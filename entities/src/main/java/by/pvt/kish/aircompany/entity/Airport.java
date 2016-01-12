@@ -1,6 +1,9 @@
 package by.pvt.kish.aircompany.entity;
 
 /**
+ * Описывает сущность аэропорта
+ * Аэропорт используется, как место вылета и место прилета рейса
+ *
  * @author Kish Alexey
  */
 public class Airport {
@@ -9,7 +12,6 @@ public class Airport {
 
     public Airport() {
     }
-
 
     /**
      * @param aid - airport id

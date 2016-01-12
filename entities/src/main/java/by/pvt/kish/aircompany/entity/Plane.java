@@ -1,6 +1,10 @@
 package by.pvt.kish.aircompany.entity;
 
 /**
+ * Описывает сущность самолета
+ * Самолет используется для осуществления Рейса
+ * Самолет характеризуется вместимостью пассажиров <code>capacity</code> и дальностью полета <code>range</code>
+ *
  * @author Kish Alexey
  */
 public class Plane {

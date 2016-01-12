@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author  Kish Alexey
- *
  * В случае ошибки или прямого обращения к контроллеру переадресация на страницу ввода логина
+ *
+ * @author  Kish Alexey
  */
 public class EmptyCommand implements ActionCommand{
     @Override

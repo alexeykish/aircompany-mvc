@@ -34,7 +34,7 @@ public class Controller extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
             dispatcher.forward(request, response);
         } else {
-            logger.error("page == null  at Controller");
+            logger.error("empty page at Controller");
         }
     }
 }

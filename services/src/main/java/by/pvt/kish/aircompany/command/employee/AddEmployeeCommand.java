@@ -33,9 +33,10 @@ public class AddEmployeeCommand implements ActionCommand {
 			employee.setLastName(request.getParameter(LASTNAME).trim());
 			employee.setPosition(Position.valueOf(request.getParameter(POSITION).trim()));
 
-			String validateResult = EmployeeValidator.validate(employee,  request);
+			String validateResult = EmployeeValidator.validate(employee);
 			if (validateResult!=null) {
-				return validateResult;
+				request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, validateResult);
+				return Page.ERROR;
 			}
 
 			EmployeeDAO.getInstance().add(employee);

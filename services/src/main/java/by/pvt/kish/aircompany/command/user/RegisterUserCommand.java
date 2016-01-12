@@ -38,7 +38,7 @@ public class RegisterUserCommand implements ActionCommand {
 			user.setEmail(request.getParameter(EMAIL).trim());
 			user.setUserType(request.getParameter(USERTYPE).trim());
 
-			String validateResult = UserValidator.validate(user, request);
+			String validateResult = UserValidator.validate(user);
 			if (validateResult != null) {
 				request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, validateResult);
 				logger.error(Message.ERROR_REG_DATA + " " + validateResult);

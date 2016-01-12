@@ -11,27 +11,42 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * Проверяет обеъект Employee перед добавлением или изменением его в БД
+ *
  * @author Kish Alexey
  */
 public class EmployeeValidator {
 	
 	static Logger logger = Logger.getLogger(EmployeeValidator.class.getName());
-	
-	public static String validate(Employee employee, HttpServletRequest request) {
+
+    /**
+     * Проверяет на корректность:
+     * <li>наличие пустых полей</li>
+     * @param employee - проверяемый объект Employee
+     * @return - null, если все проверки пройдены корректно; страницу ошибки, если данные некорректны
+     */
+    public static String validate(Employee employee) {
 		if (checkEmpty(employee)) {
-			logger.error(Message.ERROR_EMPTY);
-			return Page.ERROR;
+			return Message.ERROR_EMPTY;
 		}
 		return null;
 	}
-	
-	private static boolean checkEmpty(Employee employee) {
+
+    /**
+     * Метод проверяет полноту заполнения всех позиций, пустые позиции не допускаются
+     * @param employee - проверяемый объект Employee
+     * @return - false, если все проверки пройдены корректно; true - если данные некорректны
+     */
+    private static boolean checkEmpty(Employee employee) {
 		if ((employee.getFirstName() == null) || (employee.getFirstName().equals(""))) {
 			return true;
 		}
-		if (employee.getLastName() == null || (employee.getLastName().equals(""))) {
+		if ((employee.getLastName() == null) || (employee.getLastName().equals(""))) {
 			return true;
 		}
-		return (employee.getPosition() == null) || (employee.getPosition().equals(""));
+		if ((employee.getPosition() == null) || (employee.getPosition().equals(""))) {
+            return true;
+        }
+        return false;
 	}
 }

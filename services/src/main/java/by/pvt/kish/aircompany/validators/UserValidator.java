@@ -11,10 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 
 import static by.pvt.kish.aircompany.validators.FormDataValidator.*;
 
+/**
+ * Проверяет объект User перед добавлением или изменением его в БД
+ *
+ * @author Kish Alexey
+ */
 public class UserValidator {
-	static Logger logger = Logger.getLogger(UserValidator.class.getName());
-	
-	public static String validate(User user, HttpServletRequest request) {
+
+    /**
+     * Проверяет соттветсвие введенных данных пользователя шаблону
+     * @param user - проверяемый объект User
+     * @return - null, если все проверки пройдены корректно; если данные некорректны - соответствующую строку с указанием ошибки
+     */
+    public static String validate(User user) {
 		if (!namePattern.matcher(user.getFirstName()).matches()) {
 			return Message.MALFORMED_FIRSTNAME;
 		}

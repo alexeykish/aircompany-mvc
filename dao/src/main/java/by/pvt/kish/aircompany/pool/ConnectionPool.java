@@ -12,6 +12,10 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 /**
+ * Реализует пул соединений
+ * Данные для соединения с БД берутся из файла db.properties
+ * Количество соединений по умолчанию равно 8
+ *
  * @author Kish Alexey
  */
 public class ConnectionPool {
@@ -27,7 +31,14 @@ public class ConnectionPool {
 		dataSource.setUrl(bundle.getString("SQL_DB_URL"));
 	}
 
-	public synchronized static ConnectionPool getInstance() throws IOException, SQLException, PropertyVetoException {
+    /**
+     * Возвращает экземпляр пула соединений, если экземпляра еще не существует - создается новый
+     * @return - пул содинений
+     * @throws IOException
+     * @throws SQLException
+     * @throws PropertyVetoException
+     */
+    public synchronized static ConnectionPool getInstance() throws IOException, SQLException, PropertyVetoException {
 		if (pool == null) {
 			pool = new ConnectionPool();
 			return pool;
@@ -36,7 +47,12 @@ public class ConnectionPool {
 		}
 	}
 
-	public Connection getConnection() throws SQLException {
+    /**
+     * Возвращает экземпляр соединения
+     * @return - соединение с БД
+     * @throws SQLException
+     */
+    public Connection getConnection() throws SQLException {
 		return this.dataSource.getConnection();
 	}
 }

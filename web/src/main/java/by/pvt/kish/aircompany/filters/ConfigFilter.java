@@ -8,8 +8,9 @@ import javax.servlet.*;
 import java.io.IOException;
 
 /**
+ * Фильтр устанавливает кодировку UTF-8
+ *
  * @author Kish Alexey
- * устанавливаем кодировку
  */
 public class ConfigFilter implements Filter {
 

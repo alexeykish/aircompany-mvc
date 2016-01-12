@@ -4,6 +4,9 @@
 package by.pvt.kish.aircompany.entity;
 
 /**
+ * Описывает сущность пользователя системы
+ * Пользователь может быть двух типов: администратор или диспетчер
+ *
  * @author Kish Alexey
  */
 public class User {
@@ -13,7 +16,7 @@ public class User {
 	private String login;
 	private String password;
 	private String email;
-	private String userType;
+	private String userType; //TODO Enum type
 
 	public User() {
 

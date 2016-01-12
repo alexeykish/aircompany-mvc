@@ -3,9 +3,9 @@ package by.pvt.kish.aircompany.validators;
 import java.util.regex.Pattern;
 
 /**
- * Validates data
+ * Проверяет введеные данные
  *
- * Created by Kish Alexey on 23.12.2015.
+ * @author  Kish Alexey
  */
 public class FormDataValidator {
     

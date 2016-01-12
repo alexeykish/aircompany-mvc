@@ -3,6 +3,9 @@ package by.pvt.kish.aircompany.entity;
 import by.pvt.kish.aircompany.enums.Position;
 
 /**
+ * Описывает сущность сотрудника
+ * Сотрудник состоит в полетной бригаде (может состоять в нескольких бригадах)
+ *
  * @author Kish Alexey
  */
 public class Employee {

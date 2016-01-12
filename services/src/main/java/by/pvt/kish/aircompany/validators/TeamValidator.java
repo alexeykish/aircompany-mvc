@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * Проверяет обеъект FlightTeam перед добавлением или изменением его в БД
  * @author Kish Alexey, 2015
  *
  */
@@ -21,12 +22,12 @@ public class TeamValidator {
 	static Logger logger = Logger.getLogger(TeamValidator.class.getName());
 
     /**
-     * Проверяет полетную команду на корректность:
-     * <li>есть ли незаполненные позиции,</li>
+     * Проверяет на корректность:
+     * <li>наличие пустых полей,</li>
      * <li>один и тот же сотрудник не должен быть в команде на нескольких позициях</li>
      * <li>каждый сострудник должен находится на соответсвующей его должности позиции</li>
-     * @param flightTeam - проверяемая команда
-     * @return - null, если все проверки пройдены корректно; страницу ошибки, если данные некорректны
+     * @param flightTeam - проверяемый объект FlightTeam
+     * @return - null, если все проверки пройдены корректно; если данные некорректны - соответствующую строку с указанием ошибки
      */
     public static String validate(FlightTeam flightTeam) {
 		if (checkEmpty(flightTeam)) {
@@ -43,7 +44,7 @@ public class TeamValidator {
 
     /**
      * Метод проверяет соответсвие позиции сотрудника его позиции в команде
-     * @param team - проверяемая команда
+     * @param team - проверяемый объект FlightTeam
      * @return false если соответсвие позиций корректно, true если было найдено хотя бы одно несоответсвие
      */
     private static boolean checkPositions(FlightTeam team) {
@@ -73,7 +74,7 @@ public class TeamValidator {
 
     /**
      * Метод проверяет полноту заполнения всех позиций, пустые позиции не допускаются
-     * @param team - проверяемая команда
+     * @param team - проверяемый объект FlightTeam
      * @return - false если все позиции заполнены, true если одна из позиций равна null
      */
     private static boolean checkEmpty(FlightTeam team) { //TODO проверка наличия сотрудника в базе
@@ -100,7 +101,7 @@ public class TeamValidator {
 
     /**
      * Метод проверяет уникальность каждого сотрудника в команде, сотрудник не должен занимать соазу несколько позиций
-     * @param team - проверяемая команда
+     * @param team - проверяемый объект FlightTeam
      * @return - false все позиции уникальны, true если найдены совпадения
      */
     private static boolean checkEntry(FlightTeam team) {

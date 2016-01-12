@@ -42,9 +42,10 @@ public class UpdateFlightCommand implements ActionCommand {
 			flight.setTid(Integer.parseInt(request.getParameter(FLIGHT_TEAM).trim()));
 			flight.setPlane(PlaneDAO.getInstance().getById(Integer.parseInt(request.getParameter(PID).trim())));
 
-			String validateResult = FlightValidator.validate(flight,  request);
+			String validateResult = FlightValidator.validate(flight);
 			if (validateResult!=null) {
-				return validateResult;
+				request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, validateResult);
+				return Page.ERROR;
 			}
 			
 			FlightDAO.getInstance().update(flight);
