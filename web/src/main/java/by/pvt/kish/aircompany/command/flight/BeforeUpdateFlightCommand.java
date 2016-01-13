@@ -9,6 +9,8 @@ import by.pvt.kish.aircompany.dao.PlaneDAO;
 import by.pvt.kish.aircompany.entity.Airport;
 import by.pvt.kish.aircompany.entity.Flight;
 import by.pvt.kish.aircompany.entity.Plane;
+import by.pvt.kish.aircompany.services.AirportService;
+import by.pvt.kish.aircompany.services.PlaneService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +21,7 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class BeforeUpdateFlightCommand implements by.pvt.kish.aircompany.command.ActionCommand {
+public class BeforeUpdateFlightCommand extends FlightCommand {
 
     static Logger logger = Logger.getLogger(BeforeUpdateFlightCommand.class.getName());
 
@@ -33,9 +35,11 @@ public class BeforeUpdateFlightCommand implements by.pvt.kish.aircompany.command
                 logger.error(Message.ERROR_ID_MISSING);
                 return Page.ERROR;
             }
-            Flight flight = FlightDAO.getInstance().getById(Integer.parseInt(id));// TODO Null checking
-            List<Airport> airports = AirportDAO.getInstance().getAll();// TODO Null checking
-            List<Plane> planes = PlaneDAO.getInstance().getAll();// TODO Null checking
+            Flight flight = flightService.getById(Integer.parseInt(id));
+            PlaneService planeService = new PlaneService();
+            AirportService airportService = new AirportService();
+            List<Plane> planes = planeService.getAll();
+            List<Airport> airports = airportService.getAll();
             request.setAttribute(Attribute.AIRPORTS_ATTRIBUTE, airports);
             request.setAttribute(Attribute.PLANES_ATTRIBUTE, planes);
             request.setAttribute(Attribute.FLIGHT_ATTRIBUTE, flight);

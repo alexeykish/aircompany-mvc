@@ -128,14 +128,14 @@ public class FlightDAO extends BaseDAO<Flight> {
 		return flight;
 	}
 
-	public void updateFlightByTeam(String fid, String tid) throws SQLException {
+	public void updateFlightByTeam(int fid, int tid) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(SqlQuery.UPDATE_TEAM_TO_FLIGHT); 
-			preparedStatement.setInt(1, Integer.parseInt(tid));
-			preparedStatement.setInt(2, Integer.parseInt(fid));
+			preparedStatement.setInt(1, tid);
+			preparedStatement.setInt(2, fid);
 			preparedStatement.executeUpdate();
 		} finally {
 			closeItems(preparedStatement, connection);

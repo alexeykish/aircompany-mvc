@@ -7,6 +7,8 @@ import by.pvt.kish.aircompany.dao.AirportDAO;
 import by.pvt.kish.aircompany.dao.PlaneDAO;
 import by.pvt.kish.aircompany.entity.Airport;
 import by.pvt.kish.aircompany.entity.Plane;
+import by.pvt.kish.aircompany.services.AirportService;
+import by.pvt.kish.aircompany.services.PlaneService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,15 +19,17 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class BeforeAddFlightCommand implements by.pvt.kish.aircompany.command.ActionCommand {
+public class BeforeAddFlightCommand extends FlightCommand {
 
     static Logger logger = Logger.getLogger(BeforeAddFlightCommand.class.getName());
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
-            List<Airport> airports = AirportDAO.getInstance().getAll();// TODO Null checking
-            List<Plane> planes = PlaneDAO.getInstance().getAll();// TODO Null checking
+            PlaneService planeService = new PlaneService();
+            AirportService airportService = new AirportService();
+            List<Plane> planes = planeService.getAll();
+            List<Airport> airports = airportService.getAll();
             request.setAttribute(Attribute.AIRPORTS_ATTRIBUTE, airports);
             request.setAttribute(Attribute.PLANES_ATTRIBUTE, planes);
             return Page.ADD_FLIGHT;

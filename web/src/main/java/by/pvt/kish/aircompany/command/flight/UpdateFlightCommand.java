@@ -19,7 +19,7 @@ import java.sql.SQLException;
 /**
  * @author Kish Alexey
  */
-public class UpdateFlightCommand implements ActionCommand {
+public class UpdateFlightCommand extends FlightCommand {
 
 	static Logger logger = Logger.getLogger(UpdateFlightCommand.class.getName());
 
@@ -47,8 +47,8 @@ public class UpdateFlightCommand implements ActionCommand {
 				request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, validateResult);
 				return Page.ERROR;
 			}
-			
-			FlightDAO.getInstance().update(flight);
+			flightService.update(flight);
+
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_UPDATE_FLIGHT);
 		} catch (IllegalArgumentException e) {
 			logger.error(Message.ERROR_IAE);

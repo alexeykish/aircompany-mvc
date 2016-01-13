@@ -44,6 +44,9 @@ public class FlightValidator {
      * @return - false, если все проверки пройдены корректно; true - если данные некорректны
      */
     private static boolean checkEmpty(Flight flight) {
+		if (flight == null) {
+            return true;
+        }
 		if (flight.getDate() == null) {
 			return true;
 		}

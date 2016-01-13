@@ -22,7 +22,7 @@ import java.sql.SQLException;
 /**
  * @author Kish Alexey
  */
-public class AddFlightCommand implements ActionCommand {
+public class AddFlightCommand extends FlightCommand {
 
 	static Logger logger = Logger.getLogger(AddFlightCommand.class.getName());
 
@@ -49,9 +49,9 @@ public class AddFlightCommand implements ActionCommand {
 				return Page.ERROR;
 			}
 
-			int id = FlightDAO.getInstance().add(flight);
+			flightService.add(flight);
 
-			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_ADD_FLIGHT + "; flight id : " + id);
+			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_ADD_FLIGHT);
 		} catch (IllegalArgumentException e) {
 			logger.error(Message.ERROR_IAE);
 			return Page.ERROR;

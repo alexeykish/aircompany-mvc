@@ -17,7 +17,7 @@ import java.sql.SQLException;
 /**
  * @author Kish Alexey
  */
-public class SaveTeamToFlightCommand implements ActionCommand {
+public class SaveTeamToFlightCommand extends FlightCommand {
 
 	static Logger logger = Logger.getLogger(SaveTeamToFlightCommand.class.getName());
 	private final String FID = "fid";
@@ -32,7 +32,7 @@ public class SaveTeamToFlightCommand implements ActionCommand {
 				logger.error(Message.ERROR_ID_MISSING);
 				return Page.ERROR;
 			}
-			FlightDAO.getInstance().updateFlightByTeam(id, tid);
+			flightService.updateFlightByTeam(Integer.parseInt(id), Integer.parseInt(tid));
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_TEAM_CHANGE);
 		} catch (SQLException e) {
 			logger.error(Message.ERROR_SQL_DAO);
