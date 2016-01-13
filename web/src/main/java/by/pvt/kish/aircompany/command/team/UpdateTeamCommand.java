@@ -20,7 +20,7 @@ import java.sql.SQLException;
 /**
  * @author Kish Alexey
  */
-public class UpdateTeamCommand implements ActionCommand {
+public class UpdateTeamCommand extends FlightTeamCommand {
 
 	static Logger logger = Logger.getLogger(UpdateTeamCommand.class.getName());
 
@@ -61,8 +61,7 @@ public class UpdateTeamCommand implements ActionCommand {
 			if (validateResult!=null) {
 				return validateResult;
 			}
-
-			FlightTeamDAO.getInstance().update(flightTeam);
+			teamService.update(flightTeam);
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_UPDATE_TEAM);
 		} catch (SQLException e) {
 			logger.error(Message.ERROR_SQL_DAO);

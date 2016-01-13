@@ -78,6 +78,9 @@ public class TeamValidator {
      * @return - false если все позиции заполнены, true если одна из позиций равна null
      */
     private static boolean checkEmpty(FlightTeam team) { //TODO проверка наличия сотрудника в базе
+            if (team == null) {
+                return true;
+            }
             if (team.getFirstPilot() == null) {
                 return true;
             }

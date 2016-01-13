@@ -7,6 +7,7 @@ import by.pvt.kish.aircompany.dao.EmployeeDAO;
 import by.pvt.kish.aircompany.dao.FlightTeamDAO;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.FlightTeam;
+import by.pvt.kish.aircompany.services.EmployeeService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class BeforeUpdateTeamCommand implements by.pvt.kish.aircompany.command.ActionCommand {
+public class BeforeUpdateTeamCommand extends FlightTeamCommand {
 
     static Logger logger = Logger.getLogger(BeforeUpdateTeamCommand.class.getName());
 
@@ -31,8 +32,9 @@ public class BeforeUpdateTeamCommand implements by.pvt.kish.aircompany.command.A
                 logger.error(Message.ERROR_ID_MISSING);
                 return Page.ERROR;
             }
-            List<Employee> employees = EmployeeDAO.getInstance().getAll();//TODO Null checking
-            FlightTeam team = FlightTeamDAO.getInstance().getById(Integer.parseInt(id));//TODO Null checking
+            EmployeeService employeeService = new EmployeeService();
+            List<Employee> employees = employeeService.getAll();
+            FlightTeam team = teamService.getById(Integer.parseInt(id));
             request.setAttribute(Attribute.TEAM_ATTRIBUTE, team);
             request.setAttribute(Attribute.EMPLOYEES_ATTRIBUTE, employees);
             return Page.EDIT_TEAM;

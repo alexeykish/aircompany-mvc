@@ -17,7 +17,7 @@ import java.sql.SQLException;
 /**
  * @author Kish Alexey
  */
-public class DeleteTeamCommand implements ActionCommand {
+public class DeleteTeamCommand extends FlightTeamCommand {
 
 	static Logger logger = Logger.getLogger(DeleteTeamCommand.class.getName());
 	private final String TID = "tid";
@@ -30,7 +30,7 @@ public class DeleteTeamCommand implements ActionCommand {
 				logger.error(Message.ERROR_ID_MISSING);
 				return Page.ERROR;
 			}
-			FlightTeamDAO.getInstance().delete(Integer.parseInt(id));
+			teamService.delete(Integer.parseInt(id));
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_DELETE_TEAM);
 		} catch (SQLException e) {
 			logger.error(Message.ERROR_SQL_DAO);

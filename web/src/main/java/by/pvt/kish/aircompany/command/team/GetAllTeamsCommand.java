@@ -19,14 +19,14 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class GetAllTeamsCommand implements ActionCommand {
+public class GetAllTeamsCommand extends FlightTeamCommand {
 
 	static Logger logger = Logger.getLogger(GetAllTeamsCommand.class.getName());
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			List<FlightTeam> teams = FlightTeamDAO.getInstance().getAll();// TODO Null checking
+			List<FlightTeam> teams = teamService.getAll();
 			request.setAttribute(Attribute.TEAMS_ATTRIBUTE, teams);
 		} catch (SQLException e) {
 			logger.error(Message.ERROR_SQL_DAO);

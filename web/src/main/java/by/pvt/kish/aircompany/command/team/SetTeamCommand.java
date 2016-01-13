@@ -11,6 +11,7 @@ import by.pvt.kish.aircompany.dao.FlightDAO;
 import by.pvt.kish.aircompany.dao.FlightTeamDAO;
 import by.pvt.kish.aircompany.entity.Flight;
 import by.pvt.kish.aircompany.entity.FlightTeam;
+import by.pvt.kish.aircompany.services.FlightService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class SetTeamCommand implements ActionCommand {
+public class SetTeamCommand extends FlightTeamCommand {
 
 	static Logger logger = Logger.getLogger(SetTeamCommand.class.getName());
 
@@ -35,8 +36,9 @@ public class SetTeamCommand implements ActionCommand {
 				logger.error(Message.ERROR_ID_MISSING);
 				return Page.ERROR;
 			}
-			Flight flight = FlightDAO.getInstance().getById(Integer.parseInt(id));//TODO Null checking
-			List<FlightTeam> teams = FlightTeamDAO.getInstance().getAll();//TODO Null checking
+			FlightService flightService = new FlightService();
+			Flight flight = flightService.getById(Integer.parseInt(id));
+			List<FlightTeam> teams = teamService.getAll();
 			request.setAttribute(Attribute.FLIGHT_ATTRIBUTE, flight); 
 			request.setAttribute(Attribute.TEAMS_ATTRIBUTE, teams); 
 		} catch (SQLException e) {

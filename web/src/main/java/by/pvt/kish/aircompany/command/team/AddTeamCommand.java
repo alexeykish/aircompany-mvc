@@ -20,7 +20,7 @@ import java.sql.SQLException;
 /**
  * @author Kish Alexey
  */
-public class AddTeamCommand implements ActionCommand {
+public class AddTeamCommand extends FlightTeamCommand {
 
 	static Logger logger = Logger.getLogger(AddTeamCommand.class.getName());
 
@@ -59,8 +59,7 @@ public class AddTeamCommand implements ActionCommand {
 				request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, validateResult);
 				return Page.ERROR;
 			}
-
-			FlightTeamDAO.getInstance().add(flightTeam);
+			teamService.add(flightTeam);
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_ADD_TEAM);
 		} catch (SQLException e) {
 			logger.error(Message.ERROR_SQL_DAO);
