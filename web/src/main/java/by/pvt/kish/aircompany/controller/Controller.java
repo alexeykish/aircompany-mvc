@@ -27,7 +27,8 @@ public class Controller extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CommandFactory factory = new CommandFactory();
-        ActionCommand command = factory.defineCommand(request);
+        String action = request.getParameter("command");
+        ActionCommand command = factory.defineCommand(action);
         logger.debug("call " + command.getClass().getSimpleName());
         String page = command.execute(request, response);
         if (page != null) {

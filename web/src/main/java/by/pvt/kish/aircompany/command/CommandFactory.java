@@ -11,9 +11,8 @@ public class CommandFactory {
 
     static Logger logger = Logger.getLogger(CommandFactory.class.getName());
 
-    public ActionCommand defineCommand(HttpServletRequest request) {
+    public ActionCommand defineCommand(String action) {
         ActionCommand currentCommand = new EmptyCommand();
-        String action = request.getParameter("command");
         if (action == null || action.isEmpty()) {
             return currentCommand;
         }
