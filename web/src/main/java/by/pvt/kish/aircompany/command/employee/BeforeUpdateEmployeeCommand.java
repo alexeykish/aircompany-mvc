@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class BeforeUpdateEmployeeCommand implements by.pvt.kish.aircompany.command.ActionCommand {
+public class BeforeUpdateEmployeeCommand extends EmployeeCommand {
 
     static Logger logger = Logger.getLogger(BeforeUpdateEmployeeCommand.class.getName());
 
@@ -31,7 +31,7 @@ public class BeforeUpdateEmployeeCommand implements by.pvt.kish.aircompany.comma
                 logger.error(Message.ERROR_ID_MISSING);
                 return Page.ERROR;
             }
-            Employee employee = EmployeeDAO.getInstance().getById(Integer.parseInt(id));//TODO Null checking
+            Employee employee = employeeService.getById(Integer.parseInt(id));
             request.setAttribute(Attribute.EMPLOYEE_ATTRIBUTE, employee);
             List<Position> positions = Arrays.asList(Position.values());
             request.setAttribute(Attribute.POSITIONS_ATTRIBUTE, positions);

@@ -17,7 +17,7 @@ import java.sql.SQLException;
 /**
  * @author Kish Alexey
  */
-public class DeleteEmployeeCommand implements ActionCommand {
+public class DeleteEmployeeCommand extends EmployeeCommand {
 
 	static Logger logger = Logger.getLogger(DeleteEmployeeCommand.class.getName());
 	private final String EID = "eid";
@@ -30,7 +30,7 @@ public class DeleteEmployeeCommand implements ActionCommand {
 				logger.error(Message.ERROR_ID_MISSING);
 				return Page.ERROR;
 			}
-			EmployeeDAO.getInstance().delete(Integer.parseInt(id));
+			employeeService.delete(Integer.parseInt(id));
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_DELETE_EMPLOYEE);
 			return Page.MAIN;
 		} catch (SQLException e) {

@@ -17,8 +17,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class EmployeeValidator {
 	
-	static Logger logger = Logger.getLogger(EmployeeValidator.class.getName());
-
     /**
      * Проверяет на корректность:
      * <li>наличие пустых полей</li>
@@ -38,6 +36,9 @@ public class EmployeeValidator {
      * @return - false, если все проверки пройдены корректно; true - если данные некорректны
      */
     private static boolean checkEmpty(Employee employee) {
+		if (employee == null) {
+            return true;
+        }
 		if ((employee.getFirstName() == null) || (employee.getFirstName().equals(""))) {
 			return true;
 		}

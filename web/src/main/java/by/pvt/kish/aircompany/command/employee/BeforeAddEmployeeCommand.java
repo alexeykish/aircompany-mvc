@@ -13,9 +13,7 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class BeforeAddEmployeeCommand implements by.pvt.kish.aircompany.command.ActionCommand {
-
-    static Logger logger = Logger.getLogger(BeforeAddEmployeeCommand.class.getName());
+public class BeforeAddEmployeeCommand extends EmployeeCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

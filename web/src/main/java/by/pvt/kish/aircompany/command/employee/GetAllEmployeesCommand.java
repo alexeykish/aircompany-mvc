@@ -19,13 +19,13 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class GetAllEmployeesCommand implements ActionCommand {
+public class GetAllEmployeesCommand extends EmployeeCommand {
 	static Logger logger = Logger.getLogger(GetAllEmployeesCommand.class.getName());
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			List<Employee> employees = EmployeeDAO.getInstance().getAll();//TODO Null checking
+			List<Employee> employees = employeeService.getAll();
 			request.setAttribute(Attribute.EMPLOYEES_ATTRIBUTE, employees);
 			return Page.EMPLOYEES;
 		} catch (SQLException e) {

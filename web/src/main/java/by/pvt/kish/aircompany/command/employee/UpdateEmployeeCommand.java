@@ -10,6 +10,7 @@ import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.dao.EmployeeDAO;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.enums.Position;
+import by.pvt.kish.aircompany.services.EmployeeService;
 import by.pvt.kish.aircompany.validators.EmployeeValidator;
 import org.apache.log4j.Logger;
 
@@ -20,7 +21,7 @@ import java.sql.SQLException;
 /**
  * @author Kish Alexey
  */
-public class UpdateEmployeeCommand implements ActionCommand {
+public class UpdateEmployeeCommand extends EmployeeCommand {
 	
 	static Logger logger = Logger.getLogger(UpdateEmployeeCommand.class.getName());
 	private final String EID = "eid";
@@ -43,8 +44,7 @@ public class UpdateEmployeeCommand implements ActionCommand {
 				request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, validateResult);
 				return Page.ERROR;
 			}
-
-			EmployeeDAO.getInstance().update(employee);
+            employeeService.update(employee);
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_UPDATE_EMPLOYEE);
 			return Page.MAIN;
 
