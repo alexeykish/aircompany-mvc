@@ -38,4 +38,5 @@ public class Message {
     public static final String ERROR_IAE = "IllegalArgument Exception: DATE field";
     public static final String USER_LOGOUT = "(Session invalidation) Logout of user";
     public static final String ERROR_TEAM_POSITIONS_VALID = "Action canceled! Members of the team must be at correct positions";
+    public static final Object ERR_ACCESS = "Access denied";
 }

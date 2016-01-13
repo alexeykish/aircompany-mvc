@@ -16,6 +16,30 @@
         <servlet-name>registration-page</servlet-name>
         <jsp-file>/assests/pages/registration.jsp</jsp-file>
     </servlet>
+    <servlet>
+        <servlet-name>addflight-page</servlet-name>
+        <jsp-file>/assests/pages/addflight.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>updateflight-page</servlet-name>
+        <jsp-file>/assests/pages/editflight.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>addteam-page</servlet-name>
+        <jsp-file>/assests/pages/addteam.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>updateteam-page</servlet-name>
+        <jsp-file>/assests/pages/editteam.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>addemployee-page</servlet-name>
+        <jsp-file>/assests/pages/addemployee.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>updateemployee-page</servlet-name>
+        <jsp-file>/assests/pages/editemployee.jsp</jsp-file>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>controller</servlet-name>
@@ -29,28 +53,117 @@
         <servlet-name>registration-page</servlet-name>
         <url-pattern>/registration</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addflight-page</servlet-name>
+        <url-pattern>/addflight</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateflight-page</servlet-name>
+        <url-pattern>/updateflight</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addteam-page</servlet-name>
+        <url-pattern>/addteam</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateteam-page</servlet-name>
+        <url-pattern>/updateteam</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addemployee-page</servlet-name>
+        <url-pattern>/addemployee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateemployee-page</servlet-name>
+        <url-pattern>/updateemployee</url-pattern>
+    </servlet-mapping>
 
     <filter>
         <filter-name>ConfigFilter</filter-name>
         <filter-class>by.pvt.kish.aircompany.filters.ConfigFilter</filter-class>
     </filter>
-    <!--<filter>
-        <filter-name>AuthFilter</filter-name>
-        <filter-class>by.pvt.kish.aircompany.filters.AuthFilter</filter-class>
-    </filter>-->
+    <filter>
+        <filter-name>AdminAuthFilter</filter-name>
+        <filter-class>by.pvt.kish.aircompany.filters.AdminAuthFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>DispatcherAuthFilter</filter-name>
+        <filter-class>by.pvt.kish.aircompany.filters.DispatcherAuthFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>PreAddFlightFilter</filter-name>
+        <filter-class>by.pvt.kish.aircompany.filters.PreAddFlightFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>PreUpdateFlightFilter</filter-name>
+        <filter-class>by.pvt.kish.aircompany.filters.PreUpdateFlightFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>PreAddTeamFilter</filter-name>
+        <filter-class>by.pvt.kish.aircompany.filters.PreAddTeamFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>PreUpdateTeamFilter</filter-name>
+        <filter-class>by.pvt.kish.aircompany.filters.PreUpdateTeamFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>PreAddEmployeeFilter</filter-name>
+        <filter-class>by.pvt.kish.aircompany.filters.PreAddEmployeeFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>PreUpdateEmployeeFilter</filter-name>
+        <filter-class>by.pvt.kish.aircompany.filters.PreUpdateEmployeeFilter</filter-class>
+    </filter>
+
 
     <filter-mapping>
         <filter-name>ConfigFilter</filter-name>
         <url-pattern>*</url-pattern>
     </filter-mapping>
-<!--    <filter-mapping>
-        <filter-name>AuthFilter</filter-name>
-        <url-pattern>/controller/*</url-pattern>
+    <filter-mapping>
+        <filter-name>AdminAuthFilter</filter-name>
+        <url-pattern>/addflight</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
-    </filter-mapping>-->
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>DispatcherAuthFilter</filter-name>
+        <url-pattern>/addemployee</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PreAddFlightFilter</filter-name>
+        <url-pattern>/addflight</url-pattern>
+        <url-pattern>/updateflight</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PreUpdateFlightFilter</filter-name>
+        <url-pattern>/updateflight</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PreAddTeamFilter</filter-name>
+        <url-pattern>/addteam</url-pattern>
+        <url-pattern>/updateteam</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PreUpdateTeamFilter</filter-name>
+        <url-pattern>/updateteam</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PreAddEmployeeFilter</filter-name>
+        <url-pattern>/addemployee</url-pattern>
+        <url-pattern>/updateemployee</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PreUpdateEmployeeFilter</filter-name>
+        <url-pattern>/updateemployee</url-pattern>
+
+    </filter-mapping>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

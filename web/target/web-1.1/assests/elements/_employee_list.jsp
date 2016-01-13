@@ -25,8 +25,7 @@
                     </form>
                 </td>
                 <td style="width: 70px;">
-                    <form action="controller" method="post">
-                        <input type="hidden" name="command" value="before_update_employee_command"/>
+                    <form action="updateemployee" method="post">
                         <input type="hidden" name="eid" value="${employee.eid}"/>
                         <input class="table-button" type="submit" name="submit" value="edit"/>
                     </form>

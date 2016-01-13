@@ -19,8 +19,7 @@
         </tr>
         <tr>
             <td>
-                <form action="controller" method="post">
-                    <input type="hidden" name="command" value="before_add_employee_command"/>
+                <form action="addemployee" method="post">
                     <input class="button" type="submit" name="submit" value="add employee"/>
                 </form>
             </td>
@@ -41,8 +40,7 @@
         </tr>
         <tr>
             <td>
-                <form action="controller" method="post">
-                    <input type="hidden" name="command" value="before_add_team_command"/>
+                <form action="addteam" method="post">
                     <input class="button" type="submit" name="submit" value="add flight team"/>
                 </form>
             </td>

@@ -59,8 +59,7 @@
 					</form>
 				</td>
 				<td style="width: 70px;">
-					<form action="controller" method="post">
-						<input type="hidden" name="command" value="before_update_team_command" />
+					<form action="updateteam" method="post">
 						<input type="hidden" name="tid" value="${team.tid}" />
 						<input class="table-button" type="submit" name="submit"	value="edit" />
 					</form>

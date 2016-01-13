@@ -6,8 +6,8 @@
     <table>
         <tr>
             <td>
-                <form action="controller" method="post">
-                    <input type="hidden" name="command" value="before_add_flight_command"/>
+                <form action="addflight" method="post">
+                    <%--<input type="hidden" name="command" value="before_add_flight_command"/>--%>
                     <input class="button" type="submit" name="submit" value="add flights"/>
                 </form>
             </td>

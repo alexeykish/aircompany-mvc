@@ -30,8 +30,7 @@
                         </form>
                     </td>
                     <td style="width: 70px;">
-                        <form action="controller" method="post">
-                            <input type="hidden" name="command" value="before_update_flight_command"/>
+                        <form action="updateflight" method="post">
                             <input type="hidden" name="fid" value="${flight.fid}"/>
                             <input class="table-button" type="submit" name="submit" value="edit"/>
                         </form>
