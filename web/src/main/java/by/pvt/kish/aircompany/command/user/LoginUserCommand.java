@@ -17,7 +17,7 @@ import java.sql.SQLException;
 /**
  * @author Kish Alexey
  */
-public class LoginUserCommand implements ActionCommand {
+public class LoginUserCommand extends UserCommand {
 
 	static Logger logger = Logger.getLogger(LoginUserCommand.class.getName());
 
@@ -39,7 +39,7 @@ public class LoginUserCommand implements ActionCommand {
 				return Page.INDEX;
 			}
 
-			User user = UserDAO.getInstance().getUser(login, password);
+			User user = userService.getUser(login, password);
 			if (user == null) {
 				request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.ERROR_REG_LOGIN);
 				logger.error(Message.ERROR_REG_LOGIN);

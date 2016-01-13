@@ -16,7 +16,7 @@ import java.sql.SQLException;
 /**
  * @author Kish Alexey
  */
-public class RegisterUserCommand implements ActionCommand {
+public class RegisterUserCommand extends UserCommand {
 
 	static Logger logger = Logger.getLogger(RegisterUserCommand.class.getName());
 
@@ -45,14 +45,12 @@ public class RegisterUserCommand implements ActionCommand {
 				return Page.INDEX;
 			}
 
-			UserDAO userDAO = UserDAO.getInstance();
-
-			if (!userDAO.checkLogin(user.getLogin())) {
+			if (!userService.checkLogin(user.getLogin())) {
 				request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.ERROR_REG_LOGIN);
 				logger.error(Message.ERROR_REG_LOGIN);
 				return Page.INDEX;
 			}
-			userDAO.register(user);
+			userService.register(user);
 			request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.SUCCESS_REG);
 			return Page.INDEX;
 		} catch (SQLException e) {

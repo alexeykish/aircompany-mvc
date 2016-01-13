@@ -1,11 +1,7 @@
 package by.pvt.kish.aircompany.services;
 
-import by.pvt.kish.aircompany.constants.Attribute;
-import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.dao.EmployeeDAO;
 import by.pvt.kish.aircompany.entity.Employee;
-import by.pvt.kish.aircompany.validators.EmployeeValidator;
-import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.List;

@@ -19,14 +19,14 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class GetAllUsersCommand implements ActionCommand {
+public class GetAllUsersCommand extends UserCommand {
 	
 	static Logger logger = Logger.getLogger(GetAllUsersCommand.class.getName());
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			List<User> users = UserDAO.getInstance().getAll();//TODO Null checking
+			List<User> users = userService.getAll();
 			request.setAttribute(Attribute.USERS_ATTRIBUTE, users);
 		} catch (SQLException e) {
 			logger.error(Message.ERROR_SQL_DAO);
