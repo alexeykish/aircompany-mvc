@@ -12,7 +12,6 @@ package by.pvt.kish.aircompany.entity;
  */
 public class FlightTeam {
 	private int tid;
-	private Flight flight;
 	private Employee firstPilot;
 	private Employee secondPilot;
 	private Employee navigator;
@@ -27,7 +26,6 @@ public class FlightTeam {
 
 	/**
 	 * @param tid - flight team id
-	 * @param flight - the flight that accompanies flight team
 	 * @param firstPilot - first pilot id
 	 * @param secondPilot - second pilot id
 	 * @param navigator - navigator id
@@ -36,10 +34,9 @@ public class FlightTeam {
 	 * @param stewardess2 - 2nd stewardess id
 	 * @param stewardess3 - 3rd stewardess id
 	 */
-	public FlightTeam(int tid, Flight flight, Employee firstPilot, Employee secondPilot, Employee navigator, Employee radiooperator, Employee stewardess1, Employee stewardess2, Employee stewardess3) {
+	public FlightTeam(int tid, Employee firstPilot, Employee secondPilot, Employee navigator, Employee radiooperator, Employee stewardess1, Employee stewardess2, Employee stewardess3) {
 		super();
 		this.tid = tid;
-		this.flight = flight;
 		this.firstPilot = firstPilot;
 		this.secondPilot = secondPilot;
 		this.navigator = navigator;
@@ -54,7 +51,6 @@ public class FlightTeam {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((firstPilot == null) ? 0 : firstPilot.hashCode());
-		result = prime * result + ((flight == null) ? 0 : flight.hashCode());
 		result = prime * result + ((navigator == null) ? 0 : navigator.hashCode());
 		result = prime * result + ((radiooperator == null) ? 0 : radiooperator.hashCode());
 		result = prime * result + ((secondPilot == null) ? 0 : secondPilot.hashCode());
@@ -78,11 +74,6 @@ public class FlightTeam {
 			if (other.firstPilot != null)
 				return false;
 		} else if (!firstPilot.equals(other.firstPilot))
-			return false;
-		if (flight == null) {
-			if (other.flight != null)
-				return false;
-		} else if (!flight.equals(other.flight))
 			return false;
 		if (navigator == null) {
 			if (other.navigator != null)
@@ -123,14 +114,6 @@ public class FlightTeam {
 
 	public void setTid(int tid) {
 		this.tid = tid;
-	}
-
-	public Flight getFlight() {
-		return flight;
-	}
-
-	public void setFlight(Flight flight) {
-		this.flight = flight;
 	}
 
 	public Employee getFirstPilot() {

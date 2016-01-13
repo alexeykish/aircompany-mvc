@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4cac44f3-9576-4e93-a6e6-15f4181987cf" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/constants/SqlQuery.java" afterPath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/constants/SqlQuery.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/UserDAO.java" afterPath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/UserDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/UserDAOTest.java" afterPath="$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/UserDAOTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/entities/src/main/java/by/pvt/kish/aircompany/entity/FlightTeam.java" afterPath="$PROJECT_DIR$/entities/src/main/java/by/pvt/kish/aircompany/entity/FlightTeam.java" />
     </list>
     <ignored path="aircompany.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,6 +21,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/aircompany$by_pvt_kish_aircompany_dao_in_dao.coverage" NAME="by.pvt.kish.aircompany.dao in dao Coverage Results" MODIFIED="1452715456419" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>by.pvt.kish.aircompany.dao.*</FILTER>
+    </SUITE>
+  </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -63,7 +66,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/PlaneService.java" />
         <option value="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/flight/BeforeAddFlightCommand.java" />
         <option value="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/flight/BeforeUpdateFlightCommand.java" />
         <option value="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/flight/SaveTeamToFlightCommand.java" />
@@ -114,6 +116,7 @@
         <option value="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/constants/SqlQuery.java" />
         <option value="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/UserDAO.java" />
         <option value="$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/UserDAOTest.java" />
+        <option value="$PROJECT_DIR$/entities/src/main/java/by/pvt/kish/aircompany/entity/FlightTeam.java" />
       </list>
     </option>
   </component>
@@ -1377,7 +1380,13 @@
       <option name="project" value="LOCAL" />
       <updated>1452709573804</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="UserDao method realised&#10;UserDaoTest created&#10;">
+      <created>1452715294794</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1452715294794</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1386,9 +1395,6 @@
     </history-entry>
     <history-entry file="UserDAOTest - 2016.01.13 at 22h 59m 55s.xml">
       <configuration name="UserDAOTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="UserDAOTest_testCheckLogin - 2016.01.13 at 22h 40m 29s.xml">
-      <configuration name="UserDAOTest.testCheckLogin" configurationId="JUnit" />
     </history-entry>
     <history-entry file="UserDAOTest_testCheckLogin - 2016.01.13 at 22h 44m 11s.xml">
       <configuration name="UserDAOTest.testCheckLogin" configurationId="JUnit" />
@@ -1411,9 +1417,12 @@
     <history-entry file="by_pvt_kish_aircompany_dao_in_dao - 2016.01.13 at 23h 00m 05s.xml">
       <configuration name="by.pvt.kish.aircompany.dao in dao" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="by_pvt_kish_aircompany_dao_in_dao - 2016.01.13 at 23h 04m 21s.xml">
+      <configuration name="by.pvt.kish.aircompany.dao in dao" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38809000" />
+    <option name="totallyTimeSpent" value="39239000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1437,10 +1446,11 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6251969" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4897511" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28550512" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25841874" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1484,7 +1494,8 @@
     <MESSAGE value="Added: UserService&#10;Updated all user commands&#10;" />
     <MESSAGE value="User register - &gt; add&#10;" />
     <MESSAGE value="User - UserType String -&gt; Enum&#10;All method uses UserType changed&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="User - UserType String -&gt; Enum&#10;All method uses UserType changed&#10;" />
+    <MESSAGE value="UserDao method realised&#10;UserDaoTest created&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="UserDao method realised&#10;UserDaoTest created&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1566,13 +1577,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/entities/src/main/java/by/pvt/kish/aircompany/entity/FlightTeam.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14261745">
-          <caret line="7" column="49" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/entities/src/main/java/by/pvt/kish/aircompany/entity/Flight.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37080538">
@@ -1614,6 +1618,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4850214">
           <caret line="29" column="128" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="128" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1847,24 +1852,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/UserDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1557789">
-          <caret line="89" column="23" selection-start-line="89" selection-start-column="23" selection-end-line="89" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/UserDAOTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59799">
-          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/EmployeeDAOTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20100503">
@@ -1880,6 +1867,48 @@
           <folding>
             <element signature="e#2570#2571#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/UserDAOTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39209226">
+          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/entities/src/main/java/by/pvt/kish/aircompany/entity/FlightTeam.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.6306534">
+          <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/FlightDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.826633">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/FlightTeamDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34170854">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/UserDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.8869348">
+          <caret line="89" column="23" selection-start-line="89" selection-start-column="23" selection-end-line="89" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
