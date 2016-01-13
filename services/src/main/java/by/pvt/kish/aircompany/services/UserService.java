@@ -36,7 +36,7 @@ public class UserService implements EntityService<User> {
     }
 
     public void register(User user) throws SQLException{
-        UserDAO.getInstance().register(user);
+        UserDAO.getInstance().add(user);
     }
 
     public boolean checkLogin(String login) throws SQLException{

@@ -9,10 +9,7 @@ import by.pvt.kish.aircompany.entity.User;
 import by.pvt.kish.aircompany.utils.Coder;
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,13 +33,15 @@ public class UserDAO extends BaseDAO<User> {
 		return instance;
 	}
 
-	public void register(User user) throws SQLException {
+	@Override
+	public int add(User user) throws SQLException {
+		int generatedId = 0;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 		try {
 			connection = poolInstance.getConnection();
-			preparedStatement = connection.prepareStatement(SqlQuery.ADD_USER);
-
+			preparedStatement = connection.prepareStatement(SqlQuery.ADD_USER, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, user.getFirstName());
 			preparedStatement.setString(2, user.getLastName());
 			preparedStatement.setString(3, user.getLogin());
@@ -50,9 +49,14 @@ public class UserDAO extends BaseDAO<User> {
 			preparedStatement.setString(5, user.getEmail());
 			preparedStatement.setString(6, user.getUserType());
 			preparedStatement.executeUpdate();
+			resultSet = preparedStatement.getGeneratedKeys();
+			if (resultSet.next()) {
+				generatedId = resultSet.getInt(1);
+			}
 		} finally {
-			closeItems(preparedStatement, connection);
+			closeItems(resultSet, preparedStatement, connection);
 		}
+		return generatedId;
 	}
 
 	public boolean checkLogin(String login) throws SQLException {
@@ -127,10 +131,6 @@ public class UserDAO extends BaseDAO<User> {
 		return user;
 	}
 
-	@Override
-	public int add(User user) throws SQLException {
-		throw new UnsupportedOperationException();
-	}
 
 	@Override
 	public void update(User user) throws SQLException {
