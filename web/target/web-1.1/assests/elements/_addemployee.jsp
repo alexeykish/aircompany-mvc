@@ -21,10 +21,6 @@
 					<c:forEach items="${requestScope.positions}" var="position">
 						<option value="${position}">${position}</option>
 					</c:forEach>
-						<%--<option value="PILOT">Pilot</option>
-						<option value="NAVIGATOR">Navigator</option>
-						<option value="RADIOOPERATOR">Radiooperator</option>
-						<option value="STEWARDESS">Stewardess</option>--%>
 				</select></td>
 			</tr>
 		</table>

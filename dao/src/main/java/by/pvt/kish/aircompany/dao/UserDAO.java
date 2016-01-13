@@ -6,6 +6,7 @@ package by.pvt.kish.aircompany.dao;
 import by.pvt.kish.aircompany.constants.Column;
 import by.pvt.kish.aircompany.constants.SqlQuery;
 import by.pvt.kish.aircompany.entity.User;
+import by.pvt.kish.aircompany.enums.UserType;
 import by.pvt.kish.aircompany.utils.Coder;
 import org.apache.log4j.Logger;
 
@@ -47,7 +48,7 @@ public class UserDAO extends BaseDAO<User> {
 			preparedStatement.setString(3, user.getLogin());
 			preparedStatement.setString(4, Coder.getHashCode(user.getPassword()));
 			preparedStatement.setString(5, user.getEmail());
-			preparedStatement.setString(6, user.getUserType());
+			preparedStatement.setString(6, user.getUserType().toString());
 			preparedStatement.executeUpdate();
 			resultSet = preparedStatement.getGeneratedKeys();
 			if (resultSet.next()) {
@@ -127,7 +128,7 @@ public class UserDAO extends BaseDAO<User> {
 		user.setLastName(resultSet.getString(Column.USERS_LASTNAME));
 		user.setLogin(resultSet.getString(Column.USERS_LOGIN));
 		user.setEmail(resultSet.getString(Column.USERS_EMAIL));
-		user.setUserType(resultSet.getString(Column.USERS_USERTYPE));
+		user.setUserType(UserType.valueOf(resultSet.getString(Column.USERS_USERTYPE)));
 		return user;
 	}
 

@@ -49,8 +49,9 @@
                 <td class="input-label">User type:</td>
                 <td>
                     <select class="inputForm" name="user_type">
-                        <option class="inputForm" value="ADMINISTRATOR">Administrator</option>
-                        <option selected class="inputForm" value="DISPATCHER">Dispatcher</option>
+                        <c:forEach items="${requestScope.types}" var="type">
+                            <option value="${type}">${type}</option>
+                        </c:forEach>
                     </select>
                 </td>
             </tr>

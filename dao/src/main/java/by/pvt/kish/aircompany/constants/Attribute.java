@@ -20,4 +20,5 @@ public class Attribute {
     public static final String AIRPORT_ATTRIBUTE = "airport";
     public static final String AIRPORTS_ATTRIBUTE = "airports";
     public static final String POSITIONS_ATTRIBUTE = "positions";
+    public static final String USERTYPES_ATTRIBUTE = "types";
 }

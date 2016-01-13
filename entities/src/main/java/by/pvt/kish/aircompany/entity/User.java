@@ -3,6 +3,8 @@
  */
 package by.pvt.kish.aircompany.entity;
 
+import by.pvt.kish.aircompany.enums.UserType;
+
 /**
  * Описывает сущность пользователя системы
  * Пользователь может быть двух типов: администратор или диспетчер
@@ -16,11 +18,9 @@ public class User {
 	private String login;
 	private String password;
 	private String email;
-	private String userType; //TODO Enum type
+	private UserType userType;
 
 	public User() {
-
-
 	}
 
 	/**
@@ -31,7 +31,7 @@ public class User {
 	 * @param password - user password
 	 * @param userType - user type (Administrator or dispatcher)
 	 */
-	public User(int uid, String firstName, String lastName, String login, String password, String userType) {
+	public User(int uid, String firstName, String lastName, String login, String password, UserType userType) {
 		super();
 		this.uid = uid;
 		this.firstName = firstName;
@@ -42,61 +42,32 @@ public class User {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + uid;
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((userType == null) ? 0 : userType.hashCode());
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		User user = (User) o;
+
+		if (uid != user.uid) return false;
+		if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
+		if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
+		if (login != null ? !login.equals(user.login) : user.login != null) return false;
+		if (password != null ? !password.equals(user.password) : user.password != null) return false;
+		if (email != null ? !email.equals(user.email) : user.email != null) return false;
+		return userType == user.userType;
+
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof User))
-			return false;
-		User other = (User) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (uid != other.uid)
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (login == null) {
-			if (other.login != null)
-				return false;
-		} else if (!login.equals(other.login))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (userType == null) {
-			if (other.userType != null)
-				return false;
-		} else if (!userType.equals(other.userType))
-			return false;
-		return true;
+	public int hashCode() {
+		int result = uid;
+		result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+		result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+		result = 31 * result + (login != null ? login.hashCode() : 0);
+		result = 31 * result + (password != null ? password.hashCode() : 0);
+		result = 31 * result + (email != null ? email.hashCode() : 0);
+		result = 31 * result + (userType != null ? userType.hashCode() : 0);
+		return result;
 	}
 
 	public int getUid() {
@@ -139,11 +110,11 @@ public class User {
 		this.password = password;
 	}
 
-	public String getUserType() {
+	public UserType getUserType() {
 		return userType;
 	}
 
-	public void setUserType(String userType) {
+	public void setUserType(UserType userType) {
 		this.userType = userType;
 	}
 
