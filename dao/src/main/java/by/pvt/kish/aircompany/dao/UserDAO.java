@@ -72,6 +72,7 @@ public class UserDAO extends BaseDAO<User> {
 			if (resultSet.next()) {
 				return false;
 			}
+
 		} finally {
 			closeItems(resultSet, preparedStatement, connection);
 		}
@@ -84,7 +85,6 @@ public class UserDAO extends BaseDAO<User> {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		logger.debug("get user");
 		try {
 			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(SqlQuery.GET_USER); 
@@ -121,7 +121,42 @@ public class UserDAO extends BaseDAO<User> {
 		}
 		return users;
 	}
-	
+
+	@Override
+	public User getById(int id) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		User user = null;
+		try {
+			connection = poolInstance.getConnection();
+			preparedStatement = connection.prepareStatement(SqlQuery.GET_USER_BY_ID);
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				user = new User();
+				user = setUserParametrs(resultSet, user);
+			}
+		} finally {
+			closeItems(resultSet, preparedStatement, connection);
+		}
+		return user;
+	}
+
+	@Override
+	public void delete(int id) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			connection = poolInstance.getConnection();
+			preparedStatement = connection.prepareStatement(SqlQuery.DELETE_USER);
+			preparedStatement.setInt(1, id);
+			preparedStatement.executeUpdate();
+		} finally {
+			closeItems(preparedStatement, connection);
+		};
+	}
+
 	private User setUserParametrs(ResultSet resultSet, User user) throws SQLException {
 		user.setUid(resultSet.getInt(Column.USERS_UID));
 		user.setFirstName(resultSet.getString(Column.USERS_FIRSTNAME));
@@ -132,19 +167,8 @@ public class UserDAO extends BaseDAO<User> {
 		return user;
 	}
 
-
 	@Override
 	public void update(User user) throws SQLException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public User getById(int id) throws SQLException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void delete(int id) throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 }

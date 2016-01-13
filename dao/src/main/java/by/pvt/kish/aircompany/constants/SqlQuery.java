@@ -28,6 +28,8 @@ public class SqlQuery {
     public static final String ADD_USER = "INSERT INTO  users (`first_name`,`last_name`,`login`,`password`,`email`,`user_type`) VALUES (?,?,?,?,?,?)";
     public static final String CHECK_LOGIN = "SELECT uid FROM users WHERE login = ?";
     public static final String GET_USER = "SELECT * FROM users WHERE login = ? AND password = ?";
+    public static final String DELETE_USER = "DELETE FROM users WHERE uid = ?";
+    public static final String GET_USER_BY_ID = "SELECT * FROM users WHERE uid = ?";;
     public static final String GET_ALL_USERS = "SELECT * FROM users";
 
     public static final String ADD_PLANE = "INSERT INTO  planes (`model`,`capacity`,`range`) VALUES (?,?,?)";
@@ -41,4 +43,6 @@ public class SqlQuery {
     public static final String DELETE_AIRPORT = "DELETE FROM airports WHERE aid = ?";
     public static final String GET_AIRPORT_BY_ID = "SELECT * FROM  airports WHERE aid = ?";
     public static final String UPDATE_AIRPORT = "UPDATE airports SET `city` = ? WHERE aid = ?";
+
+
 }
