@@ -5,8 +5,13 @@ package by.pvt.kish.aircompany.dao;
 
 import by.pvt.kish.aircompany.constants.Column;
 import by.pvt.kish.aircompany.constants.SqlQuery;
+import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.FlightTeam;
+import by.pvt.kish.aircompany.pool.ConnectionPool;
+import org.apache.log4j.Logger;
 
+import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,23 +19,33 @@ import java.util.List;
 /**
  * @author  Kish Alexey
  */
-public class FlightTeamDAO extends BaseDAO<FlightTeam> {
+public class TeamDAO {
 
-	//static Logger logger = Logger.getLogger(FlightTeamDAO.class.getName());
-	private static FlightTeamDAO instance;
+	static Logger logger = Logger.getLogger(TeamDAO.class.getName());
+	private static TeamDAO instance;
+	ConnectionPool poolInstance;;
 
-	private FlightTeamDAO() {
+	private TeamDAO() {
 		super();
+		try {
+			poolInstance = ConnectionPool.getInstance();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (PropertyVetoException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public synchronized static FlightTeamDAO getInstance() {
+	public synchronized static TeamDAO getInstance() {
 		if (instance == null) {
-			instance = new FlightTeamDAO();
+			instance = new TeamDAO();
 		}
 		return instance;
 	}
 
-	@Override
+	//@Override
 	public int add(FlightTeam flightTeam) throws SQLException {
 		int generatedId = 0;
 		Connection connection = null;
@@ -57,7 +72,7 @@ public class FlightTeamDAO extends BaseDAO<FlightTeam> {
 		return generatedId;
 	}
 
-	@Override
+	//@Override
 	public List<FlightTeam> getAll() throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -78,7 +93,7 @@ public class FlightTeamDAO extends BaseDAO<FlightTeam> {
 		return teams;
 	}
 
-	@Override
+	//@Override
 	public void delete(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -93,20 +108,19 @@ public class FlightTeamDAO extends BaseDAO<FlightTeam> {
 
 	}
 
-	@Override
-	public FlightTeam getById(int id) throws SQLException {
+	//@Override
+	public List<Employee> getById(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		FlightTeam team = new FlightTeam();
+		List<Employee> team = new ArrayList<>();
 		try {
 			connection = poolInstance.getConnection();
-			preparedStatement = connection.prepareStatement(SqlQuery.GET_TEAM_BY_ID);
+			preparedStatement = connection.prepareStatement(SqlQuery.GET_TEAM_BY_ID); //TODO refactor
 			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();
-			if (resultSet.next()) {
-				team = setTeamParametrs(resultSet, team);
-				return team;
+			while (resultSet.next()) {
+				team.add(EmployeeDAO.getInstance().getById(resultSet.getInt(Column.TEAMS_EID)));
 			}
 		} finally {
 			closeItems(resultSet, preparedStatement, connection);
@@ -114,7 +128,7 @@ public class FlightTeamDAO extends BaseDAO<FlightTeam> {
 		return team;
 	}
 
-	@Override
+	//@Override
 	public void update(FlightTeam team) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -146,6 +160,33 @@ public class FlightTeamDAO extends BaseDAO<FlightTeam> {
 		team.setStewardess2(employeeDAO.getById(resultSet.getInt(Column.TEAMS_STEWARDESS2_ID)));
 		team.setStewardess3(employeeDAO.getById(resultSet.getInt(Column.TEAMS_STEWARDESS3_ID)));
 		return team;
+	}
+	private void closeItems(PreparedStatement preparedStatement, Connection connection){
+		try {
+			if (preparedStatement != null) {
+				preparedStatement.close();
+			}
+			if (connection != null) {
+				connection.close();
+			}
+		} catch (SQLException e) {
+			logger.error("SQL exception occurred during closing connection");
+		}
+	}
+	private void closeItems(ResultSet resultSet, PreparedStatement preparedStatement, Connection connection){
+		try {
+			if (resultSet != null) {
+				resultSet.close();
+			}
+			if (preparedStatement != null) {
+				preparedStatement.close();
+			}
+			if (connection != null) {
+				connection.close();
+			}
+		} catch (SQLException e) {
+			logger.error("SQL exception occurred during closing connection");
+		}
 	}
 
 }

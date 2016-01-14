@@ -3,12 +3,10 @@
  */
 package by.pvt.kish.aircompany.command.team;
 
-import by.pvt.kish.aircompany.command.ActionCommand;
 import by.pvt.kish.aircompany.constants.Attribute;
 import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.dao.EmployeeDAO;
-import by.pvt.kish.aircompany.dao.FlightTeamDAO;
 import by.pvt.kish.aircompany.entity.FlightTeam;
 import by.pvt.kish.aircompany.validators.TeamValidator;
 import org.apache.log4j.Logger;
@@ -20,7 +18,7 @@ import java.sql.SQLException;
 /**
  * @author Kish Alexey
  */
-public class AddTeamCommand extends FlightTeamCommand {
+public class AddTeamCommand extends TeamCommand {
 
 	static Logger logger = Logger.getLogger(AddTeamCommand.class.getName());
 

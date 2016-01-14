@@ -36,7 +36,7 @@ public class PreUpdateTeamFilter implements Filter {
                 dispatcher.forward(request, response);
             }
             TeamService teamService = new TeamService();
-            FlightTeam team = teamService.getById(Integer.parseInt(id));
+            List<Employee> team = teamService.getById(Integer.parseInt(id));
             request.setAttribute(Attribute.TEAM_ATTRIBUTE, team);
             chain.doFilter(request,response);
         } catch (SQLException e) {

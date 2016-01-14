@@ -35,7 +35,7 @@ public class FlightService implements EntityService<Flight> {
         return FlightDAO.getInstance().getById(id);
     }
 
-    public void updateFlightByTeam(int fid, int tid) throws SQLException {
+    public void updateFlightByTeam(int fid, List<Integer> tid) throws SQLException {
         FlightDAO.getInstance().updateFlightByTeam(fid, tid);
     }
 }

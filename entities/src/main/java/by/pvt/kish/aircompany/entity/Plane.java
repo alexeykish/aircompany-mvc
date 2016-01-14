@@ -1,5 +1,9 @@
 package by.pvt.kish.aircompany.entity;
 
+import by.pvt.kish.aircompany.enums.Position;
+
+import java.util.Map;
+
 /**
  * Описывает сущность самолета
  * Самолет используется для осуществления Рейса
@@ -13,6 +17,7 @@ public class Plane {
     private String model;
     private int capacity;
     private int range;
+    private Map<Position, Integer> team;
 
     public Plane() {
     }
@@ -22,12 +27,15 @@ public class Plane {
      * @param model - plane model
      * @param capacity - plane passenger capacity
      * @param range - plane flight range
+     * @param team - team to service flight
      */
-    public Plane(int pid, String model, int capacity, int range) {
+
+    public Plane(int pid, String model, int capacity, int range, Map<Position, Integer> team) {
         this.pid = pid;
         this.model = model;
         this.capacity = capacity;
         this.range = range;
+        this.team = team;
     }
 
     @Override
@@ -40,7 +48,8 @@ public class Plane {
         if (pid != plane.pid) return false;
         if (capacity != plane.capacity) return false;
         if (range != plane.range) return false;
-        return model != null ? model.equals(plane.model) : plane.model == null;
+        if (model != null ? !model.equals(plane.model) : plane.model != null) return false;
+        return team != null ? team.equals(plane.team) : plane.team == null;
 
     }
 
@@ -50,6 +59,7 @@ public class Plane {
         result = 31 * result + (model != null ? model.hashCode() : 0);
         result = 31 * result + capacity;
         result = 31 * result + range;
+        result = 31 * result + (team != null ? team.hashCode() : 0);
         return result;
     }
 
@@ -83,5 +93,13 @@ public class Plane {
 
     public void setRange(int range) {
         this.range = range;
+    }
+
+    public Map<Position, Integer> getTeam() {
+        return team;
+    }
+
+    public void setTeam(Map<Position, Integer> team) {
+        this.team = team;
     }
 }

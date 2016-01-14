@@ -10,7 +10,11 @@ import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.dao.AirportDAO;
 import by.pvt.kish.aircompany.dao.FlightDAO;
 import by.pvt.kish.aircompany.dao.PlaneDAO;
+import by.pvt.kish.aircompany.entity.Airport;
 import by.pvt.kish.aircompany.entity.Flight;
+import by.pvt.kish.aircompany.services.AirportService;
+import by.pvt.kish.aircompany.services.PlaneService;
+import by.pvt.kish.aircompany.services.TeamService;
 import by.pvt.kish.aircompany.validators.FlightValidator;
 import org.apache.log4j.Logger;
 
@@ -29,19 +33,22 @@ public class AddFlightCommand extends FlightCommand {
 	private final String DATE = "date";
 	private final String FROM = "from";
 	private final String TO = "to";
-	private final String FLIGHT_TEAM = "tid";
+	private final String TEAM = "tid";
 	private final String PID = "pid";
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			Flight flight = new Flight();
+			PlaneService planeService = new PlaneService();
+			AirportService airportService = new AirportService();
+			//TeamService teamService = new TeamService();
 
 			flight.setDate(Date.valueOf(request.getParameter(DATE).trim()));
-			flight.setFrom(AirportDAO.getInstance().getById(Integer.parseInt(request.getParameter(FROM).trim())));
-			flight.setTo(AirportDAO.getInstance().getById(Integer.parseInt(request.getParameter(TO).trim())));
-			flight.setTid(Integer.parseInt(request.getParameter(FLIGHT_TEAM).trim()));
-			flight.setPlane(PlaneDAO.getInstance().getById(Integer.parseInt(request.getParameter(PID).trim())));
+			flight.setFrom(airportService.getById(Integer.parseInt(request.getParameter(FROM).trim())));
+			flight.setTo(airportService.getById(Integer.parseInt(request.getParameter(TO).trim())));
+			//flight.setTeam(teamService.getById(Integer.parseInt(request.getParameter(TEAM).trim())));
+			flight.setPlane(planeService.getById(Integer.parseInt(request.getParameter(PID).trim())));
 
 			String validateResult = FlightValidator.validate(flight);
 			if (validateResult != null) {

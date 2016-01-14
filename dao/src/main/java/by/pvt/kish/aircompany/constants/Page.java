@@ -22,6 +22,8 @@ public class Page {
     public static final String EDIT_TEAM = "/assests/pages/editteam.jsp";
 
     public static final String SET_TEAM = "/assests/pages/setteam.jsp";
+    public static final String CHANGE_TEAM = "/assests/pages/changeteam.jsp";
 
     public static final String USERS = "/assests/pages/user_list.jsp";
+
 }

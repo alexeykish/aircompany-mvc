@@ -10,7 +10,6 @@ public class Column {
     public static final String FLIGHTS_DATE = "date";
     public static final String FLIGHTS_FROM = "from";
     public static final String FLIGHTS_TO = "to";
-    public static final String FLIGHTS_TID = "tid";
     public static final String FLIGHTS_PID = "pid";
 
     public static final String EMPLOYEES_EID = "eid";
@@ -22,10 +21,16 @@ public class Column {
     public static final String PLANES_MODEL = "model";
     public static final String PLANES_CAPACITY = "capacity";
     public static final String PLANES_RANGE = "range";
+    public static final String PLANES_PILOTS = "num_pilots";
+    public static final String PLANES_NAVIGATORS = "num_nav";
+    public static final String PLANES_RADIOOPERATORS = "num_radio";
+    public static final String PLANES_STEWARDESSES = "num_stew";
 
     public static final String AIRPORT_AID = "aid";
     public static final String AIRPORT_CITY = "city";
 
+    public static final String TEAMS_EID = "t_eid";
+    public static final String TEAMS_FID = "t_fid";
     public static final String TEAMS_TID = "tid";
     public static final String TEAMS_FIRSTPILOT_ID = "first_pilot_id";
     public static final String TEAMS_SECONDPILOT_ID = "second_pilot_id";
@@ -42,4 +47,5 @@ public class Column {
     public static final String USERS_PASSWORD = "password";
     public static final String USERS_EMAIL = "email";
     public static final String USERS_USERTYPE = "user_type";
+
 }

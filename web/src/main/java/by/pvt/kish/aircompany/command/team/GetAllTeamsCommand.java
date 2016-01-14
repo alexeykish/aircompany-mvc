@@ -3,11 +3,9 @@
  */
 package by.pvt.kish.aircompany.command.team;
 
-import by.pvt.kish.aircompany.command.ActionCommand;
 import by.pvt.kish.aircompany.constants.Attribute;
 import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
-import by.pvt.kish.aircompany.dao.FlightTeamDAO;
 import by.pvt.kish.aircompany.entity.FlightTeam;
 import org.apache.log4j.Logger;
 
@@ -19,7 +17,7 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class GetAllTeamsCommand extends FlightTeamCommand {
+public class GetAllTeamsCommand extends TeamCommand {
 
 	static Logger logger = Logger.getLogger(GetAllTeamsCommand.class.getName());
 

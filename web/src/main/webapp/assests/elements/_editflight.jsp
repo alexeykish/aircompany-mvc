@@ -49,12 +49,6 @@
 					</c:forEach>
 				</select></td>
 			</tr>
-
-			<tr>
-				<td class="input-label">Flight team:</td>
-				<td><input class="inputForm" type="text" name="tid"
-					value="${requestScope.flight.tid}" readonly  title="tid"/></td>
-			</tr>
 		</table>
 		<input class="button" type="submit" name="submit"
 			value="update flight" />

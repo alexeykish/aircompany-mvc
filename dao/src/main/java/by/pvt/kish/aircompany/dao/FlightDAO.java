@@ -2,6 +2,7 @@ package by.pvt.kish.aircompany.dao;
 
 import by.pvt.kish.aircompany.constants.Column;
 import by.pvt.kish.aircompany.constants.SqlQuery;
+import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.Flight;
 import org.apache.log4j.Logger;
 
@@ -47,7 +48,6 @@ public class FlightDAO extends BaseDAO<Flight> {
 			if (resultSet.next()) {
 				generatedId = resultSet.getInt(1);
 			}
-
 		} finally {
 			closeItems(resultSet, preparedStatement, connection);
 		}
@@ -128,27 +128,40 @@ public class FlightDAO extends BaseDAO<Flight> {
 		return flight;
 	}
 
-	public void updateFlightByTeam(int fid, int tid) throws SQLException {
+	public void updateFlightByTeam(int fid, List<Integer> team) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = poolInstance.getConnection();
-			preparedStatement = connection.prepareStatement(SqlQuery.UPDATE_TEAM_TO_FLIGHT); 
-			preparedStatement.setInt(1, tid);
-			preparedStatement.setInt(2, fid);
-			preparedStatement.executeUpdate();
+			connection.setAutoCommit(false);
+			preparedStatement = connection.prepareStatement(SqlQuery.ADD_TEAM);
+			for (Integer i : team) {
+				preparedStatement.setInt(1, i);
+				preparedStatement.setInt(2, fid);
+				preparedStatement.executeUpdate();
+			}
+			connection.commit();
+		} catch (SQLException e) {
+			try {
+				logger.debug("Commit failed");
+				connection.rollback();
+			}catch (SQLException e2) {
+				logger.debug("Rollback failed");
+
+			}
 		} finally {
 			closeItems(preparedStatement, connection);
 		}
 	}
-	
+
 	private Flight setFlightParametrs(ResultSet resultSet, Flight flight) throws SQLException {
-		flight.setFid(resultSet.getInt(Column.FLIGHTS_FID));
+		int fid = resultSet.getInt(Column.FLIGHTS_FID);
+		flight.setFid(fid);
 		flight.setDate(resultSet.getDate(Column.FLIGHTS_DATE));
 		flight.setFrom(AirportDAO.getInstance().getById(resultSet.getInt(Column.FLIGHTS_FROM)));
 		flight.setTo(AirportDAO.getInstance().getById(resultSet.getInt(Column.FLIGHTS_TO)));
-		flight.setTid(resultSet.getInt(Column.FLIGHTS_TID));
 		flight.setPlane(PlaneDAO.getInstance().getById(resultSet.getInt(Column.FLIGHTS_PID)));
+		flight.setTeam(TeamDAO.getInstance().getById(fid));
 		return flight;
 	}
 }

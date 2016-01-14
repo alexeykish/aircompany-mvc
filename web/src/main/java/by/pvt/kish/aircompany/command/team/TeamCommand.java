@@ -6,6 +6,6 @@ import by.pvt.kish.aircompany.services.TeamService;
 /**
  * @author Kish Alexey
  */
-public abstract class FlightTeamCommand implements ActionCommand{
+public abstract class TeamCommand implements ActionCommand{
     TeamService teamService = new TeamService();
 }

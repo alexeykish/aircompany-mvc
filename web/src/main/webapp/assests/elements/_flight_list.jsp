@@ -17,7 +17,11 @@
                 <td>${flight.date}</td>
                 <td>${flight.from.city}</td>
                 <td>${flight.to.city}</td>
-                <td>${flight.tid}</td>
+                <td>
+                    <c:forEach items="${flight.team}" var="employee">
+                        <div>#${employee.eid} ${employee.lastName} ${employee.position}</div>
+                    </c:forEach>
+                </td>
                 <td>${flight.plane.model}</td>
                 <c:if test="${(sessionScope.userType == '2')}">
                     <td style="width: 70px;">
@@ -41,11 +45,11 @@
                         <form action="controller" method="post">
                             <input type="hidden" name="command" value="set_team_command"/>
                             <input type="hidden" name="fid" value="${flight.fid}"/>
-                            <c:if test="${(flight.tid == '0')}">
+                            <c:if test="${(flight.team.size() == 0)}">
                                 <input class="table-button" style="width: 90px;  color:red;" type="submit" name="submit"
                                        value="set flight team"/>
                             </c:if>
-                            <c:if test="${(flight.tid > '0')}">
+                            <c:if test="${(flight.team.size() != 0)}">
                                 <input class="table-button" style="width: 90px;" type="submit" name="submit"
                                        value="change flight team"/>
                             </c:if>

@@ -14,13 +14,14 @@
             <tr>
                 <td class="input-label">Flight team:</td>
             </tr>
-            <c:forEach items="${requestScope.positions}" var="position" varStatus="loop">
+            <c:forEach items="${requestScope.team}" var="position" varStatus="loop">
                 <tr>
                     <td class="input-label">${position}</td>
                     <td>
                         <select class="inputForm" name="${loop.index}" title="Flight team">
+                            <option selected value="${position.eid}">${position.firstName} ${position.lastName}/${position.position}</option>
                             <c:forEach items="${requestScope.employees}" var="employee">
-                                <c:if test="${(employee.position == position)}">
+                                <c:if test="${(employee.position == position)&&(employee.eid != position.eid)}">
                                     <option value="${employee.eid}">${employee.firstName} ${employee.lastName}/${employee.position}</option>
                                 </c:if>
                             </c:forEach>

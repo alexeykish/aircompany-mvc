@@ -39,7 +39,7 @@ public class UpdateFlightCommand extends FlightCommand {
 			flight.setDate(Date.valueOf(request.getParameter(DATE).trim()));
 			flight.setFrom(AirportDAO.getInstance().getById(Integer.parseInt(request.getParameter(FROM).trim())));
 			flight.setTo(AirportDAO.getInstance().getById(Integer.parseInt(request.getParameter(TO).trim())));
-			flight.setTid(Integer.parseInt(request.getParameter(FLIGHT_TEAM).trim()));
+			//flight.setTid(Integer.parseInt(request.getParameter(FLIGHT_TEAM).trim()));
 			flight.setPlane(PlaneDAO.getInstance().getById(Integer.parseInt(request.getParameter(PID).trim())));
 
 			String validateResult = FlightValidator.validate(flight);
