@@ -29,7 +29,7 @@ public class TeamValidator {
      * @param flightTeam - проверяемый объект FlightTeam
      * @return - null, если все проверки пройдены корректно; если данные некорректны - соответствующую строку с указанием ошибки
      */
-    public static String validate(FlightTeam flightTeam) {
+    public static String validate(FlightTeam flightTeam) { //TODO проверка команды на существование
 		if (checkEmpty(flightTeam)) {
 			return Message.ERROR_EMPTY;
 		}

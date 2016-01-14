@@ -28,7 +28,6 @@ public class AirportDAOTest {
     public void testAdd() throws Exception {
         Airport addedAirport = airportDAO.getById(id);
         assertEquals("Add method failed: wrong city", addedAirport.getCity(), testAirport.getCity());
-
     }
 
     @Test
@@ -47,7 +46,7 @@ public class AirportDAOTest {
         int beforeAddNumber = airportDAO.getAll().size();
         int getAllId = airportDAO.add(testAirport);
         int afterAddNumber = airportDAO.getAll().size();
-        assertEquals("Get all failed", beforeAddNumber, afterAddNumber-1);
+        assertEquals("Get all method failed", beforeAddNumber, afterAddNumber-1);
         airportDAO.delete(getAllId);
     }
 
