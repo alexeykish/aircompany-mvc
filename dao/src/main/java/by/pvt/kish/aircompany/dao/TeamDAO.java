@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * @author  Kish Alexey
  */
-public class TeamDAO {
+public class TeamDAO implements ITeamDAO {
 
 	static Logger logger = Logger.getLogger(TeamDAO.class.getName());
 	private static TeamDAO instance;
@@ -41,6 +41,7 @@ public class TeamDAO {
 		return instance;
 	}
 
+	@Override
 	public void add(int fid, List<Integer> team) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -67,8 +68,7 @@ public class TeamDAO {
 			closeItems(preparedStatement, connection);
 		}
 	}
-
-	//@Override
+	@Override
 	public List<FlightTeam> getAll() throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -88,8 +88,7 @@ public class TeamDAO {
 		}
 		return teams;
 	}
-
-	//@Override
+	@Override
 	public void delete(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -101,10 +100,8 @@ public class TeamDAO {
 		} finally {
 			closeItems(preparedStatement, connection);
 		}
-
 	}
-
-	//@Override
+	@Override
 	public List<Employee> getById(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -124,38 +121,17 @@ public class TeamDAO {
 		return team;
 	}
 
-	//@Override
-	public void update(FlightTeam team) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		try {
-			connection = poolInstance.getConnection();
-			preparedStatement = connection.prepareStatement(SqlQuery.UPDATE_TEAM);
-			preparedStatement.setInt(1, team.getFirstPilot().getEid());
-			preparedStatement.setInt(2, team.getSecondPilot().getEid());
-			preparedStatement.setInt(3, team.getNavigator().getEid());
-			preparedStatement.setInt(4, team.getRadiooperator().getEid());
-			preparedStatement.setInt(5, team.getStewardess1().getEid());
-			preparedStatement.setInt(6, team.getStewardess2().getEid());
-			preparedStatement.setInt(7, team.getStewardess3().getEid());
-			preparedStatement.setInt(8, team.getTid());
-			preparedStatement.executeUpdate();
-		} finally {
-			closeItems(preparedStatement, connection);
-		}
-		
-	}
 	private FlightTeam setTeamParametrs(ResultSet resultSet, FlightTeam team) throws SQLException {
-		team.setTid(resultSet.getInt(Column.TEAMS_TID));
-		EmployeeDAO employeeDAO = EmployeeDAO.getInstance();
-		team.setFirstPilot(employeeDAO.getById(resultSet.getInt(Column.TEAMS_FIRSTPILOT_ID)));
-		team.setSecondPilot(employeeDAO.getById(resultSet.getInt(Column.TEAMS_SECONDPILOT_ID)));
-		team.setNavigator(employeeDAO.getById(resultSet.getInt(Column.TEAMS_NAVIGATOR_ID)));
-		team.setRadiooperator(employeeDAO.getById(resultSet.getInt(Column.TEAMS_RADIOPERATOR_ID)));
-		team.setStewardess1(employeeDAO.getById(resultSet.getInt(Column.TEAMS_STEWARDESS1_ID)));
-		team.setStewardess2(employeeDAO.getById(resultSet.getInt(Column.TEAMS_STEWARDESS2_ID)));
-		team.setStewardess3(employeeDAO.getById(resultSet.getInt(Column.TEAMS_STEWARDESS3_ID)));
-		return team;
+			team.setTid(resultSet.getInt(Column.TEAMS_TID));
+			EmployeeDAO employeeDAO = EmployeeDAO.getInstance();
+			team.setFirstPilot(employeeDAO.getById(resultSet.getInt(Column.TEAMS_FIRSTPILOT_ID)));
+			team.setSecondPilot(employeeDAO.getById(resultSet.getInt(Column.TEAMS_SECONDPILOT_ID)));
+			team.setNavigator(employeeDAO.getById(resultSet.getInt(Column.TEAMS_NAVIGATOR_ID)));
+			team.setRadiooperator(employeeDAO.getById(resultSet.getInt(Column.TEAMS_RADIOPERATOR_ID)));
+			team.setStewardess1(employeeDAO.getById(resultSet.getInt(Column.TEAMS_STEWARDESS1_ID)));
+			team.setStewardess2(employeeDAO.getById(resultSet.getInt(Column.TEAMS_STEWARDESS2_ID)));
+			team.setStewardess3(employeeDAO.getById(resultSet.getInt(Column.TEAMS_STEWARDESS3_ID)));
+			return team;
 	}
 	private void closeItems(PreparedStatement preparedStatement, Connection connection){
 		try {
@@ -169,6 +145,7 @@ public class TeamDAO {
 			logger.error("SQL exception occurred during closing connection");
 		}
 	}
+
 	private void closeItems(ResultSet resultSet, PreparedStatement preparedStatement, Connection connection){
 		try {
 			if (resultSet != null) {

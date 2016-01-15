@@ -27,7 +27,7 @@ public class TeamService {
     }
 
     public void update(FlightTeam flightTeam) throws SQLException {
-        TeamDAO.getInstance().update(flightTeam);
+        //TeamDAO.getInstance().update(flightTeam);
     }
 
     public List<FlightTeam> getAll() throws SQLException {
