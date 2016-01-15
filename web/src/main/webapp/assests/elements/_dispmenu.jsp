@@ -10,19 +10,12 @@
                     <input class="button"
                            type="submit"
                            name="submit"
-                           value="show flights"/>
+                           value="Flights"/>
                 </form>
             </td>
         </tr>
         <tr>
             <td></td>
-        </tr>
-        <tr>
-            <td>
-                <form action="addemployee" method="post">
-                    <input class="button" type="submit" name="submit" value="add employee"/>
-                </form>
-            </td>
         </tr>
         <tr>
             <td>
@@ -31,7 +24,7 @@
                     <input class="button"
                            type="submit"
                            name="submit"
-                           value="show employees"/>
+                           value="Employees"/>
                 </form>
             </td>
         </tr>
@@ -40,19 +33,12 @@
         </tr>
         <tr>
             <td>
-                <form action="addteam" method="post">
-                    <input class="button" type="submit" name="submit" value="add flight team"/>
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td>
                 <form action="controller" method="post">
                     <input type="hidden" name="command" value="get_all_teams_command"/>
                     <input class="button"
                            type="submit"
                            name="submit"
-                           value="show flight teams"/>
+                           value="Flight teams"/>
                 </form>
             </td>
         </tr>
