@@ -49,7 +49,7 @@ public class RegisterUserCommand extends UserCommand {
 				logger.error(Message.ERROR_REG_LOGIN);
 				return Page.INDEX;
 			}
-			userService.register(user);
+			userService.add(user);
 			request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.SUCCESS_REG);
 			return Page.INDEX;
 		} catch (SQLException e) {

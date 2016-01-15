@@ -8,6 +8,8 @@ import by.pvt.kish.aircompany.constants.Attribute;
 import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.dao.FlightDAO;
+import by.pvt.kish.aircompany.services.FlightService;
+import by.pvt.kish.aircompany.utils.RequestHandler;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,26 +19,21 @@ import java.sql.SQLException;
 /**
  * @author Kish Alexey
  */
-public class DeleteFlightCommand extends FlightCommand {
+public class DeleteFlightCommand implements ActionCommand {
 
-	static Logger logger = Logger.getLogger(DeleteFlightCommand.class.getName());
-
-	private final String FID = "fid";
+	static String className = DeleteFlightCommand.class.getSimpleName();
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			String id = request.getParameter(FID);
-			if (id == null) {
-				logger.error(Message.ERROR_ID_MISSING);
-				return Page.ERROR;
+			int id = RequestHandler.getId(request, "fid");
+			if (id < 0) {
+				return RequestHandler.returnErrorPage(Message.ERROR_ID_MISSING, className);
 			}
-			flightService.delete(Integer.parseInt(id));
-
+			FlightService.getInstance().delete(id);
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_DELETE_FLIGHT);
 		} catch (SQLException e) {
-			logger.error(Message.ERROR_SQL_DAO);
-			return Page.ERROR;
+			return RequestHandler.returnErrorPage(Message.ERROR_SQL_DAO, className);
 		}
 		return Page.MAIN;
 	}

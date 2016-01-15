@@ -1,6 +1,7 @@
 package by.pvt.kish.aircompany.services;
 
 import by.pvt.kish.aircompany.dao.FlightDAO;
+import by.pvt.kish.aircompany.dao.TeamDAO;
 import by.pvt.kish.aircompany.entity.Flight;
 
 import java.sql.SQLException;
@@ -9,33 +10,48 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class FlightService implements IEntityService<Flight> {
+public class FlightService implements IService<Flight> {
+
+    private static FlightService instance;
+    private FlightDAO flightDAO = FlightDAO.getInstance();
+
+    public synchronized static FlightService getInstance() {
+        if (instance == null) {
+            instance = new FlightService();
+        }
+        return instance;
+    }
+
     @Override
     public int add(Flight flight) throws SQLException {
-        return FlightDAO.getInstance().add(flight);
+        if (flight != null) {
+            return flightDAO.add(flight);
+        }
+        return 0;
     }
 
     @Override
     public void update(Flight flight) throws SQLException {
-        FlightDAO.getInstance().update(flight);
+        flightDAO.update(flight);
     }
 
     @Override
     public List<Flight> getAll() throws SQLException {
-        return FlightDAO.getInstance().getAll();
+        return flightDAO.getAll();
     }
 
     @Override
     public void delete(int id) throws SQLException {
-        FlightDAO.getInstance().delete(id);
+        flightDAO.delete(id);
     }
 
     @Override
     public Flight getById(int id) throws SQLException {
-        return FlightDAO.getInstance().getById(id);
+        return flightDAO.getById(id);
     }
 
     public void updateFlightByTeam(int fid, List<Integer> tid) throws SQLException {
-        FlightDAO.getInstance().updateFlightByTeam(fid, tid);
+        TeamDAO.getInstance().delete(fid);
+        flightDAO.updateFlightByTeam(fid, tid);
     }
 }

@@ -9,7 +9,17 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class AirportService implements IEntityService<Airport> {
+public class AirportService implements IService<Airport> {
+
+    private static AirportService instance;
+
+    public synchronized static AirportService getInstance() {
+        if (instance == null) {
+            instance = new AirportService();
+        }
+        return instance;
+    }
+
     @Override
     public int add(Airport airport) throws SQLException {
         return AirportDAO.getInstance().add(airport);

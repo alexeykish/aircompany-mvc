@@ -28,19 +28,5 @@
                 </form>
             </td>
         </tr>
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td>
-                <form action="controller" method="post">
-                    <input type="hidden" name="command" value="get_all_teams_command"/>
-                    <input class="button"
-                           type="submit"
-                           name="submit"
-                           value="Flight teams"/>
-                </form>
-            </td>
-        </tr>
     </table>
 </div>

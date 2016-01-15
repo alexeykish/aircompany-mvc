@@ -6,20 +6,12 @@
     <table>
         <tr>
             <td>
-                <form action="addflight" method="post">
-                    <%--<input type="hidden" name="command" value="before_add_flight_command"/>--%>
-                    <input class="button" type="submit" name="submit" value="add flights"/>
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td>
                 <form action="controller" method="post">
                     <input type="hidden" name="command" value="get_all_flights_command"/>
                     <input class="button"
                            type="submit"
                            name="submit"
-                           value="show flights"/>
+                           value="Flights"/>
                 </form>
             </td>
         </tr>
@@ -30,7 +22,7 @@
                     <input class="button"
                            type="submit"
                            name="submit"
-                           value="show users"/>
+                           value="Users"/>
                 </form>
             </td>
         </tr>

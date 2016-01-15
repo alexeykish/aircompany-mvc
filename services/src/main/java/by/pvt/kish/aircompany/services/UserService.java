@@ -9,10 +9,15 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class UserService implements IEntityService<User> {
-    @Override
-    public int add(User user) throws SQLException {
-        throw new UnsupportedOperationException();
+public class UserService implements IService<User> {
+
+    private static UserService instance;
+
+    public synchronized static UserService getInstance() {
+        if (instance == null) {
+            instance = new UserService();
+        }
+        return instance;
     }
 
     @Override
@@ -34,9 +39,9 @@ public class UserService implements IEntityService<User> {
     public User getById(int id) throws SQLException {
         return null;
     }
-
-    public void register(User user) throws SQLException{
-        UserDAO.getInstance().add(user);
+    @Override
+    public int add(User user) throws SQLException{
+        return UserDAO.getInstance().add(user);
     }
 
     public boolean checkLogin(String login) throws SQLException{

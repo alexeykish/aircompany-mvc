@@ -8,7 +8,7 @@
             <th>Date</th>
             <th>From</th>
             <th>To</th>
-            <th>Flight_team</th>
+            <th>Team</th>
             <th>Plane</th>
         </tr>
         <c:forEach items="${requestScope.flights}" var="flight">
@@ -59,4 +59,9 @@
             </tr>
         </c:forEach>
     </table>
+    <c:if test="${(sessionScope.userType == '2')}">
+        <form action="addflight" method="post">
+            <input class="button" type="submit" name="submit" value="add flights"/>
+        </form>
+    </c:if>
 </div>

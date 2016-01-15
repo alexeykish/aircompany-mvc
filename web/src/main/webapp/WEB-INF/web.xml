@@ -25,14 +25,6 @@
         <jsp-file>/assests/pages/editflight.jsp</jsp-file>
     </servlet>
     <servlet>
-        <servlet-name>addteam-page</servlet-name>
-        <jsp-file>/assests/pages/addteam.jsp</jsp-file>
-    </servlet>
-    <servlet>
-        <servlet-name>updateteam-page</servlet-name>
-        <jsp-file>/assests/pages/editteam.jsp</jsp-file>
-    </servlet>
-    <servlet>
         <servlet-name>addemployee-page</servlet-name>
         <jsp-file>/assests/pages/addemployee.jsp</jsp-file>
     </servlet>
@@ -62,14 +54,6 @@
         <url-pattern>/updateflight</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>addteam-page</servlet-name>
-        <url-pattern>/addteam</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>updateteam-page</servlet-name>
-        <url-pattern>/updateteam</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>addemployee-page</servlet-name>
         <url-pattern>/addemployee</url-pattern>
     </servlet-mapping>
@@ -97,14 +81,6 @@
     <filter>
         <filter-name>PreUpdateFlightFilter</filter-name>
         <filter-class>by.pvt.kish.aircompany.filters.PreUpdateFlightFilter</filter-class>
-    </filter>
-    <filter>
-        <filter-name>PreAddTeamFilter</filter-name>
-        <filter-class>by.pvt.kish.aircompany.filters.PreAddTeamFilter</filter-class>
-    </filter>
-    <filter>
-        <filter-name>PreUpdateTeamFilter</filter-name>
-        <filter-class>by.pvt.kish.aircompany.filters.PreUpdateTeamFilter</filter-class>
     </filter>
     <filter>
         <filter-name>PreAddEmployeeFilter</filter-name>
@@ -148,15 +124,6 @@
     <filter-mapping>
         <filter-name>PreUpdateFlightFilter</filter-name>
         <url-pattern>/updateflight</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>PreAddTeamFilter</filter-name>
-        <url-pattern>/addteam</url-pattern>
-        <url-pattern>/updateteam</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>PreUpdateTeamFilter</filter-name>
-        <url-pattern>/updateteam</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>PreAddEmployeeFilter</filter-name>

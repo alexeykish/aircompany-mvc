@@ -9,7 +9,16 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class EmployeeService implements IEntityService<Employee> {
+public class EmployeeService implements IService<Employee> {
+
+    private static EmployeeService instance;
+
+    public synchronized static EmployeeService getInstance() {
+        if (instance == null) {
+            instance = new EmployeeService();
+        }
+        return instance;
+    }
 
     @Override
     public int add(Employee employee) throws SQLException {

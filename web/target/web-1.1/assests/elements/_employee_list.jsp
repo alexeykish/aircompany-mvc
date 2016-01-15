@@ -33,4 +33,7 @@
             </tr>
         </c:forEach>
     </table>
+    <form action="addemployee" method="post">
+        <input class="button" type="submit" name="submit" value="add employee"/>
+    </form>
 </div>

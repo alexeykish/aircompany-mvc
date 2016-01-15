@@ -9,7 +9,17 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class PlaneService implements IEntityService<Plane> {
+public class PlaneService implements IService<Plane> {
+
+    private static PlaneService instance;
+
+    public synchronized static PlaneService getInstance() {
+        if (instance == null) {
+            instance = new PlaneService();
+        }
+        return instance;
+    }
+
     @Override
     public int add(Plane plane) throws SQLException {
         return PlaneDAO.getInstance().add(plane);
