@@ -6,12 +6,6 @@ package by.pvt.kish.aircompany.constants;
  * @author  Kish Alexey
  */
 public class SqlQuery {
-    public static final String ADD_FLIGHT = "INSERT INTO  flights (`date`,`from`,`to`, `pid`) VALUES (?,?,?,?)";
-    public static final String GET_ALL_FLIGHTS = "SELECT * FROM flights";
-    public static final String DELETE_FLIGHT = "DELETE FROM flights WHERE fid = ?";
-    public static final String GET_FLIGHT_BY_ID = "SELECT * FROM flights WHERE fid = ?";
-    public static final String UPDATE_FLIGHT = "UPDATE flights SET `date` = ?, `from` = ?, `to` = ?, `pid` = ? WHERE fid = ?";
-    public static final String UPDATE_TEAM_TO_FLIGHT = "UPDATE flights SET `tid` = ? WHERE fid = ?";
 
     public static final String ADD_EMPLOYEE = "INSERT INTO employees (`first_name`,`last_name`,`position`) VALUES (?,?,?)";
     public static final String GET_ALL_EMPLOYEES = "SELECT * FROM employees";

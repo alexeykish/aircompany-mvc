@@ -24,10 +24,7 @@ public enum CommandEnum {
     LOGOUT_USER_COMMAND					{	{this.command = new LogoutUserCommand();	    	}	},
     GET_ALL_USERS_COMMAND				{	{this.command = new GetAllUsersCommand();	    	}	},
 
-    ADD_TEAM_COMMAND 				 	{   {this.command = new AddTeamCommand();		    	}	},
-    GET_ALL_TEAMS_COMMAND 			 	{	{this.command = new GetAllTeamsCommand();	    	}	},
     DELETE_TEAM_COMMAND				 	{	{this.command = new DeleteTeamCommand();	    	}	},
-    UPDATE_TEAM_COMMAND 		    	{	{this.command = new UpdateTeamCommand(); 	    	}	},
     SET_TEAM_COMMAND					{	{this.command = new SetTeamCommand();           	}	},
     SAVE_TEAM_TO_FLIGHT_COMMAND	    	{	{this.command = new SaveTeamToFlightCommand();      }	};
     //TODO user commands (block, delete, update)

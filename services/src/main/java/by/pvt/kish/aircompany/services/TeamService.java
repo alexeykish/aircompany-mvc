@@ -21,8 +21,9 @@ public class TeamService {
         return instance;
     }
 
-    public int add(FlightTeam flightTeam) throws SQLException {
-        return TeamDAO.getInstance().add(flightTeam);
+    public void add(int fid, List<Integer> tid) throws SQLException {
+        TeamDAO.getInstance().delete(fid);
+        TeamDAO.getInstance().add(fid, tid);
     }
 
     public void update(FlightTeam flightTeam) throws SQLException {

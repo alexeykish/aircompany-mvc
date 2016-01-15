@@ -1,10 +1,7 @@
 package by.pvt.kish.aircompany.dao;
 
 import by.pvt.kish.aircompany.constants.Column;
-import by.pvt.kish.aircompany.constants.SqlQuery;
-import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.Flight;
-import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,7 +12,11 @@ import java.util.List;
  */
 public class FlightDAO extends BaseDAO<Flight> {
 
-	static Logger logger = Logger.getLogger(FlightDAO.class.getName());
+	private static final String ADD_FLIGHT = "INSERT INTO  flights (`date`,`from`,`to`, `pid`) VALUES (?,?,?,?)";
+	private static final String GET_ALL_FLIGHTS = "SELECT * FROM flights";
+	private static final String DELETE_FLIGHT = "DELETE FROM flights WHERE fid = ?";
+	private static final String GET_FLIGHT_BY_ID = "SELECT * FROM flights WHERE fid = ?";
+	private static final String UPDATE_FLIGHT = "UPDATE flights SET `date` = ?, `from` = ?, `to` = ?, `pid` = ? WHERE fid = ?";
 
 	private static FlightDAO instance;
 
@@ -38,7 +39,7 @@ public class FlightDAO extends BaseDAO<Flight> {
 		ResultSet resultSet = null;
 		try {
 			connection = poolInstance.getConnection();
-			preparedStatement = connection.prepareStatement(SqlQuery.ADD_FLIGHT, Statement.RETURN_GENERATED_KEYS);
+			preparedStatement = connection.prepareStatement(ADD_FLIGHT, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setDate(1, flight.getDate());
 			preparedStatement.setInt(2, flight.getFrom().getAid());
 			preparedStatement.setInt(3, flight.getTo().getAid());
@@ -62,7 +63,7 @@ public class FlightDAO extends BaseDAO<Flight> {
 		List<Flight> flights = new ArrayList<>();
 		try {
 			connection = poolInstance.getConnection();
-			preparedStatement = connection.prepareStatement(SqlQuery.GET_ALL_FLIGHTS);
+			preparedStatement = connection.prepareStatement(GET_ALL_FLIGHTS);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Flight flight = new Flight();
@@ -81,7 +82,7 @@ public class FlightDAO extends BaseDAO<Flight> {
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = poolInstance.getConnection();
-			preparedStatement = connection.prepareStatement(SqlQuery.DELETE_FLIGHT); 
+			preparedStatement = connection.prepareStatement(DELETE_FLIGHT);
 			preparedStatement.setInt(1, fid);
 			preparedStatement.executeUpdate();
 		} finally {
@@ -95,7 +96,7 @@ public class FlightDAO extends BaseDAO<Flight> {
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = poolInstance.getConnection();
-			preparedStatement = connection.prepareStatement(SqlQuery.UPDATE_FLIGHT); 
+			preparedStatement = connection.prepareStatement(UPDATE_FLIGHT);
 			preparedStatement.setDate(1, flight.getDate());
 			preparedStatement.setInt(2, flight.getFrom().getAid());
 			preparedStatement.setInt(3, flight.getTo().getAid());
@@ -115,7 +116,7 @@ public class FlightDAO extends BaseDAO<Flight> {
 		Flight flight = null;
 		try {
 			connection = poolInstance.getConnection();
-			preparedStatement = connection.prepareStatement(SqlQuery.GET_FLIGHT_BY_ID); 
+			preparedStatement = connection.prepareStatement(GET_FLIGHT_BY_ID);
 			preparedStatement.setInt(1, fid);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
@@ -126,32 +127,6 @@ public class FlightDAO extends BaseDAO<Flight> {
 			closeItems(resultSet, preparedStatement, connection);
 		}
 		return flight;
-	}
-
-	public void updateFlightByTeam(int fid, List<Integer> team) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		try {
-			connection = poolInstance.getConnection();
-			connection.setAutoCommit(false);
-			preparedStatement = connection.prepareStatement(SqlQuery.ADD_TEAM);
-			for (Integer i : team) {
-				preparedStatement.setInt(1, i);
-				preparedStatement.setInt(2, fid);
-				preparedStatement.executeUpdate();
-			}
-			connection.commit();
-		} catch (SQLException e) {
-			try {
-				logger.debug("Commit failed");
-				connection.rollback();
-			}catch (SQLException e2) {
-				logger.debug("Rollback failed");
-
-			}
-		} finally {
-			closeItems(preparedStatement, connection);
-		}
 	}
 
 	private Flight setFlightParametrs(ResultSet resultSet, Flight flight) throws SQLException {

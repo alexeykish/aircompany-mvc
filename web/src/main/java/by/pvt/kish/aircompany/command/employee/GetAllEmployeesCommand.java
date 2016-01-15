@@ -9,6 +9,8 @@ import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.dao.EmployeeDAO;
 import by.pvt.kish.aircompany.entity.Employee;
+import by.pvt.kish.aircompany.services.EmployeeService;
+import by.pvt.kish.aircompany.utils.RequestHandler;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,18 +21,17 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class GetAllEmployeesCommand extends EmployeeCommand {
-	static Logger logger = Logger.getLogger(GetAllEmployeesCommand.class.getName());
+public class GetAllEmployeesCommand implements ActionCommand {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		String className = GetAllEmployeesCommand.class.getName();
 		try {
-			List<Employee> employees = employeeService.getAll();
+			List<Employee> employees = EmployeeService.getInstance().getAll();
 			request.setAttribute(Attribute.EMPLOYEES_ATTRIBUTE, employees);
-			return Page.EMPLOYEES;
 		} catch (SQLException e) {
-			logger.error(Message.ERROR_SQL_DAO);
-			return Page.ERROR;
+			return RequestHandler.returnErrorPage(Message.ERROR_SQL_DAO, className);
 		}
+		return Page.EMPLOYEES;
 	}
 }

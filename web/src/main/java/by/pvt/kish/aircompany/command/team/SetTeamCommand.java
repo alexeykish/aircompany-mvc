@@ -3,6 +3,7 @@
  */
 package by.pvt.kish.aircompany.command.team;
 
+import by.pvt.kish.aircompany.command.ActionCommand;
 import by.pvt.kish.aircompany.constants.Attribute;
 import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
@@ -25,7 +26,7 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class SetTeamCommand extends TeamCommand {
+public class SetTeamCommand implements ActionCommand {
 
     static Logger logger = Logger.getLogger(SetTeamCommand.class.getName());
 

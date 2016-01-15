@@ -22,10 +22,9 @@ import java.sql.SQLException;
  */
 public class AddFlightCommand implements ActionCommand {
 
-	static String className = AddFlightCommand.class.getSimpleName();
-
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		String className = AddFlightCommand.class.getSimpleName();
 		try {
 			Flight flight = RequestHandler.getFlight(request);
 			String validateResult = FlightValidator.validate(flight);

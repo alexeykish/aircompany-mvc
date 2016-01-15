@@ -49,9 +49,4 @@ public class FlightService implements IService<Flight> {
     public Flight getById(int id) throws SQLException {
         return flightDAO.getById(id);
     }
-
-    public void updateFlightByTeam(int fid, List<Integer> tid) throws SQLException {
-        TeamDAO.getInstance().delete(fid);
-        flightDAO.updateFlightByTeam(fid, tid);
-    }
 }

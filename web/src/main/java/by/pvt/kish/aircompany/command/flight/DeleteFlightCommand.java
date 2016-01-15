@@ -21,10 +21,9 @@ import java.sql.SQLException;
  */
 public class DeleteFlightCommand implements ActionCommand {
 
-	static String className = DeleteFlightCommand.class.getSimpleName();
-
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		String className = DeleteFlightCommand.class.getSimpleName();
 		try {
 			int id = RequestHandler.getId(request, "fid");
 			if (id < 0) {

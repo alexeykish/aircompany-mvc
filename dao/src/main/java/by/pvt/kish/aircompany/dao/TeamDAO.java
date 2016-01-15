@@ -29,11 +29,7 @@ public class TeamDAO {
 		super();
 		try {
 			poolInstance = ConnectionPool.getInstance();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (PropertyVetoException e) {
+		} catch (IOException | SQLException | PropertyVetoException e) {
 			e.printStackTrace();
 		}
 	}
@@ -45,31 +41,31 @@ public class TeamDAO {
 		return instance;
 	}
 
-	//@Override
-	public int add(FlightTeam flightTeam) throws SQLException {
-		int generatedId = 0;
+	public void add(int fid, List<Integer> team) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
 		try {
 			connection = poolInstance.getConnection();
-			preparedStatement = connection.prepareStatement(SqlQuery.ADD_TEAM, Statement.RETURN_GENERATED_KEYS);
-			preparedStatement.setInt(1, flightTeam.getFirstPilot().getEid());
-			preparedStatement.setInt(2, flightTeam.getSecondPilot().getEid());
-			preparedStatement.setInt(3, flightTeam.getNavigator().getEid());
-			preparedStatement.setInt(4, flightTeam.getRadiooperator().getEid());
-			preparedStatement.setInt(5, flightTeam.getStewardess1().getEid());
-			preparedStatement.setInt(6, flightTeam.getStewardess2().getEid());
-			preparedStatement.setInt(7, flightTeam.getStewardess3().getEid());
-			preparedStatement.executeUpdate();
-			resultSet = preparedStatement.getGeneratedKeys();
-			if (resultSet.next()) {
-				generatedId = resultSet.getInt(1);
+			connection.setAutoCommit(false);
+			preparedStatement = connection.prepareStatement(SqlQuery.ADD_TEAM);
+			for (Integer i : team) {
+				preparedStatement.setInt(1, i);
+				preparedStatement.setInt(2, fid);
+				preparedStatement.executeUpdate();
+			}
+			connection.commit();
+		} catch (SQLException e) {
+			try {
+				logger.debug("Commit failed");
+				if (connection != null) {
+					connection.rollback();
+				}
+			}catch (SQLException e2) {
+				logger.debug("Rollback failed");
 			}
 		} finally {
-			closeItems(resultSet, preparedStatement, connection);
+			closeItems(preparedStatement, connection);
 		}
-		return generatedId;
 	}
 
 	//@Override
