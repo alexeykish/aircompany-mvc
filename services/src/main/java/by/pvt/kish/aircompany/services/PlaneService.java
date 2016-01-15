@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class PlaneService implements EntityService<Plane> {
+public class PlaneService implements IEntityService<Plane> {
     @Override
     public int add(Plane plane) throws SQLException {
         return PlaneDAO.getInstance().add(plane);

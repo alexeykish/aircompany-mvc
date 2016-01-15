@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class EmployeeService implements EntityService<Employee> {
+public class EmployeeService implements IEntityService<Employee> {
 
     @Override
     public int add(Employee employee) throws SQLException {

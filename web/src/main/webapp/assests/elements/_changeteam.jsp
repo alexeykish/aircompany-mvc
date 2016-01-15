@@ -2,7 +2,7 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <div style="margin: 5px;">
     <c:set var="totalRecords" value="0"/>
-    <h2>Set flight team to flight</h2>
+    <h2>Change flight team to flight</h2>
     <form name="setteam" action="controller" method="post">
         <input type="hidden" name="command" value="save_team_to_flight_command"/>
         <table>
@@ -14,14 +14,14 @@
             <tr>
                 <td class="input-label">Flight team:</td>
             </tr>
-            <c:forEach items="${requestScope.team}" var="position" varStatus="loop">
+            <c:forEach items="${requestScope.team}" var="team_member" varStatus="loop">
                 <tr>
-                    <td class="input-label">${position}</td>
+                    <td class="input-label">${team_member.position}</td>
                     <td>
                         <select class="inputForm" name="${loop.index}" title="Flight team">
-                            <option selected value="${position.eid}">${position.firstName} ${position.lastName}/${position.position}</option>
+                            <option selected value="${team_member.eid}">${team_member.firstName} ${team_member.lastName}/${team_member.position}</option>
                             <c:forEach items="${requestScope.employees}" var="employee">
-                                <c:if test="${(employee.position == position)&&(employee.eid != position.eid)}">
+                                <c:if test="${(employee.position == team_member.position)&&(employee.eid != team_member.eid)}">
                                     <option value="${employee.eid}">${employee.firstName} ${employee.lastName}/${employee.position}</option>
                                 </c:if>
                             </c:forEach>

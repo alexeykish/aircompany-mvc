@@ -54,10 +54,10 @@ public class SetTeamCommand extends TeamCommand {
             request.setAttribute(Attribute.EMPLOYEES_ATTRIBUTE, employees);
             request.setAttribute(Attribute.POSITIONS_ATTRIBUTE, positions);
             if (team.size() == 0) {
+                return Page.SET_TEAM;
+            } else {
                 request.setAttribute(Attribute.TEAM_ATTRIBUTE, team);
                 return Page.CHANGE_TEAM;
-            } else {
-                return Page.SET_TEAM;
             }
         } catch (SQLException e) {
             logger.error(Message.ERROR_SQL_DAO);

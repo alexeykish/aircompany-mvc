@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class AirportService implements EntityService<Airport> {
+public class AirportService implements IEntityService<Airport> {
     @Override
     public int add(Airport airport) throws SQLException {
         return AirportDAO.getInstance().add(airport);

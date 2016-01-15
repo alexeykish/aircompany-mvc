@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class FlightService implements EntityService<Flight> {
+public class FlightService implements IEntityService<Flight> {
     @Override
     public int add(Flight flight) throws SQLException {
         return FlightDAO.getInstance().add(flight);

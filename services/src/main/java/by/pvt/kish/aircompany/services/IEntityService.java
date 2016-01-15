@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public interface EntityService<T> {
+public interface IEntityService<T> {
     int add(T t) throws SQLException;
     void update(T t) throws SQLException;
     List<T> getAll() throws SQLException;

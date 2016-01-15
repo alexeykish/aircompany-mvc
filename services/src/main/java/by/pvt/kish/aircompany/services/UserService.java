@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class UserService implements EntityService<User> {
+public class UserService implements IEntityService<User> {
     @Override
     public int add(User user) throws SQLException {
         throw new UnsupportedOperationException();
