@@ -2,13 +2,15 @@ package by.pvt.kish.aircompany.entity;
 
 import by.pvt.kish.aircompany.enums.Position;
 
+import java.io.Serializable;
+
 /**
  * Описывает сущность сотрудника
  * Сотрудник состоит в полетной бригаде (может состоять в нескольких бригадах)
  *
  * @author Kish Alexey
  */
-public class Employee {
+public class Employee implements Serializable{
 	private int eid;
 	private String firstName;
 	private String lastName;

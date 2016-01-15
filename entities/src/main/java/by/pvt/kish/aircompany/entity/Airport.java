@@ -1,12 +1,14 @@
 package by.pvt.kish.aircompany.entity;
 
+import java.io.Serializable;
+
 /**
  * Описывает сущность аэропорта
  * Аэропорт используется, как место вылета и место прилета рейса
  *
  * @author Kish Alexey
  */
-public class Airport {
+public class Airport implements Serializable{
     private int aid;
     private String city;
 

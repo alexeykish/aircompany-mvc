@@ -3,6 +3,7 @@
  */
 package by.pvt.kish.aircompany.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author Kish Alexey
  */
-public class Flight {
+public class Flight implements Serializable{
     private int fid;
     private Date date;
     private Airport from;

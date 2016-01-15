@@ -2,6 +2,7 @@ package by.pvt.kish.aircompany.entity;
 
 import by.pvt.kish.aircompany.enums.Position;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Map;
  *
  * @author Kish Alexey
  */
-public class Plane {
+public class Plane implements Serializable{
 
     private int pid;
     private String model;

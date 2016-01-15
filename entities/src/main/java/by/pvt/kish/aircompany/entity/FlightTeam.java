@@ -3,6 +3,8 @@
  */
 package by.pvt.kish.aircompany.entity;
 
+import java.io.Serializable;
+
 /**
  * Описывает сущность полетной бригады
  * Полетная бригада обслуживает рейс <code>flight</code> (может обслуживать несколько рейсов)
@@ -10,7 +12,7 @@ package by.pvt.kish.aircompany.entity;
  *
  * @author Kish Alexey
  */
-public class FlightTeam {
+public class FlightTeam implements Serializable{
 	private int tid;
 	private Employee firstPilot;
 	private Employee secondPilot;

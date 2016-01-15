@@ -5,13 +5,15 @@ package by.pvt.kish.aircompany.entity;
 
 import by.pvt.kish.aircompany.enums.UserType;
 
+import java.io.Serializable;
+
 /**
  * Описывает сущность пользователя системы
  * Пользователь может быть двух типов: администратор или диспетчер
  *
  * @author Kish Alexey
  */
-public class User {
+public class User implements Serializable{
 	private int uid;
 	private String firstName;
 	private String lastName;
