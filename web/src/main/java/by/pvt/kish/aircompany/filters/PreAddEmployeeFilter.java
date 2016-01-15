@@ -21,8 +21,6 @@ import java.util.List;
  */
 public class PreAddEmployeeFilter implements Filter {
 
-    static Logger logger = Logger.getLogger(PreAddEmployeeFilter.class.getName());
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }

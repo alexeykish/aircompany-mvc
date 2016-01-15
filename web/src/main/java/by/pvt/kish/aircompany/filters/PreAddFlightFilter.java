@@ -28,10 +28,8 @@ public class PreAddFlightFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
-            PlaneService planeService = new PlaneService();
-            AirportService airportService = new AirportService();
-            List<Plane> planes = planeService.getAll();
-            List<Airport> airports = airportService.getAll();
+            List<Plane> planes = PlaneService.getInstance().getAll();
+            List<Airport> airports = AirportService.getInstance().getAll();
             request.setAttribute(Attribute.AIRPORTS_ATTRIBUTE, airports);
             request.setAttribute(Attribute.PLANES_ATTRIBUTE, planes);
             chain.doFilter(request,response);

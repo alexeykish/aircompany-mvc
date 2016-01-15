@@ -37,8 +37,7 @@ public class PreUpdateEmployeeFilter implements Filter {
                 RequestDispatcher dispatcher = request.getRequestDispatcher(Page.ERROR);
                 dispatcher.forward(request, response);
             }
-            EmployeeService employeeService = new EmployeeService();
-            Employee employee = employeeService.getById(Integer.parseInt(id));
+            Employee employee = EmployeeService.getInstance().getById(Integer.parseInt(id));
             request.setAttribute(Attribute.EMPLOYEE_ATTRIBUTE, employee);
             chain.doFilter(request,response);
         } catch (SQLException e) {

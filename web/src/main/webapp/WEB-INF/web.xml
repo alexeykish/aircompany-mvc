@@ -103,6 +103,7 @@
     <filter-mapping>
         <filter-name>AdminAuthFilter</filter-name>
         <url-pattern>/addflight</url-pattern>
+        <url-pattern>/updateflight</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
@@ -111,6 +112,7 @@
     <filter-mapping>
         <filter-name>DispatcherAuthFilter</filter-name>
         <url-pattern>/addemployee</url-pattern>
+        <url-pattern>/updateemployee</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>

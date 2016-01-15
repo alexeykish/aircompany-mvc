@@ -37,8 +37,7 @@ public class PreUpdateFlightFilter implements Filter {
                 RequestDispatcher dispatcher = request.getRequestDispatcher(Page.ERROR);
                 dispatcher.forward(request, response);
             }
-            FlightService flightService = new FlightService();
-            Flight flight = flightService.getById(Integer.parseInt(id));
+            Flight flight = FlightService.getInstance().getById(Integer.parseInt(id));
             request.setAttribute(Attribute.FLIGHT_ATTRIBUTE, flight);
             chain.doFilter(request,response);
         } catch (SQLException e) {
