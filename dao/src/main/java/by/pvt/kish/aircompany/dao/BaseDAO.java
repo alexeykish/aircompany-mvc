@@ -20,46 +20,19 @@ public abstract class BaseDAO<T> implements DAO<T>{
 
 	static Logger logger = Logger.getLogger(BaseDAO.class.getName());
 
-	protected static ConnectionPool poolInstance;
+//	protected static ConnectionPool poolInstance;
 
 	protected BaseDAO() {
-		try {
-			poolInstance = ConnectionPool.getInstance();
-        } catch (IOException e) {
-			logger.error("IOException at DAO");
-		} catch (SQLException e) {
-			logger.error("SQLException at DAO");
-		} catch (PropertyVetoException e) {
-			logger.error("PropertyVetoException at DAO");
-		}
+//		try {
+//			poolInstance = ConnectionPool.getInstance();
+//        } catch (IOException e) {
+//			logger.error("IOException at DAO");
+//		} catch (SQLException e) {
+//			logger.error("SQLException at DAO");
+//		} catch (PropertyVetoException e) {
+//			logger.error("PropertyVetoException at DAO");
+//		}
 	}
 
-	public void closeItems(PreparedStatement preparedStatement, Connection connection){
-		try {
-			if (preparedStatement != null) {
-				preparedStatement.close();
-			}
-			if (connection != null) {
-				connection.close();
-			}
-		} catch (SQLException e) {
-			logger.error("SQL exception occurred during closing connection");
-		}
-	}
-	public void closeItems(ResultSet resultSet, PreparedStatement preparedStatement, Connection connection){
-		try {
-			if (resultSet != null) {
-				resultSet.close();
-			}
-			if (preparedStatement != null) {
-				preparedStatement.close();
-			}
-			if (connection != null) {
-				connection.close();
-			}
-		} catch (SQLException e) {
-			logger.error("SQL exception occurred during closing connection");
-		}
-	}
-	
+
 }

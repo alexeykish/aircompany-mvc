@@ -9,6 +9,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.pvt.kish.aircompany.pool.ConnectionUtils.closePreparedStatement;
+import static by.pvt.kish.aircompany.pool.ConnectionUtils.closeResultSet;
+
 /**
  *
  * @author  Kish Alexey
@@ -31,13 +34,13 @@ public class AirportDAO extends BaseDAO<Airport> {
     }
 
     @Override
-    public int add(Airport airport) throws SQLException {
-        Connection connection = null;
+    public int add(Connection connection, Airport airport) throws SQLException {
+//        Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         int generatedId = 0;
         try {
-            connection = poolInstance.getConnection();
+//            connection = poolInstance.getConnection();
             preparedStatement = connection.prepareStatement(SqlQuery.ADD_AIRPORT, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, airport.getCity());
             preparedStatement.executeUpdate();
@@ -46,34 +49,35 @@ public class AirportDAO extends BaseDAO<Airport> {
                 generatedId = resultSet.getInt(1);
             }
         } finally {
-            closeItems(resultSet, preparedStatement, connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
         }
         return generatedId;
     }
 
     @Override
-    public void update(Airport airport) throws SQLException {
-        Connection connection = null;
+    public void update(Connection connection, Airport airport) throws SQLException {
+//        Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
-            connection = poolInstance.getConnection();
+//            connection = poolInstance.getConnection();
             preparedStatement = connection.prepareStatement(SqlQuery.UPDATE_AIRPORT);
             preparedStatement.setString(1, airport.getCity());
             preparedStatement.setInt(2, airport.getAid());
             preparedStatement.executeUpdate();
         } finally {
-            closeItems(preparedStatement, connection);
+            closePreparedStatement(preparedStatement);
         }
     }
 
     @Override
-    public List<Airport> getAll() throws SQLException {
-        Connection connection = null;
+    public List<Airport> getAll(Connection connection) throws SQLException {
+//        Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List<Airport> airports = new ArrayList<>();
         try {
-            connection = poolInstance.getConnection();
+//            connection = poolInstance.getConnection();
             preparedStatement = connection.prepareStatement(SqlQuery.GET_ALL_AIRPORTS);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -82,19 +86,20 @@ public class AirportDAO extends BaseDAO<Airport> {
                 airports.add(airport);
             }
         } finally {
-            closeItems(resultSet, preparedStatement, connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
         }
         return airports;
     }
 
     @Override
-    public Airport getById(int id) throws SQLException {
-        Connection connection = null;
+    public Airport getById(Connection connection, int id) throws SQLException {
+//        Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         Airport airport = null;
         try {
-            connection = poolInstance.getConnection();
+//            connection = poolInstance.getConnection();
             preparedStatement = connection.prepareStatement(SqlQuery.GET_AIRPORT_BY_ID);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
@@ -103,22 +108,23 @@ public class AirportDAO extends BaseDAO<Airport> {
                 airport = setAirportParametrs(resultSet, airport);
             }
         } finally {
-            closeItems(resultSet, preparedStatement, connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
         }
         return airport;
     }
 
     @Override
-    public void delete(int id) throws SQLException {
-        Connection connection = null;
+    public void delete(Connection connection, int id) throws SQLException {
+//        Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
-            connection = poolInstance.getConnection();
+//            connection = poolInstance.getConnection();
             preparedStatement = connection.prepareStatement(SqlQuery.DELETE_AIRPORT);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } finally {
-            closeItems(preparedStatement, connection);
+            closePreparedStatement(preparedStatement);
         }
     }
 

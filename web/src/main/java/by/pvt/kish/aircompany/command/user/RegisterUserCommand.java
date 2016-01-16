@@ -1,10 +1,12 @@
 package by.pvt.kish.aircompany.command.user;
 
+import by.pvt.kish.aircompany.command.ActionCommand;
 import by.pvt.kish.aircompany.constants.Attribute;
 import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.User;
 import by.pvt.kish.aircompany.enums.UserType;
+import by.pvt.kish.aircompany.services.UserService;
 import by.pvt.kish.aircompany.validators.UserValidator;
 import org.apache.log4j.Logger;
 
@@ -15,7 +17,7 @@ import java.sql.SQLException;
 /**
  * @author Kish Alexey
  */
-public class RegisterUserCommand extends UserCommand {
+public class RegisterUserCommand implements ActionCommand {
 
 	static Logger logger = Logger.getLogger(RegisterUserCommand.class.getName());
 
@@ -44,12 +46,12 @@ public class RegisterUserCommand extends UserCommand {
 				return Page.INDEX;
 			}
 
-			if (!userService.checkLogin(user.getLogin())) {
+			if (!UserService.getInstance().checkLogin(user.getLogin())) {
 				request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.ERROR_REG_LOGIN);
 				logger.error(Message.ERROR_REG_LOGIN);
 				return Page.INDEX;
 			}
-			userService.add(user);
+			UserService.getInstance().add(user);
 			request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.SUCCESS_REG);
 			return Page.INDEX;
 		} catch (SQLException e) {

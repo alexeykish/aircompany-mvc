@@ -2,16 +2,22 @@ package by.pvt.kish.aircompany.services;
 
 import by.pvt.kish.aircompany.dao.UserDAO;
 import by.pvt.kish.aircompany.entity.User;
+import by.pvt.kish.aircompany.pool.ConnectionUtils;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+
+import static by.pvt.kish.aircompany.pool.ConnectionUtils.*;
 
 /**
  * @author Kish Alexey
  */
-public class UserService implements IService<User> {
+public class UserService extends BaseService<User> {
 
     private static UserService instance;
+    private UserDAO userDAO = UserDAO.getInstance();
+    Connection connection;
 
     public synchronized static UserService getInstance() {
         if (instance == null) {
@@ -27,7 +33,10 @@ public class UserService implements IService<User> {
 
     @Override
     public List<User> getAll() throws SQLException {
-        return UserDAO.getInstance().getAll();
+        connection = poolInstance.getConnection();
+        List<User> list = userDAO.getAll(connection);
+        closeConnection(connection);
+        return list;
     }
 
     @Override
@@ -41,14 +50,23 @@ public class UserService implements IService<User> {
     }
     @Override
     public int add(User user) throws SQLException{
-        return UserDAO.getInstance().add(user);
+        connection = poolInstance.getConnection();
+        int id =  userDAO.add(connection, user);
+        closeConnection(connection);
+        return id;
     }
 
     public boolean checkLogin(String login) throws SQLException{
-        return UserDAO.getInstance().checkLogin(login);
+        connection = poolInstance.getConnection();
+        boolean result =  userDAO.checkLogin(connection, login);
+        closeConnection(connection);
+        return result;
     }
 
     public User getUser(String login, String password) throws SQLException{
-        return UserDAO.getInstance().getUser(login, password);
+        connection = poolInstance.getConnection();
+        User user = userDAO.getUser(connection, login, password);
+        closeConnection(connection);
+        return user;
     }
 }

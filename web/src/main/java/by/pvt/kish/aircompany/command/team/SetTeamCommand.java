@@ -41,15 +41,10 @@ public class SetTeamCommand implements ActionCommand {
                 return Page.ERROR;
             }
 
-            FlightService flightService = new FlightService();
-            PlaneService planeService = new PlaneService();
-            EmployeeService employeeService = new EmployeeService();
-            TeamService teamService = new TeamService();
-
-            Flight flight = flightService.getById(Integer.parseInt(id));
-            List<Employee> team = teamService.getById(Integer.parseInt(id));
-            List<String> positions = TeamCreator.getPlanePositions(planeService.getById(flight.getPlane().getPid()));
-            List<Employee> employees = employeeService.getAll();
+            Flight flight = FlightService.getInstance().getById(Integer.parseInt(id));
+            List<Employee> team = TeamService.getInstance().getById(Integer.parseInt(id));
+            List<String> positions = TeamCreator.getPlanePositions(PlaneService.getInstance().getById(flight.getPlane().getPid()));
+            List<Employee> employees = EmployeeService.getInstance().getAll();
 
             request.setAttribute(Attribute.FLIGHT_ATTRIBUTE, flight);
             request.setAttribute(Attribute.EMPLOYEES_ATTRIBUTE, employees);

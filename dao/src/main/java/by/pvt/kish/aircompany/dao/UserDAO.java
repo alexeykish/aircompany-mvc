@@ -7,12 +7,15 @@ import by.pvt.kish.aircompany.constants.Column;
 import by.pvt.kish.aircompany.constants.SqlQuery;
 import by.pvt.kish.aircompany.entity.User;
 import by.pvt.kish.aircompany.enums.UserType;
+import by.pvt.kish.aircompany.pool.ConnectionUtils;
 import by.pvt.kish.aircompany.utils.Coder;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static by.pvt.kish.aircompany.pool.ConnectionUtils.*;
 
 /**
  * @author  Kish Alexey
@@ -35,13 +38,13 @@ public class UserDAO extends BaseDAO<User> {
 	}
 
 	@Override
-	public int add(User user) throws SQLException {
+	public int add(Connection connection, User user) throws SQLException {
 		int generatedId = 0;
-		Connection connection = null;
+//		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		try {
-			connection = poolInstance.getConnection();
+//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(SqlQuery.ADD_USER, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, user.getFirstName());
 			preparedStatement.setString(2, user.getLastName());
@@ -55,17 +58,18 @@ public class UserDAO extends BaseDAO<User> {
 				generatedId = resultSet.getInt(1);
 			}
 		} finally {
-			closeItems(resultSet, preparedStatement, connection);
+			closeResultSet(resultSet);
+			closePreparedStatement(preparedStatement);
 		}
 		return generatedId;
 	}
 
-	public boolean checkLogin(String login) throws SQLException {
-		Connection connection = null;
+	public boolean checkLogin(Connection connection, String login) throws SQLException {
+//		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		try {
-			connection = poolInstance.getConnection();
+//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(SqlQuery.CHECK_LOGIN);
 			preparedStatement.setString(1, login);
 			resultSet = preparedStatement.executeQuery();
@@ -74,19 +78,20 @@ public class UserDAO extends BaseDAO<User> {
 			}
 
 		} finally {
-			closeItems(resultSet, preparedStatement, connection);
+			closeResultSet(resultSet);
+			closePreparedStatement(preparedStatement);
 		}
 		return true;
 	}
 
-	public User getUser(String login, String password) throws SQLException {
+	public User getUser(Connection connection, String login, String password) throws SQLException {
 		User user = null;
 		String pass = Coder.getHashCode(password);
-		Connection connection = null;
+//		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		try {
-			connection = poolInstance.getConnection();
+//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(SqlQuery.GET_USER); 
 			preparedStatement.setString(1, login);
 			preparedStatement.setString(2, pass);
@@ -96,19 +101,20 @@ public class UserDAO extends BaseDAO<User> {
 				user = setUserParametrs(resultSet, user);
 			}
 		} finally {
-			closeItems(resultSet, preparedStatement, connection);
+			closeResultSet(resultSet);
+			closePreparedStatement(preparedStatement);
 		}
 		return user;
 	}
 
 	@Override
-	public List<User> getAll() throws SQLException {
-		Connection connection = null;
+	public List<User> getAll(Connection connection) throws SQLException {
+//		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		List<User> users = new ArrayList<>();
 		try {
-			connection = poolInstance.getConnection();
+//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(SqlQuery.GET_ALL_USERS);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -117,19 +123,20 @@ public class UserDAO extends BaseDAO<User> {
 				users.add(user);
 			}
 		} finally {
-			closeItems(resultSet, preparedStatement, connection);
+			closeResultSet(resultSet);
+			closePreparedStatement(preparedStatement);
 		}
 		return users;
 	}
 
 	@Override
-	public User getById(int id) throws SQLException {
-		Connection connection = null;
+	public User getById(Connection connection, int id) throws SQLException {
+//		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		User user = null;
 		try {
-			connection = poolInstance.getConnection();
+//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(SqlQuery.GET_USER_BY_ID);
 			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();
@@ -138,22 +145,23 @@ public class UserDAO extends BaseDAO<User> {
 				user = setUserParametrs(resultSet, user);
 			}
 		} finally {
-			closeItems(resultSet, preparedStatement, connection);
+			closeResultSet(resultSet);
+			closePreparedStatement(preparedStatement);
 		}
 		return user;
 	}
 
 	@Override
-	public void delete(int id) throws SQLException {
-		Connection connection = null;
+	public void delete(Connection connection, int id) throws SQLException {
+//		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			connection = poolInstance.getConnection();
+//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(SqlQuery.DELETE_USER);
 			preparedStatement.setInt(1, id);
 			preparedStatement.executeUpdate();
 		} finally {
-			closeItems(preparedStatement, connection);
+			closePreparedStatement(preparedStatement);
 		};
 	}
 
@@ -168,7 +176,7 @@ public class UserDAO extends BaseDAO<User> {
 	}
 
 	@Override
-	public void update(User user) throws SQLException {
+	public void update(Connection connection, User user) throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 }

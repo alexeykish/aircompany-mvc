@@ -9,6 +9,7 @@ import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.dao.UserDAO;
 import by.pvt.kish.aircompany.entity.User;
+import by.pvt.kish.aircompany.services.UserService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,14 +20,14 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class GetAllUsersCommand extends UserCommand {
+public class GetAllUsersCommand implements ActionCommand {
 	
 	static Logger logger = Logger.getLogger(GetAllUsersCommand.class.getName());
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			List<User> users = userService.getAll();
+			List<User> users = UserService.getInstance().getAll();
 			request.setAttribute(Attribute.USERS_ATTRIBUTE, users);
 		} catch (SQLException e) {
 			logger.error(Message.ERROR_SQL_DAO);

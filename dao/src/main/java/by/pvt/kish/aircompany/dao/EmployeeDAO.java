@@ -13,6 +13,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.pvt.kish.aircompany.pool.ConnectionUtils.closePreparedStatement;
+import static by.pvt.kish.aircompany.pool.ConnectionUtils.closeResultSet;
+
 /**
  * @author  Kish Alexey
  */
@@ -32,13 +35,13 @@ public class EmployeeDAO extends BaseDAO<Employee> {
     }
 
 	@Override
-	public int add(Employee employee) throws SQLException {
+	public int add(Connection connection, Employee employee) throws SQLException {
 		int generatedId = 0;
-		Connection connection = null;
+//		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		try {
-			connection = poolInstance.getConnection();
+//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(SqlQuery.ADD_EMPLOYEE, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, employee.getFirstName());
 			preparedStatement.setString(2, employee.getLastName());
@@ -49,19 +52,20 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 				generatedId = resultSet.getInt(1);
 			}
 		} finally {
-			closeItems(resultSet, preparedStatement, connection);
+			closeResultSet(resultSet);
+			closePreparedStatement(preparedStatement);
 		}
 		return  generatedId;
 	}
 
 	@Override
-	public List<Employee> getAll() throws SQLException {
-		Connection connection = null;
+	public List<Employee> getAll(Connection connection) throws SQLException {
+//		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		List<Employee> employees = new ArrayList<>();
 		try {
-			connection = poolInstance.getConnection();
+//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(SqlQuery.GET_ALL_EMPLOYEES);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -70,32 +74,33 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 				employees.add(employee);
 			}
 		} finally {
-			closeItems(resultSet, preparedStatement, connection);
+			closeResultSet(resultSet);
+			closePreparedStatement(preparedStatement);
 		}
 		return employees;
 	}
 
 	@Override
-	public void delete(int eid) throws SQLException {
-		Connection connection = null;
+	public void delete(Connection connection, int eid) throws SQLException {
+//		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			connection = poolInstance.getConnection();
+//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(SqlQuery.DELETE_EMPLOYEE);
 			preparedStatement.setInt(1, eid);
 			preparedStatement.executeUpdate();
 		} finally {
-			closeItems(preparedStatement, connection);
+			closePreparedStatement(preparedStatement);
 		}
 
 	}
 
 	@Override
-	public void update(Employee employee) throws SQLException {
-		Connection connection = null;
+	public void update(Connection connection, Employee employee) throws SQLException {
+//		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			connection = poolInstance.getConnection();
+//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(SqlQuery.UPDATE_EMPLOYEE);
 			preparedStatement.setString(1, employee.getFirstName());
 			preparedStatement.setString(2, employee.getLastName());
@@ -103,18 +108,18 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 			preparedStatement.setInt(4, employee.getEid());
 			preparedStatement.executeUpdate();
 		} finally {
-			closeItems(preparedStatement, connection);
+			closePreparedStatement(preparedStatement);
 		}
 	}
 
 	@Override
-	public Employee getById(int eid) throws SQLException {
-		Connection connection = null;
+	public Employee getById(Connection connection, int eid) throws SQLException {
+//		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Employee employee = null;
 		try {
-			connection = poolInstance.getConnection();
+//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(SqlQuery.GET_EMPLOYEE_BY_ID);
 			preparedStatement.setInt(1, eid);
 			resultSet = preparedStatement.executeQuery();
@@ -123,7 +128,8 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 				employee = setEmployeeParametrs(resultSet, employee);
 			}
 		} finally {
-			closeItems(resultSet, preparedStatement, connection);
+			closeResultSet(resultSet);
+			closePreparedStatement(preparedStatement);
 		}
 		return employee;
 	}

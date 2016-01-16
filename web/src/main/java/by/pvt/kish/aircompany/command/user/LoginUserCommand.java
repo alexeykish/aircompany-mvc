@@ -1,9 +1,11 @@
 package by.pvt.kish.aircompany.command.user;
 
+import by.pvt.kish.aircompany.command.ActionCommand;
 import by.pvt.kish.aircompany.constants.Attribute;
 import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.User;
+import by.pvt.kish.aircompany.services.UserService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.Cookie;
@@ -15,7 +17,7 @@ import java.sql.SQLException;
 /**
  * @author Kish Alexey
  */
-public class LoginUserCommand extends UserCommand {
+public class LoginUserCommand implements ActionCommand {
 
 	static Logger logger = Logger.getLogger(LoginUserCommand.class.getName());
 
@@ -35,7 +37,7 @@ public class LoginUserCommand extends UserCommand {
 				return Page.INDEX;
 			}
 
-			User user = userService.getUser(login, password);
+			User user = UserService.getInstance().getUser(login, password);
 			if (user == null) {
 				request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.ERROR_REG_LOGIN);
 				logger.error(Message.ERROR_REG_LOGIN);

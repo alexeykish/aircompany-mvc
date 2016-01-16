@@ -16,6 +16,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.pvt.kish.aircompany.pool.ConnectionUtils.closePreparedStatement;
+import static by.pvt.kish.aircompany.pool.ConnectionUtils.closeResultSet;
+
 /**
  * @author  Kish Alexey
  */
@@ -23,7 +26,7 @@ public class TeamDAO implements ITeamDAO {
 
 	static Logger logger = Logger.getLogger(TeamDAO.class.getName());
 	private static TeamDAO instance;
-	ConnectionPool poolInstance;;
+	ConnectionPool poolInstance;
 
 	private TeamDAO() {
 		super();
@@ -42,11 +45,11 @@ public class TeamDAO implements ITeamDAO {
 	}
 
 	@Override
-	public void add(int fid, List<Integer> team) throws SQLException {
-		Connection connection = null;
+	public void add(Connection connection, int fid, List<Integer> team) throws SQLException {
+//		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			connection = poolInstance.getConnection();
+//			connection = poolInstance.getConnection();
 			connection.setAutoCommit(false);
 			preparedStatement = connection.prepareStatement(SqlQuery.ADD_TEAM);
 			for (Integer i : team) {
@@ -58,24 +61,22 @@ public class TeamDAO implements ITeamDAO {
 		} catch (SQLException e) {
 			try {
 				logger.debug("Commit failed");
-				if (connection != null) {
-					connection.rollback();
-				}
+				connection.rollback();
 			}catch (SQLException e2) {
 				logger.debug("Rollback failed");
 			}
 		} finally {
-			closeItems(preparedStatement, connection);
+			closePreparedStatement(preparedStatement);
 		}
 	}
 	@Override
-	public List<FlightTeam> getAll() throws SQLException {
-		Connection connection = null;
+	public List<FlightTeam> getAll(Connection connection) throws SQLException {
+//		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		List<FlightTeam> teams = new ArrayList<>();
 		try {
-			connection = poolInstance.getConnection();
+//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(SqlQuery.GET_ALL_TEAMS);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -84,82 +85,55 @@ public class TeamDAO implements ITeamDAO {
 				teams.add(team);
 			}
 		} finally {
-			closeItems(resultSet, preparedStatement, connection);
+			closeResultSet(resultSet);
+			closePreparedStatement(preparedStatement);
 		}
 		return teams;
 	}
 	@Override
-	public void delete(int id) throws SQLException {
-		Connection connection = null;
+	public void delete(Connection connection, int id) throws SQLException {
+//		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			connection = poolInstance.getConnection();
+//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(SqlQuery.DELETE_TEAM);
 			preparedStatement.setInt(1, id);
 			preparedStatement.executeUpdate();
 		} finally {
-			closeItems(preparedStatement, connection);
+			closePreparedStatement(preparedStatement);
 		}
 	}
 	@Override
-	public List<Employee> getById(int id) throws SQLException {
-		Connection connection = null;
+	public List<Employee> getById(Connection connection, int id) throws SQLException {
+//		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		List<Employee> team = new ArrayList<>();
 		try {
-			connection = poolInstance.getConnection();
+//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(SqlQuery.GET_TEAM_BY_ID); //TODO refactor
 			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				team.add(EmployeeDAO.getInstance().getById(resultSet.getInt(Column.TEAMS_EID)));
+				team.add(EmployeeDAO.getInstance().getById(connection, resultSet.getInt(Column.TEAMS_EID)));
 			}
 		} finally {
-			closeItems(resultSet, preparedStatement, connection);
+			closeResultSet(resultSet);
+			closePreparedStatement(preparedStatement);
 		}
 		return team;
 	}
 
 	private FlightTeam setTeamParametrs(ResultSet resultSet, FlightTeam team) throws SQLException {
-			team.setTid(resultSet.getInt(Column.TEAMS_TID));
-			EmployeeDAO employeeDAO = EmployeeDAO.getInstance();
-			team.setFirstPilot(employeeDAO.getById(resultSet.getInt(Column.TEAMS_FIRSTPILOT_ID)));
-			team.setSecondPilot(employeeDAO.getById(resultSet.getInt(Column.TEAMS_SECONDPILOT_ID)));
-			team.setNavigator(employeeDAO.getById(resultSet.getInt(Column.TEAMS_NAVIGATOR_ID)));
-			team.setRadiooperator(employeeDAO.getById(resultSet.getInt(Column.TEAMS_RADIOPERATOR_ID)));
-			team.setStewardess1(employeeDAO.getById(resultSet.getInt(Column.TEAMS_STEWARDESS1_ID)));
-			team.setStewardess2(employeeDAO.getById(resultSet.getInt(Column.TEAMS_STEWARDESS2_ID)));
-			team.setStewardess3(employeeDAO.getById(resultSet.getInt(Column.TEAMS_STEWARDESS3_ID)));
+//			team.setTid(resultSet.getInt(Column.TEAMS_TID));
+//			EmployeeDAO employeeDAO = EmployeeDAO.getInstance();
+//			team.setFirstPilot(employeeDAO.getById(resultSet.getInt(Column.TEAMS_FIRSTPILOT_ID)));
+//			team.setSecondPilot(employeeDAO.getById(resultSet.getInt(Column.TEAMS_SECONDPILOT_ID)));
+//			team.setNavigator(employeeDAO.getById(resultSet.getInt(Column.TEAMS_NAVIGATOR_ID)));
+//			team.setRadiooperator(employeeDAO.getById(resultSet.getInt(Column.TEAMS_RADIOPERATOR_ID)));
+//			team.setStewardess1(employeeDAO.getById(resultSet.getInt(Column.TEAMS_STEWARDESS1_ID)));
+//			team.setStewardess2(employeeDAO.getById(resultSet.getInt(Column.TEAMS_STEWARDESS2_ID)));
+//			team.setStewardess3(employeeDAO.getById(resultSet.getInt(Column.TEAMS_STEWARDESS3_ID)));
 			return team;
 	}
-	private void closeItems(PreparedStatement preparedStatement, Connection connection){
-		try {
-			if (preparedStatement != null) {
-				preparedStatement.close();
-			}
-			if (connection != null) {
-				connection.close();
-			}
-		} catch (SQLException e) {
-			logger.error("SQL exception occurred during closing connection");
-		}
-	}
-
-	private void closeItems(ResultSet resultSet, PreparedStatement preparedStatement, Connection connection){
-		try {
-			if (resultSet != null) {
-				resultSet.close();
-			}
-			if (preparedStatement != null) {
-				preparedStatement.close();
-			}
-			if (connection != null) {
-				connection.close();
-			}
-		} catch (SQLException e) {
-			logger.error("SQL exception occurred during closing connection");
-		}
-	}
-
 }

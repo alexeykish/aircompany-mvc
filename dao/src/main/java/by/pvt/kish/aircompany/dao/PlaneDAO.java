@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static by.pvt.kish.aircompany.pool.ConnectionUtils.closePreparedStatement;
+import static by.pvt.kish.aircompany.pool.ConnectionUtils.closeResultSet;
+
 /**
  * @author  Kish Alexey
  */
@@ -34,13 +37,13 @@ public class PlaneDAO extends BaseDAO<Plane> {
     }
 
     @Override
-    public int add(Plane plane) throws SQLException {
+    public int add(Connection connection, Plane plane) throws SQLException {
         int generatedId = 0;
-        Connection connection = null;
+//        Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            connection = poolInstance.getConnection();
+//            connection = poolInstance.getConnection();
             preparedStatement = connection.prepareStatement(SqlQuery.ADD_PLANE, Statement.RETURN_GENERATED_KEYS);
             preparedStatement = setStatementParametrs(preparedStatement, plane);
             preparedStatement.executeUpdate();
@@ -49,34 +52,35 @@ public class PlaneDAO extends BaseDAO<Plane> {
                 generatedId = resultSet.getInt(1);
             }
         } finally {
-            closeItems(resultSet, preparedStatement, connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
         }
         return generatedId;
     }
 
     @Override
-    public void update(Plane plane) throws SQLException {
-        Connection connection = null;
+    public void update(Connection connection, Plane plane) throws SQLException {
+//        Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
-            connection = poolInstance.getConnection();
+//            connection = poolInstance.getConnection();
             preparedStatement = connection.prepareStatement(SqlQuery.UPDATE_PLANE);
             preparedStatement = setStatementParametrs(preparedStatement, plane);
             preparedStatement.setInt(8, plane.getPid());
             preparedStatement.executeUpdate();
         } finally {
-            closeItems(preparedStatement, connection);
+            closePreparedStatement(preparedStatement);
         }
     }
 
     @Override
-    public List<Plane> getAll() throws SQLException {
-        Connection connection = null;
+    public List<Plane> getAll(Connection connection) throws SQLException {
+//        Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List<Plane> planes = new ArrayList<>();
         try {
-            connection = poolInstance.getConnection();
+//            connection = poolInstance.getConnection();
             preparedStatement = connection.prepareStatement(SqlQuery.GET_ALL_PLANES);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -85,19 +89,20 @@ public class PlaneDAO extends BaseDAO<Plane> {
                 planes.add(plane);
             }
         } finally {
-            closeItems(resultSet, preparedStatement, connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
         }
         return planes;
     }
 
     @Override
-    public Plane getById(int id) throws SQLException {
-        Connection connection = null;
+    public Plane getById(Connection connection, int id) throws SQLException {
+//        Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         Plane plane = null;
         try {
-            connection = poolInstance.getConnection();
+//            connection = poolInstance.getConnection();
             preparedStatement = connection.prepareStatement(SqlQuery.GET_PLANE_BY_ID);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
@@ -106,22 +111,23 @@ public class PlaneDAO extends BaseDAO<Plane> {
                 plane = setPlaneParametrs(resultSet, plane);
             }
         } finally {
-            closeItems(resultSet, preparedStatement, connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
         }
         return plane;
     }
 
     @Override
-    public void delete(int id) throws SQLException {
-        Connection connection = null;
+    public void delete(Connection connection, int id) throws SQLException {
+//        Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
-            connection = poolInstance.getConnection();
+//            connection = poolInstance.getConnection();
             preparedStatement = connection.prepareStatement(SqlQuery.DELETE_PLANE);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } finally {
-            closeItems(preparedStatement, connection);
+            closePreparedStatement(preparedStatement);
         }
     }
 

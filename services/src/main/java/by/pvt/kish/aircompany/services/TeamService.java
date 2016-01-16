@@ -3,7 +3,11 @@ package by.pvt.kish.aircompany.services;
 import by.pvt.kish.aircompany.dao.TeamDAO;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.FlightTeam;
+import by.pvt.kish.aircompany.pool.ConnectionPool;
 
+import java.beans.PropertyVetoException;
+import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,6 +17,18 @@ import java.util.List;
 public class TeamService {
 
     private static TeamService instance;
+    private TeamDAO teamDAO = TeamDAO.getInstance();
+    ConnectionPool poolInstance;
+    Connection connection;
+
+    private TeamService() {
+        super();
+        try {
+            ConnectionPool poolInstance = ConnectionPool.getInstance();
+        } catch (IOException | SQLException | PropertyVetoException e) {
+            e.printStackTrace();
+        }
+    }
 
     public synchronized static TeamService getInstance() {
         if (instance == null) {
@@ -22,8 +38,9 @@ public class TeamService {
     }
 
     public void add(int fid, List<Integer> tid) throws SQLException {
-        TeamDAO.getInstance().delete(fid);
-        TeamDAO.getInstance().add(fid, tid);
+        connection = poolInstance.getConnection();
+        TeamDAO.getInstance().delete(connection, fid);
+        TeamDAO.getInstance().add(connection, fid, tid);
     }
 
     public void update(FlightTeam flightTeam) throws SQLException {
@@ -31,14 +48,17 @@ public class TeamService {
     }
 
     public List<FlightTeam> getAll() throws SQLException {
-        return TeamDAO.getInstance().getAll();
+        connection = poolInstance.getConnection();
+        return TeamDAO.getInstance().getAll(connection);
     }
 
     public void delete(int id) throws SQLException {
-        TeamDAO.getInstance().delete(id);
+        connection = poolInstance.getConnection();
+        TeamDAO.getInstance().delete(connection, id);
     }
 
     public List<Employee> getById(int id) throws SQLException {
-        return TeamDAO.getInstance().getById(id);
+        connection = poolInstance.getConnection();
+        return TeamDAO.getInstance().getById(connection, id);
     }
 }
