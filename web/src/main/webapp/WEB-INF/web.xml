@@ -29,7 +29,11 @@
         <jsp-file>/assests/pages/addemployee.jsp</jsp-file>
     </servlet>
     <servlet>
-        <servlet-name>updateemployee-page</servlet-name>
+    <servlet-name>updateemployee-page</servlet-name>
+    <jsp-file>/assests/pages/editemployee.jsp</jsp-file>
+</servlet>
+    <servlet>
+        <servlet-name>back</servlet-name>
         <jsp-file>/assests/pages/editemployee.jsp</jsp-file>
     </servlet>
 

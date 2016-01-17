@@ -4,6 +4,7 @@ import by.pvt.kish.aircompany.dao.TeamDAO;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.FlightTeam;
 import by.pvt.kish.aircompany.pool.ConnectionPool;
+import org.apache.log4j.Logger;
 
 import java.beans.PropertyVetoException;
 import java.io.IOException;
@@ -15,6 +16,8 @@ import java.util.List;
  * @author Kish Alexey
  */
 public class TeamService {
+
+    static Logger logger = Logger.getLogger(TeamService.class.getName());
 
     private static TeamService instance;
     private TeamDAO teamDAO = TeamDAO.getInstance();
@@ -38,9 +41,19 @@ public class TeamService {
     }
 
     public void add(int fid, List<Integer> tid) throws SQLException {
-        connection = poolInstance.getConnection();
-        TeamDAO.getInstance().delete(fid);
-        TeamDAO.getInstance().add(fid, tid);
+        try {
+            connection.setAutoCommit(false);
+            TeamDAO.getInstance().delete(fid);
+            TeamDAO.getInstance().add(fid, tid);
+            connection.commit();
+        } catch (SQLException e){
+            try {
+                logger.debug("Commit failed");
+                connection.rollback();
+            }catch (SQLException e2) {
+                logger.debug("Rollback failed");
+            }
+        }
     }
 
     public void update(FlightTeam flightTeam) throws SQLException {

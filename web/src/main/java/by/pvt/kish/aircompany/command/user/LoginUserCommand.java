@@ -5,6 +5,7 @@ import by.pvt.kish.aircompany.constants.Attribute;
 import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.User;
+import by.pvt.kish.aircompany.enums.UserStatus;
 import by.pvt.kish.aircompany.services.UserService;
 import org.apache.log4j.Logger;
 
@@ -43,6 +44,15 @@ public class LoginUserCommand implements ActionCommand {
 				logger.error(Message.ERROR_REG_LOGIN);
 				return Page.INDEX;
 			}
+
+			if (UserService.getInstance().checkStatus(user.getUid())) {
+				request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.ERROR_REG_LOGIN);
+				logger.error(Message.ERROR_REG_LOGIN);
+				return Page.INDEX;
+			} else {
+				UserService.getInstance().setStatus(user.getUid(), UserStatus.ONLINE);
+			}
+
 			switch (user.getUserType()) {
 				case ADMINISTRATOR:
 					session.setAttribute(Attribute.USERTYPE_ATTRIBUTE, 2); // TODO access level

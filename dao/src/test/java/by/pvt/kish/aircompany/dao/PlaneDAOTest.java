@@ -6,8 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -26,7 +26,7 @@ public class PlaneDAOTest {
         testPlane.setModel("testModel");
         testPlane.setCapacity(100);
         testPlane.setRange(200);
-        Map<Position, Integer> testTeam = new HashMap<>();
+        Map<Position, Integer> testTeam = new TreeMap<>();
         testTeam.put(Position.PILOT, 1);
         testTeam.put(Position.NAVIGATOR, 1);
         testTeam.put(Position.RADIOOPERATOR, 1);
@@ -51,7 +51,7 @@ public class PlaneDAOTest {
         prepareToUpdatePlane.setModel("updatedModel");
         prepareToUpdatePlane.setCapacity(300);
         prepareToUpdatePlane.setRange(400);
-        Map<Position, Integer> updatedTeam = new HashMap<>();
+        Map<Position, Integer> updatedTeam = new TreeMap<>();
         updatedTeam.put(Position.PILOT, 2);
         updatedTeam.put(Position.NAVIGATOR, 2);
         updatedTeam.put(Position.RADIOOPERATOR, 2);

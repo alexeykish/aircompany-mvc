@@ -3,13 +3,9 @@
  */
 package by.pvt.kish.aircompany.validators;
 
-import by.pvt.kish.aircompany.constants.Attribute;
 import by.pvt.kish.aircompany.constants.Message;
-import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.Flight;
 import org.apache.log4j.Logger;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Проверяет обеъект Flight перед добавлением или изменением его в БД

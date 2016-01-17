@@ -3,6 +3,7 @@
  */
 package by.pvt.kish.aircompany.entity;
 
+import by.pvt.kish.aircompany.enums.UserStatus;
 import by.pvt.kish.aircompany.enums.UserType;
 
 import java.io.Serializable;
@@ -21,6 +22,7 @@ public class User implements Serializable{
 	private String password;
 	private String email;
 	private UserType userType;
+	private UserStatus status;
 
 	public User() {
 	}
@@ -32,8 +34,9 @@ public class User implements Serializable{
 	 * @param login - user login
 	 * @param password - user password
 	 * @param userType - user type (Administrator or dispatcher)
+	 * @param status - user status (Online or offline)
 	 */
-	public User(int uid, String firstName, String lastName, String login, String password, UserType userType) {
+	public User(int uid, String firstName, String lastName, String login, String password, UserType userType, UserStatus status) {
 		super();
 		this.uid = uid;
 		this.firstName = firstName;
@@ -41,6 +44,7 @@ public class User implements Serializable{
 		this.login = login;
 		this.password = password;
 		this.userType = userType;
+		this.status = status;
 	}
 
 	@Override
@@ -56,7 +60,8 @@ public class User implements Serializable{
 		if (login != null ? !login.equals(user.login) : user.login != null) return false;
 		if (password != null ? !password.equals(user.password) : user.password != null) return false;
 		if (email != null ? !email.equals(user.email) : user.email != null) return false;
-		return userType == user.userType;
+		if (userType != user.userType) return false;
+		return status == user.status;
 
 	}
 
@@ -69,6 +74,7 @@ public class User implements Serializable{
 		result = 31 * result + (password != null ? password.hashCode() : 0);
 		result = 31 * result + (email != null ? email.hashCode() : 0);
 		result = 31 * result + (userType != null ? userType.hashCode() : 0);
+		result = 31 * result + (status != null ? status.hashCode() : 0);
 		return result;
 	}
 
@@ -127,5 +133,15 @@ public class User implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public UserStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(UserStatus status) {
+		this.status = status;
+	}
+
+
 
 }

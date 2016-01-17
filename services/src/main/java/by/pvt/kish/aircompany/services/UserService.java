@@ -2,6 +2,7 @@ package by.pvt.kish.aircompany.services;
 
 import by.pvt.kish.aircompany.dao.UserDAO;
 import by.pvt.kish.aircompany.entity.User;
+import by.pvt.kish.aircompany.enums.UserStatus;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -9,11 +10,10 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class UserService extends BaseService<User> {
+public class UserService extends BaseService<User> implements IUserService{
 
     private static UserService instance;
     private UserDAO userDAO = UserDAO.getInstance();
-//    Connection connection;
 
     public synchronized static UserService getInstance() {
         if (instance == null) {
@@ -23,13 +23,21 @@ public class UserService extends BaseService<User> {
     }
 
     @Override
+    public int add(User user) throws SQLException {
+        if (!userDAO.checkLogin(user.getLogin())) {
+            return -1;
+        } else {
+            return userDAO.add(user);
+        }
+    }
+
+    @Override
     public void update(User user) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
     @Override
     public List<User> getAll() throws SQLException {
-//        connection = poolInstance.getConnection();
         List<User> list = userDAO.getAll();
         return list;
     }
@@ -44,22 +52,22 @@ public class UserService extends BaseService<User> {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public int add(User user) throws SQLException{
-//        connection = poolInstance.getConnection();
-        int id =  userDAO.add(user);
-        return id;
-    }
-
-    public boolean checkLogin(String login) throws SQLException{
-//        connection = poolInstance.getConnection();
-        boolean result =  userDAO.checkLogin(login);
+    public boolean checkLogin(String login) throws SQLException {
+        boolean result = userDAO.checkLogin(login);
         return result;
     }
 
-    public User getUser(String login, String password) throws SQLException{
-//        connection = poolInstance.getConnection();
+    public User getUser(String login, String password) throws SQLException {
         User user = userDAO.getUser(login, password);
         return user;
+    }
+
+    public boolean checkStatus (int id) throws SQLException {
+        return userDAO.checkStatus(id);
+    }
+
+    @Override
+    public void setStatus(int uid, UserStatus status) throws SQLException {
+        userDAO.setStatus(uid, status);
     }
 }

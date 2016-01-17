@@ -1,7 +1,6 @@
 package by.pvt.kish.aircompany.utils;
 
 import by.pvt.kish.aircompany.constants.Attribute;
-import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.Flight;
@@ -27,7 +26,6 @@ public class RequestHandler {
         String from = request.getParameter("from");
         String to = request.getParameter("to");
         String pid = request.getParameter("pid");
-        String fid = request.getParameter("fid");
         if (!checkNull(date) || !(checkNull(from)) || !(checkNull(to)) || !(checkNull(pid))) {
             return null;
         }

@@ -30,15 +30,6 @@ public class Column {
     public static final String AIRPORT_CITY = "city";
 
     public static final String TEAMS_EID = "t_eid";
-    public static final String TEAMS_FID = "t_fid";
-    public static final String TEAMS_TID = "tid";
-    public static final String TEAMS_FIRSTPILOT_ID = "first_pilot_id";
-    public static final String TEAMS_SECONDPILOT_ID = "second_pilot_id";
-    public static final String TEAMS_NAVIGATOR_ID = "navigator_id";
-    public static final String TEAMS_RADIOPERATOR_ID = "radiooperator_id";
-    public static final String TEAMS_STEWARDESS1_ID = "stewardess1_id";
-    public static final String TEAMS_STEWARDESS2_ID = "stewardess2_id";
-    public static final String TEAMS_STEWARDESS3_ID = "stewardess3_id";
 
     public static final String USERS_UID = "uid";
     public static final String USERS_FIRSTNAME = "first_name";
@@ -47,5 +38,5 @@ public class Column {
     public static final String USERS_PASSWORD = "password";
     public static final String USERS_EMAIL = "email";
     public static final String USERS_USERTYPE = "user_type";
-
+    public static final String USERS_USERSTATUS = "status";
 }

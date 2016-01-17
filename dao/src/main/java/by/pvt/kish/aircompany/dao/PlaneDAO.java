@@ -8,10 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static by.pvt.kish.aircompany.pool.ConnectionUtils.closePreparedStatement;
 import static by.pvt.kish.aircompany.pool.ConnectionUtils.closeResultSet;
@@ -136,7 +133,7 @@ public class PlaneDAO extends BaseDAO<Plane> {
         plane.setModel(resultSet.getString(Column.PLANES_MODEL));
         plane.setCapacity(resultSet.getInt(Column.PLANES_CAPACITY));
         plane.setRange(resultSet.getInt(Column.PLANES_RANGE));
-        Map<Position,Integer> team = new HashMap<>();
+        Map<Position,Integer> team = new TreeMap<>();
         team.put(Position.PILOT, resultSet.getInt(Column.PLANES_PILOTS));
         team.put(Position.NAVIGATOR, resultSet.getInt(Column.PLANES_NAVIGATORS));
         team.put(Position.RADIOOPERATOR, resultSet.getInt(Column.PLANES_RADIOOPERATORS));

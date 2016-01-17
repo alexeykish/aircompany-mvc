@@ -46,14 +46,14 @@ public class RegisterUserCommand implements ActionCommand {
 				return Page.INDEX;
 			}
 
-			if (!UserService.getInstance().checkLogin(user.getLogin())) {
-				request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.ERROR_REG_LOGIN);
+			if (UserService.getInstance().add(user) < 0) {
+				request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.ERROR_REG_USER_EXISTS);
 				logger.error(Message.ERROR_REG_LOGIN);
 				return Page.INDEX;
+			} else {
+				request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.SUCCESS_REG);
+				return Page.INDEX;
 			}
-			UserService.getInstance().add(user);
-			request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.SUCCESS_REG);
-			return Page.INDEX;
 		} catch (SQLException e) {
 			logger.error(Message.ERROR_SQL_DAO);
 			return Page.INDEX;
