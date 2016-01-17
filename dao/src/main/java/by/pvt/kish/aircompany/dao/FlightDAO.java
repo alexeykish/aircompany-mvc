@@ -2,13 +2,13 @@ package by.pvt.kish.aircompany.dao;
 
 import by.pvt.kish.aircompany.constants.Column;
 import by.pvt.kish.aircompany.entity.Flight;
-import by.pvt.kish.aircompany.pool.ConnectionUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static by.pvt.kish.aircompany.pool.ConnectionUtils.*;
+import static by.pvt.kish.aircompany.pool.ConnectionUtils.closePreparedStatement;
+import static by.pvt.kish.aircompany.pool.ConnectionUtils.closeResultSet;
 
 /**
  * @author Kish Alexey
@@ -35,13 +35,10 @@ public class FlightDAO extends BaseDAO<Flight> {
 	}
 
 	@Override
-	public int add(Connection connection, Flight flight) throws SQLException {
+	public int add(Flight flight) throws SQLException {
 		int generatedId = 0;
-		//Connection connection = null;
-		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		try {
-//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(ADD_FLIGHT, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setDate(1, flight.getDate());
 			preparedStatement.setInt(2, flight.getFrom().getAid());
@@ -60,13 +57,10 @@ public class FlightDAO extends BaseDAO<Flight> {
 	}
 
 	@Override
-	public List<Flight> getAll(Connection connection) throws SQLException {
-//		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+	public List<Flight> getAll() throws SQLException {
 		ResultSet resultSet = null;
 		List<Flight> flights = new ArrayList<>();
 		try {
-//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(GET_ALL_FLIGHTS);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -82,11 +76,8 @@ public class FlightDAO extends BaseDAO<Flight> {
 	}
 
 	@Override
-	public void delete(Connection connection, int fid) throws SQLException {
-//		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+	public void delete(int fid) throws SQLException {
 		try {
-//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(DELETE_FLIGHT);
 			preparedStatement.setInt(1, fid);
 			preparedStatement.executeUpdate();
@@ -96,11 +87,8 @@ public class FlightDAO extends BaseDAO<Flight> {
 	}
 
 	@Override
-	public void update(Connection connection, Flight flight) throws SQLException {
-//		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+	public void update(Flight flight) throws SQLException {
 		try {
-//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(UPDATE_FLIGHT);
 			preparedStatement.setDate(1, flight.getDate());
 			preparedStatement.setInt(2, flight.getFrom().getAid());
@@ -114,13 +102,10 @@ public class FlightDAO extends BaseDAO<Flight> {
 	}
 
 	@Override
-	public Flight getById(Connection connection, int fid) throws SQLException {
-		//Connection connection = null;
-		PreparedStatement preparedStatement = null;
+	public Flight getById(int fid) throws SQLException {
 		ResultSet resultSet = null;
 		Flight flight = null;
 		try {
-//			connection = poolInstance.getConnection();
 			preparedStatement = connection.prepareStatement(GET_FLIGHT_BY_ID);
 			preparedStatement.setInt(1, fid);
 			resultSet = preparedStatement.executeQuery();
@@ -139,10 +124,10 @@ public class FlightDAO extends BaseDAO<Flight> {
 		int fid = resultSet.getInt(Column.FLIGHTS_FID);
 		flight.setFid(fid);
 		flight.setDate(resultSet.getDate(Column.FLIGHTS_DATE));
-		flight.setFrom(AirportDAO.getInstance().getById(connection, resultSet.getInt(Column.FLIGHTS_FROM)));
-		flight.setTo(AirportDAO.getInstance().getById(connection, resultSet.getInt(Column.FLIGHTS_TO)));
-		flight.setPlane(PlaneDAO.getInstance().getById(connection, resultSet.getInt(Column.FLIGHTS_PID)));
-		flight.setTeam(TeamDAO.getInstance().getById(connection, fid));
+		flight.setFrom(AirportDAO.getInstance().getById(resultSet.getInt(Column.FLIGHTS_FROM)));
+		flight.setTo(AirportDAO.getInstance().getById(resultSet.getInt(Column.FLIGHTS_TO)));
+		flight.setPlane(PlaneDAO.getInstance().getById(resultSet.getInt(Column.FLIGHTS_PID)));
+		flight.setTeam(TeamDAO.getInstance().getById(fid));
 		return flight;
 	}
 }

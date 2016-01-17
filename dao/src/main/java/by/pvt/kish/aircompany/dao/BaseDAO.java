@@ -10,7 +10,6 @@ import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -20,18 +19,19 @@ public abstract class BaseDAO<T> implements DAO<T>{
 
 	static Logger logger = Logger.getLogger(BaseDAO.class.getName());
 
-//	protected static ConnectionPool poolInstance;
+	protected static Connection connection;
+	protected PreparedStatement preparedStatement;
 
 	protected BaseDAO() {
-//		try {
-//			poolInstance = ConnectionPool.getInstance();
-//        } catch (IOException e) {
-//			logger.error("IOException at DAO");
-//		} catch (SQLException e) {
-//			logger.error("SQLException at DAO");
-//		} catch (PropertyVetoException e) {
-//			logger.error("PropertyVetoException at DAO");
-//		}
+		try {
+			connection = ConnectionPool.getInstance().getConnection();
+        } catch (IOException e) {
+			logger.error("IOException at DAO");
+		} catch (SQLException e) {
+			logger.error("SQLException at DAO");
+		} catch (PropertyVetoException e) {
+			logger.error("PropertyVetoException at DAO");
+		}
 	}
 
 

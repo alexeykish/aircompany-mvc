@@ -3,7 +3,6 @@ package by.pvt.kish.aircompany.services;
 import by.pvt.kish.aircompany.dao.AirportDAO;
 import by.pvt.kish.aircompany.entity.Airport;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class AirportService extends BaseService<Airport> {
 
     private static AirportService instance;
     private AirportDAO airportDAO = AirportDAO.getInstance();
-    Connection connection;
+//    private Connection connection;
 
     public synchronized static AirportService getInstance() {
         if (instance == null) {
@@ -25,27 +24,31 @@ public class AirportService extends BaseService<Airport> {
 
     @Override
     public int add(Airport airport) throws SQLException {
-        connection = poolInstance.getConnection();
-        return airportDAO.add(connection, airport);
+//        connection = poolInstance.getConnection();
+        return airportDAO.add(airport);
     }
 
     @Override
     public void update(Airport airport) throws SQLException {
-        AirportDAO.getInstance().update(connection, airport);
+//        connection = poolInstance.getConnection();
+        AirportDAO.getInstance().update(airport);
     }
 
     @Override
     public List<Airport> getAll() throws SQLException {
-        return AirportDAO.getInstance().getAll(connection);
+//        connection = poolInstance.getConnection();
+        return AirportDAO.getInstance().getAll();
     }
 
     @Override
     public void delete(int id) throws SQLException {
-        AirportDAO.getInstance().delete(connection, id);
+//        connection = poolInstance.getConnection();
+        AirportDAO.getInstance().delete(id);
     }
 
     @Override
     public Airport getById(int id) throws SQLException {
-        return AirportDAO.getInstance().getById(connection, id);
+//        connection = poolInstance.getConnection();
+        return AirportDAO.getInstance().getById(id);
     }
 }

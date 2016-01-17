@@ -1,11 +1,16 @@
 package by.pvt.kish.aircompany.dao;
 
 import by.pvt.kish.aircompany.entity.Plane;
+import by.pvt.kish.aircompany.enums.Position;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * @author Kish Alexey
@@ -21,15 +26,22 @@ public class PlaneDAOTest {
         testPlane.setModel("testModel");
         testPlane.setCapacity(100);
         testPlane.setRange(200);
-        //id = planeDAO.add(testPlane);
+        Map<Position, Integer> testTeam = new HashMap<>();
+        testTeam.put(Position.PILOT, 1);
+        testTeam.put(Position.NAVIGATOR, 1);
+        testTeam.put(Position.RADIOOPERATOR, 1);
+        testTeam.put(Position.STEWARDESS, 1);
+        testPlane.setTeam(testTeam);
+        id = planeDAO.add(testPlane);
     }
 
     @Test
     public void testAdd() throws Exception {
-        //Plane addedPlane = planeDAO.getById(id);
-//        assertEquals("Add method failed: wrong model", addedPlane.getModel(), testPlane.getModel());
-//        assertEquals("Add method failed: wrong capacity", addedPlane.getCapacity(), testPlane.getCapacity());
-//        assertEquals("Add method failed: wrong range", addedPlane.getRange(), testPlane.getRange());
+        Plane addedPlane = planeDAO.getById(id);
+        assertEquals("Add method failed: wrong model", addedPlane.getModel(), testPlane.getModel());
+        assertEquals("Add method failed: wrong capacity", addedPlane.getCapacity(), testPlane.getCapacity());
+        assertEquals("Add method failed: wrong range", addedPlane.getRange(), testPlane.getRange());
+        assertEquals("Add method failed: wrong team", addedPlane.getTeam(), testPlane.getTeam());
     }
 
     @Test
@@ -39,32 +51,39 @@ public class PlaneDAOTest {
         prepareToUpdatePlane.setModel("updatedModel");
         prepareToUpdatePlane.setCapacity(300);
         prepareToUpdatePlane.setRange(400);
-        //planeDAO.update(prepareToUpdatePlane);
-       // Plane updatedPlane = planeDAO.getById(id);
-//        assertEquals("Update method failed: wrong pid", prepareToUpdatePlane.getPid(), updatedPlane.getPid());
-//        assertEquals("Update method failed: wrong model", prepareToUpdatePlane.getModel(), updatedPlane.getModel());
-//        assertEquals("Update method failed: wrong capacity", prepareToUpdatePlane.getCapacity(), updatedPlane.getCapacity());
-//        assertEquals("Update method failed: wrong range", prepareToUpdatePlane.getRange(), updatedPlane.getRange());
+        Map<Position, Integer> updatedTeam = new HashMap<>();
+        updatedTeam.put(Position.PILOT, 2);
+        updatedTeam.put(Position.NAVIGATOR, 2);
+        updatedTeam.put(Position.RADIOOPERATOR, 2);
+        updatedTeam.put(Position.STEWARDESS, 2);
+        prepareToUpdatePlane.setTeam(updatedTeam);
+        planeDAO.update(prepareToUpdatePlane);
+        Plane updatedPlane = planeDAO.getById(id);
+        assertEquals("Update method failed: wrong pid", prepareToUpdatePlane.getPid(), updatedPlane.getPid());
+        assertEquals("Update method failed: wrong model", prepareToUpdatePlane.getModel(), updatedPlane.getModel());
+        assertEquals("Update method failed: wrong capacity", prepareToUpdatePlane.getCapacity(), updatedPlane.getCapacity());
+        assertEquals("Update method failed: wrong range", prepareToUpdatePlane.getRange(), updatedPlane.getRange());
+        assertEquals("Update method failed: wrong team", prepareToUpdatePlane.getTeam(), updatedPlane.getTeam());
     }
 
     @Test
     public void testGetAll() throws Exception {
-//        int beforeAddNumber = planeDAO.getAll().size();
-//        int getAllId = planeDAO.add(testPlane);
-//        int afterAddNumber = planeDAO.getAll().size();
-//        assertEquals("Get all method failed", beforeAddNumber, afterAddNumber-1);
-//        planeDAO.delete(getAllId);
+        int beforeAddNumber = planeDAO.getAll().size();
+        int getAllId = planeDAO.add(testPlane);
+        int afterAddNumber = planeDAO.getAll().size();
+        assertEquals("Get all method failed", beforeAddNumber, afterAddNumber-1);
+        planeDAO.delete(getAllId);
     }
 
     @Test
     public void testDelete() throws Exception {
-//        planeDAO.delete(id);
-//        assertNull("Delete method: failed",planeDAO.getById(id));
+        planeDAO.delete(id);
+        assertNull("Delete method: failed",planeDAO.getById(id));
     }
 
     @After
     public void tearDown() throws Exception {
-//        planeDAO.delete(id);
+        planeDAO.delete(id);
 
     }
 }

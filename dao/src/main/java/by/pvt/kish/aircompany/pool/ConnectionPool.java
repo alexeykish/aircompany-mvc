@@ -25,7 +25,7 @@ public class ConnectionPool {
 
     private static ConnectionPool instance;
     private static BasicDataSource dataSource = new BasicDataSource();
-    private static ThreadLocal<Connection> connectionHolder = new ThreadLocal<>();
+    public static final ThreadLocal<Connection> threadConnection = new ThreadLocal<Connection>();
 
     private ConnectionPool() throws IOException, SQLException, PropertyVetoException {
         ResourceBundle bundle = ResourceBundle.getBundle("db");
@@ -46,11 +46,13 @@ public class ConnectionPool {
      * @throws PropertyVetoException
      */
     public synchronized static ConnectionPool getInstance() throws IOException, SQLException, PropertyVetoException {
+        //connectionHolder.set(dataSource.getConnection());
         if (instance == null) {
             instance = new ConnectionPool();
-            connectionHolder.set(dataSource.getConnection());
+            //connectionHolder.set(dataSource.getConnection());
             return instance;
         } else {
+            //connectionHolder.set(dataSource.getConnection());
             return instance;
         }
     }
@@ -61,9 +63,20 @@ public class ConnectionPool {
      * @return - соединение с БД
      * @throws SQLException
      */
+//    public Connection getConnection() throws SQLException {
+//        logger.info(Thread.currentThread()+": get a connection.");
+//        return connectionHolder.get();
+//    }
     public Connection getConnection() throws SQLException {
-        logger.info(Thread.currentThread()+": get a connection.");
-        return connectionHolder.get();
+
+        if(threadConnection.get() == null) {
+            Connection connection = this.dataSource.getConnection();
+            threadConnection.set(connection);
+            logger.info(Thread.currentThread()+": set a connection: " + connection.getMetaData().getURL());
+            return threadConnection.get();
+        } else
+            logger.info(Thread.currentThread()+": get a connection.");
+            return threadConnection.get();
     }
 
 

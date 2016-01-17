@@ -24,7 +24,7 @@ public class TeamService {
     private TeamService() {
         super();
         try {
-            ConnectionPool poolInstance = ConnectionPool.getInstance();
+            poolInstance = ConnectionPool.getInstance();
         } catch (IOException | SQLException | PropertyVetoException e) {
             e.printStackTrace();
         }
@@ -39,8 +39,8 @@ public class TeamService {
 
     public void add(int fid, List<Integer> tid) throws SQLException {
         connection = poolInstance.getConnection();
-        TeamDAO.getInstance().delete(connection, fid);
-        TeamDAO.getInstance().add(connection, fid, tid);
+        TeamDAO.getInstance().delete(fid);
+        TeamDAO.getInstance().add(fid, tid);
     }
 
     public void update(FlightTeam flightTeam) throws SQLException {
@@ -49,16 +49,16 @@ public class TeamService {
 
     public List<FlightTeam> getAll() throws SQLException {
         connection = poolInstance.getConnection();
-        return TeamDAO.getInstance().getAll(connection);
+        return TeamDAO.getInstance().getAll();
     }
 
     public void delete(int id) throws SQLException {
         connection = poolInstance.getConnection();
-        TeamDAO.getInstance().delete(connection, id);
+        TeamDAO.getInstance().delete(id);
     }
 
     public List<Employee> getById(int id) throws SQLException {
         connection = poolInstance.getConnection();
-        return TeamDAO.getInstance().getById(connection, id);
+        return TeamDAO.getInstance().getById(id);
     }
 }

@@ -2,13 +2,9 @@ package by.pvt.kish.aircompany.services;
 
 import by.pvt.kish.aircompany.dao.UserDAO;
 import by.pvt.kish.aircompany.entity.User;
-import by.pvt.kish.aircompany.pool.ConnectionUtils;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-
-import static by.pvt.kish.aircompany.pool.ConnectionUtils.*;
 
 /**
  * @author Kish Alexey
@@ -17,7 +13,7 @@ public class UserService extends BaseService<User> {
 
     private static UserService instance;
     private UserDAO userDAO = UserDAO.getInstance();
-    Connection connection;
+//    Connection connection;
 
     public synchronized static UserService getInstance() {
         if (instance == null) {
@@ -33,9 +29,8 @@ public class UserService extends BaseService<User> {
 
     @Override
     public List<User> getAll() throws SQLException {
-        connection = poolInstance.getConnection();
-        List<User> list = userDAO.getAll(connection);
-        closeConnection(connection);
+//        connection = poolInstance.getConnection();
+        List<User> list = userDAO.getAll();
         return list;
     }
 
@@ -46,27 +41,25 @@ public class UserService extends BaseService<User> {
 
     @Override
     public User getById(int id) throws SQLException {
-        return null;
+        throw new UnsupportedOperationException();
     }
+
     @Override
     public int add(User user) throws SQLException{
-        connection = poolInstance.getConnection();
-        int id =  userDAO.add(connection, user);
-        closeConnection(connection);
+//        connection = poolInstance.getConnection();
+        int id =  userDAO.add(user);
         return id;
     }
 
     public boolean checkLogin(String login) throws SQLException{
-        connection = poolInstance.getConnection();
-        boolean result =  userDAO.checkLogin(connection, login);
-        closeConnection(connection);
+//        connection = poolInstance.getConnection();
+        boolean result =  userDAO.checkLogin(login);
         return result;
     }
 
     public User getUser(String login, String password) throws SQLException{
-        connection = poolInstance.getConnection();
-        User user = userDAO.getUser(connection, login, password);
-        closeConnection(connection);
+//        connection = poolInstance.getConnection();
+        User user = userDAO.getUser(login, password);
         return user;
     }
 }

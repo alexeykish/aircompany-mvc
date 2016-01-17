@@ -1,11 +1,11 @@
 package by.pvt.kish.aircompany.dao;
 
 import by.pvt.kish.aircompany.constants.Column;
-import by.pvt.kish.aircompany.constants.SqlQuery;
 import by.pvt.kish.aircompany.entity.Airport;
-import org.apache.log4j.Logger;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +18,11 @@ import static by.pvt.kish.aircompany.pool.ConnectionUtils.closeResultSet;
  */
 public class AirportDAO extends BaseDAO<Airport> {
 
-    static Logger logger = Logger.getLogger(AirportDAO.class.getName());
+    private static final String ADD_AIRPORT = "INSERT INTO  airports (`city`) VALUES (?)";
+    private static final String GET_ALL_AIRPORTS = "SELECT * FROM  airports";
+    private static final String DELETE_AIRPORT = "DELETE FROM airports WHERE aid = ?";
+    private static final String GET_AIRPORT_BY_ID = "SELECT * FROM  airports WHERE aid = ?";
+    private static final String UPDATE_AIRPORT = "UPDATE airports SET `city` = ? WHERE aid = ?";
 
     private static AirportDAO instance;
 
@@ -34,14 +38,11 @@ public class AirportDAO extends BaseDAO<Airport> {
     }
 
     @Override
-    public int add(Connection connection, Airport airport) throws SQLException {
-//        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+    public int add(Airport airport) throws SQLException {
         ResultSet resultSet = null;
         int generatedId = 0;
         try {
-//            connection = poolInstance.getConnection();
-            preparedStatement = connection.prepareStatement(SqlQuery.ADD_AIRPORT, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement = connection.prepareStatement(ADD_AIRPORT, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, airport.getCity());
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
@@ -56,12 +57,9 @@ public class AirportDAO extends BaseDAO<Airport> {
     }
 
     @Override
-    public void update(Connection connection, Airport airport) throws SQLException {
-//        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+    public void update(Airport airport) throws SQLException {
         try {
-//            connection = poolInstance.getConnection();
-            preparedStatement = connection.prepareStatement(SqlQuery.UPDATE_AIRPORT);
+            preparedStatement = connection.prepareStatement(UPDATE_AIRPORT);
             preparedStatement.setString(1, airport.getCity());
             preparedStatement.setInt(2, airport.getAid());
             preparedStatement.executeUpdate();
@@ -71,14 +69,11 @@ public class AirportDAO extends BaseDAO<Airport> {
     }
 
     @Override
-    public List<Airport> getAll(Connection connection) throws SQLException {
-//        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+    public List<Airport> getAll() throws SQLException {
         ResultSet resultSet = null;
         List<Airport> airports = new ArrayList<>();
         try {
-//            connection = poolInstance.getConnection();
-            preparedStatement = connection.prepareStatement(SqlQuery.GET_ALL_AIRPORTS);
+            preparedStatement = connection.prepareStatement(GET_ALL_AIRPORTS);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Airport airport = new Airport();
@@ -93,14 +88,11 @@ public class AirportDAO extends BaseDAO<Airport> {
     }
 
     @Override
-    public Airport getById(Connection connection, int id) throws SQLException {
-//        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+    public Airport getById(int id) throws SQLException {
         ResultSet resultSet = null;
         Airport airport = null;
         try {
-//            connection = poolInstance.getConnection();
-            preparedStatement = connection.prepareStatement(SqlQuery.GET_AIRPORT_BY_ID);
+            preparedStatement = connection.prepareStatement(GET_AIRPORT_BY_ID);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -115,12 +107,9 @@ public class AirportDAO extends BaseDAO<Airport> {
     }
 
     @Override
-    public void delete(Connection connection, int id) throws SQLException {
-//        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+    public void delete(int id) throws SQLException {
         try {
-//            connection = poolInstance.getConnection();
-            preparedStatement = connection.prepareStatement(SqlQuery.DELETE_AIRPORT);
+            preparedStatement = connection.prepareStatement(DELETE_AIRPORT);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } finally {

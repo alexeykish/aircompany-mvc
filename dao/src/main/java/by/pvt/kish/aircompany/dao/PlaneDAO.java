@@ -1,13 +1,13 @@
 package by.pvt.kish.aircompany.dao;
 
 import by.pvt.kish.aircompany.constants.Column;
-import by.pvt.kish.aircompany.constants.SqlQuery;
-import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.Plane;
 import by.pvt.kish.aircompany.enums.Position;
-import org.apache.log4j.Logger;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +21,11 @@ import static by.pvt.kish.aircompany.pool.ConnectionUtils.closeResultSet;
  */
 public class PlaneDAO extends BaseDAO<Plane> {
 
-    static Logger logger = Logger.getLogger(PlaneDAO.class.getName());
+    private static final String ADD_PLANE = "INSERT INTO  planes (`model`,`capacity`,`range`, `num_pilots`, `num_nav`, `num_radio`, `num_stew`) VALUES (?,?,?,?,?,?,?)";
+    private static final String GET_ALL_PLANES = "SELECT * FROM  planes";
+    public static final String DELETE_PLANE = "DELETE FROM planes WHERE pid = ?";
+    public static final String GET_PLANE_BY_ID = "SELECT * FROM  planes WHERE pid = ?";
+    public static final String UPDATE_PLANE = "UPDATE planes SET `model` = ?, `capacity` = ?, `range` = ?, `num_pilots` = ?, `num_nav` = ?, `num_radio` = ?, `num_stew` = ? WHERE pid = ?";
 
     private static PlaneDAO instance;
 
@@ -37,14 +41,11 @@ public class PlaneDAO extends BaseDAO<Plane> {
     }
 
     @Override
-    public int add(Connection connection, Plane plane) throws SQLException {
+    public int add(Plane plane) throws SQLException {
         int generatedId = 0;
-//        Connection connection = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-//            connection = poolInstance.getConnection();
-            preparedStatement = connection.prepareStatement(SqlQuery.ADD_PLANE, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement = connection.prepareStatement(ADD_PLANE, Statement.RETURN_GENERATED_KEYS);
             preparedStatement = setStatementParametrs(preparedStatement, plane);
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
@@ -59,12 +60,9 @@ public class PlaneDAO extends BaseDAO<Plane> {
     }
 
     @Override
-    public void update(Connection connection, Plane plane) throws SQLException {
-//        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+    public void update(Plane plane) throws SQLException {
         try {
-//            connection = poolInstance.getConnection();
-            preparedStatement = connection.prepareStatement(SqlQuery.UPDATE_PLANE);
+            preparedStatement = connection.prepareStatement(UPDATE_PLANE);
             preparedStatement = setStatementParametrs(preparedStatement, plane);
             preparedStatement.setInt(8, plane.getPid());
             preparedStatement.executeUpdate();
@@ -74,14 +72,11 @@ public class PlaneDAO extends BaseDAO<Plane> {
     }
 
     @Override
-    public List<Plane> getAll(Connection connection) throws SQLException {
-//        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+    public List<Plane> getAll() throws SQLException {
         ResultSet resultSet = null;
         List<Plane> planes = new ArrayList<>();
         try {
-//            connection = poolInstance.getConnection();
-            preparedStatement = connection.prepareStatement(SqlQuery.GET_ALL_PLANES);
+            preparedStatement = connection.prepareStatement(GET_ALL_PLANES);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Plane plane = new Plane();
@@ -96,14 +91,11 @@ public class PlaneDAO extends BaseDAO<Plane> {
     }
 
     @Override
-    public Plane getById(Connection connection, int id) throws SQLException {
-//        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+    public Plane getById(int id) throws SQLException {
         ResultSet resultSet = null;
         Plane plane = null;
         try {
-//            connection = poolInstance.getConnection();
-            preparedStatement = connection.prepareStatement(SqlQuery.GET_PLANE_BY_ID);
+            preparedStatement = connection.prepareStatement(GET_PLANE_BY_ID);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -118,12 +110,9 @@ public class PlaneDAO extends BaseDAO<Plane> {
     }
 
     @Override
-    public void delete(Connection connection, int id) throws SQLException {
-//        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+    public void delete(int id) throws SQLException {
         try {
-//            connection = poolInstance.getConnection();
-            preparedStatement = connection.prepareStatement(SqlQuery.DELETE_PLANE);
+            preparedStatement = connection.prepareStatement(DELETE_PLANE);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } finally {

@@ -20,53 +20,53 @@ public class EmployeeDAOTest {
 
     @Before
     public void setUp() throws Exception {
-//        testEmployee = new Employee();
-//        testEmployee.setFirstName("FirstName");
-//        testEmployee.setLastName("LastName");
-//        testEmployee.setPosition(Position.PILOT);
-//        id = employeeDao.add(testEmployee);
+        testEmployee = new Employee();
+        testEmployee.setFirstName("FirstName");
+        testEmployee.setLastName("LastName");
+        testEmployee.setPosition(Position.PILOT);
+        id = employeeDao.add(testEmployee);
     }
 
     @Test
     public void testAdd() throws Exception {
-//        Employee addedEmployee = employeeDao.getById(id);
-//        assertEquals("Add method failed: wrong firstname", addedEmployee.getFirstName(), testEmployee.getFirstName());
-//        assertEquals("Add method failed: wrong lastname", addedEmployee.getLastName(), testEmployee.getLastName());
-//        assertEquals("Add method failed: wrong position", addedEmployee.getPosition(), testEmployee.getPosition());
+        Employee addedEmployee = employeeDao.getById(id);
+        assertEquals("Add method failed: wrong firstname", addedEmployee.getFirstName(), testEmployee.getFirstName());
+        assertEquals("Add method failed: wrong lastname", addedEmployee.getLastName(), testEmployee.getLastName());
+        assertEquals("Add method failed: wrong position", addedEmployee.getPosition(), testEmployee.getPosition());
     }
 
     @Test
     public void testUpdate() throws Exception {
-//        Employee prepareToUpdateEmployee = new Employee();
-//        prepareToUpdateEmployee.setEid(id);
-//        prepareToUpdateEmployee.setFirstName("updatedFirstname");
-//        prepareToUpdateEmployee.setLastName("updatedLastname");
-//        prepareToUpdateEmployee.setPosition(Position.NAVIGATOR);
-//        employeeDao.update(prepareToUpdateEmployee);
-//        Employee updatedEmployee = employeeDao.getById(id);
-//        assertEquals("Update method failed: wrong eid", updatedEmployee.getEid(), prepareToUpdateEmployee.getEid());
-//        assertEquals("Update method failed: wrong firstname", updatedEmployee.getFirstName(), prepareToUpdateEmployee.getFirstName());
-//        assertEquals("Update method failed: wrong lastname", updatedEmployee.getLastName(), prepareToUpdateEmployee.getLastName());
-//        assertEquals("Update method failed: wrong position", updatedEmployee.getPosition(), prepareToUpdateEmployee.getPosition());
+        Employee prepareToUpdateEmployee = new Employee();
+        prepareToUpdateEmployee.setEid(id);
+        prepareToUpdateEmployee.setFirstName("updatedFirstname");
+        prepareToUpdateEmployee.setLastName("updatedLastname");
+        prepareToUpdateEmployee.setPosition(Position.NAVIGATOR);
+        employeeDao.update(prepareToUpdateEmployee);
+        Employee updatedEmployee = employeeDao.getById(id);
+        assertEquals("Update method failed: wrong eid", updatedEmployee.getEid(), prepareToUpdateEmployee.getEid());
+        assertEquals("Update method failed: wrong firstname", updatedEmployee.getFirstName(), prepareToUpdateEmployee.getFirstName());
+        assertEquals("Update method failed: wrong lastname", updatedEmployee.getLastName(), prepareToUpdateEmployee.getLastName());
+        assertEquals("Update method failed: wrong position", updatedEmployee.getPosition(), prepareToUpdateEmployee.getPosition());
     }
 
     @Test
     public void testGetAll() throws Exception {
-//        int beforeAddNumber = employeeDao.getAll().size();
-//        int getAllId = employeeDao.add(testEmployee);
-//        int afterAddNumber = employeeDao.getAll().size();
-//        assertEquals("Get all method failed", beforeAddNumber, afterAddNumber-1);
-//        employeeDao.delete(getAllId);
+        int beforeAddNumber = employeeDao.getAll().size();
+        int getAllId = employeeDao.add(testEmployee);
+        int afterAddNumber = employeeDao.getAll().size();
+        assertEquals("Get all method failed", beforeAddNumber, afterAddNumber-1);
+        employeeDao.delete(getAllId);
     }
 
     @Test
     public void testDelete() throws Exception {
-//        employeeDao.delete(id);
-//        assertNull("Delete employee: failed",employeeDao.getById(id));
+        employeeDao.delete(id);
+        assertNull("Delete employee: failed",employeeDao.getById(id));
     }
 
     @After
     public void tearDown() throws Exception {
-//        employeeDao.delete(id);
+        employeeDao.delete(id);
     }
 }

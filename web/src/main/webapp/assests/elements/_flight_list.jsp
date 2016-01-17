@@ -61,7 +61,7 @@
     </table>
     <c:if test="${(sessionScope.userType == '2')}">
         <form action="addflight" method="post">
-            <input class="button" type="submit" name="submit" value="add flights"/>
+            <input class="button" type="submit" name="submit" value="add flight"/>
         </form>
     </c:if>
 </div>
