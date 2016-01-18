@@ -1,36 +1,27 @@
-package by.pvt.kish.aircompany.services;
+package by.pvt.kish.aircompany.services.impl;
 
 import by.pvt.kish.aircompany.dao.impl.TeamDAO;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.FlightTeam;
-import by.pvt.kish.aircompany.pool.ConnectionPool;
+import by.pvt.kish.aircompany.services.BaseService;
+import by.pvt.kish.aircompany.services.ITeamService;
 import org.apache.log4j.Logger;
 
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 /**
  * @author Kish Alexey
  */
-public class TeamService {
+public class TeamService extends BaseService implements ITeamService {
 
     static Logger logger = Logger.getLogger(TeamService.class.getName());
 
     private static TeamService instance;
     private TeamDAO teamDAO = TeamDAO.getInstance();
-    ConnectionPool poolInstance;
-    Connection connection;
 
     private TeamService() {
         super();
-        try {
-            poolInstance = ConnectionPool.getInstance();
-        } catch (IOException | SQLException | PropertyVetoException e) {
-            e.printStackTrace();
-        }
     }
 
     public synchronized static TeamService getInstance() {
@@ -40,11 +31,12 @@ public class TeamService {
         return instance;
     }
 
+    @Override
     public void add(int fid, List<Integer> tid) throws SQLException {
         try {
             connection.setAutoCommit(false);
-            TeamDAO.getInstance().delete(fid);
-            TeamDAO.getInstance().add(fid, tid);
+            teamDAO.delete(fid);
+            teamDAO.add(fid, tid);
             connection.commit();
         } catch (SQLException e){
             try {
@@ -56,22 +48,28 @@ public class TeamService {
         }
     }
 
-    public void update(FlightTeam flightTeam) throws SQLException {
-        //TeamDAO.getInstance().update(flightTeam);
+    @Override
+    public int add(Object o) throws SQLException {
+        throw new UnsupportedOperationException();
     }
 
+    @Override
+    public void update(Object o) throws SQLException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public List<FlightTeam> getAll() throws SQLException {
-        connection = poolInstance.getConnection();
-        return TeamDAO.getInstance().getAll();
+        return teamDAO.getAll();
     }
 
+    @Override
     public void delete(int id) throws SQLException {
-        connection = poolInstance.getConnection();
-        TeamDAO.getInstance().delete(id);
+        teamDAO.delete(id);
     }
 
+    @Override
     public List<Employee> getById(int id) throws SQLException {
-        connection = poolInstance.getConnection();
-        return TeamDAO.getInstance().getById(id);
+        return teamDAO.getById(id);
     }
 }

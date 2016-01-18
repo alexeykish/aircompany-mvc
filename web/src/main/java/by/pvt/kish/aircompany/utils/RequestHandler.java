@@ -5,8 +5,8 @@ import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.Flight;
 import by.pvt.kish.aircompany.enums.Position;
-import by.pvt.kish.aircompany.services.AirportService;
-import by.pvt.kish.aircompany.services.PlaneService;
+import by.pvt.kish.aircompany.services.impl.AirportService;
+import by.pvt.kish.aircompany.services.impl.PlaneService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;

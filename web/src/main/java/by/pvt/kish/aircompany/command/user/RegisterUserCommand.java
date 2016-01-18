@@ -6,7 +6,7 @@ import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.User;
 import by.pvt.kish.aircompany.enums.UserType;
-import by.pvt.kish.aircompany.services.UserService;
+import by.pvt.kish.aircompany.services.impl.UserService;
 import by.pvt.kish.aircompany.validators.UserValidator;
 import org.apache.log4j.Logger;
 

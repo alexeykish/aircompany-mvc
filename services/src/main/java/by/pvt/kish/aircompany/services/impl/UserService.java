@@ -1,8 +1,10 @@
-package by.pvt.kish.aircompany.services;
+package by.pvt.kish.aircompany.services.impl;
 
 import by.pvt.kish.aircompany.dao.impl.UserDAO;
 import by.pvt.kish.aircompany.entity.User;
 import by.pvt.kish.aircompany.enums.UserStatus;
+import by.pvt.kish.aircompany.services.BaseService;
+import by.pvt.kish.aircompany.services.IUserService;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.List;
 /**
  * @author Kish Alexey
  */
-public class UserService extends BaseService<User> implements IUserService{
+public class UserService extends BaseService<User> implements IUserService {
 
     private static UserService instance;
     private UserDAO userDAO = UserDAO.getInstance();

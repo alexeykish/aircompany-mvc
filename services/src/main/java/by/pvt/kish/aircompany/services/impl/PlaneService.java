@@ -1,7 +1,8 @@
-package by.pvt.kish.aircompany.services;
+package by.pvt.kish.aircompany.services.impl;
 
 import by.pvt.kish.aircompany.dao.impl.PlaneDAO;
 import by.pvt.kish.aircompany.entity.Plane;
+import by.pvt.kish.aircompany.services.BaseService;
 
 import java.sql.SQLException;
 import java.util.List;

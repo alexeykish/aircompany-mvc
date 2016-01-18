@@ -9,18 +9,17 @@ import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.Flight;
-import by.pvt.kish.aircompany.entity.FlightTeam;
-import by.pvt.kish.aircompany.services.EmployeeService;
-import by.pvt.kish.aircompany.services.FlightService;
-import by.pvt.kish.aircompany.services.PlaneService;
-import by.pvt.kish.aircompany.services.TeamService;
+import by.pvt.kish.aircompany.services.impl.EmployeeService;
+import by.pvt.kish.aircompany.services.impl.FlightService;
+import by.pvt.kish.aircompany.services.impl.PlaneService;
+import by.pvt.kish.aircompany.services.impl.TeamService;
+import by.pvt.kish.aircompany.utils.RequestHandler;
 import by.pvt.kish.aircompany.utils.TeamCreator;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,15 +33,15 @@ public class SetTeamCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+        String className = SetTeamCommand.class.getSimpleName();
         try {
-            String id = request.getParameter(FID);
-            if (id == null) {
-                logger.error(Message.ERROR_ID_MISSING);
-                return Page.ERROR;
+            int id = RequestHandler.getId(request, "fid");
+            if (id < 0) {
+                return RequestHandler.returnErrorPage(Message.ERROR_ID_MISSING, className);
             }
 
-            Flight flight = FlightService.getInstance().getById(Integer.parseInt(id));
-            List<Employee> team = TeamService.getInstance().getById(Integer.parseInt(id));
+            Flight flight = FlightService.getInstance().getById(id);
+            List<Employee> team = TeamService.getInstance().getById(id);
             List<String> positions = TeamCreator.getPlanePositions(PlaneService.getInstance().getById(flight.getPlane().getPid()));
             List<Employee> employees = EmployeeService.getInstance().getAll();
 
@@ -56,8 +55,7 @@ public class SetTeamCommand implements ActionCommand {
                 return Page.CHANGE_TEAM;
             }
         } catch (SQLException e) {
-            logger.error(Message.ERROR_SQL_DAO);
-            return Page.ERROR;
+            return RequestHandler.returnErrorPage(Message.ERROR_SQL_DAO, className);
         }
     }
 }
