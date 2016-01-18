@@ -25,16 +25,14 @@ public class ConnectionPool {
 
     private static ConnectionPool instance;
     private static BasicDataSource dataSource = new BasicDataSource();
-    public static final ThreadLocal<Connection> threadConnection = new ThreadLocal<Connection>();
+    public static final ThreadLocal<Connection> threadConnection = new ThreadLocal<>();
 
     private ConnectionPool() throws IOException, SQLException, PropertyVetoException {
         ResourceBundle bundle = ResourceBundle.getBundle("db");
-        //dataSource = new BasicDataSource();
         dataSource.setDriverClassName(bundle.getString("SQL_DB_DRIVER_CLASS"));
         dataSource.setUsername(bundle.getString("SQL_DB_USERNAME"));
         dataSource.setPassword(bundle.getString("SQL_DB_PASSWORD"));
         dataSource.setUrl(bundle.getString("SQL_DB_URL"));
-
     }
 
     /**
@@ -46,33 +44,26 @@ public class ConnectionPool {
      * @throws PropertyVetoException
      */
     public synchronized static ConnectionPool getInstance() throws IOException, SQLException, PropertyVetoException {
-        //connectionHolder.set(dataSource.getConnection());
         if (instance == null) {
             instance = new ConnectionPool();
-            //connectionHolder.set(dataSource.getConnection());
             return instance;
         } else {
-            //connectionHolder.set(dataSource.getConnection());
             return instance;
         }
     }
 
     /**
-     * Возвращает экземпляр соединения
+     * Возвращает экземпляр соединенияиз переменной потока, если в переменной потока не было соединения, оно туда заносится
      *
      * @return - соединение с БД
      * @throws SQLException
      */
-//    public Connection getConnection() throws SQLException {
-//        logger.info(Thread.currentThread()+": get a connection.");
-//        return connectionHolder.get();
-//    }
     public Connection getConnection() throws SQLException {
 
         if(threadConnection.get() == null) {
-            Connection connection = this.dataSource.getConnection();
+            Connection connection = dataSource.getConnection();
             threadConnection.set(connection);
-            logger.debug(Thread.currentThread()+": set a connection: " + connection.getMetaData().getURL());
+            logger.debug(Thread.currentThread()+": set a connection.");
             return threadConnection.get();
         } else
             logger.debug(Thread.currentThread()+": get a connection.");

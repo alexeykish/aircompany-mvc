@@ -4,6 +4,7 @@ import by.pvt.kish.aircompany.constants.Column;
 import by.pvt.kish.aircompany.dao.BaseDAO;
 import by.pvt.kish.aircompany.entity.Plane;
 import by.pvt.kish.aircompany.enums.Position;
+import by.pvt.kish.aircompany.exceptions.DaoException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,7 +40,7 @@ public class PlaneDAO extends BaseDAO<Plane> {
     }
 
     @Override
-    public int add(Plane plane) throws SQLException {
+    public int add(Plane plane) throws DaoException {
         int generatedId = 0;
         ResultSet resultSet = null;
         try {
@@ -50,6 +51,8 @@ public class PlaneDAO extends BaseDAO<Plane> {
             if (resultSet.next()) {
                 generatedId = resultSet.getInt(1);
             }
+        } catch (SQLException e) {
+            throw new DaoException("Creating plane failed", e);
         } finally {
             closeResultSet(resultSet);
             closePreparedStatement(preparedStatement);

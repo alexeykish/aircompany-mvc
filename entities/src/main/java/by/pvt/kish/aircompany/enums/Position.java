@@ -6,10 +6,7 @@ package by.pvt.kish.aircompany.enums;
  * @author Kish Alexey
  */
 public enum Position {
-    PILOT(1), NAVIGATOR(2), RADIOOPERATOR(3), STEWARDESS(4);
+    PILOT, NAVIGATOR, RADIOOPERATOR, STEWARDESS;
 
-    private int order;
-    Position(int i) {
-        order = i;
-    }
+
 }

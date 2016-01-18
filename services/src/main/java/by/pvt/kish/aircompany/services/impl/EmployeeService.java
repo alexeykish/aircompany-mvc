@@ -26,7 +26,11 @@ public class EmployeeService extends BaseService<Employee> {
     @Override
     public int add(Employee employee) throws SQLException {
         //connection = poolInstance.getConnection();
-        return employeeDAO.add(employee);
+        try {
+            return employeeDAO.add(employee);
+        } catch (by.pvt.kish.aircompany.exceptions.DaoException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

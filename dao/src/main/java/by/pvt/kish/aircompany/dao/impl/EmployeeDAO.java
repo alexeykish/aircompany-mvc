@@ -7,6 +7,7 @@ import by.pvt.kish.aircompany.constants.Column;
 import by.pvt.kish.aircompany.dao.BaseDAO;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.enums.Position;
+import by.pvt.kish.aircompany.exceptions.DaoException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,7 +43,7 @@ public class EmployeeDAO extends BaseDAO<Employee> {
     }
 
 	@Override
-	public int add(Employee employee) throws SQLException {
+	public int add(Employee employee) throws DaoException {
 		int generatedId = 0;
 		ResultSet resultSet = null;
 		try {
@@ -55,6 +56,8 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 			if (resultSet.next()) {
 				generatedId = resultSet.getInt(1);
 			}
+		} catch (SQLException e) {
+			throw new DaoException("Creating employee failed", e);
 		} finally {
 			closeResultSet(resultSet);
 			closePreparedStatement(preparedStatement);

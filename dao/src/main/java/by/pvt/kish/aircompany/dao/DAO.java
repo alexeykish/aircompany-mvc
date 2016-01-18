@@ -1,5 +1,7 @@
 package by.pvt.kish.aircompany.dao;
 
+import by.pvt.kish.aircompany.exceptions.DaoException;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -8,7 +10,7 @@ import java.util.List;
  */
 public interface DAO<T> {
 
-    int add(T t) throws SQLException;
+    int add(T t) throws DaoException;
 
     void update(T t) throws SQLException;
 

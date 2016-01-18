@@ -24,7 +24,11 @@ public class PlaneService extends BaseService<Plane> {
 
     @Override
     public int add(Plane plane) throws SQLException {
-        return PlaneDAO.getInstance().add(plane);
+        try {
+            return PlaneDAO.getInstance().add(plane);
+        } catch (by.pvt.kish.aircompany.exceptions.DaoException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

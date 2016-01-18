@@ -9,6 +9,7 @@ import by.pvt.kish.aircompany.dao.IUserDAO;
 import by.pvt.kish.aircompany.entity.User;
 import by.pvt.kish.aircompany.enums.UserStatus;
 import by.pvt.kish.aircompany.enums.UserType;
+import by.pvt.kish.aircompany.exceptions.DaoException;
 import by.pvt.kish.aircompany.utils.Coder;
 
 import java.sql.ResultSet;
@@ -48,7 +49,7 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
     }
 
     @Override
-    public int add(User user) throws SQLException {
+    public int add(User user) throws DaoException {
         int generatedId = 0;
         ResultSet resultSet = null;
         try {
@@ -64,6 +65,8 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
             if (resultSet.next()) {
                 generatedId = resultSet.getInt(1);
             }
+        } catch (SQLException e) {
+            throw new DaoException("Creating user failed");
         } finally {
             closeResultSet(resultSet);
             closePreparedStatement(preparedStatement);

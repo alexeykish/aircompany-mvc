@@ -3,6 +3,7 @@ package by.pvt.kish.aircompany.dao.impl;
 import by.pvt.kish.aircompany.constants.Column;
 import by.pvt.kish.aircompany.dao.BaseDAO;
 import by.pvt.kish.aircompany.entity.Flight;
+import by.pvt.kish.aircompany.exceptions.DaoException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class FlightDAO extends BaseDAO<Flight> {
 	}
 
 	@Override
-	public int add(Flight flight) throws SQLException {
+	public int add(Flight flight) throws DaoException {
 		int generatedId = 0;
 		ResultSet resultSet = null;
 		try {
@@ -50,6 +51,8 @@ public class FlightDAO extends BaseDAO<Flight> {
 			if (resultSet.next()) {
 				generatedId = resultSet.getInt(1);
 			}
+		} catch (SQLException e) {
+			throw new DaoException("Creating flight failed", e);
 		} finally {
 			closeResultSet(resultSet);
 			closePreparedStatement(preparedStatement);

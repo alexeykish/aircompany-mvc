@@ -29,7 +29,11 @@ public class UserService extends BaseService<User> implements IUserService {
         if (!userDAO.checkLogin(user.getLogin())) {
             return -1;
         } else {
-            return userDAO.add(user);
+            try {
+                return userDAO.add(user);
+            } catch (by.pvt.kish.aircompany.exceptions.DaoException e) {
+                e.printStackTrace();
+            }
         }
     }
 

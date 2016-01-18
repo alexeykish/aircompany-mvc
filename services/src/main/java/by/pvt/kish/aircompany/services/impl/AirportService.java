@@ -14,7 +14,6 @@ public class AirportService extends BaseService<Airport> {
 
     private static AirportService instance;
     private AirportDAO airportDAO = AirportDAO.getInstance();
-//    private Connection connection;
 
     public synchronized static AirportService getInstance() {
         if (instance == null) {
@@ -25,31 +24,30 @@ public class AirportService extends BaseService<Airport> {
 
     @Override
     public int add(Airport airport) throws SQLException {
-//        connection = poolInstance.getConnection();
-        return airportDAO.add(airport);
+        try {
+            return airportDAO.add(airport);
+        } catch (by.pvt.kish.aircompany.exceptions.DaoException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void update(Airport airport) throws SQLException {
-//        connection = poolInstance.getConnection();
         AirportDAO.getInstance().update(airport);
     }
 
     @Override
     public List<Airport> getAll() throws SQLException {
-//        connection = poolInstance.getConnection();
         return AirportDAO.getInstance().getAll();
     }
 
     @Override
     public void delete(int id) throws SQLException {
-//        connection = poolInstance.getConnection();
         AirportDAO.getInstance().delete(id);
     }
 
     @Override
     public Airport getById(int id) throws SQLException {
-//        connection = poolInstance.getConnection();
         return AirportDAO.getInstance().getById(id);
     }
 }

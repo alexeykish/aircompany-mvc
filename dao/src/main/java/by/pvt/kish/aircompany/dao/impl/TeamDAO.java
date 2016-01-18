@@ -8,13 +8,9 @@ import by.pvt.kish.aircompany.dao.BaseDAO;
 import by.pvt.kish.aircompany.dao.ITeamDAO;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.FlightTeam;
-import by.pvt.kish.aircompany.pool.ConnectionPool;
+import by.pvt.kish.aircompany.exceptions.DaoException;
 import org.apache.log4j.Logger;
 
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -49,7 +45,7 @@ public class TeamDAO extends BaseDAO implements ITeamDAO {
 	}
 
 	@Override
-	public void add(int fid, List<Integer> team) throws SQLException {
+	public void add(int fid, List<Integer> team) throws DaoException {
 		try {
 			connection.setAutoCommit(false);
 			preparedStatement = connection.prepareStatement(ADD_TEAM);
@@ -63,8 +59,10 @@ public class TeamDAO extends BaseDAO implements ITeamDAO {
 			try {
 				logger.debug("Commit failed");
 				connection.rollback();
+				throw new DaoException("Creating team failed (commit failed)");
 			}catch (SQLException e2) {
 				logger.debug("Rollback failed");
+				throw new DaoException("Creating team failed (rollback failed)");
 			}
 		} finally {
 			closePreparedStatement(preparedStatement);
@@ -72,7 +70,7 @@ public class TeamDAO extends BaseDAO implements ITeamDAO {
 	}
 
 	@Override
-	public int add(Object o) throws SQLException {
+	public int add(Object o) throws DaoException {
 		throw new UnsupportedOperationException();
 	}
 
