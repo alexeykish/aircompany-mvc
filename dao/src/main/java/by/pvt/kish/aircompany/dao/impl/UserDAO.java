@@ -1,9 +1,11 @@
 /**
  *
  */
-package by.pvt.kish.aircompany.dao;
+package by.pvt.kish.aircompany.dao.impl;
 
 import by.pvt.kish.aircompany.constants.Column;
+import by.pvt.kish.aircompany.dao.BaseDAO;
+import by.pvt.kish.aircompany.dao.IUserDAO;
 import by.pvt.kish.aircompany.entity.User;
 import by.pvt.kish.aircompany.enums.UserStatus;
 import by.pvt.kish.aircompany.enums.UserType;
@@ -21,7 +23,7 @@ import static by.pvt.kish.aircompany.pool.ConnectionUtils.closeResultSet;
 /**
  * @author Kish Alexey
  */
-public class UserDAO extends BaseDAO<User> implements IUserDAO{
+public class UserDAO extends BaseDAO<User> implements IUserDAO {
 
     private static final String ADD_USER = "INSERT INTO  users (`first_name`,`last_name`,`login`,`password`,`email`,`user_type`) VALUES (?,?,?,?,?,?)";
     private static final String CHECK_LOGIN = "SELECT uid FROM users WHERE login = ?";
@@ -166,7 +168,7 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO{
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                if (resultSet.getString(Column.USERS_USERSTATUS).equals(UserStatus.OFFLINE.toString())) {
+                if (resultSet.getString(Column.USERS_USERSTATUS).equals(UserStatus.ONLINE.toString())) {
                     return true;
                 }
             }

@@ -2,31 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cac44f3-9576-4e93-a6e6-15f4181987cf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/IUserDAO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/entities/src/main/java/by/pvt/kish/aircompany/enums/UserStatus.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/IUserService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/AirportDAO.java" afterPath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/impl/AirportDAO.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/EmployeeDAO.java" afterPath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/impl/EmployeeDAO.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/FlightDAO.java" afterPath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/impl/FlightDAO.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/PlaneDAO.java" afterPath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/impl/PlaneDAO.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/TeamDAO.java" afterPath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/impl/TeamDAO.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/UserDAO.java" afterPath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/impl/UserDAO.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/constants/Column.java" afterPath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/constants/Column.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/constants/Message.java" afterPath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/constants/Message.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/PlaneDAO.java" afterPath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/PlaneDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/UserDAO.java" afterPath="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/UserDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/AirportDAOTest.java" afterPath="$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/AirportDAOTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/EmployeeDAOTest.java" afterPath="$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/EmployeeDAOTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/PlaneDAOTest.java" afterPath="$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/PlaneDAOTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/entities/src/main/java/by/pvt/kish/aircompany/entity/User.java" afterPath="$PROJECT_DIR$/entities/src/main/java/by/pvt/kish/aircompany/entity/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/entities/src/main/java/by/pvt/kish/aircompany/enums/Position.java" afterPath="$PROJECT_DIR$/entities/src/main/java/by/pvt/kish/aircompany/enums/Position.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/UserDAOTest.java" afterPath="$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/UserDAOTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/AirportService.java" afterPath="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/AirportService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/EmployeeService.java" afterPath="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/EmployeeService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/FlightService.java" afterPath="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/FlightService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/PlaneService.java" afterPath="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/PlaneService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/TeamService.java" afterPath="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/TeamService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/UserService.java" afterPath="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/UserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/validators/FlightValidator.java" afterPath="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/validators/FlightValidator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/employee/AddEmployeeCommand.java" afterPath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/employee/AddEmployeeCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/employee/DeleteEmployeeCommand.java" afterPath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/employee/DeleteEmployeeCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/employee/GetAllEmployeesCommand.java" afterPath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/employee/GetAllEmployeesCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/employee/UpdateEmployeeCommand.java" afterPath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/employee/UpdateEmployeeCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/flight/DeleteFlightCommand.java" afterPath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/flight/DeleteFlightCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/flight/GetAllFlightsCommand.java" afterPath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/flight/GetAllFlightsCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/flight/UpdateFlightCommand.java" afterPath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/flight/UpdateFlightCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/GetAllUsersCommand.java" afterPath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/GetAllUsersCommand.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/LoginUserCommand.java" afterPath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/LoginUserCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/LogoutUserCommand.java" afterPath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/LogoutUserCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/RegisterUserCommand.java" afterPath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/RegisterUserCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/utils/RequestHandler.java" afterPath="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/utils/RequestHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/web/src/main/webapp/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/main/webapp/assests/pages/registration.jsp" afterPath="$PROJECT_DIR$/web/src/main/webapp/assests/pages/registration.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/target/web-1.1/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/web/target/web-1.1/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/target/web-1.1/assests/elements/_flight_list.jsp" afterPath="$PROJECT_DIR$/web/target/web-1.1/assests/elements/_flight_list.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/target/web-1.1/assests/pages/registration.jsp" afterPath="$PROJECT_DIR$/web/target/web-1.1/assests/pages/registration.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/target/web-1.1/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/web/target/web-1.1/META-INF/MANIFEST.MF" />
     </list>
     <ignored path="aircompany.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -69,69 +72,67 @@
         <entry file="file://$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/UserService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="UserDAO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/UserDAO.java">
+        <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/impl/UserDAO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="189" column="0" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
+              <caret line="191" column="0" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginUserCommand.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LoginUserCommand.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/LoginUserCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.35587582">
+              <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/controller/Controller.java">
+      <file leaf-file-name="UserDAOTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/UserDAOTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.58035713">
-              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="45" column="15" selection-start-line="45" selection-start-column="15" selection-end-line="45" selection-end-column="15" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/entities/src/main/java/by/pvt/kish/aircompany/entity/User.java">
+      <file leaf-file-name="TeamDAO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/impl/TeamDAO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-              <folding>
-                <element signature="e#2537#2538#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegisterUserCommand.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/RegisterUserCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="55" column="13" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
+              <caret line="61" column="22" selection-start-line="61" selection-start-column="22" selection-end-line="61" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LogoutUserCommand.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/LogoutUserCommand.java">
+      <file leaf-file-name="PlaneDAO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/impl/PlaneDAO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+              <caret line="30" column="15" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BaseDAO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/BaseDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -171,7 +172,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/flight/GetAllFlightsCommand.java" />
         <option value="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/employee/DeleteEmployeeCommand.java" />
         <option value="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/employee/GetAllEmployeesCommand.java" />
         <option value="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/employee/AddEmployeeCommand.java" />
@@ -192,7 +192,6 @@
         <option value="$PROJECT_DIR$/web/src/main/webapp/assests/elements/_flight_list.jsp" />
         <option value="$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/AirportDAOTest.java" />
         <option value="$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/EmployeeDAOTest.java" />
-        <option value="$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/UserDAOTest.java" />
         <option value="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/BaseDAO.java" />
         <option value="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/FlightDAO.java" />
         <option value="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/AirportDAO.java" />
@@ -215,13 +214,15 @@
         <option value="$PROJECT_DIR$/entities/src/main/java/by/pvt/kish/aircompany/enums/UserStatus.java" />
         <option value="$PROJECT_DIR$/entities/src/main/java/by/pvt/kish/aircompany/entity/User.java" />
         <option value="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/constants/Column.java" />
-        <option value="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/LoginUserCommand.java" />
         <option value="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/IUserService.java" />
         <option value="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/IUserDAO.java" />
-        <option value="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/UserService.java" />
-        <option value="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/constants/Message.java" />
         <option value="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/LogoutUserCommand.java" />
+        <option value="$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/LoginUserCommand.java" />
+        <option value="$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/UserService.java" />
         <option value="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/UserDAO.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/constants/Message.java" />
+        <option value="$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/UserDAOTest.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/impl/TeamDAO.java" />
       </list>
     </option>
   </component>
@@ -279,10 +280,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="x" value="-4" />
+    <option name="y" value="-4" />
+    <option name="width" value="1928" />
+    <option name="height" value="1054" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -328,8 +329,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -1201,6 +1202,44 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="dao" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="aircompany" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="aircompany-mvc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dao" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="aircompany" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="constants" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1247,7 +1286,7 @@
     <configuration default="false" name="by.pvt.kish.aircompany.dao in dao" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="by.pvt.kish.aircompany.dao.*" />
+          <option name="PATTERN" value="by.pvt.kish.aircompany.dao.impl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -1273,7 +1312,7 @@
     <configuration default="false" name="PlaneDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="by.pvt.kish.aircompany.dao.*" />
+          <option name="PATTERN" value="by.pvt.kish.aircompany.dao.impl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -1299,7 +1338,7 @@
     <configuration default="false" name="FlightTeamDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="by.pvt.kish.aircompany.dao.*" />
+          <option name="PATTERN" value="by.pvt.kish.aircompany.dao.impl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -1325,7 +1364,7 @@
     <configuration default="false" name="FlightTeamDAOTest.testAdd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="by.pvt.kish.aircompany.dao.*" />
+          <option name="PATTERN" value="by.pvt.kish.aircompany.dao.impl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -1351,7 +1390,7 @@
     <configuration default="false" name="PlaneDAOTest.testUpdate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="by.pvt.kish.aircompany.dao.*" />
+          <option name="PATTERN" value="by.pvt.kish.aircompany.dao.impl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -1923,6 +1962,7 @@
       <workItem from="1452835253767" duration="26370000" />
       <workItem from="1452925619626" duration="13702000" />
       <workItem from="1452967582469" duration="24230000" />
+      <workItem from="1453094200675" duration="1911000" />
     </task>
     <task id="LOCAL-00001" summary="Добавлены описания классов и методов&#10;Измененыны методы EmployeeValidator.validate, FlightValidator.validate - из атрибутов убран request&#10;Соответсвенно изменены классы AddEmployeeCommand, UpdateEmployeeCommand, AddFlight Command, UpdateEmployeeCommand&#10;">
       <created>1452586632410</created>
@@ -2092,7 +2132,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137440000" />
+    <option name="totallyTimeSpent" value="139351000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2104,7 +2144,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-4" y="-4" width="1928" height="1054" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2115,25 +2155,25 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6251969" sideWeight="0.29502195" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6251969" sideWeight="0.70497805" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43937007" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6247312" sideWeight="0.70497805" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4385776" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30380672" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3035144" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42677164" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42672414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4897511" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="UnknownFeatures">
@@ -2181,7 +2221,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/employee/UpdateEmployeeCommand.java</url>
-          <line>32</line>
+          <line>29</line>
           <properties />
           <option name="timeStamp" value="15" />
         </line-breakpoint>
@@ -2190,18 +2230,6 @@
           <line>73</line>
           <properties />
           <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/LoginUserCommand.java</url>
-          <line>47</line>
-          <properties />
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/LogoutUserCommand.java</url>
-          <line>26</line>
-          <properties />
-          <option name="timeStamp" value="32" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="33" />
@@ -2213,22 +2241,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/UserDAOTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0362438">
-          <caret line="44" column="15" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/EmployeeDAOTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.5963756">
-          <caret line="64" column="14" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/AirportDAOTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.2042834">
@@ -2241,19 +2253,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.66886324">
           <caret line="2828" column="15" selection-start-line="2828" selection-start-column="15" selection-end-line="2828" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/BaseDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47611204">
-          <caret line="26" column="69" selection-start-line="26" selection-start-column="69" selection-end-line="26" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/EmployeeDAO.java">
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/impl/EmployeeDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30807248">
           <caret line="113" column="60" selection-start-line="113" selection-start-column="60" selection-end-line="113" selection-end-column="60" />
@@ -2313,7 +2316,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1878089">
           <caret line="61" column="14" selection-start-line="61" selection-start-column="14" selection-end-line="61" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2359,7 +2361,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44810542">
           <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2387,17 +2388,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/FlightDAO.java">
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/impl/FlightDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.23229">
           <caret line="129" column="59" selection-start-line="129" selection-start-column="59" selection-end-line="129" selection-end-column="59" />
-          <folding>
-            <marker date="1453046548176" expanded="true" signature="483:548" placeholder="INSERT INTO flights" />
-            <marker date="1453046548176" expanded="true" signature="599:620" placeholder="SELECT * FRO... flights" />
-            <marker date="1453046548176" expanded="true" signature="669:702" placeholder="DELETE FROM " />
-            <marker date="1453046548176" expanded="true" signature="754:789" placeholder="SELECT * FRO... flights" />
-            <marker date="1453046548176" expanded="true" signature="838:914" placeholder="UPDATE fligh... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2405,7 +2400,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.4878049">
           <caret line="95" column="17" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2413,7 +2407,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-67.414635">
           <caret line="51" column="57" selection-start-line="51" selection-start-column="57" selection-end-line="51" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2421,14 +2414,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.39939025">
           <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/TeamDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.73170733">
-          <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -2453,10 +2438,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.64329267">
           <caret line="169" column="74" selection-start-line="169" selection-start-column="74" selection-end-line="169" selection-end-column="74" />
-          <folding>
-            <element signature="e#5767#5768#0" expanded="false" />
-            <element signature="e#5800#5801#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2472,10 +2453,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.777439">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="e#261#262#0" expanded="false" />
-            <element signature="e#286#287#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2539,15 +2516,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22405271">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/PlaneDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53212523">
-          <caret line="32" column="55" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2559,21 +2527,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/constants/Message.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8039539">
-          <caret line="42" column="69" selection-start-line="42" selection-start-column="69" selection-end-line="42" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/IUserService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44810542">
           <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2581,13 +2538,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.42009884">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/AirportDAO.java">
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/impl/AirportDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.39209226">
           <caret line="24" column="96" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="96" />
@@ -2595,28 +2549,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/LoginUserCommand.java">
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/impl/UserDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/entities/src/main/java/by/pvt/kish/aircompany/entity/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-          <folding>
-            <element signature="e#2537#2538#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/UserDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="189" column="0" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
+          <caret line="191" column="0" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2624,23 +2560,81 @@
     <entry file="file://$PROJECT_DIR$/services/src/main/java/by/pvt/kish/aircompany/services/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/constants/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.63833994">
+          <caret line="28" column="57" selection-start-line="28" selection-start-column="57" selection-end-line="28" selection-end-column="57" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/LogoutUserCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.47035572">
+          <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/entities/src/main/java/by/pvt/kish/aircompany/entity/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20948617">
+          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+          <folding>
+            <element signature="e#2537#2538#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/controller/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58035713">
+        <state vertical-scroll-proportion="0.49604744">
           <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/BaseDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/impl/PlaneDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="15" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/by/pvt/kish/aircompany/dao/impl/TeamDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="61" column="22" selection-start-line="61" selection-start-column="22" selection-end-line="61" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/test/java/by/pvt/kish/aircompany/dao/UserDAOTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="15" selection-start-line="45" selection-start-column="15" selection-end-line="45" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/main/java/by/pvt/kish/aircompany/command/user/LoginUserCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35587582">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding />
         </state>
       </provider>

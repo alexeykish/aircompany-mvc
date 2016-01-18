@@ -1,5 +1,6 @@
 package by.pvt.kish.aircompany.dao;
 
+import by.pvt.kish.aircompany.dao.impl.UserDAO;
 import by.pvt.kish.aircompany.entity.User;
 import by.pvt.kish.aircompany.enums.UserType;
 import by.pvt.kish.aircompany.utils.Coder;

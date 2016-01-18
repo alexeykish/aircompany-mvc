@@ -26,7 +26,7 @@ public class Message {
     public static final String MALFORMED_EMAIL = "Incorrectly filled 'e-mail' field";
 
     public static final String ERROR_REG_LOGIN = "Wrong login name or password";
-    public static final String ERROR_REG_USER_EXISTS = "User with this login is already exists";
+    public static final String ERROR_REG_USER_EXISTS = "User with this login already authorized";
     public static final String ERROR_REG_EMPTY= "Empty data at login or password";
     public static final String ERROR_SQL = "Something wrong with the database, please check connection";
     public static final String ERROR_EMPTY = "Empty data at request";

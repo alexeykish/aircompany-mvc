@@ -1,6 +1,6 @@
 package by.pvt.kish.aircompany.services;
 
-import by.pvt.kish.aircompany.dao.UserDAO;
+import by.pvt.kish.aircompany.dao.impl.UserDAO;
 import by.pvt.kish.aircompany.entity.User;
 import by.pvt.kish.aircompany.enums.UserStatus;
 
@@ -52,16 +52,19 @@ public class UserService extends BaseService<User> implements IUserService{
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean checkLogin(String login) throws SQLException {
         boolean result = userDAO.checkLogin(login);
         return result;
     }
 
+    @Override
     public User getUser(String login, String password) throws SQLException {
         User user = userDAO.getUser(login, password);
         return user;
     }
 
+    @Override
     public boolean checkStatus (int id) throws SQLException {
         return userDAO.checkStatus(id);
     }

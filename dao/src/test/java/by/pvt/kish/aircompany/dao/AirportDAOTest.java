@@ -1,5 +1,6 @@
 package by.pvt.kish.aircompany.dao;
 
+import by.pvt.kish.aircompany.dao.impl.AirportDAO;
 import by.pvt.kish.aircompany.entity.Airport;
 import org.junit.After;
 import org.junit.Before;

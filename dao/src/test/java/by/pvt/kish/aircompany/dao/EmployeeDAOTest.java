@@ -1,5 +1,6 @@
 package by.pvt.kish.aircompany.dao;
 
+import by.pvt.kish.aircompany.dao.impl.EmployeeDAO;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.enums.Position;
 import org.junit.After;

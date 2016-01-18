@@ -1,6 +1,6 @@
 package by.pvt.kish.aircompany.services;
 
-import by.pvt.kish.aircompany.dao.TeamDAO;
+import by.pvt.kish.aircompany.dao.impl.TeamDAO;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.FlightTeam;
 import by.pvt.kish.aircompany.pool.ConnectionPool;

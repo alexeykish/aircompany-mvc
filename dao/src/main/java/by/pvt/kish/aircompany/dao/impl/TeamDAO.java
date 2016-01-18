@@ -1,9 +1,11 @@
 /**
  * 
  */
-package by.pvt.kish.aircompany.dao;
+package by.pvt.kish.aircompany.dao.impl;
 
 import by.pvt.kish.aircompany.constants.Column;
+import by.pvt.kish.aircompany.dao.BaseDAO;
+import by.pvt.kish.aircompany.dao.ITeamDAO;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.FlightTeam;
 import by.pvt.kish.aircompany.pool.ConnectionPool;
@@ -24,7 +26,7 @@ import static by.pvt.kish.aircompany.pool.ConnectionUtils.closeResultSet;
 /**
  * @author  Kish Alexey
  */
-public class TeamDAO implements ITeamDAO {
+public class TeamDAO extends BaseDAO implements ITeamDAO {
 
 	public static final String ADD_TEAM = "INSERT INTO  teams (`t_eid`,`t_fid`) VALUES (?,?)";
 	public static final String GET_ALL_TEAMS = "SELECT * FROM teams";
@@ -34,15 +36,16 @@ public class TeamDAO implements ITeamDAO {
 	static Logger logger = Logger.getLogger(TeamDAO.class.getName());
 
 	private static TeamDAO instance;
-	private Connection connection;
-	private PreparedStatement preparedStatement;
+//	private Connection connection;
+//	private PreparedStatement preparedStatement;
 
 	private TeamDAO() {
-		try {
-			connection = ConnectionPool.getInstance().getConnection();
-		} catch (IOException | SQLException | PropertyVetoException e) {
-			e.printStackTrace();
-		}
+		super();
+//		try {
+//			connection = ConnectionPool.getInstance().getConnection();
+//		} catch (IOException | SQLException | PropertyVetoException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	public synchronized static TeamDAO getInstance() {
@@ -74,6 +77,17 @@ public class TeamDAO implements ITeamDAO {
 			closePreparedStatement(preparedStatement);
 		}
 	}
+
+	@Override
+	public int add(Object o) throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void update(Object o) throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
 	@Override
 	public List<FlightTeam> getAll() throws SQLException {
 		ResultSet resultSet = null;

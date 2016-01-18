@@ -46,7 +46,7 @@ public class LoginUserCommand implements ActionCommand {
 			}
 
 			if (UserService.getInstance().checkStatus(user.getUid())) {
-				request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.ERROR_REG_LOGIN);
+				request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.ERROR_REG_USER_EXISTS);
 				logger.error(Message.ERROR_REG_LOGIN);
 				return Page.INDEX;
 			} else {

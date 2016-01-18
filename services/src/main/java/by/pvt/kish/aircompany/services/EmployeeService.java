@@ -1,6 +1,6 @@
 package by.pvt.kish.aircompany.services;
 
-import by.pvt.kish.aircompany.dao.EmployeeDAO;
+import by.pvt.kish.aircompany.dao.impl.EmployeeDAO;
 import by.pvt.kish.aircompany.entity.Employee;
 
 import java.sql.SQLException;

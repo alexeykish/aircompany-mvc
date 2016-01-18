@@ -1,6 +1,7 @@
-package by.pvt.kish.aircompany.dao;
+package by.pvt.kish.aircompany.dao.impl;
 
 import by.pvt.kish.aircompany.constants.Column;
+import by.pvt.kish.aircompany.dao.BaseDAO;
 import by.pvt.kish.aircompany.entity.Airport;
 
 import java.sql.ResultSet;
