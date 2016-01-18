@@ -5,16 +5,14 @@ package by.pvt.kish.aircompany.command.user;
 
 import by.pvt.kish.aircompany.command.ActionCommand;
 import by.pvt.kish.aircompany.constants.Attribute;
-import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.User;
+import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.services.impl.UserService;
 import by.pvt.kish.aircompany.utils.ErrorHandler;
-import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -22,16 +20,14 @@ import java.util.List;
  */
 public class GetAllUsersCommand implements ActionCommand {
 	
-	static Logger logger = Logger.getLogger(GetAllUsersCommand.class.getName());
-
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		String className = LoginUserCommand.class.getSimpleName();
 		try {
 			List<User> users = UserService.getInstance().getAll();
 			request.setAttribute(Attribute.USERS_ATTRIBUTE, users);
-		} catch (SQLException e) {
-			return ErrorHandler.returnErrorPage(Message.ERROR_SQL_DAO, className);
+		} catch (ServiceException e) {
+			return ErrorHandler.returnErrorPage(e.getMessage(), className);
 		}
 		return Page.USERS;
 	}

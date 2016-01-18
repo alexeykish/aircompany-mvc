@@ -61,19 +61,21 @@ public class AirportDAO extends BaseDAO<Airport> {
     }
 
     @Override
-    public void update(Airport airport) throws SQLException {
+    public void update(Airport airport) throws DaoException {
         try {
             preparedStatement = connection.prepareStatement(UPDATE_AIRPORT);
             preparedStatement.setString(1, airport.getCity());
             preparedStatement.setInt(2, airport.getAid());
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("Updating airport failed", e);
         } finally {
             closePreparedStatement(preparedStatement);
         }
     }
 
     @Override
-    public List<Airport> getAll() throws SQLException {
+    public List<Airport> getAll() throws DaoException {
         ResultSet resultSet = null;
         List<Airport> airports = new ArrayList<>();
         try {
@@ -84,6 +86,8 @@ public class AirportDAO extends BaseDAO<Airport> {
                 airport = setAirportParametrs(resultSet, airport);
                 airports.add(airport);
             }
+        } catch (SQLException e) {
+            throw new DaoException("Failed get all airports", e);
         } finally {
             closeResultSet(resultSet);
             closePreparedStatement(preparedStatement);
@@ -92,7 +96,7 @@ public class AirportDAO extends BaseDAO<Airport> {
     }
 
     @Override
-    public Airport getById(int id) throws SQLException {
+    public Airport getById(int id) throws DaoException {
         ResultSet resultSet = null;
         Airport airport = null;
         try {
@@ -103,6 +107,8 @@ public class AirportDAO extends BaseDAO<Airport> {
                 airport = new Airport();
                 airport = setAirportParametrs(resultSet, airport);
             }
+        } catch (SQLException e) {
+            throw new DaoException("Getting airport by ID failed", e);
         } finally {
             closeResultSet(resultSet);
             closePreparedStatement(preparedStatement);
@@ -111,11 +117,13 @@ public class AirportDAO extends BaseDAO<Airport> {
     }
 
     @Override
-    public void delete(int id) throws SQLException {
+    public void delete(int id) throws DaoException {
         try {
             preparedStatement = connection.prepareStatement(DELETE_AIRPORT);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("Deleting airport failed", e);
         } finally {
             closePreparedStatement(preparedStatement);
         }

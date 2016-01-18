@@ -1,10 +1,15 @@
 package by.pvt.kish.aircompany.services.impl;
 
+import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.dao.impl.TeamDAO;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.FlightTeam;
+import by.pvt.kish.aircompany.exceptions.DaoException;
+import by.pvt.kish.aircompany.exceptions.ServiceException;
+import by.pvt.kish.aircompany.exceptions.ServiceValidateException;
 import by.pvt.kish.aircompany.services.BaseService;
 import by.pvt.kish.aircompany.services.ITeamService;
+import by.pvt.kish.aircompany.validators.TeamValidator;
 import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
@@ -32,44 +37,71 @@ public class TeamService extends BaseService implements ITeamService {
     }
 
     @Override
-    public void add(int fid, List<Integer> tid) throws SQLException {
+    public void add(int fid, List<Integer> team) throws ServiceException, ServiceValidateException {
         try {
+            if (fid < 0) {
+                throw new ServiceException(Message.ERROR_ID_MISSING);
+            }
+            String validateResult = TeamValidator.validate(fid, team);
+            if (validateResult!=null) {
+                throw new ServiceValidateException(validateResult);
+            }
             connection.setAutoCommit(false);
             teamDAO.delete(fid);
-            teamDAO.add(fid, tid);
+            teamDAO.add(fid, team);
             connection.commit();
         } catch (SQLException e){
             try {
-                logger.debug("Commit failed");
+                logger.debug("Add team: commit failed");
                 connection.rollback();
             }catch (SQLException e2) {
-                logger.debug("Rollback failed");
+                logger.debug("Add team: rollback failed");
             }
+        } catch (DaoException e) {
+            throw new ServiceException(e);
         }
     }
 
     @Override
-    public int add(Object o) throws SQLException {
+    public int add(Object o) throws ServiceException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void update(Object o) throws SQLException {
+    public void update(Object o) throws ServiceException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public List<FlightTeam> getAll() throws SQLException {
-        return teamDAO.getAll();
+    public List<FlightTeam> getAll() throws ServiceException {
+        try {
+            return teamDAO.getAll();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 
     @Override
-    public void delete(int id) throws SQLException {
-        teamDAO.delete(id);
+    public void delete(int id) throws ServiceException {
+        try {
+            if (id < 0) {
+                throw new ServiceException(Message.ERROR_ID_MISSING);
+            }
+            teamDAO.delete(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 
     @Override
-    public List<Employee> getById(int id) throws SQLException {
-        return teamDAO.getById(id);
+    public List<Employee> getById(int id) throws ServiceException {
+        try {
+            if (id < 0) {
+                throw new ServiceException(Message.ERROR_ID_MISSING);
+            }
+            return teamDAO.getById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 }

@@ -61,19 +61,21 @@ public class PlaneDAO extends BaseDAO<Plane> {
     }
 
     @Override
-    public void update(Plane plane) throws SQLException {
+    public void update(Plane plane) throws DaoException {
         try {
             preparedStatement = connection.prepareStatement(UPDATE_PLANE);
             preparedStatement = setStatementParametrs(preparedStatement, plane);
             preparedStatement.setInt(8, plane.getPid());
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("Updating plane failed", e);
         } finally {
             closePreparedStatement(preparedStatement);
         }
     }
 
     @Override
-    public List<Plane> getAll() throws SQLException {
+    public List<Plane> getAll() throws DaoException {
         ResultSet resultSet = null;
         List<Plane> planes = new ArrayList<>();
         try {
@@ -84,6 +86,8 @@ public class PlaneDAO extends BaseDAO<Plane> {
                 plane = setPlaneParametrs(resultSet, plane);
                 planes.add(plane);
             }
+        } catch (SQLException e) {
+            throw new DaoException("Getting all planes failed", e);
         } finally {
             closeResultSet(resultSet);
             closePreparedStatement(preparedStatement);
@@ -92,7 +96,7 @@ public class PlaneDAO extends BaseDAO<Plane> {
     }
 
     @Override
-    public Plane getById(int id) throws SQLException {
+    public Plane getById(int id) throws DaoException {
         ResultSet resultSet = null;
         Plane plane = null;
         try {
@@ -103,6 +107,8 @@ public class PlaneDAO extends BaseDAO<Plane> {
                 plane = new Plane();
                 plane = setPlaneParametrs(resultSet, plane);
             }
+        } catch (SQLException e) {
+            throw new DaoException("Getting plane by ID failed", e);
         } finally {
             closeResultSet(resultSet);
             closePreparedStatement(preparedStatement);
@@ -111,11 +117,13 @@ public class PlaneDAO extends BaseDAO<Plane> {
     }
 
     @Override
-    public void delete(int id) throws SQLException {
+    public void delete(int id) throws DaoException {
         try {
             preparedStatement = connection.prepareStatement(DELETE_PLANE);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("Deleting plane failed", e);
         } finally {
             closePreparedStatement(preparedStatement);
         }

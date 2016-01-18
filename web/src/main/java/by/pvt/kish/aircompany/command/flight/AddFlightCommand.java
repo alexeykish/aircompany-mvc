@@ -8,11 +8,11 @@ import by.pvt.kish.aircompany.constants.Attribute;
 import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.Flight;
-import by.pvt.kish.aircompany.exceptions.ServiceValidateException;
 import by.pvt.kish.aircompany.exceptions.ServiceException;
+import by.pvt.kish.aircompany.exceptions.ServiceValidateException;
+import by.pvt.kish.aircompany.services.impl.FlightService;
 import by.pvt.kish.aircompany.utils.ErrorHandler;
 import by.pvt.kish.aircompany.utils.RequestHandler;
-import by.pvt.kish.aircompany.services.impl.FlightService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +32,7 @@ public class AddFlightCommand implements ActionCommand {
 		} catch (IllegalArgumentException e) {
 			return ErrorHandler.returnErrorPage(Message.ERROR_IAE, className);
 		} catch (ServiceException e) {
-			return ErrorHandler.returnErrorPage(Message.ERROR_SQL_DAO, className);
+			return ErrorHandler.returnErrorPage(e.getMessage(), className);
 		} catch (ServiceValidateException e) {
 			return ErrorHandler.returnValidateErrorPage(request, e.getMessage(), className);
 		}

@@ -2,31 +2,25 @@ package by.pvt.kish.aircompany.command.user;
 
 import by.pvt.kish.aircompany.command.ActionCommand;
 import by.pvt.kish.aircompany.constants.Attribute;
-import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.User;
-import by.pvt.kish.aircompany.enums.UserStatus;
+import by.pvt.kish.aircompany.exceptions.RequestHandlerException;
+import by.pvt.kish.aircompany.exceptions.ServiceException;
+import by.pvt.kish.aircompany.exceptions.ServiceLoginException;
 import by.pvt.kish.aircompany.services.impl.UserService;
 import by.pvt.kish.aircompany.utils.ErrorHandler;
 import by.pvt.kish.aircompany.utils.RequestHandler;
-import org.apache.log4j.Logger;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
 
 /**
  * @author Kish Alexey
  */
 public class LoginUserCommand implements ActionCommand {
 
-	static Logger logger = Logger.getLogger(LoginUserCommand.class.getName());
-
-	private final String UID = "uid";
-	private final String LOGIN = "login";
-	private final String PASSWORD = "password";
 	private final int SESSION_AGE = 60 * 60; //one hour
 
 	@Override
@@ -34,21 +28,9 @@ public class LoginUserCommand implements ActionCommand {
 		String className = LoginUserCommand.class.getSimpleName();
 		HttpSession session = request.getSession();
 		try {
-			String login = request.getParameter(LOGIN);
-			String password = request.getParameter(PASSWORD);
-			if ((login == null) || (password == null)) {
-				return ErrorHandler.returnLoginErrorPage(request, Message.ERROR_REG_EMPTY, className);
-			}
-
+			String login = RequestHandler.getString(request, "login");
+			String password = RequestHandler.getString(request, "password");
 			User user = UserService.getInstance().getUser(login, password);
-			if (user == null) {
-				return ErrorHandler.returnLoginErrorPage(request, Message.ERROR_REG_LOGIN, className);
-			} else if (user.getStatus().equals(UserStatus.ONLINE)) {
-				return ErrorHandler.returnLoginErrorPage(request, Message.ERROR_REG_USER_EXISTS, className);
-			} else {
-				UserService.getInstance().setStatus(user.getUid(), UserStatus.ONLINE);
-			}
-
 			switch (user.getUserType()) {
 				case ADMINISTRATOR:
 					session.setAttribute(Attribute.USERTYPE_ATTRIBUTE, 2); // TODO access level
@@ -61,12 +43,16 @@ public class LoginUserCommand implements ActionCommand {
 					break;
 			}
 			session.setAttribute(Attribute.USER_ATTRIBUTE, user);
-			Cookie c = new Cookie(UID, String.valueOf(user.getUid()));
+			Cookie c = new Cookie("uid", String.valueOf(user.getUid()));
 			c.setMaxAge(SESSION_AGE);
 			response.addCookie(c);
 			return Page.MAIN;
-		} catch (SQLException e) {
-			return ErrorHandler.returnErrorPage(Message.ERROR_SQL_DAO, className);
+		} catch (ServiceException e) {
+			return ErrorHandler.returnErrorPage(e.getMessage(), className);
+		} catch (RequestHandlerException e) {
+			return ErrorHandler.returnLoginErrorPage(request, e.getMessage(), className);
+		} catch (ServiceLoginException e) {
+			return ErrorHandler.returnLoginErrorPage(request, e.getMessage(), className);
 		}
 	}
 }

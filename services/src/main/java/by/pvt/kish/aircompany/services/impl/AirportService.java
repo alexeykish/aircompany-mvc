@@ -2,9 +2,10 @@ package by.pvt.kish.aircompany.services.impl;
 
 import by.pvt.kish.aircompany.dao.impl.AirportDAO;
 import by.pvt.kish.aircompany.entity.Airport;
+import by.pvt.kish.aircompany.exceptions.DaoException;
+import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.services.BaseService;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -23,31 +24,47 @@ public class AirportService extends BaseService<Airport> {
     }
 
     @Override
-    public int add(Airport airport) throws SQLException {
+    public int add(Airport airport) throws ServiceException {
         try {
             return airportDAO.add(airport);
-        } catch (by.pvt.kish.aircompany.exceptions.DaoException e) {
-            e.printStackTrace();
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
         }
     }
 
     @Override
-    public void update(Airport airport) throws SQLException {
-        AirportDAO.getInstance().update(airport);
+    public void update(Airport airport) throws ServiceException {
+        try {
+            AirportDAO.getInstance().update(airport);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
     }
 
     @Override
-    public List<Airport> getAll() throws SQLException {
-        return AirportDAO.getInstance().getAll();
+    public List<Airport> getAll() throws ServiceException {
+        try {
+            return AirportDAO.getInstance().getAll();
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
     }
 
     @Override
-    public void delete(int id) throws SQLException {
-        AirportDAO.getInstance().delete(id);
+    public void delete(int id) throws ServiceException {
+        try {
+            AirportDAO.getInstance().delete(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
     }
 
     @Override
-    public Airport getById(int id) throws SQLException {
-        return AirportDAO.getInstance().getById(id);
+    public Airport getById(int id) throws ServiceException {
+        try {
+            return AirportDAO.getInstance().getById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
     }
 }

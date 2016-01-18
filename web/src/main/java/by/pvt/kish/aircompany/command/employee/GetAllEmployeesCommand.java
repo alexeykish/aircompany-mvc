@@ -8,13 +8,12 @@ import by.pvt.kish.aircompany.constants.Attribute;
 import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.Employee;
+import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.services.impl.EmployeeService;
 import by.pvt.kish.aircompany.utils.ErrorHandler;
-import by.pvt.kish.aircompany.utils.RequestHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -28,7 +27,7 @@ public class GetAllEmployeesCommand implements ActionCommand {
 		try {
 			List<Employee> employees = EmployeeService.getInstance().getAll();
 			request.setAttribute(Attribute.EMPLOYEES_ATTRIBUTE, employees);
-		} catch (SQLException e) {
+		} catch (ServiceException e) {
 			return ErrorHandler.returnErrorPage(Message.ERROR_SQL_DAO, className);
 		}
 		return Page.EMPLOYEES;

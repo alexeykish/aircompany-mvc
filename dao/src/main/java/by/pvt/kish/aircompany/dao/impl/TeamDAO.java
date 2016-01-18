@@ -75,36 +75,40 @@ public class TeamDAO extends BaseDAO implements ITeamDAO {
 	}
 
 	@Override
-	public void update(Object o) throws SQLException {
+	public void update(Object o) throws DaoException {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public List<FlightTeam> getAll() throws SQLException {
+	public List<FlightTeam> getAll() throws DaoException {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void delete(int id) throws SQLException {
+	public void delete(int id) throws DaoException {
 		try {
 			preparedStatement = connection.prepareStatement(DELETE_TEAM);
 			preparedStatement.setInt(1, id);
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			throw new DaoException(e);
 		} finally {
 			closePreparedStatement(preparedStatement);
 		}
 	}
 	@Override
-	public List<Employee> getById(int id) throws SQLException {
+	public List<Employee> getById(int id) throws DaoException {
 		ResultSet resultSet = null;
 		List<Employee> team = new ArrayList<>();
 		try {
-			preparedStatement = connection.prepareStatement(GET_TEAM_BY_ID); //TODO refactor
+			preparedStatement = connection.prepareStatement(GET_TEAM_BY_ID);
 			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				team.add(EmployeeDAO.getInstance().getById(resultSet.getInt(Column.TEAMS_EID)));
 			}
+		} catch (SQLException e) {
+			throw new DaoException(e);
 		} finally {
 			closeResultSet(resultSet);
 			closePreparedStatement(preparedStatement);

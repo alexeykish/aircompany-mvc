@@ -1,7 +1,5 @@
 package by.pvt.kish.aircompany.utils;
 
-import by.pvt.kish.aircompany.constants.Attribute;
-import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.Flight;
 import by.pvt.kish.aircompany.entity.Plane;
@@ -9,13 +7,13 @@ import by.pvt.kish.aircompany.entity.User;
 import by.pvt.kish.aircompany.enums.Position;
 import by.pvt.kish.aircompany.enums.UserStatus;
 import by.pvt.kish.aircompany.enums.UserType;
+import by.pvt.kish.aircompany.exceptions.RequestHandlerException;
+import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.services.impl.AirportService;
 import by.pvt.kish.aircompany.services.impl.PlaneService;
-import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +24,7 @@ import java.util.Map;
  */
 public class RequestHandler {
 
-    public static Flight getFlight(HttpServletRequest request) throws SQLException {
+    public static Flight getFlight(HttpServletRequest request) throws ServiceException {
         Flight flight = new Flight();
         String date = request.getParameter("date");
         String from = request.getParameter("from");
@@ -145,4 +143,27 @@ public class RequestHandler {
         return user;
     }
 
+    public static String getString(HttpServletRequest request, String parameter) throws RequestHandlerException {
+        String result = request.getParameter("password");
+        if (!checkNull(result)) {
+            throw new RequestHandlerException(parameter + " is empty");
+        }
+        return result;
+    }
+
+    public static int getInt(HttpServletRequest request, String parameter) throws RequestHandlerException {
+        int result = Integer.parseInt(request.getParameter(parameter));
+        if (result < 0) {
+            throw new RequestHandlerException(parameter + " is less than zero");
+        }
+        return result;
+    }
+
+    public static List<Integer> getTeam(HttpServletRequest request, int count) {
+        List<Integer> team = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            team.add(Integer.parseInt(request.getParameter(String.valueOf(i))));
+        }
+        return team;
+    }
 }
