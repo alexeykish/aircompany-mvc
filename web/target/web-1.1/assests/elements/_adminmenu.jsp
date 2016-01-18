@@ -18,6 +18,28 @@
         <tr>
             <td>
                 <form action="controller" method="post">
+                    <input type="hidden" name="command" value="get_all_planes_command"/>
+                    <input class="button"
+                           type="submit"
+                           name="submit"
+                           value="Planes"/>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="controller" method="post">
+                    <input type="hidden" name="command" value="get_all_airports_command"/>
+                    <input class="button"
+                           type="submit"
+                           name="submit"
+                           value="Airports"/>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="controller" method="post">
                     <input type="hidden" name="command" value="get_all_users_command"/>
                     <input class="button"
                            type="submit"

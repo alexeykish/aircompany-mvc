@@ -20,8 +20,6 @@
                 <%@include file="../elements/_adminmenu.jsp" %>
             </div>
         </td>
-
-
         <td id="right-content" class="right-content">
             <div>
                 <%@include file="../elements/_user_list.jsp" %>

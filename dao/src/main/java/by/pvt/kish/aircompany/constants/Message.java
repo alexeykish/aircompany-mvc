@@ -9,13 +9,13 @@ public class Message {
     public static final String SUCCESS_UPDATE_FLIGHT = "The flight was successfully updated";
 
     public static final String SUCCESS_TEAM_CHANGE = "The flight team was successfully changed";
-    public static final String SUCCESS_ADD_TEAM = "The flight team was successfully added";
     public static final String SUCCESS_DELETE_TEAM = "The flight team was successfully deleted";
-    public static final String SUCCESS_UPDATE_TEAM = "The flight team was successfully updated";
 
     public static final String SUCCESS_ADD_EMPLOYEE = "The employee was successfully added";
     public static final String SUCCESS_DELETE_EMPLOYEE = "The employee was successfully deleted";
     public static final String SUCCESS_UPDATE_EMPLOYEE = "The employee was successfully updated";
+
+    public static final String SUCCESS_ADD_PLANE = "The plane was successfully added";
 
     public static final String SUCCESS_REG = "You have successfully registered";
 
@@ -41,4 +41,5 @@ public class Message {
     public static final String ERROR_TEAM_POSITIONS_VALID = "Action canceled! Members of the team must be at correct positions";
     public static final String ERR_ACCESS = "Access denied";
     public static final String ERROR_REG_LOGOUT = "User logout failed";
+
 }

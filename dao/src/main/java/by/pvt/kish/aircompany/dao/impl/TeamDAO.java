@@ -36,16 +36,9 @@ public class TeamDAO extends BaseDAO implements ITeamDAO {
 	static Logger logger = Logger.getLogger(TeamDAO.class.getName());
 
 	private static TeamDAO instance;
-//	private Connection connection;
-//	private PreparedStatement preparedStatement;
 
 	private TeamDAO() {
 		super();
-//		try {
-//			connection = ConnectionPool.getInstance().getConnection();
-//		} catch (IOException | SQLException | PropertyVetoException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	public synchronized static TeamDAO getInstance() {
@@ -90,22 +83,9 @@ public class TeamDAO extends BaseDAO implements ITeamDAO {
 
 	@Override
 	public List<FlightTeam> getAll() throws SQLException {
-		ResultSet resultSet = null;
-		List<FlightTeam> teams = new ArrayList<>();
-		try {
-			preparedStatement = connection.prepareStatement(GET_ALL_TEAMS);
-			resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				FlightTeam team = new FlightTeam();
-				//team = setTeamParametrs(resultSet, team);
-				teams.add(team);
-			}
-		} finally {
-			closeResultSet(resultSet);
-			closePreparedStatement(preparedStatement);
-		}
-		return teams;
+		throw new UnsupportedOperationException();
 	}
+
 	@Override
 	public void delete(int id) throws SQLException {
 		try {

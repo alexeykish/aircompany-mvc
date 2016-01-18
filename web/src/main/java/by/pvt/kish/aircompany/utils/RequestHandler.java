@@ -4,7 +4,11 @@ import by.pvt.kish.aircompany.constants.Attribute;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.Flight;
+import by.pvt.kish.aircompany.entity.Plane;
+import by.pvt.kish.aircompany.entity.User;
 import by.pvt.kish.aircompany.enums.Position;
+import by.pvt.kish.aircompany.enums.UserStatus;
+import by.pvt.kish.aircompany.enums.UserType;
 import by.pvt.kish.aircompany.services.impl.AirportService;
 import by.pvt.kish.aircompany.services.impl.PlaneService;
 import org.apache.log4j.Logger;
@@ -12,13 +16,15 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Kish Alexey
  */
 public class RequestHandler {
-
-    static Logger logger = Logger.getLogger(RequestHandler.class.getName());
 
     public static Flight getFlight(HttpServletRequest request) throws SQLException {
         Flight flight = new Flight();
@@ -53,17 +59,6 @@ public class RequestHandler {
         return Integer.parseInt(id);
     }
 
-    public static String returnValidateErrorPage(HttpServletRequest request, String validateResult, String className) {
-        request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, validateResult);
-        logger.error(className + ": " + validateResult);
-        return Page.ERROR;
-    }
-
-    public static String returnErrorPage(String error, String className) {
-        logger.error(className + ": " + error);
-        return Page.ERROR;
-    }
-
     public static Employee getEmployee(HttpServletRequest request) {
         Employee employee = new Employee();
         String firstName = request.getParameter("firstName");
@@ -81,4 +76,73 @@ public class RequestHandler {
         }
         return employee;
     }
+
+    public static Plane getPlane(HttpServletRequest request) {
+        Plane plane = new Plane();
+        String model = request.getParameter("model");
+        String capacity = request.getParameter("capacity");
+        String range = request.getParameter("range");
+        String num_pilots = request.getParameter("num_pilots");
+        String num_navigators = request.getParameter("num_navigators");
+        String num_radiooperators = request.getParameter("num_radiooperators");
+        String num_stewardess = request.getParameter("num_stewardess");
+        if (!checkNull(model) ||
+                !(checkNull(capacity)) ||
+                !(checkNull(range)) ||
+                !(checkNull(num_pilots)) ||
+                !(checkNull(num_navigators)) ||
+                !(checkNull(num_radiooperators)) ||
+                !(checkNull(num_stewardess))) {
+            return null;
+        }
+        plane.setModel(model.trim());
+        plane.setCapacity(Integer.parseInt(capacity.trim()));
+        plane.setRange(Integer.parseInt(range.trim()));
+        Map<Position, Integer> team = new HashMap<>();
+        team.put(Position.PILOT, Integer.parseInt(num_pilots));
+        team.put(Position.NAVIGATOR, Integer.parseInt(num_navigators));
+        team.put(Position.RADIOOPERATOR, Integer.parseInt(num_navigators));
+        team.put(Position.STEWARDESS, Integer.parseInt(num_stewardess));
+        plane.setTeam(team);
+        int id = RequestHandler.getId(request, "pid");
+        if (id > 0) {
+            plane.setPid(id);
+        }
+        return plane;
+    }
+
+    public static User getUser(HttpServletRequest request) {
+        User user = new User();
+        String firstname = request.getParameter("first_name");
+        String lastname = request.getParameter("last_name");
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String userType = request.getParameter("user_type");
+        if (!checkNull(firstname) ||
+                !(checkNull(lastname)) ||
+                !(checkNull(login)) ||
+                !(checkNull(password)) ||
+                !(checkNull(email)) ||
+                !(checkNull(userType))) {
+            return null;
+        }
+        user.setFirstName(firstname.trim());
+        user.setLastName(lastname.trim());
+        user.setLogin(login.trim());
+        user.setPassword(password.trim());
+        user.setEmail(email.trim());
+        user.setUserType(UserType.valueOf(userType.trim()));
+        int id = RequestHandler.getId(request, "uid");
+        if (id > 0) {
+            user.setUid(id);
+            String status = request.getParameter("status");
+            if (!checkNull(status)) {
+                return null;
+            }
+            user.setStatus(UserStatus.valueOf(status));
+        }
+        return user;
+    }
+
 }

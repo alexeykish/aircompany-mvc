@@ -8,6 +8,7 @@ import by.pvt.kish.aircompany.constants.Attribute;
 import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.Flight;
+import by.pvt.kish.aircompany.utils.ErrorHandler;
 import by.pvt.kish.aircompany.utils.RequestHandler;
 import by.pvt.kish.aircompany.services.impl.FlightService;
 import by.pvt.kish.aircompany.validators.FlightValidator;
@@ -28,14 +29,14 @@ public class AddFlightCommand implements ActionCommand {
 			Flight flight = RequestHandler.getFlight(request);
 			String validateResult = FlightValidator.validate(flight);
 			if (validateResult != null) {
-				return RequestHandler.returnValidateErrorPage(request, validateResult, AddFlightCommand.class.getName());
+				return ErrorHandler.returnValidateErrorPage(request, validateResult, className);
 			}
 			FlightService.getInstance().add(flight);
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_ADD_FLIGHT);
 		} catch (IllegalArgumentException e) {
-			return RequestHandler.returnErrorPage(Message.ERROR_IAE, className);
+			return ErrorHandler.returnErrorPage(Message.ERROR_IAE, className);
 		} catch (SQLException e1) {
-			return RequestHandler.returnErrorPage(Message.ERROR_SQL_DAO, className);
+			return ErrorHandler.returnErrorPage(Message.ERROR_SQL_DAO, className);
 		}
 		return Page.MAIN;
 	}

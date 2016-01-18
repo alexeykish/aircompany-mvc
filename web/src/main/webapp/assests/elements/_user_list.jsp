@@ -10,6 +10,7 @@
 			<th>LOGIN</th>
 			<th>EMAIL</th>
 			<th>USER TYPE</th>
+			<th>USER STATUS</th>
 		</tr>
 		<c:forEach items="${requestScope.users}" var="user">
 			<tr>
@@ -19,6 +20,7 @@
 				<td>${user.login}</td>
 				<td>${user.email}</td>
 				<td>${user.userType}</td>
+				<td>${user.status}</td>
 			</tr>
 		</c:forEach>
 	</table>

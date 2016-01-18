@@ -7,6 +7,8 @@ import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.User;
 import by.pvt.kish.aircompany.enums.UserStatus;
 import by.pvt.kish.aircompany.services.impl.UserService;
+import by.pvt.kish.aircompany.utils.ErrorHandler;
+import by.pvt.kish.aircompany.utils.RequestHandler;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.Cookie;
@@ -29,26 +31,20 @@ public class LoginUserCommand implements ActionCommand {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		String className = LoginUserCommand.class.getSimpleName();
 		HttpSession session = request.getSession();
 		try {
 			String login = request.getParameter(LOGIN);
 			String password = request.getParameter(PASSWORD);
 			if ((login == null) || (password == null)) {
-				logger.error(Message.ERROR_REG_EMPTY);
-				return Page.INDEX;
+				return ErrorHandler.returnLoginErrorPage(request, Message.ERROR_REG_EMPTY, className);
 			}
 
 			User user = UserService.getInstance().getUser(login, password);
 			if (user == null) {
-				request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.ERROR_REG_LOGIN);
-				logger.error(Message.ERROR_REG_LOGIN);
-				return Page.INDEX;
-			}
-
-			if (UserService.getInstance().checkStatus(user.getUid())) {
-				request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.ERROR_REG_USER_EXISTS);
-				logger.error(Message.ERROR_REG_LOGIN);
-				return Page.INDEX;
+				return ErrorHandler.returnLoginErrorPage(request, Message.ERROR_REG_LOGIN, className);
+			} else if (user.getStatus().equals(UserStatus.ONLINE)) {
+				return ErrorHandler.returnLoginErrorPage(request, Message.ERROR_REG_USER_EXISTS, className);
 			} else {
 				UserService.getInstance().setStatus(user.getUid(), UserStatus.ONLINE);
 			}
@@ -70,8 +66,7 @@ public class LoginUserCommand implements ActionCommand {
 			response.addCookie(c);
 			return Page.MAIN;
 		} catch (SQLException e) {
-			logger.error(Message.ERROR_SQL_DAO);
-			return Page.INDEX;
+			return ErrorHandler.returnErrorPage(Message.ERROR_SQL_DAO, className);
 		}
 	}
 }

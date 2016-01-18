@@ -22,7 +22,7 @@
         </td>
         <td id="right-content" class="right-content">
             <div>
-                <%@include file="../elements/_user_list.jsp" %>
+                <%@include file="../elements/_plane_list.jsp" %>
             </div>
         </td>
     </tr>

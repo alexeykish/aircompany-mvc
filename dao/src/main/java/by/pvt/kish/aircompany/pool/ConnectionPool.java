@@ -72,14 +72,12 @@ public class ConnectionPool {
         if(threadConnection.get() == null) {
             Connection connection = this.dataSource.getConnection();
             threadConnection.set(connection);
-            logger.info(Thread.currentThread()+": set a connection: " + connection.getMetaData().getURL());
+            logger.debug(Thread.currentThread()+": set a connection: " + connection.getMetaData().getURL());
             return threadConnection.get();
         } else
-            logger.info(Thread.currentThread()+": get a connection.");
+            logger.debug(Thread.currentThread()+": get a connection.");
             return threadConnection.get();
     }
-
-
 
 }
 

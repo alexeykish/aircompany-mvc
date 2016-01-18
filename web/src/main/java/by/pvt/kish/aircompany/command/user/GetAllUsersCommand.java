@@ -9,6 +9,7 @@ import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.User;
 import by.pvt.kish.aircompany.services.impl.UserService;
+import by.pvt.kish.aircompany.utils.ErrorHandler;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,12 +26,12 @@ public class GetAllUsersCommand implements ActionCommand {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		String className = LoginUserCommand.class.getSimpleName();
 		try {
 			List<User> users = UserService.getInstance().getAll();
 			request.setAttribute(Attribute.USERS_ATTRIBUTE, users);
 		} catch (SQLException e) {
-			logger.error(Message.ERROR_SQL_DAO);
-			return Page.ERROR;
+			return ErrorHandler.returnErrorPage(Message.ERROR_SQL_DAO, className);
 		}
 		return Page.USERS;
 	}

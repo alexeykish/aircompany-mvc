@@ -32,7 +32,7 @@ public class LogoutUserCommand implements ActionCommand {
 				logger.info(Message.USER_LOGOUT);
 			} catch (SQLException e) {
 				request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.ERROR_REG_LOGOUT);
-				logger.error(Message.ERROR_REG_LOGIN);
+				logger.error(Message.ERROR_REG_LOGOUT);
 				return Page.MAIN;
 			}
 		}

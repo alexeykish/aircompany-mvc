@@ -8,6 +8,7 @@ import by.pvt.kish.aircompany.constants.Attribute;
 import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.services.impl.EmployeeService;
+import by.pvt.kish.aircompany.utils.ErrorHandler;
 import by.pvt.kish.aircompany.utils.RequestHandler;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,13 +26,13 @@ public class DeleteEmployeeCommand implements ActionCommand {
 		try {
 			int id = RequestHandler.getId(request, "eid");
 			if (id < 0) {
-				return RequestHandler.returnErrorPage(Message.ERROR_ID_MISSING, className);
+				return ErrorHandler.returnErrorPage(Message.ERROR_ID_MISSING, className);
 			}
 			EmployeeService.getInstance().delete(id);
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_DELETE_EMPLOYEE);
 			return Page.MAIN;
 		} catch (SQLException e) {
-			return RequestHandler.returnErrorPage(Message.ERROR_SQL_DAO, className);
+			return ErrorHandler.returnErrorPage(Message.ERROR_SQL_DAO, className);
 		}
 	}
 }

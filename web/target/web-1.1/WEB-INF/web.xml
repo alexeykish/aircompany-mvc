@@ -29,12 +29,24 @@
         <jsp-file>/assests/pages/addemployee.jsp</jsp-file>
     </servlet>
     <servlet>
-    <servlet-name>updateemployee-page</servlet-name>
-    <jsp-file>/assests/pages/editemployee.jsp</jsp-file>
-</servlet>
-    <servlet>
-        <servlet-name>back</servlet-name>
+        <servlet-name>updateemployee-page</servlet-name>
         <jsp-file>/assests/pages/editemployee.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>addairport-page</servlet-name>
+        <jsp-file>/assests/pages/addairport.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>updateairport-page</servlet-name>
+        <jsp-file>/assests/pages/editairport.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>addplane-page</servlet-name>
+        <jsp-file>/assests/pages/addplane.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>updateplane-page</servlet-name>
+        <jsp-file>/assests/pages/editplane.jsp</jsp-file>
     </servlet>
 
     <servlet-mapping>
@@ -64,6 +76,22 @@
     <servlet-mapping>
         <servlet-name>updateemployee-page</servlet-name>
         <url-pattern>/updateemployee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addairport-page</servlet-name>
+        <url-pattern>/addairport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateairport-page</servlet-name>
+        <url-pattern>/updateairport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addplane-page</servlet-name>
+        <url-pattern>/addplane</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateplane-page</servlet-name>
+        <url-pattern>/updateplane</url-pattern>
     </servlet-mapping>
 
     <filter>

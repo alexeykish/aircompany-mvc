@@ -1,9 +1,17 @@
 package by.pvt.kish.aircompany.command;
 
+import by.pvt.kish.aircompany.command.airport.DeleteAirportCommand;
+import by.pvt.kish.aircompany.command.airport.GetAllAirportsCommand;
+import by.pvt.kish.aircompany.command.airport.UpdateAirportCommand;
+import by.pvt.kish.aircompany.command.plane.AddPlaneCommand;
+import by.pvt.kish.aircompany.command.plane.DeletePlaneCommand;
+import by.pvt.kish.aircompany.command.plane.GetAllPlanesCommand;
+import by.pvt.kish.aircompany.command.plane.UpdatePlaneCommand;
 import by.pvt.kish.aircompany.command.flight.*;
 import by.pvt.kish.aircompany.command.employee.*;
 import by.pvt.kish.aircompany.command.team.*;
 import by.pvt.kish.aircompany.command.user.*;
+import by.pvt.kish.aircompany.command.airport.AddAirportCommand;
 
 /**
  * @author Kish Alexey
@@ -23,6 +31,16 @@ public enum CommandEnum {
     LOGIN_USER_COMMAND 				 	{   {this.command = new LoginUserCommand();		    	}	},
     LOGOUT_USER_COMMAND					{	{this.command = new LogoutUserCommand();	    	}	},
     GET_ALL_USERS_COMMAND				{	{this.command = new GetAllUsersCommand();	    	}	},
+
+    ADD_PLANE_COMMAND 			    	{   {this.command = new AddPlaneCommand();		        }	},
+    GET_ALL_PLANES_COMMAND 	    	    {	{this.command = new GetAllPlanesCommand();   	    }	},
+    DELETE_PLANE_COMMAND			 	{	{this.command = new DeletePlaneCommand();	        }	},
+    UPDATE_PLANE_COMMAND            	{	{this.command = new UpdatePlaneCommand();	        }	},
+
+    ADD_AIRPORT_COMMAND 			 	{   {this.command = new AddAirportCommand();		    }	},
+    GET_ALL_AIRPORTS_COMMAND 	    	{	{this.command = new GetAllAirportsCommand();       	}	},
+    DELETE_AIRPORT_COMMAND			 	{	{this.command = new DeleteAirportCommand();	        }	},
+    UPDATE_AIRPORT_COMMAND            	{	{this.command = new UpdateAirportCommand();	        }	},
 
     DELETE_TEAM_COMMAND				 	{	{this.command = new DeleteTeamCommand();	    	}	},
     SET_TEAM_COMMAND					{	{this.command = new SetTeamCommand();           	}	},
