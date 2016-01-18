@@ -10,6 +10,8 @@ import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.services.impl.TeamService;
 import by.pvt.kish.aircompany.utils.RequestHandler;
+import by.pvt.kish.aircompany.validators.EmployeeValidator;
+import by.pvt.kish.aircompany.validators.TeamValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +36,10 @@ public class SaveTeamToFlightCommand implements ActionCommand {
 			List<Integer> team = new ArrayList<>();
 			for (int i = 0; i < num; i++) {
 				team.add(Integer.parseInt(request.getParameter(String.valueOf(i))));
+			}
+			String validateResult = TeamValidator.validate(id, team);
+			if (validateResult!=null) {
+				return RequestHandler.returnValidateErrorPage(request, validateResult, className);
 			}
 			TeamService.getInstance().add(id, team);
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_TEAM_CHANGE);
