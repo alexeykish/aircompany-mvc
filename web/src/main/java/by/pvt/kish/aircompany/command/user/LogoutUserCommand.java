@@ -7,6 +7,7 @@ import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.User;
 import by.pvt.kish.aircompany.enums.UserStatus;
 import by.pvt.kish.aircompany.exceptions.ServiceException;
+import by.pvt.kish.aircompany.exceptions.ServiceValidateException;
 import by.pvt.kish.aircompany.services.impl.UserService;
 import by.pvt.kish.aircompany.utils.ErrorHandler;
 import org.apache.log4j.Logger;
@@ -35,6 +36,8 @@ public class LogoutUserCommand implements ActionCommand {
 			} catch (ServiceException e) {
 				request.setAttribute(Attribute.LOGIN_MESSAGE_ATTRIBUTE, Message.ERROR_REG_LOGOUT);
 				return ErrorHandler.returnErrorPage(e.getMessage(), className);
+			} catch (ServiceValidateException e) {
+				return ErrorHandler.returnLoginErrorPage(request, e.getMessage(), className);
 			}
 		}
 		return Page.INDEX;

@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Проверяет обеъект Employee перед добавлением или изменением его в БД
+ * Описывает утилитный класс для проверки обеъекта Employee перед добавлением или изменением его в БД
  *
  * @author Kish Alexey
  */
@@ -31,21 +31,15 @@ public class EmployeeValidator {
 	}
 
     /**
-     * Метод проверяет полноту заполнения всех позиций, пустые позиции не допускаются
+     * Метод проверяет объект на <code>null</code> полноту заполнения всех позиций, пустые позиции не допускаются
      * @param employee - проверяемый объект Employee
      * @return - false, если все проверки пройдены корректно; true - если данные некорректны
      */
     private static boolean checkEmpty(Employee employee) {
-		if (employee == null) {
-            return true;
-        }
-		if ((employee.getFirstName() == null) || (employee.getFirstName().equals(""))) {
-			return true;
-		}
-		if ((employee.getLastName() == null) || (employee.getLastName().equals(""))) {
-			return true;
-		}
-		if ((employee.getPosition() == null) || (employee.getPosition().equals(""))) {
+		if ((employee == null) ||
+				(employee.getFirstName() == null) || (employee.getFirstName().equals("")) ||
+				(employee.getLastName() == null) || (employee.getLastName().equals("")) ||
+				(employee.getPosition() == null)) {
             return true;
         }
         return false;

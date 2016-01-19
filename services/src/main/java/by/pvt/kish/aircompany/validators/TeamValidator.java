@@ -8,6 +8,7 @@ import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.FlightTeam;
 import by.pvt.kish.aircompany.entity.Plane;
 import by.pvt.kish.aircompany.enums.Position;
+import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.services.impl.EmployeeService;
 import by.pvt.kish.aircompany.services.impl.FlightService;
 import org.apache.log4j.Logger;
@@ -37,7 +38,7 @@ public class TeamValidator {
      * @param team - проверяемый объект FlightTeam
      * @return - null, если все проверки пройдены корректно; если данные некорректны - соответствующую строку с указанием ошибки
      */
-    public static String validate(int id, List<Integer> team) throws SQLException {
+    public static String validate(int id, List<Integer> team) throws ServiceException {
         if (checkEmpty(team)) {
             return Message.ERROR_EMPTY;
         }
@@ -56,7 +57,7 @@ public class TeamValidator {
      * @param team - проверяемый объект FlightTeam
      * @return false если соответсвие позиций корректно, true если было найдено хотя бы одно несоответсвие
      */
-    private static boolean checkPositions(int fid, List<Integer> team) throws SQLException {
+    private static boolean checkPositions(int fid, List<Integer> team) throws ServiceException {
         List<Employee> list = new ArrayList<>();
         for (Integer i : team) {
             list.add(EmployeeService.getInstance().getById(i));

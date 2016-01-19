@@ -63,10 +63,8 @@ public class ConnectionPool {
         if(threadConnection.get() == null) {
             Connection connection = dataSource.getConnection();
             threadConnection.set(connection);
-            logger.debug(Thread.currentThread()+": set a connection.");
             return threadConnection.get();
         } else
-            logger.debug(Thread.currentThread()+": get a connection.");
             return threadConnection.get();
     }
 

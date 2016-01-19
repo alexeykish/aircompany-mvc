@@ -14,5 +14,5 @@ public interface IUserService {
     boolean checkLogin(String login) throws ServiceException;
     User getUser(String login, String password) throws ServiceException, ServiceLoginException;
     boolean checkStatus (int id) throws ServiceException;
-    void setStatus(int uid, UserStatus status) throws ServiceException;
+    void setStatus(int uid, UserStatus status) throws ServiceException, ServiceValidateException;
 }

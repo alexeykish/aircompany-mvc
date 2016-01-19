@@ -42,6 +42,7 @@ public class Message {
     public static final String ERROR_TEAM_POSITIONS_VALID = "Action canceled! Members of the team must be at correct positions";
     public static final String ERR_ACCESS = "Access denied";
     public static final String ERROR_REG_LOGOUT = "User logout failed";
+    public static final String ERROR_USER_STATUS = "Set user status failed";
 
 
 }

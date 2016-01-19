@@ -144,7 +144,7 @@ public class RequestHandler {
     }
 
     public static String getString(HttpServletRequest request, String parameter) throws RequestHandlerException {
-        String result = request.getParameter("password");
+        String result = request.getParameter(parameter);
         if (!checkNull(result)) {
             throw new RequestHandlerException(parameter + " is empty");
         }

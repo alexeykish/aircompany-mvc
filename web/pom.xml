@@ -6,11 +6,11 @@
   <parent>
     <groupId>by.pvt.kish</groupId>
     <artifactId>aircompany</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
   </parent>
 
   <artifactId>web</artifactId>
-  <version>1.1</version>
+  <version>1.2</version>
   <packaging>war</packaging>
 
   <name>web</name>
@@ -21,11 +21,11 @@
     <dependency>
       <groupId>by.pvt.kish</groupId>
       <artifactId>services</artifactId>
-      <version>1.1</version>
+      <version>1.2</version>
     </dependency>
 
   </dependencies>
   <build>
-    <finalName>${project.artifactId}-${project.version}</finalName>
+    <finalName>aircompany-${project.version}</finalName>
   </build>
 </project>

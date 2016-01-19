@@ -183,7 +183,6 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
 
     @Override
     public boolean checkStatus(int id) throws DaoException {
-        boolean status = false;
         ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(SQL_GET_USER_STATUS);
@@ -200,7 +199,7 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
             closeResultSet(resultSet);
             closePreparedStatement(preparedStatement);
         }
-        return status;
+        return false;
     }
 
     @Override

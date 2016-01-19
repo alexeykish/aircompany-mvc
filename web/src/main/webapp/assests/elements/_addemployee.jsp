@@ -9,11 +9,11 @@
 		<table>
 			<tr>
 				<td class="input-label">Firstname:</td>
-				<td><input class="inputForm" type="text" name="first_name" title="Firstname"/></td>
+				<td><input class="inputForm" type="text" name="firstName" title="Firstname"/></td>
 			</tr>
 			<tr>
 				<td class="input-label">Lastname:</td>
-				<td><input class="inputForm" type="text" name="last_name" title="Lastname"/></td>
+				<td><input class="inputForm" type="text" name="lastName" title="Lastname"/></td>
 			</tr>
 			<tr>
 				<td class="input-label">Position:</td>

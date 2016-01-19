@@ -9,9 +9,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Utility class for TeamService. Contains utility for team creation
+ *
  * @author Kish Alexey
  */
 public class TeamCreator {
+
+    /**
+     * Возвращает попозиционный список членов экипажа, согласно необходимого экипажа для конкретного самолета.
+     * @param plane - самолет, для которого формируется экипаж
+     * @return попозиционный список членов экипажа для конкретного самотета
+     */
     public static List<String> getPlanePositions(Plane plane) {
         List<String> positions = new ArrayList<>();
         Map<Position,Integer> team = plane.getTeam();

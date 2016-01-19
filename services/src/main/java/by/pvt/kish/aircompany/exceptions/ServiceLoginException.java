@@ -3,7 +3,7 @@ package by.pvt.kish.aircompany.exceptions;
 /**
  * @author Kish Alexey
  */
-public class ServiceLoginException extends Throwable {
+public class ServiceLoginException extends Exception {
     /**
      * Constructs a ServiceLoginException with the given detail message.
      * @param message The detail message of the ServiceLoginException.

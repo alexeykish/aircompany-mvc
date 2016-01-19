@@ -5,6 +5,7 @@ import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.Airport;
 import by.pvt.kish.aircompany.entity.Plane;
+import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.services.impl.AirportService;
 import by.pvt.kish.aircompany.services.impl.PlaneService;
 import org.apache.log4j.Logger;
@@ -33,7 +34,7 @@ public class PreAddFlightFilter implements Filter {
             request.setAttribute(Attribute.AIRPORTS_ATTRIBUTE, airports);
             request.setAttribute(Attribute.PLANES_ATTRIBUTE, planes);
             chain.doFilter(request,response);
-        } catch (SQLException e) {
+        } catch (ServiceException e) {
             logger.error(Message.ERROR_SQL_DAO);
             RequestDispatcher dispatcher = request.getRequestDispatcher(Page.ERROR);
             dispatcher.forward(request, response);

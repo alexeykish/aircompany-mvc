@@ -5,7 +5,7 @@
 
     <groupId>by.pvt.kish</groupId>
     <artifactId>aircompany</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     <packaging>pom</packaging>
 
     <name>aircompany</name>
@@ -41,9 +41,10 @@
                 <version>2.2</version>
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
-                    <username>admin</username>
-                    <password>admin</password>
+                    <server>apache-tomcat-8.0.21</server>
                     <path>/${project.build.finalName}</path>
+                    <username>tomcat</username>
+                    <password>tomcat</password>
                     <warFile>target/${project.build.finalName}.war</warFile>
                 </configuration>
                 <executions>
