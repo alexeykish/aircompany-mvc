@@ -5,7 +5,6 @@ package by.pvt.kish.aircompany.validators;
 
 import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.entity.Employee;
-import by.pvt.kish.aircompany.entity.FlightTeam;
 import by.pvt.kish.aircompany.entity.Plane;
 import by.pvt.kish.aircompany.enums.Position;
 import by.pvt.kish.aircompany.exceptions.ServiceException;
@@ -13,14 +12,13 @@ import by.pvt.kish.aircompany.services.impl.EmployeeService;
 import by.pvt.kish.aircompany.services.impl.FlightService;
 import org.apache.log4j.Logger;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 /**
- * Проверяет обеъект FlightTeam перед добавлением или изменением его в БД
+ * Проверяет flight team перед добавлением или изменением его в БД
  *
  * @author Kish Alexey, 2015
  */
@@ -35,7 +33,7 @@ public class TeamValidator {
      * <li>каждый сострудник должен находится на соответсвующей его должности позиции</li>
      *
      * @param id - id рейса
-     * @param team - проверяемый объект FlightTeam
+     * @param team - проверяемый объект team
      * @return - null, если все проверки пройдены корректно; если данные некорректны - соответствующую строку с указанием ошибки
      */
     public static String validate(int id, List<Integer> team) throws ServiceException {
@@ -54,7 +52,7 @@ public class TeamValidator {
     /**
      * Метод проверяет соответсвие позиций сотрудников их позициям в команде
      *
-     * @param team - проверяемый объект FlightTeam
+     * @param team - проверяемый объект team
      * @return false если соответсвие позиций корректно, true если было найдено хотя бы одно несоответсвие
      */
     private static boolean checkPositions(int fid, List<Integer> team) throws ServiceException {

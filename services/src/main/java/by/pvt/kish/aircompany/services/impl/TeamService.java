@@ -3,7 +3,6 @@ package by.pvt.kish.aircompany.services.impl;
 import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.dao.impl.TeamDAO;
 import by.pvt.kish.aircompany.entity.Employee;
-import by.pvt.kish.aircompany.entity.FlightTeam;
 import by.pvt.kish.aircompany.exceptions.DaoException;
 import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.exceptions.ServiceValidateException;
@@ -73,12 +72,8 @@ public class TeamService extends BaseService implements ITeamService {
     }
 
     @Override
-    public List<FlightTeam> getAll() throws ServiceException {
-        try {
-            return teamDAO.getAll();
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
+    public List getAll() throws SQLException, ServiceException {
+        throw new UnsupportedOperationException();
     }
 
     @Override

@@ -36,7 +36,7 @@ public class Message {
     public static final String ERROR_FLIGHT_VALID = "Action canceled! Place of departure and place of arrival should be different";
     public static final String ERROR_TEAM_VALID = "Action canceled! Duplication in the composition of the team members";
     public static final String ERROR_MESSAGE = "Opps! Something gone wrong... Check log file.";
-    public static final String ERROR_SQL_DAO = "SQL exception at DAO";
+    public static final String ERROR_SQL_DAO = "SQL exception at IDAO";
     public static final String ERROR_IAE = "IllegalArgument Exception: DATE field";
     public static final String USER_LOGOUT = "(Session invalidation) Logout of user";
     public static final String ERROR_TEAM_POSITIONS_VALID = "Action canceled! Members of the team must be at correct positions";

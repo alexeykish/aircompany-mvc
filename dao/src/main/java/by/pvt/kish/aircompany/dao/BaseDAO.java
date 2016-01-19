@@ -15,7 +15,7 @@ import java.sql.SQLException;
 /**
  * @author Kish Alexey
  */
-public abstract class BaseDAO<T> implements DAO<T>{
+public abstract class BaseDAO<T> implements IDAO<T> {
 
 	static Logger logger = Logger.getLogger(BaseDAO.class.getName());
 
@@ -26,11 +26,11 @@ public abstract class BaseDAO<T> implements DAO<T>{
 		try {
 			connection = ConnectionPool.getInstance().getConnection();
         } catch (IOException e) {
-			logger.error("IOException at DAO");
+			logger.error("IOException at IDAO");
 		} catch (SQLException e) {
-			logger.error("SQLException at DAO");
+			logger.error("SQLException at IDAO");
 		} catch (PropertyVetoException e) {
-			logger.error("PropertyVetoException at DAO");
+			logger.error("PropertyVetoException at IDAO");
 		}
 	}
 
