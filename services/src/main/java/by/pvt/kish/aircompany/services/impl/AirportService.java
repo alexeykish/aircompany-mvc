@@ -2,20 +2,31 @@ package by.pvt.kish.aircompany.services.impl;
 
 import by.pvt.kish.aircompany.dao.impl.AirportDAO;
 import by.pvt.kish.aircompany.entity.Airport;
-import by.pvt.kish.aircompany.exceptions.DaoException;
 import by.pvt.kish.aircompany.exceptions.ServiceException;
+import by.pvt.kish.aircompany.exceptions.ServiceValidateException;
 import by.pvt.kish.aircompany.services.BaseService;
+import by.pvt.kish.aircompany.validators.AirportValidator;
 
 import java.util.List;
 
+import static by.pvt.kish.aircompany.utils.ServiceUtils.*;
+
 /**
+ * This class represents a concrete implementation of the IService interface for airport model.
+ *
  * @author Kish Alexey
  */
 public class AirportService extends BaseService<Airport> {
 
     private static AirportService instance;
     private AirportDAO airportDAO = AirportDAO.getInstance();
+    private AirportValidator airportValidator = new AirportValidator();
 
+    /**
+     * Returns an synchronized instance of a AirportService, if the instance does not exist yet - create a new
+     *
+     * @return - a instance of a AirportService
+     */
     public synchronized static AirportService getInstance() {
         if (instance == null) {
             instance = new AirportService();
@@ -24,47 +35,27 @@ public class AirportService extends BaseService<Airport> {
     }
 
     @Override
-    public int add(Airport airport) throws ServiceException {
-        try {
-            return airportDAO.add(airport);
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
-        }
+    public int add(Airport airport) throws ServiceException, ServiceValidateException {
+        return addEntity(airportDAO, airport, airportValidator);
     }
 
     @Override
-    public void update(Airport airport) throws ServiceException {
-        try {
-            AirportDAO.getInstance().update(airport);
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
-        }
+    public void update(Airport airport) throws ServiceException, ServiceValidateException {
+        updateEntity(airportDAO, airport, airportValidator);
     }
 
     @Override
     public List<Airport> getAll() throws ServiceException {
-        try {
-            return AirportDAO.getInstance().getAll();
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
-        }
+        return getAllEntities(airportDAO);
     }
 
     @Override
     public void delete(int id) throws ServiceException {
-        try {
-            AirportDAO.getInstance().delete(id);
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
-        }
+        deleteEntity(airportDAO, id);
     }
 
     @Override
     public Airport getById(int id) throws ServiceException {
-        try {
-            return AirportDAO.getInstance().getById(id);
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
-        }
+        return getByIdEntity(airportDAO, id);
     }
 }

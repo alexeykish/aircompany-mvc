@@ -1,6 +1,5 @@
 package by.pvt.kish.aircompany.utils;
 
-import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.Plane;
 import by.pvt.kish.aircompany.enums.Position;
 
@@ -17,12 +16,13 @@ public class TeamCreator {
 
     /**
      * Возвращает попозиционный список членов экипажа, согласно необходимого экипажа для конкретного самолета.
+     *
      * @param plane - самолет, для которого формируется экипаж
      * @return попозиционный список членов экипажа для конкретного самотета
      */
     public static List<String> getPlanePositions(Plane plane) {
         List<String> positions = new ArrayList<>();
-        Map<Position,Integer> team = plane.getTeam();
+        Map<Position, Integer> team = plane.getTeam();
         for (int i = 0; i < team.get(Position.PILOT); i++) {
             positions.add(Position.PILOT.toString());
         }

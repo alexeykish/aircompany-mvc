@@ -8,6 +8,7 @@ import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.exceptions.ServiceValidateException;
 import by.pvt.kish.aircompany.services.BaseService;
 import by.pvt.kish.aircompany.services.ITeamService;
+import by.pvt.kish.aircompany.utils.ServiceUtils;
 import by.pvt.kish.aircompany.validators.TeamValidator;
 import org.apache.log4j.Logger;
 
@@ -15,11 +16,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
+ * This class represents a concrete implementation of the ITeamService interface for flight team.
+ *
  * @author Kish Alexey
  */
 public class TeamService extends BaseService implements ITeamService {
 
-    static Logger logger = Logger.getLogger(TeamService.class.getName());
+    private static Logger logger = Logger.getLogger(TeamService.class.getName());
 
     private static TeamService instance;
     private TeamDAO teamDAO = TeamDAO.getInstance();
@@ -28,6 +31,11 @@ public class TeamService extends BaseService implements ITeamService {
         super();
     }
 
+    /**
+     * Returns an synchronized instance of a TeamService, if the instance does not exist yet - create a new
+     *
+     * @return - a instance of a TeamService
+     */
     public synchronized static TeamService getInstance() {
         if (instance == null) {
             instance = new TeamService();
@@ -35,26 +43,36 @@ public class TeamService extends BaseService implements ITeamService {
         return instance;
     }
 
+    /**
+     * Create a given flight team for a particular flight matching the given ID
+     *
+     * @param id   - The ID of the flight
+     * @param team - The flight team to be created
+     * @throws ServiceException         - if something fails at Service layer
+     * @throws ServiceValidateException - if something fails at Service validation
+     */
     @Override
-    public void add(int fid, List<Integer> team) throws ServiceException, ServiceValidateException {
+    public void add(int id, List<Integer> team) throws ServiceException, ServiceValidateException {
         try {
-            if (fid < 0) {
+            if (id < 0) {
                 throw new ServiceException(Message.ERROR_ID_MISSING);
             }
-            String validateResult = TeamValidator.validate(fid, team);
-            if (validateResult!=null) {
+            String validateResult = TeamValidator.validate(id, team);
+            if (validateResult != null) {
                 throw new ServiceValidateException(validateResult);
             }
             connection.setAutoCommit(false);
-            teamDAO.delete(fid);
-            teamDAO.add(fid, team);
+            teamDAO.delete(id);
+            teamDAO.add(id, team);
             connection.commit();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             try {
                 logger.debug("Add team: commit failed");
                 connection.rollback();
-            }catch (SQLException e2) {
+                throw new ServiceException(e);
+            } catch (SQLException e2) {
                 logger.debug("Add team: rollback failed");
+                throw new ServiceException(e);
             }
         } catch (DaoException e) {
             throw new ServiceException(e);
@@ -72,22 +90,22 @@ public class TeamService extends BaseService implements ITeamService {
     }
 
     @Override
-    public List getAll() throws SQLException, ServiceException {
+    public List getAll() throws ServiceException {
         throw new UnsupportedOperationException();
     }
 
     @Override
     public void delete(int id) throws ServiceException {
-        try {
-            if (id < 0) {
-                throw new ServiceException(Message.ERROR_ID_MISSING);
-            }
-            teamDAO.delete(id);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
+        ServiceUtils.deleteEntity(teamDAO, id);
     }
 
+    /**
+     * Returns a list of employees of the flight team for particular flight matching the given ID
+     *
+     * @param id - The ID of the flight
+     * @return a list of the employees, that is a flight team
+     * @throws ServiceException - if something fails at Service layer
+     */
     @Override
     public List<Employee> getById(int id) throws ServiceException {
         try {

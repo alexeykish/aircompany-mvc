@@ -1,7 +1,8 @@
 package by.pvt.kish.aircompany.enums;
 
 /**
- * Описывает возможные типы пользователей
+ * Describes possible types of the users
+ *
  * @author Kish Alexey
  */
 public enum UserType {

@@ -21,8 +21,6 @@ import javax.servlet.http.HttpSession;
  */
 public class LoginUserCommand implements ActionCommand {
 
-	private final int SESSION_AGE = 60 * 60; //one hour
-
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		String className = LoginUserCommand.class.getSimpleName();
@@ -44,7 +42,8 @@ public class LoginUserCommand implements ActionCommand {
 			}
 			session.setAttribute(Attribute.USER_ATTRIBUTE, user);
 			Cookie c = new Cookie("uid", String.valueOf(user.getUid()));
-			c.setMaxAge(SESSION_AGE);
+			int sessionAge = 60 * 60;
+			c.setMaxAge(sessionAge);
 			response.addCookie(c);
 			return Page.MAIN;
 		} catch (ServiceException e) {

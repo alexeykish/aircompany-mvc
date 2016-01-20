@@ -6,13 +6,18 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * Описывает сущность самолета
- * Самолет используется для осуществления Рейса
- * Самолет характеризуется вместимостью пассажиров <code>capacity</code> и дальностью полета <code>range</code>
+ * This class represents the Plane model.
+ * The plane is used for Flight.
+ * The plane is characterized by passenger capacity of <code>capacity</code> and a flight range of <code>range</code>
+ * For service flights on a particular aircraft,
+ * flight crew should consist of particular number of professionals (pilots, navigators, radiooperators, stewardesses).
+ * These amounts are described by Map <code>team</code>
+ * This model class can be used throughout all
+ * layers, the data layer, the controller layer and the view layer.
  *
  * @author Kish Alexey
  */
-public class Plane implements Serializable{
+public class Plane implements Serializable {
 
     private int pid;
     private String model;
@@ -24,11 +29,11 @@ public class Plane implements Serializable{
     }
 
     /**
-     * @param pid - plane id
-     * @param model - plane model
+     * @param pid      - plane id
+     * @param model    - plane model
      * @param capacity - plane passenger capacity
-     * @param range - plane flight range
-     * @param team - team to service flight
+     * @param range    - plane flight range
+     * @param team     - team to service flight
      */
 
     public Plane(int pid, String model, int capacity, int range, Map<Position, Integer> team) {

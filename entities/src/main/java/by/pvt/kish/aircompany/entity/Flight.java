@@ -8,14 +8,16 @@ import java.sql.Date;
 import java.util.List;
 
 /**
- * Описывает сущность рейса
- * Рейс осуществляется из места вылета <code>from</code> в место прилета <code>to</code> самолетом <code>plane</code>
- * Рейс выполняется в определенныю дату <code>date</code>
- * Каждый рейс обслуживает полетная бригада (указывается id паолетной бригады <code>tid</code>
+ * This class represents the Flight model.
+ * Flight is carried out from a place of departure <code>from</code> instead of arrivals <code>to</code> plane <code>plane</code>
+ * Flights are operated on a specific date <code>date</code>
+ * Each flight team services the particular flight (specified id flight team <code>tid</code>
+ * This model class can be used throughout all
+ * layers, the data layer, the controller layer and the view layer.
  *
  * @author Kish Alexey
  */
-public class Flight implements Serializable{
+public class Flight implements Serializable {
     private int fid;
     private Date date;
     private Airport from;

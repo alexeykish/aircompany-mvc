@@ -12,7 +12,6 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -20,7 +19,7 @@ import java.util.List;
  */
 public class PreAddFlightFilter implements Filter {
 
-    static Logger logger = Logger.getLogger(PreAddFlightFilter.class.getName());
+    private static Logger logger = Logger.getLogger(PreAddFlightFilter.class.getName());
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

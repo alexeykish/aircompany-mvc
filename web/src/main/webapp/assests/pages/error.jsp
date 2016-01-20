@@ -32,7 +32,7 @@
         <td id="right-content" class="right-content">
             <div style="margin: 5px;">
                 <c:choose>
-                    <c:when test="${(not empty message)}">${message}</c:when>
+                    <c:when test="${(not empty requestScope.message)}">${requestScope.message}</c:when>
                     <c:otherwise>Opps! Something gone wrong... Check log file.</c:otherwise>
                 </c:choose>
             </div>

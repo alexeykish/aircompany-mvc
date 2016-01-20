@@ -12,11 +12,11 @@
 				<input type="hidden" name="command" value="login_user_command" />
 				<div>
 					<input class="inputForm" id="loginAuthForm" name="login"
-						type="text"/>
+						type="text" title="loginAuthForm"/>
 				</div>
 				<div>
 					<input class="inputForm" id="passAuthForm" name="password"
-						type="password" />
+						type="password"  title="passAuthForm"/>
 				</div>
 				<div>
 					<input class="button" type="submit" value="login" />
@@ -31,7 +31,7 @@
 			<div class="user-container" style="text-align: left;">
 				<p style="font-size: 12px">Current user:
 					${sessionScope.user.login}</p>
-				<p style="font-size: 12px">Uset type:
+				<p style="font-size: 12px">User type:
 					${sessionScope.user.userType}</p>
 				<form action="controller" method="post" autocomplete="off">
 					<input type="hidden" name="command" value="logout_user_command" /> <input

@@ -16,7 +16,7 @@ public class Message {
     public static final String SUCCESS_UPDATE_EMPLOYEE = "The employee was successfully updated";
 
     public static final String SUCCESS_ADD_PLANE = "The plane was successfully added";
-    public static final String SUCCESS_DELETE_PLANE = "The plane was successfully deleted";;
+    public static final String SUCCESS_DELETE_PLANE = "The plane was successfully deleted";
 
     public static final String SUCCESS_REG = "You have successfully registered";
 

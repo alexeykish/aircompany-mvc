@@ -27,7 +27,7 @@ function check(formID) {
 
     }
 
-    inputStr = document.getElementById(formID + 'Form').value;
+    var inputStr = document.getElementById(formID + 'Form').value;
 
     if (pattern.test(inputStr)) {
         document.getElementById(formID).style.color = 'green';

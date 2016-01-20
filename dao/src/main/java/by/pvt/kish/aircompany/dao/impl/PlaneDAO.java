@@ -12,8 +12,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
-import static by.pvt.kish.aircompany.pool.ConnectionUtils.closePreparedStatement;
-import static by.pvt.kish.aircompany.pool.ConnectionUtils.closeResultSet;
+import static by.pvt.kish.aircompany.utils.DaoUtils.closePreparedStatement;
+import static by.pvt.kish.aircompany.utils.DaoUtils.closeResultSet;
+import static by.pvt.kish.aircompany.utils.DaoUtils.deleteEntity;
 
 /**
  * This class represents a concrete implementation of the IDAO interface for plane model.
@@ -156,15 +157,7 @@ public class PlaneDAO extends BaseDAO<Plane> {
      */
     @Override
     public void delete(int id) throws DaoException {
-        try {
-            preparedStatement = connection.prepareStatement(SQL_DELETE_PLANE);
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DaoException(DELETE_PLANE_FAIL, e);
-        } finally {
-            closePreparedStatement(preparedStatement);
-        }
+        deleteEntity(connection, preparedStatement, id, SQL_DELETE_PLANE, DELETE_PLANE_FAIL);
     }
 
     private PreparedStatement setStatementParametrs (PreparedStatement preparedStatement, Plane plane) throws SQLException{

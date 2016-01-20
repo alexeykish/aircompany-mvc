@@ -2,14 +2,12 @@ package by.pvt.kish.aircompany.command;
 
 import org.apache.log4j.Logger;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @author Kish Alexey
  */
 public class CommandFactory {
 
-    static Logger logger = Logger.getLogger(CommandFactory.class.getName());
+    private static Logger logger = Logger.getLogger(CommandFactory.class.getName());
 
     public ActionCommand defineCommand(String action) {
         ActionCommand currentCommand = new EmptyCommand();

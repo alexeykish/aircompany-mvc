@@ -10,15 +10,13 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import java.io.IOException;
-import java.sql.SQLException;
 
 /**
  * @author Kish Alexey
  */
 public class PreUpdateFlightFilter implements Filter {
 
-    static Logger logger = Logger.getLogger(PreUpdateFlightFilter.class.getName());
-    private final String FID = "fid";
+    private static Logger logger = Logger.getLogger(PreUpdateFlightFilter.class.getName());
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -27,7 +25,7 @@ public class PreUpdateFlightFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
-            String id = request.getParameter(FID);
+            String id = request.getParameter("fid");
             if (id == null) {
                 logger.error(Message.ERROR_ID_MISSING);
                 RequestDispatcher dispatcher = request.getRequestDispatcher(Page.ERROR);

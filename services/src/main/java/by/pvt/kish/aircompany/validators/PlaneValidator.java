@@ -5,19 +5,20 @@ import by.pvt.kish.aircompany.entity.Plane;
 import by.pvt.kish.aircompany.enums.Position;
 
 /**
- * Проверяет обеъект Plane перед добавлением или изменением его в БД
+ * Describes the utility class to test the Plane object before adding or changing it in the DB
  *
  * @author Kish Alexey
  */
-public class PlaneValidator {
+public class PlaneValidator implements IValidator<Plane> {
 
     /**
-     * Проверяет на корректность:
-     * <li>наличие пустых полей</li>
-     * @param plane - проверяемый объект Plane
-     * @return - null, если все проверки пройдены корректно; страницу ошибки, если данные некорректны
+     * Check the validity of:
+     * <li>the presence of empty fields</li>
+     *
+     * @param plane - Plane object being checked
+     * @return - Null, if everything checks out correctly; error page if the data is incorrect
      */
-    public static String validate(Plane plane) {
+    public String validate(Plane plane) {
         if (checkEmpty(plane)) {
             return Message.ERROR_EMPTY;
         }
@@ -25,12 +26,13 @@ public class PlaneValidator {
     }
 
     /**
-     * Метод проверяет полноту заполнения всех позиций, пустые позиции не допускаются
-     * @param plane - проверяемый объект Plane
-     * @return - false, если все проверки пройдены корректно; true - если данные некорректны
+     * The method checks the object to <code>null</code> completeness of all positions are empty positions are not allowed
+     *
+     * @param plane - Plane object being checked
+     * @return - false, if everything checks out correctly; true - if the data is invalid
      */
     private static boolean checkEmpty(Plane plane) {
-        if ((plane == null) ||
+        return (plane == null) ||
                 (plane.getModel() == null) ||
                 (plane.getModel().equals("")) ||
                 (plane.getCapacity() < 1) ||
@@ -39,9 +41,6 @@ public class PlaneValidator {
                 (plane.getTeam().get(Position.PILOT) <= 0) ||
                 (plane.getTeam().get(Position.NAVIGATOR) <= 0) ||
                 (plane.getTeam().get(Position.RADIOOPERATOR) <= 0) ||
-                (plane.getTeam().get(Position.STEWARDESS) <= 0)) {
-            return true;
-        }
-        return false;
+                (plane.getTeam().get(Position.STEWARDESS) <= 0);
     }
 }

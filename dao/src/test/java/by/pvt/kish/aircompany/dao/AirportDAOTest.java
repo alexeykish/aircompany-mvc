@@ -14,12 +14,13 @@ import static org.junit.Assert.assertNull;
  */
 public class AirportDAOTest {
 
-    private AirportDAO airportDAO = AirportDAO.getInstance();
+    private AirportDAO airportDAO;
     private int id;
     private Airport testAirport;
 
     @Before
     public void setUp() throws Exception {
+        airportDAO = AirportDAO.getInstance();
         testAirport = new Airport();
         testAirport.setCity("testCity");
         id = airportDAO.add(testAirport);
@@ -47,14 +48,14 @@ public class AirportDAOTest {
         int beforeAddNumber = airportDAO.getAll().size();
         int getAllId = airportDAO.add(testAirport);
         int afterAddNumber = airportDAO.getAll().size();
-        assertEquals("Get all method failed", beforeAddNumber, afterAddNumber-1);
+        assertEquals("Get all method failed", beforeAddNumber, afterAddNumber - 1);
         airportDAO.delete(getAllId);
     }
 
     @Test
     public void testDelete() throws Exception {
         airportDAO.delete(id);
-        assertNull("Delete method: failed",airportDAO.getById(id));
+        assertNull("Delete method: failed", airportDAO.getById(id));
     }
 
     @After

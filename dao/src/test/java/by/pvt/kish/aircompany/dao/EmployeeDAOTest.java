@@ -17,10 +17,11 @@ public class EmployeeDAOTest {
 
     private Employee testEmployee;
     private int id;
-    private EmployeeDAO employeeDao = EmployeeDAO.getInstance();
+    private EmployeeDAO employeeDao;
 
     @Before
     public void setUp() throws Exception {
+        employeeDao = EmployeeDAO.getInstance();
         testEmployee = new Employee();
         testEmployee.setFirstName("FirstName");
         testEmployee.setLastName("LastName");
@@ -56,14 +57,14 @@ public class EmployeeDAOTest {
         int beforeAddNumber = employeeDao.getAll().size();
         int getAllId = employeeDao.add(testEmployee);
         int afterAddNumber = employeeDao.getAll().size();
-        assertEquals("Get all method failed", beforeAddNumber, afterAddNumber-1);
+        assertEquals("Get all method failed", beforeAddNumber, afterAddNumber - 1);
         employeeDao.delete(getAllId);
     }
 
     @Test
     public void testDelete() throws Exception {
         employeeDao.delete(id);
-        assertNull("Delete employee: failed",employeeDao.getById(id));
+        assertNull("Delete employee: failed", employeeDao.getById(id));
     }
 
     @After

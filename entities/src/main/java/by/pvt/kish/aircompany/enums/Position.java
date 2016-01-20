@@ -1,12 +1,12 @@
 package by.pvt.kish.aircompany.enums;
 
 /**
- * Описывает возможные должности в составе полетной бригады
+ * Describes the possible positions as a part of flight crews
  *
  * @author Kish Alexey
  */
 public enum Position {
-    PILOT, NAVIGATOR, RADIOOPERATOR, STEWARDESS;
+    PILOT, NAVIGATOR, RADIOOPERATOR, STEWARDESS
 
 
 }

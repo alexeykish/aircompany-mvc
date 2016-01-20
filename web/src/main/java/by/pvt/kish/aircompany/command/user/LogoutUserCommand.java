@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 public class LogoutUserCommand implements ActionCommand {
 
-	static Logger logger = Logger.getLogger(LogoutUserCommand.class.getName());
+	private static Logger logger = Logger.getLogger(LogoutUserCommand.class.getName());
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {

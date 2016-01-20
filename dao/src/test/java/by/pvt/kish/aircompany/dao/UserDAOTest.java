@@ -15,12 +15,13 @@ import static org.junit.Assert.*;
  * @author Kish Alexey
  */
 public class UserDAOTest {
-    private UserDAO userDao = UserDAO.getInstance();
-    private  int id;
+    private UserDAO userDao;
+    private int id;
     private User testUser;
 
     @Before
     public void setUp() throws Exception {
+        userDao = UserDAO.getInstance();
         testUser = new User();
         testUser.setFirstName("testFirstName");
         testUser.setLastName("testLastName");
@@ -49,7 +50,7 @@ public class UserDAOTest {
 
     @Test
     public void testGetUser() throws Exception {
-        User gettedUser = userDao.getUser(testUser.getLogin(),testUser.getPassword());
+        User gettedUser = userDao.getUser(testUser.getLogin(), testUser.getPassword());
         assertEquals("Get method failed: wrong firstname", testUser.getFirstName(), gettedUser.getFirstName());
         assertEquals("Get method failed: wrong lastname", testUser.getLastName(), gettedUser.getLastName());
         assertEquals("Get method failed: wrong login", testUser.getLogin(), gettedUser.getLogin());
@@ -64,14 +65,14 @@ public class UserDAOTest {
         int beforeAddNumber = userDao.getAll().size();
         int getAllId = userDao.add(testUser2);
         int afterAddNumber = userDao.getAll().size();
-        assertEquals("Get all users method failed", beforeAddNumber, afterAddNumber-1);
+        assertEquals("Get all users method failed", beforeAddNumber, afterAddNumber - 1);
         userDao.delete(getAllId);
     }
 
     @Test
     public void testDelete() throws Exception {
         userDao.delete(id);
-        assertNull("Delete user: failed",userDao.getById(id));
+        assertNull("Delete user: failed", userDao.getById(id));
     }
 
     @Test
@@ -90,7 +91,7 @@ public class UserDAOTest {
     }
 
     @After
-    public void tearDown() throws Exception{
+    public void tearDown() throws Exception {
         userDao.delete(id);
     }
 

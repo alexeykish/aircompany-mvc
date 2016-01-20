@@ -14,77 +14,78 @@ import static org.junit.Assert.*;
  */
 public class UserValidatorTest {
 
-    User valideUser;
+    private User validUser;
+    private UserValidator userValidator = new UserValidator();
 
     @Before
     public void setUp() throws Exception {
-        valideUser = new User();
-        valideUser.setFirstName("Firstname");
-        valideUser.setLastName("Lastname");
-        valideUser.setLogin("login");
-        valideUser.setPassword("1111111");
-        valideUser.setEmail("email@email.com");
-        valideUser.setUserType(UserType.DISPATCHER);
-        valideUser.setStatus(UserStatus.OFFLINE);
+        validUser = new User();
+        validUser.setFirstName("Firstname");
+        validUser.setLastName("Lastname");
+        validUser.setLogin("login");
+        validUser.setPassword("1111111");
+        validUser.setEmail("email@email.com");
+        validUser.setUserType(UserType.DISPATCHER);
+        validUser.setStatus(UserStatus.OFFLINE);
     }
 
     @Test
     public void testValidateData() throws Exception {
-        assertNull("User validate failed", UserValidator.validate(valideUser));
-        valideUser.setFirstName("FIRSTNAME");
-        assertEquals("Validate method failed: firstName is wrong", UserValidator.validate(valideUser), Message.MALFORMED_FIRSTNAME);
-        valideUser.setFirstName("firstTname");
-        assertEquals("Validate method failed: firstName is wrong", UserValidator.validate(valideUser), Message.MALFORMED_FIRSTNAME);
-        valideUser.setFirstName("Firstname");
-        valideUser.setLastName("LASTNAME");
-        assertEquals("Validate method failed: lastName is wrong", UserValidator.validate(valideUser), Message.MALFORMED_LASTNAME);
-        valideUser.setLastName("lastName");
-        assertEquals("Validate method failed: lastName is wrong", UserValidator.validate(valideUser), Message.MALFORMED_LASTNAME);
-        valideUser.setLastName("Lastname");
-        valideUser.setLogin("testLoginlong");
-        assertEquals("Validate method failed: login is to long", UserValidator.validate(valideUser), Message.MALFORMED_LOGIN);
-        valideUser.setLogin("te");
-        assertEquals("Validate method failed: login is to short", UserValidator.validate(valideUser), Message.MALFORMED_LOGIN);
-        valideUser.setLogin("test!login");
-        assertEquals("Validate method failed: login is wrong", UserValidator.validate(valideUser), Message.MALFORMED_LOGIN);
-        valideUser.setLogin("login");
-        valideUser.setPassword("passw");
-        assertEquals("Validate method failed: password is to short", UserValidator.validate(valideUser), Message.MALFORMED_PASSWORD);
-        valideUser.setPassword("passwordpassword");
-        assertEquals("Validate method failed: password is to long", UserValidator.validate(valideUser), Message.MALFORMED_PASSWORD);
-        valideUser.setPassword("pass.word");
-        assertEquals("Validate method failed: password is wrong", UserValidator.validate(valideUser), Message.MALFORMED_PASSWORD);
-        valideUser.setPassword("1111111");
-        valideUser.setEmail("emailemail.com");
-        assertEquals("Validate method failed: email is wrong", UserValidator.validate(valideUser), Message.MALFORMED_EMAIL);
-        valideUser.setEmail("emai@lemailcom");
-        assertEquals("Validate method failed: email is wrong", UserValidator.validate(valideUser), Message.MALFORMED_EMAIL);
+        assertNull("User validate failed", userValidator.validate(validUser));
+        validUser.setFirstName("FIRSTNAME");
+        assertEquals("Validate method failed: firstName is wrong", userValidator.validate(validUser), Message.MALFORMED_FIRSTNAME);
+        validUser.setFirstName("firstTname");
+        assertEquals("Validate method failed: firstName is wrong", userValidator.validate(validUser), Message.MALFORMED_FIRSTNAME);
+        validUser.setFirstName("Firstname");
+        validUser.setLastName("LASTNAME");
+        assertEquals("Validate method failed: lastName is wrong", userValidator.validate(validUser), Message.MALFORMED_LASTNAME);
+        validUser.setLastName("lastName");
+        assertEquals("Validate method failed: lastName is wrong", userValidator.validate(validUser), Message.MALFORMED_LASTNAME);
+        validUser.setLastName("Lastname");
+        validUser.setLogin("testLoginlong");
+        assertEquals("Validate method failed: login is to long", userValidator.validate(validUser), Message.MALFORMED_LOGIN);
+        validUser.setLogin("te");
+        assertEquals("Validate method failed: login is to short", userValidator.validate(validUser), Message.MALFORMED_LOGIN);
+        validUser.setLogin("test!login");
+        assertEquals("Validate method failed: login is wrong", userValidator.validate(validUser), Message.MALFORMED_LOGIN);
+        validUser.setLogin("login");
+        validUser.setPassword("passw");
+        assertEquals("Validate method failed: password is to short", userValidator.validate(validUser), Message.MALFORMED_PASSWORD);
+        validUser.setPassword("passwordpassword");
+        assertEquals("Validate method failed: password is to long", userValidator.validate(validUser), Message.MALFORMED_PASSWORD);
+        validUser.setPassword("pass.word");
+        assertEquals("Validate method failed: password is wrong", userValidator.validate(validUser), Message.MALFORMED_PASSWORD);
+        validUser.setPassword("1111111");
+        validUser.setEmail("emailemail.com");
+        assertEquals("Validate method failed: email is wrong", userValidator.validate(validUser), Message.MALFORMED_EMAIL);
+        validUser.setEmail("emai@lemailcom");
+        assertEquals("Validate method failed: email is wrong", userValidator.validate(validUser), Message.MALFORMED_EMAIL);
     }
 
     @Test
     public void testValidateNull() throws Exception {
-        valideUser.setEmail("email@email.com");
-        valideUser.setFirstName(null);
-        assertEquals("Validate method failed: firstName is null", UserValidator.validate(valideUser), Message.ERROR_EMPTY);
-        valideUser.setFirstName("Firstname");
-        valideUser.setLastName(null);
-        assertEquals("Validate method failed: lastName is null", UserValidator.validate(valideUser), Message.ERROR_EMPTY);
-        valideUser.setLastName("Lastname");
-        valideUser.setLogin(null);
-        assertEquals("Validate method failed: login is null", UserValidator.validate(valideUser), Message.ERROR_EMPTY);
-        valideUser.setLogin("login");
-        valideUser.setPassword(null);
-        assertEquals("Validate method failed: password is null", UserValidator.validate(valideUser), Message.ERROR_EMPTY);
-        valideUser.setPassword("1111111");
-        valideUser.setEmail(null);
-        assertEquals("Validate method failed: email is null", UserValidator.validate(valideUser), Message.ERROR_EMPTY);
-        valideUser.setEmail("email@email.com");
-        valideUser.setUserType(null);
-        assertEquals("Validate method failed: type is null", UserValidator.validate(valideUser), Message.ERROR_EMPTY);
-        valideUser.setUserType(UserType.DISPATCHER);
-        valideUser.setStatus(null);
-        assertEquals("Validate method failed: status is null", UserValidator.validate(valideUser), Message.ERROR_EMPTY);
-        valideUser.setStatus(UserStatus.OFFLINE);
+        validUser.setEmail("email@email.com");
+        validUser.setFirstName(null);
+        assertEquals("Validate method failed: firstName is null", userValidator.validate(validUser), Message.ERROR_EMPTY);
+        validUser.setFirstName("Firstname");
+        validUser.setLastName(null);
+        assertEquals("Validate method failed: lastName is null", userValidator.validate(validUser), Message.ERROR_EMPTY);
+        validUser.setLastName("Lastname");
+        validUser.setLogin(null);
+        assertEquals("Validate method failed: login is null", userValidator.validate(validUser), Message.ERROR_EMPTY);
+        validUser.setLogin("login");
+        validUser.setPassword(null);
+        assertEquals("Validate method failed: password is null", userValidator.validate(validUser), Message.ERROR_EMPTY);
+        validUser.setPassword("1111111");
+        validUser.setEmail(null);
+        assertEquals("Validate method failed: email is null", userValidator.validate(validUser), Message.ERROR_EMPTY);
+        validUser.setEmail("email@email.com");
+        validUser.setUserType(null);
+        assertEquals("Validate method failed: type is null", userValidator.validate(validUser), Message.ERROR_EMPTY);
+        validUser.setUserType(UserType.DISPATCHER);
+        validUser.setStatus(null);
+        assertEquals("Validate method failed: status is null", userValidator.validate(validUser), Message.ERROR_EMPTY);
+        validUser.setStatus(UserStatus.OFFLINE);
     }
 
 

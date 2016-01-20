@@ -18,12 +18,13 @@ import static org.junit.Assert.assertNull;
  */
 public class PlaneDAOTest {
 
-    private PlaneDAO planeDAO = PlaneDAO.getInstance();
+    private PlaneDAO planeDAO;
     private int id;
     private Plane testPlane;
 
     @Before
     public void setUp() throws Exception {
+        planeDAO = PlaneDAO.getInstance();
         testPlane = new Plane();
         testPlane.setModel("testModel");
         testPlane.setCapacity(100);
@@ -73,14 +74,14 @@ public class PlaneDAOTest {
         int beforeAddNumber = planeDAO.getAll().size();
         int getAllId = planeDAO.add(testPlane);
         int afterAddNumber = planeDAO.getAll().size();
-        assertEquals("Get all method failed", beforeAddNumber, afterAddNumber-1);
+        assertEquals("Get all method failed", beforeAddNumber, afterAddNumber - 1);
         planeDAO.delete(getAllId);
     }
 
     @Test
     public void testDelete() throws Exception {
         planeDAO.delete(id);
-        assertNull("Delete method: failed",planeDAO.getById(id));
+        assertNull("Delete method: failed", planeDAO.getById(id));
     }
 
     @After

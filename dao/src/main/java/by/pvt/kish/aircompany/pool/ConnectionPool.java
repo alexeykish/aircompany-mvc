@@ -13,9 +13,9 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 /**
- * Реализует пул соединений
- * Данные для соединения с БД берутся из файла db.properties
- * Количество соединений по умолчанию равно 8
+ * Class implements the connection pool
+ * The data for the connection to the DB are taken from the file db.properties
+ * The number of connections defaults to 8
  *
  * @author Kish Alexey
  */
@@ -25,7 +25,7 @@ public class ConnectionPool {
 
     private static ConnectionPool instance;
     private static BasicDataSource dataSource = new BasicDataSource();
-    public static final ThreadLocal<Connection> threadConnection = new ThreadLocal<>();
+    private static final ThreadLocal<Connection> threadConnection = new ThreadLocal<>();
 
     private ConnectionPool() throws IOException, SQLException, PropertyVetoException {
         ResourceBundle bundle = ResourceBundle.getBundle("db");
@@ -36,9 +36,9 @@ public class ConnectionPool {
     }
 
     /**
-     * Возвращает экземпляр пула соединений, если экземпляра еще не существует - создается новый
+     * Returns an instance of a connection pool, if the instance does not exist yet - create a new
      *
-     * @return - пул содинений
+     * @return - connection pool
      * @throws IOException
      * @throws SQLException
      * @throws PropertyVetoException
@@ -53,14 +53,14 @@ public class ConnectionPool {
     }
 
     /**
-     * Возвращает экземпляр соединения из переменной потока, если в переменной потока не было соединения, оно туда заносится
+     * Returns a copy of the connection as a variable of the thread, if the thread was not the connection is to be set to thread variable
      *
-     * @return - соединение с БД
-     * @throws SQLException если происходит сбой соединения с БД
+     * @return - DB connection
+     * @throws SQLException If there is a failure DB connection
      */
     public Connection getConnection() throws SQLException {
 
-        if(threadConnection.get() == null) {
+        if (threadConnection.get() == null) {
             Connection connection = dataSource.getConnection();
             threadConnection.set(connection);
             return threadConnection.get();

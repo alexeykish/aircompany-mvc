@@ -1,9 +1,7 @@
 package by.pvt.kish.aircompany.services.impl;
 
-import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.dao.impl.FlightDAO;
 import by.pvt.kish.aircompany.entity.Flight;
-import by.pvt.kish.aircompany.exceptions.DaoException;
 import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.exceptions.ServiceValidateException;
 import by.pvt.kish.aircompany.services.BaseService;
@@ -11,14 +9,24 @@ import by.pvt.kish.aircompany.validators.FlightValidator;
 
 import java.util.List;
 
+import static by.pvt.kish.aircompany.utils.ServiceUtils.*;
+
 /**
+ * This class represents a concrete implementation of the IService interface for flight model.
+ *
  * @author Kish Alexey
  */
 public class FlightService extends BaseService<Flight> {
 
     private static FlightService instance;
     private FlightDAO flightDAO = FlightDAO.getInstance();
+    private FlightValidator flightValidator = new FlightValidator();
 
+    /**
+     * Returns an synchronized instance of a FlightService, if the instance does not exist yet - create a new
+     *
+     * @return - a instance of a FlightService
+     */
     public synchronized static FlightService getInstance() {
         if (instance == null) {
             instance = new FlightService();
@@ -28,57 +36,26 @@ public class FlightService extends BaseService<Flight> {
 
     @Override
     public int add(Flight flight) throws ServiceException, ServiceValidateException {
-        try {
-            String validateResult = FlightValidator.validate(flight);
-            if (validateResult != null) {
-                throw new ServiceValidateException(validateResult);
-            }
-            return flightDAO.add(flight);
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
-        }
+        return addEntity(flightDAO, flight, flightValidator);
     }
 
     @Override
     public void update(Flight flight) throws ServiceException, ServiceValidateException {
-        try {
-            String validateResult = FlightValidator.validate(flight);
-            if (validateResult != null) {
-                throw new ServiceValidateException(validateResult);
-            }
-            flightDAO.update(flight);
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
-        }
+        updateEntity(flightDAO, flight, flightValidator);
     }
 
     @Override
     public List<Flight> getAll() throws ServiceException {
-        try {
-            return flightDAO.getAll();
-        }catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
-        }
+        return getAllEntities(flightDAO);
     }
 
     @Override
     public void delete(int id) throws ServiceException {
-        try {
-            if (id < 0) {
-                throw new ServiceException(Message.ERROR_ID_MISSING);
-            }
-            flightDAO.delete(id);
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
-        }
+        deleteEntity(flightDAO, id);
     }
 
     @Override
     public Flight getById(int id) throws ServiceException {
-        try {
-            return flightDAO.getById(id);
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
-        }
+        return getByIdEntity(flightDAO, id);
     }
 }

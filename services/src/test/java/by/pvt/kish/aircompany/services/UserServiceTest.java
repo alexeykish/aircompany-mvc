@@ -1,12 +1,9 @@
 package by.pvt.kish.aircompany.services;
 
-import by.pvt.kish.aircompany.dao.impl.UserDAO;
 import by.pvt.kish.aircompany.entity.User;
 import by.pvt.kish.aircompany.enums.UserStatus;
 import by.pvt.kish.aircompany.enums.UserType;
-import by.pvt.kish.aircompany.exceptions.ServiceLoginException;
 import by.pvt.kish.aircompany.services.impl.UserService;
-import by.pvt.kish.aircompany.utils.Coder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

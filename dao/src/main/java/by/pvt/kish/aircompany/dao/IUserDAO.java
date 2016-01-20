@@ -15,6 +15,7 @@ public interface IUserDAO {
 
     /**
      * Checks unique login to the DB
+     *
      * @param login - checked login
      * @return false is login exists, true is don`t
      * @throws DaoException If something fails at DB level
@@ -23,7 +24,8 @@ public interface IUserDAO {
 
     /**
      * Returns the user from the DB matching the given login and password
-     * @param login - login of the user to be returned
+     *
+     * @param login    - login of the user to be returned
      * @param password - password of the user to be returned
      * @return The user from the DB matching the given login and password
      * @throws DaoException If something fails at DB level
@@ -32,6 +34,7 @@ public interface IUserDAO {
 
     /**
      * Checks user authorisation status
+     *
      * @param id - The ID of the user to be checked
      * @return true is status is ONLINE, false if status is OFFLINE
      * @throws DaoException If something fails at DB level
@@ -40,8 +43,9 @@ public interface IUserDAO {
 
     /**
      * Set user status to DB
-     * @param id - The ID of the user to be setted
-     * @param status - The status to be setted
+     *
+     * @param id     - The ID of the user to be set
+     * @param status - The status to be set
      * @throws DaoException If something fails at DB level
      */
     void setStatus(int id, UserStatus status) throws DaoException;

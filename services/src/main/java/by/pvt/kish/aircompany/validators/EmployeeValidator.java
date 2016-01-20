@@ -1,47 +1,42 @@
 /**
- * 
+ *
  */
 package by.pvt.kish.aircompany.validators;
 
 import by.pvt.kish.aircompany.constants.Message;
-import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.Employee;
-import org.apache.log4j.Logger;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
- * Описывает утилитный класс для проверки обеъекта Employee перед добавлением или изменением его в БД
+ * Describes the utility class to test the Employee object before adding or changing it in the DB
  *
  * @author Kish Alexey
  */
-public class EmployeeValidator {
-	
-    /**
-     * Проверяет на корректность:
-     * <li>наличие пустых полей</li>
-     * @param employee - проверяемый объект Employee
-     * @return - null, если все проверки пройдены корректно; страницу ошибки, если данные некорректны
-     */
-    public static String validate(Employee employee) {
-		if (checkEmpty(employee)) {
-			return Message.ERROR_EMPTY;
-		}
-		return null;
-	}
+public class EmployeeValidator implements IValidator<Employee> {
 
     /**
-     * Метод проверяет объект на <code>null</code> полноту заполнения всех позиций, пустые позиции не допускаются
-     * @param employee - проверяемый объект Employee
-     * @return - false, если все проверки пройдены корректно; true - если данные некорректны
+     * Check the validity of:
+     * <li>the presence of empty fields</li>
+     *
+     * @param employee - Employee object being checked
+     * @return - Null, if everything checks out correctly; error page if the data is incorrect
+     */
+    public String validate(Employee employee) {
+        if (checkEmpty(employee)) {
+            return Message.ERROR_EMPTY;
+        }
+        return null;
+    }
+
+    /**
+     * The method checks the object to <code>null</code> completeness of all positions are empty positions are not allowed
+     *
+     * @param employee - Employee object being checked
+     * @return - false, if everything checks out correctly; true - if the data is invalid
      */
     private static boolean checkEmpty(Employee employee) {
-		if ((employee == null) ||
-				(employee.getFirstName() == null) || (employee.getFirstName().equals("")) ||
-				(employee.getLastName() == null) || (employee.getLastName().equals("")) ||
-				(employee.getPosition() == null)) {
-            return true;
-        }
-        return false;
-	}
+        return (employee == null) ||
+                (employee.getFirstName() == null) || (employee.getFirstName().equals("")) ||
+                (employee.getLastName() == null) || (employee.getLastName().equals("")) ||
+                (employee.getPosition() == null);
+    }
 }

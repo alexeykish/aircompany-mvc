@@ -10,19 +10,28 @@ import by.pvt.kish.aircompany.exceptions.ServiceLoginException;
 import by.pvt.kish.aircompany.exceptions.ServiceValidateException;
 import by.pvt.kish.aircompany.services.BaseService;
 import by.pvt.kish.aircompany.services.IUserService;
-import by.pvt.kish.aircompany.validators.PlaneValidator;
 import by.pvt.kish.aircompany.validators.UserValidator;
 
 import java.util.List;
 
+import static by.pvt.kish.aircompany.utils.ServiceUtils.*;
+
 /**
+ * This class represents a concrete implementation of the IUserService interface for user model.
+ *
  * @author Kish Alexey
  */
 public class UserService extends BaseService<User> implements IUserService {
 
     private static UserService instance;
     private UserDAO userDAO = UserDAO.getInstance();
+    private UserValidator userValidator = new UserValidator();
 
+    /**
+     * Returns an synchronized instance of a UserService, if the instance does not exist yet - create a new
+     *
+     * @return - a instance of a UserService
+     */
     public synchronized static UserService getInstance() {
         if (instance == null) {
             instance = new UserService();
@@ -33,7 +42,7 @@ public class UserService extends BaseService<User> implements IUserService {
     @Override
     public int add(User user) throws ServiceException, ServiceLoginException, ServiceValidateException {
         try {
-            String validateResult = UserValidator.validate(user);
+            String validateResult = userValidator.validate(user);
             if (validateResult != null) {
                 throw new ServiceValidateException(validateResult);
             }
@@ -50,45 +59,22 @@ public class UserService extends BaseService<User> implements IUserService {
 
     @Override
     public void update(User user) throws ServiceException, ServiceValidateException {
-        try {
-            String validateResult = UserValidator.validate(user);
-            if (validateResult != null) {
-                throw new ServiceValidateException(validateResult);
-            }
-            userDAO.update(user);
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
-        }
+        updateEntity(userDAO, user, userValidator);
     }
 
     @Override
     public List<User> getAll() throws ServiceException {
-        try {
-            return userDAO.getAll();
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
+        return getAllEntities(userDAO);
     }
 
     @Override
     public void delete(int id) throws ServiceException {
-        try {
-            if (id < 0) {
-                throw new ServiceException(Message.ERROR_ID_MISSING);
-            }
-            userDAO.delete(id);
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
-        }
+        deleteEntity(userDAO, id);
     }
 
     @Override
     public User getById(int id) throws ServiceException {
-        try {
-            return userDAO.getById(id);
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
-        }
+        return getByIdEntity(userDAO, id);
     }
 
     @Override

@@ -30,7 +30,10 @@ public class RequestHandler {
         String from = request.getParameter("from");
         String to = request.getParameter("to");
         String pid = request.getParameter("pid");
-        if (!checkNull(date) || !(checkNull(from)) || !(checkNull(to)) || !(checkNull(pid))) {
+        if (checkNull(date) ||
+                checkNull(from) ||
+                checkNull(to) ||
+                checkNull(pid)) {
             return null;
         }
         flight.setDate(Date.valueOf(date.trim()));
@@ -46,7 +49,7 @@ public class RequestHandler {
     }
 
     private static boolean checkNull(String string) {
-        return string != null && !string.trim().equals("");
+        return string == null || string.trim().equals("");
     }
 
     public static int getId(HttpServletRequest request, String requestId) {
@@ -62,7 +65,7 @@ public class RequestHandler {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String position = request.getParameter("position");
-        if (!checkNull(firstName) || !(checkNull(lastName)) || !(checkNull(position))) {
+        if (checkNull(firstName) || checkNull(lastName) || checkNull(position)) {
             return null;
         }
         employee.setFirstName(firstName.trim());
@@ -84,13 +87,13 @@ public class RequestHandler {
         String num_navigators = request.getParameter("num_navigators");
         String num_radiooperators = request.getParameter("num_radiooperators");
         String num_stewardess = request.getParameter("num_stewardess");
-        if (!checkNull(model) ||
-                !(checkNull(capacity)) ||
-                !(checkNull(range)) ||
-                !(checkNull(num_pilots)) ||
-                !(checkNull(num_navigators)) ||
-                !(checkNull(num_radiooperators)) ||
-                !(checkNull(num_stewardess))) {
+        if (checkNull(model) ||
+                checkNull(capacity) ||
+                checkNull(range) ||
+                checkNull(num_pilots) ||
+                checkNull(num_navigators) ||
+                checkNull(num_radiooperators) ||
+                checkNull(num_stewardess)) {
             return null;
         }
         plane.setModel(model.trim());
@@ -117,12 +120,12 @@ public class RequestHandler {
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         String userType = request.getParameter("user_type");
-        if (!checkNull(firstname) ||
-                !(checkNull(lastname)) ||
-                !(checkNull(login)) ||
-                !(checkNull(password)) ||
-                !(checkNull(email)) ||
-                !(checkNull(userType))) {
+        if (checkNull(firstname) ||
+                checkNull(lastname) ||
+                checkNull(login) ||
+                checkNull(password) ||
+                checkNull(email) ||
+                checkNull(userType)) {
             return null;
         }
         user.setFirstName(firstname.trim());
@@ -135,7 +138,7 @@ public class RequestHandler {
         if (id > 0) {
             user.setUid(id);
             String status = request.getParameter("status");
-            if (!checkNull(status)) {
+            if (checkNull(status)) {
                 return null;
             }
             user.setStatus(UserStatus.valueOf(status));
@@ -145,7 +148,7 @@ public class RequestHandler {
 
     public static String getString(HttpServletRequest request, String parameter) throws RequestHandlerException {
         String result = request.getParameter(parameter);
-        if (!checkNull(result)) {
+        if (checkNull(result)) {
             throw new RequestHandlerException(parameter + " is empty");
         }
         return result;

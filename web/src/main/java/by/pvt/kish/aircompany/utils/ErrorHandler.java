@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ErrorHandler {
 
-    static Logger logger = Logger.getLogger(ErrorHandler.class.getName());
+    private static Logger logger = Logger.getLogger(ErrorHandler.class.getName());
 
     public static String returnValidateErrorPage(HttpServletRequest request, String validateResult, String className) {
         request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, validateResult);

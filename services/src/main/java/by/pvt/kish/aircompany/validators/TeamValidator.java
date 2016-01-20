@@ -10,7 +10,6 @@ import by.pvt.kish.aircompany.enums.Position;
 import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.services.impl.EmployeeService;
 import by.pvt.kish.aircompany.services.impl.FlightService;
-import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,23 +17,21 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Проверяет flight team перед добавлением или изменением его в БД
+ * Describes the utility class to test the flight team before adding or changing it in the DB
  *
  * @author Kish Alexey, 2015
  */
 public class TeamValidator {
 
-    static Logger logger = Logger.getLogger(TeamValidator.class.getName());
-
     /**
-     * Проверяет на корректность:
-     * <li>наличие пустых полей,</li>
-     * <li>один и тот же сотрудник не должен быть в команде на нескольких позициях</li>
-     * <li>каждый сострудник должен находится на соответсвующей его должности позиции</li>
+     * Check the validity of:
+     * <li>the presence of empty fields</li>
+     * <li>one and the same employee should not be in command at several positions</li>
+     * <li>each employee must be located at a position corresponding to its position</li>
      *
-     * @param id - id рейса
-     * @param team - проверяемый объект team
-     * @return - null, если все проверки пройдены корректно; если данные некорректны - соответствующую строку с указанием ошибки
+     * @param id   - The flight id
+     * @param team - The flight team being checked
+     * @return - Null, if everything checks out correctly; error page if the data is incorrect
      */
     public static String validate(int id, List<Integer> team) throws ServiceException {
         if (checkEmpty(team)) {
@@ -50,10 +47,10 @@ public class TeamValidator {
     }
 
     /**
-     * Метод проверяет соответсвие позиций сотрудников их позициям в команде
+     * The method checks the position of employees to their positions on the team
      *
-     * @param team - проверяемый объект team
-     * @return false если соответсвие позиций корректно, true если было найдено хотя бы одно несоответсвие
+     * @param team - The flight team being checked
+     * @return false if it corresponds to the position correctly, true if found at least one to inadequate
      */
     private static boolean checkPositions(int fid, List<Integer> team) throws ServiceException {
         List<Employee> list = new ArrayList<>();
@@ -79,26 +76,23 @@ public class TeamValidator {
                 num_stewardesses++;
             }
         }
-        if (num_pilots != plane.getTeam().get(Position.PILOT) ||
+        return num_pilots != plane.getTeam().get(Position.PILOT) ||
                 num_navigators != plane.getTeam().get(Position.NAVIGATOR) ||
                 num_radiooperators != plane.getTeam().get(Position.RADIOOPERATOR) ||
-                num_stewardesses != plane.getTeam().get(Position.STEWARDESS)) {
-            return true;
-        }
-        return false;
+                num_stewardesses != plane.getTeam().get(Position.STEWARDESS);
     }
 
     /**
-     * Метод проверяет полноту заполнения всех позиций, пустые позиции не допускаются
+     * The method checks the object to <code>null</code> completeness of all positions are empty positions are not allowed
      *
-     * @param team - проверяемый объект
-     * @return - false если все позиции заполнены, true если одна из позиций равна null
+     * @param team - The flight team being checked
+     * @return - false if all positions are filled, true if one of the items is null
      */
-    private static boolean checkEmpty(List<Integer> team) { //TODO проверка наличия сотрудника в базе
+    private static boolean checkEmpty(List<Integer> team) {
         if (team == null) {
             return true;
         }
-        for (Integer i : team){
+        for (Integer i : team) {
             if (i == null) {
                 return true;
             }
@@ -107,13 +101,12 @@ public class TeamValidator {
     }
 
     /**
-     * Метод проверяет уникальность каждого сотрудника в команде, сотрудник не должен занимать сразу несколько позиций
+     * The method checks the uniqueness of each employee in the team, the employee should take no more than one position
      *
-     * @param team - проверяемый список комманды
-     * @return - false все позиции уникальны, true если найдены совпадения
+     * @param team - The flight team being checked
+     * @return - false all items are unique, true if a match is found
      */
     private static boolean checkEntry(List<Integer> team) {
-        int i = 0;
         Set<Integer> set = new HashSet<>(team);
         return set.size() != team.size();
     }

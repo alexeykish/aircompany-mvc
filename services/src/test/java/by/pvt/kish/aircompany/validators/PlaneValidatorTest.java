@@ -16,53 +16,54 @@ import static org.junit.Assert.*;
  */
 public class PlaneValidatorTest {
 
-    Plane validePlane;
-    int numberOfPositions;
-    Map<Position, Integer> testTeam;
+    private Plane validPlane;
+    private int numberOfPositions;
+    private Map<Position, Integer> testTeam;
+    private PlaneValidator planeValidator = new PlaneValidator();
 
     @Before
     public void setUp() throws Exception {
-        validePlane = new Plane();
-        validePlane.setModel("testModel");
-        validePlane.setCapacity(99999999);
-        validePlane.setRange(99999999);
+        validPlane = new Plane();
+        validPlane.setModel("testModel");
+        validPlane.setCapacity(99999999);
+        validPlane.setRange(99999999);
         testTeam = new TreeMap<>();
         numberOfPositions = 100;
         testTeam.put(Position.PILOT, numberOfPositions);
         testTeam.put(Position.NAVIGATOR, numberOfPositions);
         testTeam.put(Position.RADIOOPERATOR, numberOfPositions);
         testTeam.put(Position.STEWARDESS, numberOfPositions);
-        validePlane.setTeam(testTeam);
+        validPlane.setTeam(testTeam);
 
     }
 
     @Test
     public void testValidate() throws Exception {
-        assertNull("Validate method failed", PlaneValidator.validate(validePlane));
-        validePlane.setModel(null);
-        assertEquals("Validate method failed: model is null", PlaneValidator.validate(validePlane), Message.ERROR_EMPTY);
-        validePlane.setModel("testModel");
-        validePlane.setCapacity(0);
-        assertEquals("Validate method failed: capacity is null", PlaneValidator.validate(validePlane), Message.ERROR_EMPTY);
-        validePlane.setCapacity(99999999);
-        validePlane.setRange(0);
-        assertEquals("Validate method failed: range is null", PlaneValidator.validate(validePlane), Message.ERROR_EMPTY);
-        validePlane.setRange(99999999);
+        assertNull("Validate method failed", planeValidator.validate(validPlane));
+        validPlane.setModel(null);
+        assertEquals("Validate method failed: model is null", planeValidator.validate(validPlane), Message.ERROR_EMPTY);
+        validPlane.setModel("testModel");
+        validPlane.setCapacity(0);
+        assertEquals("Validate method failed: capacity is null", planeValidator.validate(validPlane), Message.ERROR_EMPTY);
+        validPlane.setCapacity(99999999);
+        validPlane.setRange(0);
+        assertEquals("Validate method failed: range is null", planeValidator.validate(validPlane), Message.ERROR_EMPTY);
+        validPlane.setRange(99999999);
         testTeam.put(Position.PILOT, -1);
-        validePlane.setTeam(testTeam);
-        assertEquals("Validate method failed: number of pilots is null", PlaneValidator.validate(validePlane), Message.ERROR_EMPTY);
+        validPlane.setTeam(testTeam);
+        assertEquals("Validate method failed: number of pilots is null", planeValidator.validate(validPlane), Message.ERROR_EMPTY);
         testTeam.put(Position.PILOT, numberOfPositions);
         testTeam.put(Position.NAVIGATOR, -1);
-        validePlane.setTeam(testTeam);
-        assertEquals("Validate method failed: number of navigators is null", PlaneValidator.validate(validePlane), Message.ERROR_EMPTY);
+        validPlane.setTeam(testTeam);
+        assertEquals("Validate method failed: number of navigators is null", planeValidator.validate(validPlane), Message.ERROR_EMPTY);
         testTeam.put(Position.NAVIGATOR, numberOfPositions);
         testTeam.put(Position.RADIOOPERATOR, -1);
-        validePlane.setTeam(testTeam);
-        assertEquals("Validate method failed: number of radiooperators is null", PlaneValidator.validate(validePlane), Message.ERROR_EMPTY);
+        validPlane.setTeam(testTeam);
+        assertEquals("Validate method failed: number of radiooperators is null", planeValidator.validate(validPlane), Message.ERROR_EMPTY);
         testTeam.put(Position.RADIOOPERATOR, numberOfPositions);
         testTeam.put(Position.STEWARDESS, -1);
-        validePlane.setTeam(testTeam);
-        assertEquals("Validate method failed: number of stewardess is null", PlaneValidator.validate(validePlane), Message.ERROR_EMPTY);
-        assertEquals("Validate method failed: plane is null", PlaneValidator.validate(null), Message.ERROR_EMPTY);
+        validPlane.setTeam(testTeam);
+        assertEquals("Validate method failed: number of stewardess is null", planeValidator.validate(validPlane), Message.ERROR_EMPTY);
+        assertEquals("Validate method failed: plane is null", planeValidator.validate(null), Message.ERROR_EMPTY);
     }
 }

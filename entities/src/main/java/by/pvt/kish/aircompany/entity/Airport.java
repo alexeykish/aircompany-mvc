@@ -3,12 +3,14 @@ package by.pvt.kish.aircompany.entity;
 import java.io.Serializable;
 
 /**
- * Описывает сущность аэропорта
- * Аэропорт используется, как место вылета и место прилета рейса
+ * This class represents the Airport model.
+ * The airport is used as a flights place of departure and place of arrival.
+ * This model class can be used throughout all
+ * layers, the data layer, the controller layer and the view layer.
  *
  * @author Kish Alexey
  */
-public class Airport implements Serializable{
+public class Airport implements Serializable {
     private int aid;
     private String city;
 
@@ -16,7 +18,7 @@ public class Airport implements Serializable{
     }
 
     /**
-     * @param aid - airport id
+     * @param aid  - airport id
      * @param city - the place where the airport is located
      */
     public Airport(int aid, String city) {

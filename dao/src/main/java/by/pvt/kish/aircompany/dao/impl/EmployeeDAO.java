@@ -15,8 +15,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static by.pvt.kish.aircompany.pool.ConnectionUtils.closePreparedStatement;
-import static by.pvt.kish.aircompany.pool.ConnectionUtils.closeResultSet;
+import static by.pvt.kish.aircompany.utils.DaoUtils.closePreparedStatement;
+import static by.pvt.kish.aircompany.utils.DaoUtils.closeResultSet;
+import static by.pvt.kish.aircompany.utils.DaoUtils.deleteEntity;
 
 /**
  * This class represents a concrete implementation of the IDAO interface for employee model.
@@ -115,16 +116,7 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 	 */
 	@Override
 	public void delete(int id) throws DaoException {
-		try {
-			preparedStatement = connection.prepareStatement(SQL_DELETE_EMPLOYEE);
-			preparedStatement.setInt(1, id);
-			preparedStatement.executeUpdate();
-		} catch (SQLException e) {
-			throw new DaoException(DELETE_EMPLOYEE_FAIL, e);
-		} finally {
-			closePreparedStatement(preparedStatement);
-		}
-
+		deleteEntity(connection, preparedStatement, id, SQL_DELETE_EMPLOYEE, DELETE_EMPLOYEE_FAIL);
 	}
 
 	/**

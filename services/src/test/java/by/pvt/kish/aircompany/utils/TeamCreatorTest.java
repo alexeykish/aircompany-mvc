@@ -2,8 +2,6 @@ package by.pvt.kish.aircompany.utils;
 
 import by.pvt.kish.aircompany.entity.Plane;
 import by.pvt.kish.aircompany.enums.Position;
-import by.pvt.kish.aircompany.services.impl.PlaneService;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,8 +16,8 @@ import static org.junit.Assert.*;
  */
 public class TeamCreatorTest {
 
-    Plane testPlane;
-    int numberOfPositions;
+    private Plane testPlane;
+    private int numberOfPositions;
 
     @Before
     public void setUp() throws Exception {
@@ -41,9 +39,4 @@ public class TeamCreatorTest {
         List<String> list = TeamCreator.getPlanePositions(testPlane);
         assertEquals("Get plane positions failed: List size wrong", list.size(), numberOfPositions*4);
     }
-    @After
-    public void tearDown() throws Exception {
-    }
-
-
 }

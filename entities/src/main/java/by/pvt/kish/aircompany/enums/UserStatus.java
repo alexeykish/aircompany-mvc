@@ -1,7 +1,7 @@
 package by.pvt.kish.aircompany.enums;
 
 /**
- * Описывает возможный статус авторизациии пользователя
+ * Describes the possible status of the user's authorization
  *
  * @author Kish Alexey
  */
