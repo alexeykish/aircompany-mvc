@@ -6,6 +6,10 @@ package by.pvt.kish.aircompany.validators;
 import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.entity.Flight;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 /**
  * Describes the utility class to test the Flight object before adding or changing it in the DB
  *
@@ -27,6 +31,9 @@ public class FlightValidator implements IValidator<Flight> {
         }
         if (checkEntry(flight)) {
             return Message.ERROR_FLIGHT_VALID;
+        }
+        if (checkDate(flight)) {
+            return Message.ERROR_FLIGHT_DATE;
         }
         return null;
     }
@@ -53,5 +60,11 @@ public class FlightValidator implements IValidator<Flight> {
      */
     private static boolean checkEntry(Flight flight) {
         return flight.getFrom().equals(flight.getTo());
+    }
+
+    private boolean checkDate(Flight flight) {
+        Date yesterdayDate = new Date(System.currentTimeMillis() - 1000L * 60L * 60L * 24L);
+        Date flightDate = flight.getDate();
+        return yesterdayDate.after(flightDate);
     }
 }

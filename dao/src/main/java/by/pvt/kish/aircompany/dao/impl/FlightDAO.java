@@ -3,6 +3,7 @@ package by.pvt.kish.aircompany.dao.impl;
 import by.pvt.kish.aircompany.constants.Column;
 import by.pvt.kish.aircompany.dao.BaseDAO;
 import by.pvt.kish.aircompany.entity.Flight;
+import by.pvt.kish.aircompany.enums.FlightStatus;
 import by.pvt.kish.aircompany.exceptions.DaoException;
 
 import java.sql.*;
@@ -24,7 +25,7 @@ public class FlightDAO extends BaseDAO<Flight> {
     private static final String SQL_GET_ALL_FLIGHTS = "SELECT * FROM flights";
     private static final String SQL_DELETE_FLIGHT = "DELETE FROM flights WHERE fid = ?";
     private static final String SQL_GET_FLIGHT_BY_ID = "SELECT * FROM flights WHERE fid = ?";
-    private static final String SQL_UPDATE_FLIGHT = "UPDATE flights SET `date` = ?, `from` = ?, `to` = ?, `pid` = ? WHERE fid = ?";
+    private static final String SQL_UPDATE_FLIGHT = "UPDATE flights SET `date` = ?, `from` = ?, `to` = ?, `pid` = ?, `status` = ? WHERE fid = ?";
 
     private static final String ADD_FLIGHT_FAIL = "Creating flight failed";
     private static final String GET_ALL_FLIGHTS_FAIL = "Get all flights failed";
@@ -128,7 +129,8 @@ public class FlightDAO extends BaseDAO<Flight> {
             preparedStatement.setInt(2, flight.getFrom().getAid());
             preparedStatement.setInt(3, flight.getTo().getAid());
             preparedStatement.setInt(4, flight.getPlane().getPid());
-            preparedStatement.setInt(5, flight.getFid());
+            preparedStatement.setString(5, flight.getStatus().toString());
+            preparedStatement.setInt(6, flight.getFid());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(UPDATE_FLIGHT_FAIL, e);
@@ -172,6 +174,7 @@ public class FlightDAO extends BaseDAO<Flight> {
         flight.setTo(AirportDAO.getInstance().getById(resultSet.getInt(Column.FLIGHTS_TO)));
         flight.setPlane(PlaneDAO.getInstance().getById(resultSet.getInt(Column.FLIGHTS_PID)));
         flight.setTeam(TeamDAO.getInstance().getById(fid));
+        flight.setStatus(FlightStatus.valueOf(resultSet.getString(Column.FLIGHTS_STATUS)));
         return flight;
     }
 }

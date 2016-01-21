@@ -3,6 +3,8 @@
  */
 package by.pvt.kish.aircompany.entity;
 
+import by.pvt.kish.aircompany.enums.FlightStatus;
+
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
  * Flight is carried out from a place of departure <code>from</code> instead of arrivals <code>to</code> plane <code>plane</code>
  * Flights are operated on a specific date <code>date</code>
  * Each flight team services the particular flight (specified id flight team <code>tid</code>
+ * The flight could be in different status of complete
  * This model class can be used throughout all
  * layers, the data layer, the controller layer and the view layer.
  *
@@ -24,25 +27,29 @@ public class Flight implements Serializable {
     private Airport to;
     private Plane plane;
     private List<Employee> team;
+    private FlightStatus status;
 
     public Flight() {
 
     }
 
     /**
-     * @param fid   - flight id
-     * @param date  - flight date (departure date)
-     * @param from  - the place where the flight departs
-     * @param to    - the place where the flight arrives
-     * @param plane - the plane on which the flight is carried out
+     * @param fid    - flight id
+     * @param date   - flight date (departure date)
+     * @param from   - the place where the flight departs
+     * @param to     - the place where the flight arrives
+     * @param plane  - the plane on which the flight is carried out
+     * @param team   - the flight team that serves the flight
+     * @param status - the status of the flight
      */
-    public Flight(int fid, Date date, Airport from, Airport to, Plane plane, List<Employee> team) {
+    public Flight(int fid, Date date, Airport from, Airport to, Plane plane, List<Employee> team, FlightStatus status) {
         this.fid = fid;
         this.date = date;
         this.from = from;
         this.to = to;
         this.plane = plane;
         this.team = team;
+        this.status = status;
     }
 
     @Override
@@ -57,7 +64,8 @@ public class Flight implements Serializable {
         if (from != null ? !from.equals(flight.from) : flight.from != null) return false;
         if (to != null ? !to.equals(flight.to) : flight.to != null) return false;
         if (plane != null ? !plane.equals(flight.plane) : flight.plane != null) return false;
-        return team != null ? team.equals(flight.team) : flight.team == null;
+        if (team != null ? !team.equals(flight.team) : flight.team != null) return false;
+        return status == flight.status;
 
     }
 
@@ -69,6 +77,7 @@ public class Flight implements Serializable {
         result = 31 * result + (to != null ? to.hashCode() : 0);
         result = 31 * result + (plane != null ? plane.hashCode() : 0);
         result = 31 * result + (team != null ? team.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
 
@@ -118,5 +127,13 @@ public class Flight implements Serializable {
 
     public void setTeam(List<Employee> team) {
         this.team = team;
+    }
+
+    public FlightStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(FlightStatus status) {
+        this.status = status;
     }
 }

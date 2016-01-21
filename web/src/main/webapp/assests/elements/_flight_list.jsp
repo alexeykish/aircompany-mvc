@@ -23,6 +23,7 @@
                     </c:forEach>
                 </td>
                 <td>${flight.plane.model}</td>
+                <td>${flight.status}</td>
                 <c:if test="${(sessionScope.userType == '2')}">
                     <td style="width: 70px;">
                         <form action="controller" method="post">

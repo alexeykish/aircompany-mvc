@@ -1,9 +1,11 @@
 package by.pvt.kish.aircompany.utils;
 
+import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.entity.Flight;
 import by.pvt.kish.aircompany.entity.Plane;
 import by.pvt.kish.aircompany.entity.User;
+import by.pvt.kish.aircompany.enums.FlightStatus;
 import by.pvt.kish.aircompany.enums.Position;
 import by.pvt.kish.aircompany.enums.UserStatus;
 import by.pvt.kish.aircompany.enums.UserType;
@@ -40,10 +42,11 @@ public class RequestHandler {
         flight.setTo(AirportService.getInstance().getById(Integer.parseInt(to.trim())));
         flight.setFrom(AirportService.getInstance().getById(Integer.parseInt(from.trim())));
         flight.setPlane(PlaneService.getInstance().getById(Integer.parseInt(pid.trim())));
-
         int id = RequestHandler.getId(request, "fid");
         if (id > 0) {
             flight.setFid(id);
+            FlightStatus status = RequestHandler.getFlightStatus(request);
+            flight.setStatus(status);
         }
         return flight;
     }
@@ -58,6 +61,14 @@ public class RequestHandler {
             return -1;
         }
         return Integer.parseInt(id);
+    }
+
+    public static FlightStatus getFlightStatus(HttpServletRequest request) throws ServiceException {
+        String status = request.getParameter("status");
+        if (status == null) {
+            throw new ServiceException(Message.ERROR_STATUS);
+        }
+        return FlightStatus.valueOf(status);
     }
 
     public static Employee getEmployee(HttpServletRequest request) {

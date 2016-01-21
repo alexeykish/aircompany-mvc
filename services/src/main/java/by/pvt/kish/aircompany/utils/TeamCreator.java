@@ -15,10 +15,10 @@ import java.util.Map;
 public class TeamCreator {
 
     /**
-     * Возвращает попозиционный список членов экипажа, согласно необходимого экипажа для конкретного самолета.
+     * Returns list of team members, according to the needs of the crew for a specific aircraft.
      *
-     * @param plane - самолет, для которого формируется экипаж
-     * @return попозиционный список членов экипажа для конкретного самотета
+     * @param plane - aircraft for which formed the team
+     * @return list of members of the crew for a specific aircraft
      */
     public static List<String> getPlanePositions(Plane plane) {
         List<String> positions = new ArrayList<>();

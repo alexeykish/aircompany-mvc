@@ -4,12 +4,16 @@ import by.pvt.kish.aircompany.constants.Attribute;
 import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.constants.Page;
 import by.pvt.kish.aircompany.entity.Flight;
+import by.pvt.kish.aircompany.enums.FlightStatus;
+import by.pvt.kish.aircompany.enums.Position;
 import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.services.impl.FlightService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Kish Alexey
@@ -32,7 +36,9 @@ public class PreUpdateFlightFilter implements Filter {
                 dispatcher.forward(request, response);
             }
             Flight flight = FlightService.getInstance().getById(Integer.parseInt(id));
+            List<FlightStatus> statuses = Arrays.asList(FlightStatus.values());
             request.setAttribute(Attribute.FLIGHT_ATTRIBUTE, flight);
+            request.setAttribute(Attribute.STATUSES_ATTRIBUTE, statuses);
             chain.doFilter(request,response);
         } catch (ServiceException e) {
             logger.error(Message.ERROR_SQL_DAO);

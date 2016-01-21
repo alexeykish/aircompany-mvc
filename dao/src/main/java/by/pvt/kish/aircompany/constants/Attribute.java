@@ -21,4 +21,5 @@ public class Attribute {
     public static final String AIRPORTS_ATTRIBUTE = "airports";
     public static final String POSITIONS_ATTRIBUTE = "positions";
     public static final String USERTYPES_ATTRIBUTE = "types";
+    public static final String STATUSES_ATTRIBUTE = "statuses";
 }

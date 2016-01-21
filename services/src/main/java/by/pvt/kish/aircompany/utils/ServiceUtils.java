@@ -59,6 +59,9 @@ public class ServiceUtils {
 
     public static <T> T getByIdEntity(IDAO<T> dao, int id) throws ServiceException {
         try {
+            if (id < 0) {
+                throw new ServiceException(Message.ERROR_ID_MISSING);
+            }
             return dao.getById(id);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());

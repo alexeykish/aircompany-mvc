@@ -11,6 +11,7 @@ public class Column {
     public static final String FLIGHTS_FROM = "from";
     public static final String FLIGHTS_TO = "to";
     public static final String FLIGHTS_PID = "pid";
+    public static final String FLIGHTS_STATUS = "status";
 
     public static final String EMPLOYEES_EID = "eid";
     public static final String EMPLOYEES_FIRSTNAME = "first_name";
@@ -39,4 +40,5 @@ public class Column {
     public static final String USERS_EMAIL = "email";
     public static final String USERS_USERTYPE = "user_type";
     public static final String USERS_USERSTATUS = "status";
+
 }

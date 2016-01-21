@@ -49,6 +49,17 @@
 					</c:forEach>
 				</select></td>
 			</tr>
+			<tr>
+				<td class="input-label">Status:</td>
+				<td><select class="inputForm" name="status" title="status">
+					<option value="${requestScope.flight.status}">${requestScope.flight.status}</option>
+					<c:forEach items="${requestScope.statuses}" var="status">
+						<c:if test="${requestScope.flight.status != status}">
+							<option value="${status}">${status}</option>
+						</c:if>
+					</c:forEach>
+				</select></td>
+			</tr>
 		</table>
 		<input class="button" type="submit" name="submit"
 			value="update flight" />
