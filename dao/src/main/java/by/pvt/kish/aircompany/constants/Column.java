@@ -26,6 +26,7 @@ public class Column {
     public static final String PLANES_NAVIGATORS = "num_nav";
     public static final String PLANES_RADIOOPERATORS = "num_radio";
     public static final String PLANES_STEWARDESSES = "num_stew";
+    public static final String PLANES_STATUS = "status";
 
     public static final String AIRPORT_AID = "aid";
     public static final String AIRPORT_CITY = "city";
@@ -40,5 +41,6 @@ public class Column {
     public static final String USERS_EMAIL = "email";
     public static final String USERS_USERTYPE = "user_type";
     public static final String USERS_USERSTATUS = "status";
+
 
 }

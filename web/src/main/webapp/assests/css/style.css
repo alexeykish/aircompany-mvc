@@ -89,3 +89,8 @@ body {
     text-align: center;
     margin: 0;
 }
+
+.report {
+    font-size: 12px;
+    vertical-align: center;
+}

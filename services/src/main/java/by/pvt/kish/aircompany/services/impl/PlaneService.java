@@ -1,7 +1,10 @@
 package by.pvt.kish.aircompany.services.impl;
 
+import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.dao.impl.PlaneDAO;
 import by.pvt.kish.aircompany.entity.Plane;
+import by.pvt.kish.aircompany.enums.PlaneStatus;
+import by.pvt.kish.aircompany.exceptions.DaoException;
 import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.exceptions.ServiceValidateException;
 import by.pvt.kish.aircompany.services.BaseService;
@@ -57,5 +60,27 @@ public class PlaneService extends BaseService<Plane> {
     @Override
     public Plane getById(int id) throws ServiceException {
         return getByIdEntity(planeDAO, id);
+    }
+
+    public boolean checkFlights(int id) throws ServiceException {
+        if (id < 0) {
+            throw new ServiceException(Message.ERROR_ID_MISSING);
+        }
+        try {
+            return PlaneDAO.getInstance().checkFlights(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+    public void setStatus(int id, PlaneStatus status) throws ServiceException {
+        if (id < 0) {
+            throw new ServiceException(Message.ERROR_ID_MISSING);
+        }
+        try {
+            PlaneDAO.getInstance().setStatus(id, status);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
     }
 }

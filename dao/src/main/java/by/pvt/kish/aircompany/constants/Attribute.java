@@ -22,4 +22,5 @@ public class Attribute {
     public static final String POSITIONS_ATTRIBUTE = "positions";
     public static final String USERTYPES_ATTRIBUTE = "types";
     public static final String STATUSES_ATTRIBUTE = "statuses";
+    public static final String PERMISSION_CHANGE_DELETE_STATUS_ATTRIBUTE = "permissionChangeDeleteStatus";
 }

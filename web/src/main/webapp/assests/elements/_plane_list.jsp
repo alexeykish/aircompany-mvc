@@ -17,20 +17,12 @@
                 <td>${plane.model}</td>
                 <td>${plane.capacity}</td>
                 <td>${plane.range}</td>
-                <c:forEach items="${requestScope.plane.team}" var="num">
-                    <td>${num}</td>
-                </c:forEach>
+                <td>${plane.status}</td>
                 <td style="width: 70px;">
                     <form action="controller" method="post">
-                        <input type="hidden" name="command" value="delete_plane_command"/>
+                        <input type="hidden" name="command" value="plane_report_command"/>
                         <input type="hidden" name="pid" value="${plane.pid}"/>
-                        <input class="table-button" type="submit" name="submit" value="delete" disabled/>
-                    </form>
-                </td>
-                <td style="width: 70px;">
-                    <form action="updateplane" method="post">
-                        <input type="hidden" name="pid" value="${plane.pid}"/>
-                        <input class="table-button" type="submit" name="submit" value="edit" disabled/>
+                        <input class="table-button" type="submit" name="submit" value="details"/>
                     </form>
                 </td>
             </tr>

@@ -17,6 +17,7 @@ public class Message {
 
     public static final String SUCCESS_ADD_PLANE = "The plane was successfully added";
     public static final String SUCCESS_DELETE_PLANE = "The plane was successfully deleted";
+    public static final String SUCCESS_SET_STATUS_PLANE = "The plane status was successfully changed";
 
     public static final String SUCCESS_REG = "You have successfully registered";
 
@@ -45,5 +46,6 @@ public class Message {
     public static final String ERROR_USER_STATUS = "Set user status failed";
     public static final String ERROR_FLIGHT_DATE = "Adding or updating of the flight prohibited, when departure date is earlier than the current";
     public static final String ERROR_STATUS = "Empty status in request";
+
 }
 

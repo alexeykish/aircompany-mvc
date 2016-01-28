@@ -31,6 +31,6 @@ public class Page {
     public static final String SET_TEAM = "/assests/pages/addteam.jsp";
     public static final String CHANGE_TEAM = "/assests/pages/editteam.jsp";
 
-
+    public static final String PLANE_REPORT = "/assests/pages/plane_report.jsp";
 
 }

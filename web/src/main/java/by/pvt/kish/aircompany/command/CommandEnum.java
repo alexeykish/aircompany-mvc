@@ -3,10 +3,7 @@ package by.pvt.kish.aircompany.command;
 import by.pvt.kish.aircompany.command.airport.DeleteAirportCommand;
 import by.pvt.kish.aircompany.command.airport.GetAllAirportsCommand;
 import by.pvt.kish.aircompany.command.airport.UpdateAirportCommand;
-import by.pvt.kish.aircompany.command.plane.AddPlaneCommand;
-import by.pvt.kish.aircompany.command.plane.DeletePlaneCommand;
-import by.pvt.kish.aircompany.command.plane.GetAllPlanesCommand;
-import by.pvt.kish.aircompany.command.plane.UpdatePlaneCommand;
+import by.pvt.kish.aircompany.command.plane.*;
 import by.pvt.kish.aircompany.command.flight.*;
 import by.pvt.kish.aircompany.command.employee.*;
 import by.pvt.kish.aircompany.command.team.*;
@@ -36,6 +33,8 @@ public enum CommandEnum {
     GET_ALL_PLANES_COMMAND 	    	    {	{this.command = new GetAllPlanesCommand();   	    }	},
     DELETE_PLANE_COMMAND			 	{	{this.command = new DeletePlaneCommand();	        }	},
     UPDATE_PLANE_COMMAND            	{	{this.command = new UpdatePlaneCommand();	        }	},
+    PLANE_REPORT_COMMAND            	{	{this.command = new PlaneReportCommand();	        }	},
+    SET_PLANE_STATUS_COMMAND           	{	{this.command = new SetPlaneStatusCommand();        }	},
 
     ADD_AIRPORT_COMMAND 			 	{   {this.command = new AddAirportCommand();		    }	},
     GET_ALL_AIRPORTS_COMMAND 	    	{	{this.command = new GetAllAirportsCommand();       	}	},
