@@ -8,9 +8,11 @@ import by.pvt.kish.aircompany.enums.FlightStatus;
 import by.pvt.kish.aircompany.enums.Position;
 import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.services.impl.FlightService;
+import by.pvt.kish.aircompany.utils.RequestHandler;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -29,13 +31,14 @@ public class PreUpdateFlightFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
-            String id = request.getParameter("fid");
-            if (id == null) {
+            HttpServletRequest httpRequest = (HttpServletRequest) request;
+            int id = RequestHandler.getId(httpRequest, "fid");
+            if (id < 0) {
                 logger.error(Message.ERROR_ID_MISSING);
                 RequestDispatcher dispatcher = request.getRequestDispatcher(Page.ERROR);
                 dispatcher.forward(request, response);
             }
-            Flight flight = FlightService.getInstance().getById(Integer.parseInt(id));
+            Flight flight = FlightService.getInstance().getById(id);
             List<FlightStatus> statuses = Arrays.asList(FlightStatus.values());
             request.setAttribute(Attribute.FLIGHT_ATTRIBUTE, flight);
             request.setAttribute(Attribute.STATUSES_ATTRIBUTE, statuses);
