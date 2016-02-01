@@ -32,7 +32,7 @@ public class PreUpdateFlightFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
             HttpServletRequest httpRequest = (HttpServletRequest) request;
-            int id = RequestHandler.getId(httpRequest, "fid");
+            Long id = RequestHandler.getId(httpRequest, "fid");
             if (id < 0) {
                 logger.error(Message.ERROR_ID_MISSING);
                 RequestDispatcher dispatcher = request.getRequestDispatcher(Page.ERROR);

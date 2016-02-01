@@ -52,7 +52,7 @@ public class TeamService extends BaseService implements ITeamService {
      * @throws ServiceValidateException - if something fails at Service validation
      */
     @Override
-    public void add(int id, List<Integer> team) throws ServiceException, ServiceValidateException {
+    public void add(Long id, List<Long> team) throws ServiceException, ServiceValidateException {
         try {
             if (id < 0) {
                 throw new ServiceException(Message.ERROR_ID_MISSING);
@@ -80,7 +80,7 @@ public class TeamService extends BaseService implements ITeamService {
     }
 
     @Override
-    public int add(Object o) throws ServiceException {
+    public Long add(Object o) throws ServiceException {
         throw new UnsupportedOperationException();
     }
 
@@ -95,7 +95,7 @@ public class TeamService extends BaseService implements ITeamService {
     }
 
     @Override
-    public void delete(int id) throws ServiceException {
+    public void delete(Long id) throws ServiceException {
         ServiceUtils.deleteEntity(teamDAO, id);
     }
 
@@ -107,7 +107,7 @@ public class TeamService extends BaseService implements ITeamService {
      * @throws ServiceException - if something fails at Service layer
      */
     @Override
-    public List<Employee> getById(int id) throws ServiceException {
+    public List<Employee> getById(Long id) throws ServiceException {
         try {
             if (id < 0) {
                 throw new ServiceException(Message.ERROR_ID_MISSING);

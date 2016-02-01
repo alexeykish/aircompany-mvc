@@ -15,7 +15,7 @@ import static org.junit.Assert.assertNull;
 public class AirportDAOTest {
 
     private AirportDAO airportDAO;
-    private int id;
+    private Long id;
     private Airport testAirport;
 
     @Before
@@ -46,7 +46,7 @@ public class AirportDAOTest {
     @Test
     public void testGetAll() throws Exception {
         int beforeAddNumber = airportDAO.getAll().size();
-        int getAllId = airportDAO.add(testAirport);
+        Long getAllId = airportDAO.add(testAirport);
         int afterAddNumber = airportDAO.getAll().size();
         assertEquals("Get all method failed", beforeAddNumber, afterAddNumber - 1);
         airportDAO.delete(getAllId);

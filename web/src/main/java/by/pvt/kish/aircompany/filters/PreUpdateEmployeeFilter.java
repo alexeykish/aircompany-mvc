@@ -29,7 +29,7 @@ public class PreUpdateEmployeeFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
             HttpServletRequest httpRequest = (HttpServletRequest) request;
-            int id = RequestHandler.getId(httpRequest, "eid");
+            Long id = RequestHandler.getId(httpRequest, "eid");
             if (id < 0) {
                 logger.error(Message.ERROR_ID_MISSING);
                 RequestDispatcher dispatcher = request.getRequestDispatcher(Page.ERROR);

@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class EmployeeServiceTest {
 
     private Employee testEmployee;
-    private int id;
+    private long id;
     private EmployeeService employeeService = EmployeeService.getInstance();
 
     @Before
@@ -58,7 +58,7 @@ public class EmployeeServiceTest {
     @Test
     public void testGetAll() throws Exception {
         int beforeAddNumber = employeeService.getAll().size();
-        int getAllId = employeeService.add(testEmployee);
+        Long getAllId = employeeService.add(testEmployee);
         int afterAddNumber = employeeService.getAll().size();
         assertEquals("Get all method failed", beforeAddNumber, afterAddNumber-1);
         employeeService.delete(getAllId);

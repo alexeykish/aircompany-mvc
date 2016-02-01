@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class AirportServiceTest {
 
     private AirportService airportService = AirportService.getInstance();
-    private int id;
+    private Long id;
     private Airport testAirport;
 
     @Before
@@ -44,7 +44,7 @@ public class AirportServiceTest {
     @Test
     public void testGetAll() throws Exception {
         int beforeAddNumber = airportService.getAll().size();
-        int getAllId = airportService.add(testAirport);
+        Long getAllId = airportService.add(testAirport);
         int afterAddNumber = airportService.getAll().size();
         assertEquals("Get all method failed", beforeAddNumber, afterAddNumber-1);
         airportService.delete(getAllId);

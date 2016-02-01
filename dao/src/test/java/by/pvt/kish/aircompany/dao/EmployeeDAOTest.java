@@ -16,7 +16,7 @@ import static org.junit.Assert.assertNull;
 public class EmployeeDAOTest {
 
     private Employee testEmployee;
-    private int id;
+    private Long id;
     private EmployeeDAO employeeDao;
 
     @Before
@@ -55,7 +55,7 @@ public class EmployeeDAOTest {
     @Test
     public void testGetAll() throws Exception {
         int beforeAddNumber = employeeDao.getAll().size();
-        int getAllId = employeeDao.add(testEmployee);
+        Long getAllId = employeeDao.add(testEmployee);
         int afterAddNumber = employeeDao.getAll().size();
         assertEquals("Get all method failed", beforeAddNumber, afterAddNumber - 1);
         employeeDao.delete(getAllId);

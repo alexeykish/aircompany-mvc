@@ -21,7 +21,7 @@ import java.util.List;
  * @author Kish Alexey
  */
 public class Flight implements Serializable {
-    private int fid;
+    private Long fid;
     private Date date;
     private Airport from;
     private Airport to;
@@ -42,7 +42,7 @@ public class Flight implements Serializable {
      * @param team   - the flight team that serves the flight
      * @param status - the status of the flight
      */
-    public Flight(int fid, Date date, Airport from, Airport to, Plane plane, List<Employee> team, FlightStatus status) {
+    public Flight(Long fid, Date date, Airport from, Airport to, Plane plane, List<Employee> team, FlightStatus status) {
         this.fid = fid;
         this.date = date;
         this.from = from;
@@ -59,7 +59,7 @@ public class Flight implements Serializable {
 
         Flight flight = (Flight) o;
 
-        if (fid != flight.fid) return false;
+        if (fid != null ? !fid.equals(flight.fid) : flight.fid != null) return false;
         if (date != null ? !date.equals(flight.date) : flight.date != null) return false;
         if (from != null ? !from.equals(flight.from) : flight.from != null) return false;
         if (to != null ? !to.equals(flight.to) : flight.to != null) return false;
@@ -71,7 +71,7 @@ public class Flight implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = fid;
+        int result = fid != null ? fid.hashCode() : 0;
         result = 31 * result + (date != null ? date.hashCode() : 0);
         result = 31 * result + (from != null ? from.hashCode() : 0);
         result = 31 * result + (to != null ? to.hashCode() : 0);
@@ -81,11 +81,11 @@ public class Flight implements Serializable {
         return result;
     }
 
-    public int getFid() {
+    public Long getFid() {
         return fid;
     }
 
-    public void setFid(int fid) {
+    public void setFid(Long fid) {
         this.fid = fid;
     }
 

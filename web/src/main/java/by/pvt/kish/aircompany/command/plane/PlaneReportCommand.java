@@ -27,7 +27,7 @@ public class PlaneReportCommand implements by.pvt.kish.aircompany.command.Action
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String className = PlaneReportCommand.class.getName();
         try {
-            int id = RequestHandler.getId(request, "pid");
+            Long id = RequestHandler.getId(request, "pid");
             Plane plane = PlaneService.getInstance().getById(id);
             Map<String, Integer> team = new HashMap<>();
             team.put(Position.PILOT.toString(), plane.getTeam().get(Position.PILOT));

@@ -38,7 +38,7 @@ public class PlaneService extends BaseService<Plane> {
     }
 
     @Override
-    public int add(Plane plane) throws ServiceException, ServiceValidateException {
+    public Long add(Plane plane) throws ServiceException, ServiceValidateException {
         return addEntity(planeDAO, plane, planeValidator);
     }
 
@@ -53,16 +53,16 @@ public class PlaneService extends BaseService<Plane> {
     }
 
     @Override
-    public void delete(int id) throws ServiceException {
+    public void delete(Long id) throws ServiceException {
         deleteEntity(planeDAO, id);
     }
 
     @Override
-    public Plane getById(int id) throws ServiceException {
+    public Plane getById(Long id) throws ServiceException {
         return getByIdEntity(planeDAO, id);
     }
 
-    public void setStatus(int id, String status) throws ServiceException {
+    public void setStatus(Long id, String status) throws ServiceException {
         if (id < 0) {
             throw new ServiceException(Message.ERROR_ID_MISSING);
         }

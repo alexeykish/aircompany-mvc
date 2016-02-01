@@ -20,7 +20,7 @@ public interface IFlightDAO {
      * @return - the list of last five flight of the concrete plane
      * @throws DaoException If something fails at DB level
      */
-    List<Flight> getPlaneLastFiveFlights(int id) throws DaoException;
+    List<Flight> getPlaneLastFiveFlights(Long id) throws DaoException;
 
     /**
      * Returns a list of five last flights of the concrete employee from the DB
@@ -29,6 +29,6 @@ public interface IFlightDAO {
      * @return - the list of last five flight of the concrete employee
      * @throws DaoException If something fails at DB level
      */
-    List<Flight> getEmployeeLastFiveFlights(int id) throws DaoException;
+    List<Flight> getEmployeeLastFiveFlights(Long id) throws DaoException;
 
 }

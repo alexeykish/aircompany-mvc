@@ -40,7 +40,7 @@ public interface IUserService {
      * @return true is status is ONLINE, false if status is OFFLINE
      * @throws ServiceException - if something fails at Service layer
      */
-    boolean checkStatus(int id) throws ServiceException;
+    boolean checkStatus(Long id) throws ServiceException;
 
     /**
      * Set user status to DB
@@ -50,5 +50,5 @@ public interface IUserService {
      * @throws ServiceException         - if something fails at Service layer
      * @throws ServiceValidateException - if something fails at Service validation
      */
-    void setStatus(int id, UserStatus status) throws ServiceException, ServiceValidateException;
+    void setStatus(Long id, UserStatus status) throws ServiceException, ServiceValidateException;
 }

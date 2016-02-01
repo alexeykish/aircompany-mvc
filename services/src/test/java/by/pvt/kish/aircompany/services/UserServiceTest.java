@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 public class UserServiceTest {
 
     private UserService userService = UserService.getInstance();
-    private  int id;
+    private Long id;
     private User testUser;
 
 
@@ -66,7 +66,7 @@ public class UserServiceTest {
         User testUser2 = testUser;
         testUser2.setLogin("testLogin2");
         int beforeAddNumber = userService.getAll().size();
-        int getAllId = userService.add(testUser2);
+        Long getAllId = userService.add(testUser2);
         int afterAddNumber = userService.getAll().size();
         assertEquals("Get all users method failed", beforeAddNumber, afterAddNumber-1);
         userService.delete(getAllId);

@@ -19,7 +19,7 @@ public interface ITeamDAO {
      * @param team - The flight team to be created
      * @throws DaoException If something fails at DB level
      */
-    void add(int id, List<Integer> team) throws DaoException;
+    void add(Long id, List<Long> team) throws DaoException;
 
     /**
      * Returns a list of employees of the flight team for particular flight from the DB matching the given ID
@@ -28,5 +28,5 @@ public interface ITeamDAO {
      * @return a list of the employees, that is a flight team
      * @throws DaoException If something fails at DB level
      */
-    List<Employee> getById(int id) throws DaoException;
+    List<Employee> getById(Long id) throws DaoException;
 }

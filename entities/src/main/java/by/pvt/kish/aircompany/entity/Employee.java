@@ -14,7 +14,7 @@ import java.io.Serializable;
  * @author Kish Alexey
  */
 public class Employee implements Serializable {
-    private int eid;
+    private Long eid;
     private String firstName;
     private String lastName;
     private Position position;
@@ -30,7 +30,7 @@ public class Employee implements Serializable {
      * @param position  - employee position in a flight team
      * @param status    - employee available status
      */
-    public Employee(int eid, String firstName, String lastName, Position position, EmployeeStatus status) {
+    public Employee(Long eid, String firstName, String lastName, Position position, EmployeeStatus status) {
         super();
         this.eid = eid;
         this.firstName = firstName;
@@ -46,7 +46,7 @@ public class Employee implements Serializable {
 
         Employee employee = (Employee) o;
 
-        if (eid != employee.eid) return false;
+        if (eid != null ? !eid.equals(employee.eid) : employee.eid != null) return false;
         if (firstName != null ? !firstName.equals(employee.firstName) : employee.firstName != null) return false;
         if (lastName != null ? !lastName.equals(employee.lastName) : employee.lastName != null) return false;
         if (position != employee.position) return false;
@@ -56,7 +56,7 @@ public class Employee implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = eid;
+        int result = eid != null ? eid.hashCode() : 0;
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (position != null ? position.hashCode() : 0);
@@ -64,11 +64,11 @@ public class Employee implements Serializable {
         return result;
     }
 
-    public int getEid() {
+    public Long getEid() {
         return eid;
     }
 
-    public void setEid(int eid) {
+    public void setEid(Long eid) {
         this.eid = eid;
     }
 

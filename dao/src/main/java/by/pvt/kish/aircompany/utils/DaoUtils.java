@@ -29,10 +29,10 @@ public class DaoUtils {
      * @param failMessage       - The message to throw it in exception when SQLException happens
      * @throws DaoException If something fails at DB level
      */
-    public static void deleteEntity(Connection connection, PreparedStatement preparedStatement, int id, String sqlQuery, String failMessage) throws DaoException {
+    public static void deleteEntity(Connection connection, PreparedStatement preparedStatement, Long id, String sqlQuery, String failMessage) throws DaoException {
         try {
             preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(failMessage, e);
@@ -52,11 +52,11 @@ public class DaoUtils {
      * @param failMessage       - The message to throw it in exception when SQLException happens
      * @throws DaoException If something fails at DB level
      */
-    public static void setEntityStatus(Connection connection, PreparedStatement preparedStatement, int id, String status, String sqlQuery, String failMessage) throws DaoException {
+    public static void setEntityStatus(Connection connection, PreparedStatement preparedStatement, Long id, String status, String sqlQuery, String failMessage) throws DaoException {
         try {
             preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setString(1, status);
-            preparedStatement.setInt(2, id);
+            preparedStatement.setLong(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(failMessage, e);

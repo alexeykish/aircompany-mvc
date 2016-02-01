@@ -35,7 +35,7 @@ public class AirportService extends BaseService<Airport> {
     }
 
     @Override
-    public int add(Airport airport) throws ServiceException, ServiceValidateException {
+    public Long add(Airport airport) throws ServiceException, ServiceValidateException {
         return addEntity(airportDAO, airport, airportValidator);
     }
 
@@ -50,12 +50,12 @@ public class AirportService extends BaseService<Airport> {
     }
 
     @Override
-    public void delete(int id) throws ServiceException {
+    public void delete(Long id) throws ServiceException {
         deleteEntity(airportDAO, id);
     }
 
     @Override
-    public Airport getById(int id) throws ServiceException {
+    public Airport getById(Long id) throws ServiceException {
         return getByIdEntity(airportDAO, id);
     }
 }

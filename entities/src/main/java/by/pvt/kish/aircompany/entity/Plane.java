@@ -20,7 +20,7 @@ import java.util.Map;
  */
 public class Plane implements Serializable {
 
-    private int pid;
+    private Long pid;
     private String model;
     private int capacity;
     private int range;
@@ -39,7 +39,7 @@ public class Plane implements Serializable {
      * @param status   - plane available status
      */
 
-    public Plane(int pid, String model, int capacity, int range, Map<Position, Integer> team, PlaneStatus status) {
+    public Plane(Long pid, String model, int capacity, int range, Map<Position, Integer> team, PlaneStatus status) {
         this.pid = pid;
         this.model = model;
         this.capacity = capacity;
@@ -55,9 +55,9 @@ public class Plane implements Serializable {
 
         Plane plane = (Plane) o;
 
-        if (pid != plane.pid) return false;
         if (capacity != plane.capacity) return false;
         if (range != plane.range) return false;
+        if (pid != null ? !pid.equals(plane.pid) : plane.pid != null) return false;
         if (model != null ? !model.equals(plane.model) : plane.model != null) return false;
         if (team != null ? !team.equals(plane.team) : plane.team != null) return false;
         return status == plane.status;
@@ -66,7 +66,7 @@ public class Plane implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = pid;
+        int result = pid != null ? pid.hashCode() : 0;
         result = 31 * result + (model != null ? model.hashCode() : 0);
         result = 31 * result + capacity;
         result = 31 * result + range;
@@ -75,11 +75,11 @@ public class Plane implements Serializable {
         return result;
     }
 
-    public int getPid() {
+    public Long getPid() {
         return pid;
     }
 
-    public void setPid(int pid) {
+    public void setPid(Long pid) {
         this.pid = pid;
     }
 

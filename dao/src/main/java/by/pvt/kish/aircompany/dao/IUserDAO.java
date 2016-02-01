@@ -39,7 +39,7 @@ public interface IUserDAO {
      * @return true is status is ONLINE, false if status is OFFLINE
      * @throws DaoException If something fails at DB level
      */
-    boolean checkStatus(int id) throws DaoException;
+    boolean checkStatus(Long id) throws DaoException;
 
     /**
      * Set user status to DB
@@ -48,5 +48,5 @@ public interface IUserDAO {
      * @param status - The status to be set
      * @throws DaoException If something fails at DB level
      */
-    void setStatus(int id, UserStatus status) throws DaoException;
+    void setStatus(Long id, UserStatus status) throws DaoException;
 }

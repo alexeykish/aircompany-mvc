@@ -21,7 +21,7 @@ public interface ITeamService {
      * @throws ServiceException         - if something fails at Service layer
      * @throws ServiceValidateException - if something fails at Service validation
      */
-    void add(int id, List<Integer> team) throws ServiceException, ServiceValidateException;
+    void add(Long id, List<Long> team) throws ServiceException, ServiceValidateException;
 
     /**
      * Returns a list of employees of the flight team for particular flight matching the given ID
@@ -30,5 +30,5 @@ public interface ITeamService {
      * @return a list of the employees, that is a flight team
      * @throws ServiceException - if something fails at Service layer
      */
-    List<Employee> getById(int id) throws ServiceException;
+    List<Employee> getById(Long id) throws ServiceException;
 }

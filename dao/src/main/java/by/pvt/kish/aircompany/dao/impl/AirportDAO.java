@@ -60,16 +60,16 @@ public class AirportDAO extends BaseDAO<Airport> {
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public int add(Airport airport) throws DaoException {
+    public Long add(Airport airport) throws DaoException {
         ResultSet resultSet = null;
-        int generatedId = 0;
+        Long generatedId = null;
         try {
             preparedStatement = connection.prepareStatement(SQL_ADD_AIRPORT, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, airport.getCity());
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                generatedId = resultSet.getInt(1);
+                generatedId = resultSet.getLong(1);
             }
         } catch (SQLException e) {
             throw new DaoException(ADD_AIRPORT_FAIL, e);
@@ -91,7 +91,7 @@ public class AirportDAO extends BaseDAO<Airport> {
         try {
             preparedStatement = connection.prepareStatement(SQL_UPDATE_AIRPORT);
             preparedStatement.setString(1, airport.getCity());
-            preparedStatement.setInt(2, airport.getAid());
+            preparedStatement.setLong(2, airport.getAid());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(UPDATE_AIRPORT_FAIL, e);
@@ -135,12 +135,12 @@ public class AirportDAO extends BaseDAO<Airport> {
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public Airport getById(int id) throws DaoException {
+    public Airport getById(Long id) throws DaoException {
         ResultSet resultSet = null;
         Airport airport = null;
         try {
             preparedStatement = connection.prepareStatement(SQL_GET_AIRPORT_BY_ID);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 airport = new Airport();
@@ -162,12 +162,12 @@ public class AirportDAO extends BaseDAO<Airport> {
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public void delete(int id) throws DaoException {
+    public void delete(Long id) throws DaoException {
         deleteEntity(connection, preparedStatement, id, SQL_DELETE_AIRPORT, DELETE_AIRPORT_FAIL);
     }
 
     private Airport setAirportParametrs(ResultSet resultSet, Airport airport) throws SQLException {
-        airport.setAid(resultSet.getInt(Column.AIRPORT_AID));
+        airport.setAid(resultSet.getLong(Column.AIRPORT_AID));
         airport.setCity(resultSet.getString(Column.AIRPORT_CITY));
         return airport;
     }

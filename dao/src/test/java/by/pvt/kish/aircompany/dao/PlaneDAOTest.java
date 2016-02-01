@@ -19,7 +19,7 @@ import static org.junit.Assert.assertNull;
 public class PlaneDAOTest {
 
     private PlaneDAO planeDAO;
-    private int id;
+    private Long id;
     private Plane testPlane;
 
     @Before
@@ -72,7 +72,7 @@ public class PlaneDAOTest {
     @Test
     public void testGetAll() throws Exception {
         int beforeAddNumber = planeDAO.getAll().size();
-        int getAllId = planeDAO.add(testPlane);
+        Long getAllId = planeDAO.add(testPlane);
         int afterAddNumber = planeDAO.getAll().size();
         assertEquals("Get all method failed", beforeAddNumber, afterAddNumber - 1);
         planeDAO.delete(getAllId);

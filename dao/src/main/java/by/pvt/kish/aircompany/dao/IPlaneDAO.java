@@ -19,5 +19,5 @@ public interface IPlaneDAO {
      * @param id - The ID of the flight
      * @throws DaoException If something fails at DB level
      */
-    void setStatus(int id, String status) throws DaoException;
+    void setStatus(Long id, String status) throws DaoException;
 }

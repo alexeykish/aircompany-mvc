@@ -62,6 +62,12 @@ public class FlightValidator implements IValidator<Flight> {
         return flight.getFrom().equals(flight.getTo());
     }
 
+    /**
+     * The method checks the date of departure, it woild not be the in the past
+     *
+     * @param flight - Flight object being checked
+     * @return - false, if everything checks out correctly; true - if the data is invalid
+     */
     private boolean checkDate(Flight flight) {
         Date yesterdayDate = new Date(System.currentTimeMillis() - 1000L * 60L * 60L * 24L);
         Date flightDate = flight.getDate();

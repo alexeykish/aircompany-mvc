@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author Kish Alexey
  */
 public class Airport implements Serializable {
-    private int aid;
+    private Long aid;
     private String city;
 
     public Airport() {
@@ -21,7 +21,7 @@ public class Airport implements Serializable {
      * @param aid  - airport id
      * @param city - the place where the airport is located
      */
-    public Airport(int aid, String city) {
+    public Airport(Long aid, String city) {
         this.aid = aid;
         this.city = city;
     }
@@ -33,22 +33,23 @@ public class Airport implements Serializable {
 
         Airport airport = (Airport) o;
 
-        return aid == airport.aid && (city != null ? city.equals(airport.city) : airport.city == null);
+        if (aid != null ? !aid.equals(airport.aid) : airport.aid != null) return false;
+        return city != null ? city.equals(airport.city) : airport.city == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = aid;
+        int result = aid != null ? aid.hashCode() : 0;
         result = 31 * result + (city != null ? city.hashCode() : 0);
         return result;
     }
 
-    public int getAid() {
+    public Long getAid() {
         return aid;
     }
 
-    public void setAid(int aid) {
+    public void setAid(Long aid) {
         this.aid = aid;
     }
 
@@ -58,5 +59,13 @@ public class Airport implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "Airport{" +
+                "aid=" + aid +
+                ", city='" + city + '\'' +
+                '}';
     }
 }

@@ -33,7 +33,7 @@ public class TeamValidator {
      * @param team - The flight team being checked
      * @return - Null, if everything checks out correctly; error page if the data is incorrect
      */
-    public static String validate(int id, List<Integer> team) throws ServiceException {
+    public static String validate(Long id, List<Long> team) throws ServiceException {
         if (checkEmpty(team)) {
             return Message.ERROR_EMPTY;
         }
@@ -52,9 +52,9 @@ public class TeamValidator {
      * @param team - The flight team being checked
      * @return false if it corresponds to the position correctly, true if found at least one to inadequate
      */
-    private static boolean checkPositions(int fid, List<Integer> team) throws ServiceException {
+    private static boolean checkPositions(Long fid, List<Long> team) throws ServiceException {
         List<Employee> list = new ArrayList<>();
-        for (Integer i : team) {
+        for (Long i : team) {
             list.add(EmployeeService.getInstance().getById(i));
         }
         Plane plane = FlightService.getInstance().getById(fid).getPlane();
@@ -88,11 +88,11 @@ public class TeamValidator {
      * @param team - The flight team being checked
      * @return - false if all positions are filled, true if one of the items is null
      */
-    private static boolean checkEmpty(List<Integer> team) {
+    private static boolean checkEmpty(List<Long> team) {
         if (team == null) {
             return true;
         }
-        for (Integer i : team) {
+        for (Long i : team) {
             if (i == null) {
                 return true;
             }
@@ -106,8 +106,8 @@ public class TeamValidator {
      * @param team - The flight team being checked
      * @return - false all items are unique, true if a match is found
      */
-    private static boolean checkEntry(List<Integer> team) {
-        Set<Integer> set = new HashSet<>(team);
+    private static boolean checkEntry(List<Long> team) {
+        Set<Long> set = new HashSet<>(team);
         return set.size() != team.size();
     }
 }

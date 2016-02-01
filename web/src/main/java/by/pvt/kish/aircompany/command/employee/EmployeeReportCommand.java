@@ -24,7 +24,7 @@ public class EmployeeReportCommand implements by.pvt.kish.aircompany.command.Act
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String className = EmployeeReportCommand.class.getName();
         try {
-            int id = RequestHandler.getId(request, "eid");
+            Long id = RequestHandler.getId(request, "eid");
             Employee employee = EmployeeService.getInstance().getById(id);
             List<Flight> flights = FlightService.getInstance().getEmployeeLastFiveFlights(employee.getEid());
             boolean permissionChangeDeleteStatus = flights.size() != 0;

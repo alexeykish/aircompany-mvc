@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class ServiceUtils {
 
-    public static <T> int addEntity(IDAO<T> dao, T t, IValidator<T> validator) throws ServiceValidateException, ServiceException {
+    public static <T> Long addEntity(IDAO<T> dao, T t, IValidator<T> validator) throws ServiceValidateException, ServiceException {
         try {
             String validateResult = validator.validate(t);
             if (validateResult != null) {
@@ -38,7 +38,7 @@ public class ServiceUtils {
         }
     }
 
-    public static <T> void deleteEntity(IDAO<T> dao, int id) throws ServiceException {
+    public static <T> void deleteEntity(IDAO<T> dao, Long id) throws ServiceException {
         try {
             if (id < 0) {
                 throw new ServiceException(Message.ERROR_ID_MISSING);
@@ -57,7 +57,7 @@ public class ServiceUtils {
         }
     }
 
-    public static <T> T getByIdEntity(IDAO<T> dao, int id) throws ServiceException {
+    public static <T> T getByIdEntity(IDAO<T> dao, Long id) throws ServiceException {
         try {
             if (id < 0) {
                 throw new ServiceException(Message.ERROR_ID_MISSING);

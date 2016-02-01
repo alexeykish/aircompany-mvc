@@ -30,7 +30,7 @@ public class SetTeamCommand implements ActionCommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String className = SetTeamCommand.class.getSimpleName();
         try {
-            int id = RequestHandler.getId(request, "fid");
+            Long id = RequestHandler.getId(request, "fid");
             List<Employee> team = TeamService.getInstance().getById(id);
             Flight flight = FlightService.getInstance().getById(id);
             List<Employee> employees = EmployeeService.getInstance().getAll();

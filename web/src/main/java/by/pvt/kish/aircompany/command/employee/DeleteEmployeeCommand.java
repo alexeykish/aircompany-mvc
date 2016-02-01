@@ -24,7 +24,7 @@ public class DeleteEmployeeCommand implements ActionCommand {
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		String className = DeleteEmployeeCommand.class.getName();
 		try {
-			int id = RequestHandler.getId(request, "eid");
+			Long id = RequestHandler.getId(request, "eid");
 			EmployeeService.getInstance().delete(id);
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_DELETE_EMPLOYEE);
 			return Page.MAIN;

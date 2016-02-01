@@ -20,7 +20,7 @@ public class SetEmployeeStatusCommand implements by.pvt.kish.aircompany.command.
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String className = SetEmployeeStatusCommand.class.getName();
         try {
-            int id = RequestHandler.getId(request, "eid");
+            Long id = RequestHandler.getId(request, "eid");
             EmployeeService.getInstance().setStatus(id, RequestHandler.getString(request, "status"));
             request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_SET_STATUS_EMPLOYEE);
             return Page.MAIN;

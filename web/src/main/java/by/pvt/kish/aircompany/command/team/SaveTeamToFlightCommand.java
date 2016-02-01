@@ -28,9 +28,9 @@ public class SaveTeamToFlightCommand implements ActionCommand {
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		String className = UpdateFlightCommand.class.getSimpleName();
 		try {
-			int id = RequestHandler.getId(request, "fid");
+			Long id = RequestHandler.getId(request, "fid");
 			int num = RequestHandler.getInt(request, "num");
-			List<Integer> team = RequestHandler.getTeam(request, num);
+			List<Long> team = RequestHandler.getTeam(request, num);
 			TeamService.getInstance().add(id, team);
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_TEAM_CHANGE);
 		} catch (ServiceException e) {

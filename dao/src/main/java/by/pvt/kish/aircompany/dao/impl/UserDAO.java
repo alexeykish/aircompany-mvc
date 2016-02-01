@@ -73,8 +73,8 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public int add(User user) throws DaoException {
-        int generatedId = 0;
+    public Long add(User user) throws DaoException {
+        Long generatedId = null;
         ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(SQL_ADD_USER, Statement.RETURN_GENERATED_KEYS);
@@ -87,7 +87,7 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                generatedId = resultSet.getInt(1);
+                generatedId = resultSet.getLong(1);
             }
         } catch (SQLException e) {
             throw new DaoException(ADD_USER_FAIL, e);
@@ -190,12 +190,12 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public User getById(int id) throws DaoException {
+    public User getById(Long id) throws DaoException {
         ResultSet resultSet = null;
         User user = null;
         try {
             preparedStatement = connection.prepareStatement(SQL_GET_USER_BY_ID);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 user = new User();
@@ -217,7 +217,7 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public void delete(int id) throws DaoException {
+    public void delete(Long id) throws DaoException {
         deleteEntity(connection, preparedStatement, id, SQL_DELETE_USER, DELETE_USER_FAIL);
     }
 
@@ -229,11 +229,11 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public boolean checkStatus(int id) throws DaoException {
+    public boolean checkStatus(Long id) throws DaoException {
         ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(SQL_GET_USER_STATUS);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 if (resultSet.getString(Column.USERS_USERSTATUS).equals(UserStatus.ONLINE.toString())) {
@@ -257,11 +257,11 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public void setStatus(int id, UserStatus status) throws DaoException {
+    public void setStatus(Long id, UserStatus status) throws DaoException {
         try {
             preparedStatement = connection.prepareStatement(SQL_UPDATE_USER_STATUS);
             preparedStatement.setString(1, String.valueOf(status));
-            preparedStatement.setInt(2, id);
+            preparedStatement.setLong(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(SET_USER_FAILED, e);
@@ -271,7 +271,7 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
     }
 
     private User setUserParametrs(ResultSet resultSet, User user) throws SQLException {
-        user.setUid(resultSet.getInt(Column.USERS_UID));
+        user.setUid(resultSet.getLong(Column.USERS_UID));
         user.setFirstName(resultSet.getString(Column.USERS_FIRSTNAME));
         user.setLastName(resultSet.getString(Column.USERS_LASTNAME));
         user.setLogin(resultSet.getString(Column.USERS_LOGIN));

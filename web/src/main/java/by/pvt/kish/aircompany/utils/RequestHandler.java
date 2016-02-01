@@ -39,10 +39,10 @@ public class RequestHandler {
             return null;
         }
         flight.setDate(Date.valueOf(date.trim()));
-        flight.setTo(AirportService.getInstance().getById(Integer.parseInt(to.trim())));
-        flight.setFrom(AirportService.getInstance().getById(Integer.parseInt(from.trim())));
-        flight.setPlane(PlaneService.getInstance().getById(Integer.parseInt(pid.trim())));
-        int id = RequestHandler.getId(request, "fid");
+        flight.setTo(AirportService.getInstance().getById(Long.parseLong(to.trim())));
+        flight.setFrom(AirportService.getInstance().getById(Long.parseLong(from.trim())));
+        flight.setPlane(PlaneService.getInstance().getById(Long.parseLong(pid.trim())));
+        Long id = RequestHandler.getId(request, "fid");
         if (id > 0) {
             flight.setFid(id);
             FlightStatus status = RequestHandler.getFlightStatus(request);
@@ -55,12 +55,12 @@ public class RequestHandler {
         return string == null || string.trim().equals("");
     }
 
-    public static int getId(HttpServletRequest request, String requestId) {
+    public static Long getId(HttpServletRequest request, String requestId) {
         String id = request.getParameter(requestId);
         if (id == null) {
-            return -1;
+            return (long) -1;
         }
-        return Integer.parseInt(id);
+        return Long.parseLong(id);
     }
 
     public static FlightStatus getFlightStatus(HttpServletRequest request) throws ServiceException {
@@ -82,7 +82,7 @@ public class RequestHandler {
         employee.setFirstName(firstName.trim());
         employee.setLastName(lastName.trim());
         employee.setPosition(Position.valueOf(position.trim()));
-        int id = RequestHandler.getId(request, "eid");
+        Long id = RequestHandler.getId(request, "eid");
         if (id > 0) {
             employee.setEid(id);
         }
@@ -116,7 +116,7 @@ public class RequestHandler {
         team.put(Position.RADIOOPERATOR, Integer.parseInt(num_navigators));
         team.put(Position.STEWARDESS, Integer.parseInt(num_stewardess));
         plane.setTeam(team);
-        int id = RequestHandler.getId(request, "pid");
+        Long id = RequestHandler.getId(request, "pid");
         if (id > 0) {
             plane.setPid(id);
         }
@@ -145,7 +145,7 @@ public class RequestHandler {
         user.setPassword(password.trim());
         user.setEmail(email.trim());
         user.setUserType(UserType.valueOf(userType.trim()));
-        int id = RequestHandler.getId(request, "uid");
+        Long id = RequestHandler.getId(request, "uid");
         if (id > 0) {
             user.setUid(id);
             String status = request.getParameter("status");
@@ -173,10 +173,18 @@ public class RequestHandler {
         return result;
     }
 
-    public static List<Integer> getTeam(HttpServletRequest request, int count) {
-        List<Integer> team = new ArrayList<>();
+    public static Long getLong(HttpServletRequest request, String parameter) throws RequestHandlerException {
+        Long result = Long.parseLong(request.getParameter(parameter));
+        if (result < 0) {
+            throw new RequestHandlerException(parameter + " is less than zero");
+        }
+        return result;
+    }
+
+    public static List<Long> getTeam(HttpServletRequest request, int count) {
+        List<Long> team = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            team.add(Integer.parseInt(request.getParameter(String.valueOf(i))));
+            team.add(Long.parseLong(request.getParameter(String.valueOf(i))));
         }
         return team;
     }

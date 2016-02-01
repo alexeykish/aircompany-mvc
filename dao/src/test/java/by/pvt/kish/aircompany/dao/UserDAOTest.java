@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  */
 public class UserDAOTest {
     private UserDAO userDao;
-    private int id;
+    private Long id;
     private User testUser;
 
     @Before
@@ -63,7 +63,7 @@ public class UserDAOTest {
         User testUser2 = testUser;
         testUser2.setLogin("testLogin2");
         int beforeAddNumber = userDao.getAll().size();
-        int getAllId = userDao.add(testUser2);
+        Long getAllId = userDao.add(testUser2);
         int afterAddNumber = userDao.getAll().size();
         assertEquals("Get all users method failed", beforeAddNumber, afterAddNumber - 1);
         userDao.delete(getAllId);

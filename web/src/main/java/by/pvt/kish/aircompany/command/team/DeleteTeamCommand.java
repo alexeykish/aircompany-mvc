@@ -24,7 +24,7 @@ public class DeleteTeamCommand implements ActionCommand {
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		String className = DeleteTeamCommand.class.getSimpleName();
 		try {
-			int id = RequestHandler.getId(request, "tid");
+			Long id = RequestHandler.getId(request, "tid");
 			TeamService.getInstance().delete(id);
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_DELETE_TEAM);
 		} catch (ServiceException e) {

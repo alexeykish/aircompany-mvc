@@ -20,7 +20,7 @@ public class DeletePlaneCommand implements ActionCommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String className = DeletePlaneCommand.class.getName();
         try {
-            int id = RequestHandler.getId(request, "pid");
+            Long id = RequestHandler.getId(request, "pid");
             PlaneService.getInstance().delete(id);
             request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_DELETE_PLANE);
             return Page.MAIN;

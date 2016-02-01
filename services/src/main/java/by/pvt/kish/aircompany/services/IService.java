@@ -22,7 +22,7 @@ public interface IService<T> {
      * @throws ServiceValidateException - if something fails at Service validation
      * @throws ServiceLoginException    - if something fails at Service user authorisation
      */
-    int add(T t) throws ServiceException, ServiceValidateException, ServiceLoginException;
+    Long add(T t) throws ServiceException, ServiceValidateException, ServiceLoginException;
 
     /**
      * Update the given Entity
@@ -47,7 +47,7 @@ public interface IService<T> {
      * @param id - ID of the entity to be deleted
      * @throws ServiceException - if something fails at Service layer
      */
-    void delete(int id) throws ServiceException;
+    void delete(Long id) throws ServiceException;
 
     /**
      * Returns the Entity matching the given ID
@@ -56,5 +56,5 @@ public interface IService<T> {
      * @return - the entity
      * @throws ServiceException - if something fails at Service layer
      */
-    T getById(int id) throws ServiceException;
+    T getById(Long id) throws ServiceException;
 }

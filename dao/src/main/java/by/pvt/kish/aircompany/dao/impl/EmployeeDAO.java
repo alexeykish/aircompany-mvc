@@ -17,7 +17,6 @@ import java.util.List;
 
 import static by.pvt.kish.aircompany.utils.DaoUtils.closePreparedStatement;
 import static by.pvt.kish.aircompany.utils.DaoUtils.closeResultSet;
-import static by.pvt.kish.aircompany.utils.DaoUtils.deleteEntity;
 
 /**
  * This class represents a concrete implementation of the IDAO interface for employee model.
@@ -64,8 +63,8 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 	 * @throws DaoException If something fails at DB level
 	 */
 	@Override
-	public int add(Employee employee) throws DaoException {
-		int generatedId = 0;
+	public Long add(Employee employee) throws DaoException {
+		Long generatedId = null;
 		ResultSet resultSet = null;
 		try {
 			preparedStatement = connection.prepareStatement(SQL_ADD_EMPLOYEE, Statement.RETURN_GENERATED_KEYS);
@@ -75,7 +74,7 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 			preparedStatement.executeUpdate();
 			resultSet = preparedStatement.getGeneratedKeys();
 			if (resultSet.next()) {
-				generatedId = resultSet.getInt(1);
+				generatedId = resultSet.getLong(1);
 			}
 		} catch (SQLException e) {
 			throw new DaoException(ADD_EMPLOYEE_FAIL, e);
@@ -118,7 +117,7 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 	 * @throws DaoException If something fails at DB level
 	 */
 	@Override
-	public void delete(int id) throws DaoException {
+	public void delete(Long id) throws DaoException {
 		DaoUtils.deleteEntity(connection, preparedStatement, id, SQL_DELETE_EMPLOYEE, DELETE_EMPLOYEE_FAIL);
 	}
 
@@ -134,7 +133,7 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 			preparedStatement.setString(1, employee.getFirstName());
 			preparedStatement.setString(2, employee.getLastName());
 			preparedStatement.setString(3, employee.getPosition().name());
-			preparedStatement.setInt(4, employee.getEid());
+			preparedStatement.setLong(4, employee.getEid());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DaoException(UPDATE_EMPLOYEE_FAIL, e);
@@ -150,12 +149,12 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 	 * @throws DaoException If something fails at DB level
 	 */
 	@Override
-	public Employee getById(int id) throws DaoException {
+	public Employee getById(Long id) throws DaoException {
 		ResultSet resultSet = null;
 		Employee employee = null;
 		try {
 			preparedStatement = connection.prepareStatement(SQL_GET_EMPLOYEE_BY_ID);
-			preparedStatement.setInt(1, id);
+			preparedStatement.setLong(1, id);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				employee = new Employee();
@@ -170,14 +169,14 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 		return employee;
 	}
 
-	public void setStatus(int id, String status) throws DaoException {
+	public void setStatus(Long id, String status) throws DaoException {
 		DaoUtils.setEntityStatus(connection, preparedStatement, id, status, SQL_UPDATE_EMPLOYEE_STATUS, UPDATE_EMPLOYEE_STATUS_FAIL);
 	}
 
 
 
 	private Employee setEmployeeParametrs(ResultSet resultSet, Employee employee) throws SQLException {
-		employee.setEid(resultSet.getInt(Column.EMPLOYEES_EID));
+		employee.setEid(resultSet.getLong(Column.EMPLOYEES_EID));
 		employee.setLastName(resultSet.getString(Column.EMPLOYEES_LASTNAME));
 		employee.setFirstName(resultSet.getString(Column.EMPLOYEES_FIRSTNAME));
 		employee.setPosition(Position.valueOf(resultSet.getString(Column.EMPLOYEES_POSITION)));

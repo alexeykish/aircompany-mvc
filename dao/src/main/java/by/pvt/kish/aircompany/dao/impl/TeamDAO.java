@@ -60,13 +60,13 @@ public class TeamDAO extends BaseDAO implements ITeamDAO {
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public void add(int id, List<Integer> team) throws DaoException {
+    public void add(Long id, List<Long> team) throws DaoException {
         try {
             connection.setAutoCommit(false);
             preparedStatement = connection.prepareStatement(SQL_ADD_TEAM);
-            for (Integer i : team) {
-                preparedStatement.setInt(1, i);
-                preparedStatement.setInt(2, id);
+            for (Long i : team) {
+                preparedStatement.setLong(1, i);
+                preparedStatement.setLong(2, id);
                 preparedStatement.executeUpdate();
             }
             connection.commit();
@@ -89,7 +89,7 @@ public class TeamDAO extends BaseDAO implements ITeamDAO {
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public void delete(int id) throws DaoException {
+    public void delete(Long id) throws DaoException {
         deleteEntity(connection, preparedStatement, id, SQL_DELETE_TEAM, DELETE_TEAM_FAIL);
     }
 
@@ -101,15 +101,15 @@ public class TeamDAO extends BaseDAO implements ITeamDAO {
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public List<Employee> getById(int id) throws DaoException {
+    public List<Employee> getById(Long id) throws DaoException {
         ResultSet resultSet = null;
         List<Employee> team = new ArrayList<>();
         try {
             preparedStatement = connection.prepareStatement(SQL_GET_TEAM_BY_ID);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                team.add(EmployeeDAO.getInstance().getById(resultSet.getInt(Column.TEAMS_EID)));
+                team.add(EmployeeDAO.getInstance().getById(resultSet.getLong(Column.TEAMS_EID)));
             }
         } catch (SQLException e) {
             throw new DaoException(GET_TEAM_BY_ID_FAIL, e);
@@ -121,7 +121,7 @@ public class TeamDAO extends BaseDAO implements ITeamDAO {
     }
 
     @Override
-    public int add(Object o) throws DaoException {
+    public Long add(Object o) throws DaoException {
         throw new UnsupportedOperationException();
     }
 

@@ -24,7 +24,7 @@ public class DeleteFlightCommand implements ActionCommand {
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		String className = DeleteFlightCommand.class.getSimpleName();
 		try {
-			int id = RequestHandler.getId(request, "fid");
+			Long id = RequestHandler.getId(request, "fid");
 			FlightService.getInstance().delete(id);
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_DELETE_FLIGHT);
 		} catch (ServiceException e) {

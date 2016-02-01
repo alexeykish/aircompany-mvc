@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class PlaneServiceTest {
 
     private PlaneService planeService = PlaneService.getInstance();
-    private int id;
+    private Long id;
     private Plane testPlane;
 
     @Before
@@ -70,7 +70,7 @@ public class PlaneServiceTest {
     @Test
     public void testGetAll() throws Exception {
         int beforeAddNumber = planeService.getAll().size();
-        int getAllId = planeService.add(testPlane);
+        Long getAllId = planeService.add(testPlane);
         int afterAddNumber = planeService.getAll().size();
         assertEquals("Get all method failed", beforeAddNumber, afterAddNumber-1);
         planeService.delete(getAllId);

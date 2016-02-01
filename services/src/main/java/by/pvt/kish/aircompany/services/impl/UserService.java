@@ -40,7 +40,7 @@ public class UserService extends BaseService<User> implements IUserService {
     }
 
     @Override
-    public int add(User user) throws ServiceException, ServiceLoginException, ServiceValidateException {
+    public Long add(User user) throws ServiceException, ServiceLoginException, ServiceValidateException {
         try {
             String validateResult = userValidator.validate(user);
             if (validateResult != null) {
@@ -68,12 +68,12 @@ public class UserService extends BaseService<User> implements IUserService {
     }
 
     @Override
-    public void delete(int id) throws ServiceException {
+    public void delete(Long id) throws ServiceException {
         deleteEntity(userDAO, id);
     }
 
     @Override
-    public User getById(int id) throws ServiceException {
+    public User getById(Long id) throws ServiceException {
         return getByIdEntity(userDAO, id);
     }
 
@@ -106,7 +106,7 @@ public class UserService extends BaseService<User> implements IUserService {
     }
 
     @Override
-    public boolean checkStatus(int id) throws ServiceException {
+    public boolean checkStatus(Long id) throws ServiceException {
         try {
             return userDAO.checkStatus(id);
         } catch (DaoException e) {
@@ -115,7 +115,7 @@ public class UserService extends BaseService<User> implements IUserService {
     }
 
     @Override
-    public void setStatus(int uid, UserStatus status) throws ServiceException, ServiceValidateException {
+    public void setStatus(Long uid, UserStatus status) throws ServiceException, ServiceValidateException {
         try {
             if (uid <= 0) {
                 throw new ServiceValidateException(Message.ERROR_USER_STATUS);

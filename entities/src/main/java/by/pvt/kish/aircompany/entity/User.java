@@ -17,7 +17,7 @@ import java.io.Serializable;
  * @author Kish Alexey
  */
 public class User implements Serializable {
-    private int uid;
+    private Long uid;
     private String firstName;
     private String lastName;
     private String login;
@@ -38,7 +38,7 @@ public class User implements Serializable {
      * @param userType  - user type (Administrator or dispatcher)
      * @param status    - user status (Online or offline)
      */
-    public User(int uid, String firstName, String lastName, String login, String password, UserType userType, UserStatus status) {
+    public User(Long uid, String firstName, String lastName, String login, String password, UserType userType, UserStatus status) {
         super();
         this.uid = uid;
         this.firstName = firstName;
@@ -56,7 +56,7 @@ public class User implements Serializable {
 
         User user = (User) o;
 
-        if (uid != user.uid) return false;
+        if (uid != null ? !uid.equals(user.uid) : user.uid != null) return false;
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
         if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
         if (login != null ? !login.equals(user.login) : user.login != null) return false;
@@ -69,7 +69,7 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = uid;
+        int result = uid != null ? uid.hashCode() : 0;
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (login != null ? login.hashCode() : 0);
@@ -80,11 +80,11 @@ public class User implements Serializable {
         return result;
     }
 
-    public int getUid() {
+    public Long getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(Long uid) {
         this.uid = uid;
     }
 

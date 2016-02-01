@@ -3,7 +3,6 @@ package by.pvt.kish.aircompany.dao.impl;
 import by.pvt.kish.aircompany.constants.Column;
 import by.pvt.kish.aircompany.dao.BaseDAO;
 import by.pvt.kish.aircompany.dao.IPlaneDAO;
-import by.pvt.kish.aircompany.entity.Flight;
 import by.pvt.kish.aircompany.entity.Plane;
 import by.pvt.kish.aircompany.enums.PlaneStatus;
 import by.pvt.kish.aircompany.enums.Position;
@@ -68,8 +67,8 @@ public class PlaneDAO extends BaseDAO<Plane> implements IPlaneDAO{
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public int add(Plane plane) throws DaoException {
-        int generatedId = 0;
+    public Long add(Plane plane) throws DaoException {
+        Long generatedId = null;
         ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(SQL_ADD_PLANE, Statement.RETURN_GENERATED_KEYS);
@@ -77,7 +76,7 @@ public class PlaneDAO extends BaseDAO<Plane> implements IPlaneDAO{
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                generatedId = resultSet.getInt(1);
+                generatedId = resultSet.getLong(1);
             }
         } catch (SQLException e) {
             throw new DaoException(ADD_PLANE_FAIL, e);
@@ -99,7 +98,7 @@ public class PlaneDAO extends BaseDAO<Plane> implements IPlaneDAO{
         try {
             preparedStatement = connection.prepareStatement(SQL_UPDATE_PLANE);
             preparedStatement = setStatementParametrs(preparedStatement, plane);
-            preparedStatement.setInt(8, plane.getPid());
+            preparedStatement.setLong(8, plane.getPid());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(UPDATE_PLANE_FAIL, e);
@@ -143,12 +142,12 @@ public class PlaneDAO extends BaseDAO<Plane> implements IPlaneDAO{
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public Plane getById(int id) throws DaoException {
+    public Plane getById(Long id) throws DaoException {
         ResultSet resultSet = null;
         Plane plane = null;
         try {
             preparedStatement = connection.prepareStatement(SQL_GET_PLANE_BY_ID);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 plane = new Plane();
@@ -170,7 +169,7 @@ public class PlaneDAO extends BaseDAO<Plane> implements IPlaneDAO{
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public void delete(int id) throws DaoException {
+    public void delete(Long id) throws DaoException {
         deleteEntity(connection, preparedStatement, id, SQL_DELETE_PLANE, DELETE_PLANE_FAIL);
     }
 
@@ -181,7 +180,7 @@ public class PlaneDAO extends BaseDAO<Plane> implements IPlaneDAO{
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public void setStatus(int id, String status) throws DaoException {
+    public void setStatus(Long id, String status) throws DaoException {
         DaoUtils.setEntityStatus(connection, preparedStatement, id, status, SQL_UPDATE_PLANE_STATUS, UPDATE_PLANE_STATUS_FAIL);
     }
 
@@ -197,7 +196,7 @@ public class PlaneDAO extends BaseDAO<Plane> implements IPlaneDAO{
     }
 
     private Plane setPlaneParametrs(ResultSet resultSet, Plane plane) throws SQLException {
-        plane.setPid(resultSet.getInt(Column.PLANES_PID));
+        plane.setPid(resultSet.getLong(Column.PLANES_PID));
         plane.setModel(resultSet.getString(Column.PLANES_MODEL));
         plane.setCapacity(resultSet.getInt(Column.PLANES_CAPACITY));
         plane.setRange(resultSet.getInt(Column.PLANES_RANGE));

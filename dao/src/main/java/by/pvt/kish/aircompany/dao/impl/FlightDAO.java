@@ -23,7 +23,7 @@ import static by.pvt.kish.aircompany.utils.DaoUtils.deleteEntity;
 public class FlightDAO extends BaseDAO<Flight> implements IFlightDAO{
 
     private static final String SQL_ADD_FLIGHT = "INSERT INTO  flights (`date`,`from`,`to`, `pid`) VALUES (?,?,?,?)";
-    private static final String SQL_GET_ALL_FLIGHTS = "SELECT * FROM flights";
+    private static final String SQL_GET_ALL_FLIGHTS = "SELECT * FROM flights ORDER BY `date`";
     private static final String SQL_DELETE_FLIGHT = "DELETE FROM flights WHERE fid = ?";
     private static final String SQL_GET_FLIGHT_BY_ID = "SELECT * FROM flights WHERE fid = ?";
     private static final String SQL_UPDATE_FLIGHT = "UPDATE flights SET `date` = ?, `from` = ?, `to` = ?, `pid` = ?, `status` = ? WHERE fid = ?";
@@ -63,19 +63,19 @@ public class FlightDAO extends BaseDAO<Flight> implements IFlightDAO{
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public int add(Flight flight) throws DaoException {
-        int generatedId = 0;
+    public Long add(Flight flight) throws DaoException {
+        Long generatedId = null;
         ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(SQL_ADD_FLIGHT, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setDate(1, flight.getDate());
-            preparedStatement.setInt(2, flight.getFrom().getAid());
-            preparedStatement.setInt(3, flight.getTo().getAid());
-            preparedStatement.setInt(4, flight.getPlane().getPid());
+            preparedStatement.setLong(2, flight.getFrom().getAid());
+            preparedStatement.setLong(3, flight.getTo().getAid());
+            preparedStatement.setLong(4, flight.getPlane().getPid());
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                generatedId = resultSet.getInt(1);
+                generatedId = resultSet.getLong(1);
             }
         } catch (SQLException e) {
             throw new DaoException(ADD_FLIGHT_FAIL, e);
@@ -118,7 +118,7 @@ public class FlightDAO extends BaseDAO<Flight> implements IFlightDAO{
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public void delete(int id) throws DaoException {
+    public void delete(Long id) throws DaoException {
         deleteEntity(connection, preparedStatement, id, SQL_DELETE_FLIGHT, DELETE_FLIGHT_FAIL);
     }
 
@@ -132,11 +132,11 @@ public class FlightDAO extends BaseDAO<Flight> implements IFlightDAO{
         try {
             preparedStatement = connection.prepareStatement(SQL_UPDATE_FLIGHT);
             preparedStatement.setDate(1, flight.getDate());
-            preparedStatement.setInt(2, flight.getFrom().getAid());
-            preparedStatement.setInt(3, flight.getTo().getAid());
-            preparedStatement.setInt(4, flight.getPlane().getPid());
+            preparedStatement.setLong(2, flight.getFrom().getAid());
+            preparedStatement.setLong(3, flight.getTo().getAid());
+            preparedStatement.setLong(4, flight.getPlane().getPid());
             preparedStatement.setString(5, flight.getStatus().toString());
-            preparedStatement.setInt(6, flight.getFid());
+            preparedStatement.setLong(6, flight.getFid());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(UPDATE_FLIGHT_FAIL, e);
@@ -152,12 +152,12 @@ public class FlightDAO extends BaseDAO<Flight> implements IFlightDAO{
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public Flight getById(int id) throws DaoException {
+    public Flight getById(Long id) throws DaoException {
         ResultSet resultSet = null;
         Flight flight = null;
         try {
             preparedStatement = connection.prepareStatement(SQL_GET_FLIGHT_BY_ID);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 flight = new Flight();
@@ -180,7 +180,7 @@ public class FlightDAO extends BaseDAO<Flight> implements IFlightDAO{
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public List<Flight> getPlaneLastFiveFlights(int id) throws DaoException {
+    public List<Flight> getPlaneLastFiveFlights(Long id) throws DaoException {
         return getLastFiveFlights(id, SQL_GET_PLANES_LAST_FIVE_FLIGHTS, GET_PLANE_FLIGHTS_FAIL);
     }
 
@@ -192,28 +192,28 @@ public class FlightDAO extends BaseDAO<Flight> implements IFlightDAO{
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public List<Flight> getEmployeeLastFiveFlights(int id) throws DaoException {
+    public List<Flight> getEmployeeLastFiveFlights(Long id) throws DaoException {
         return getLastFiveFlights(id, SQL_GET_EMPLOYEES_LAST_FIVE_FLIGHTS, GET_EMPLOYEES_FLIGHTS_FAIL);
     }
 
     private Flight setFlightParametrs(ResultSet resultSet, Flight flight) throws SQLException, DaoException {
-        int fid = resultSet.getInt(Column.FLIGHTS_FID);
+        Long fid = resultSet.getLong(Column.FLIGHTS_FID);
         flight.setFid(fid);
         flight.setDate(resultSet.getDate(Column.FLIGHTS_DATE));
-        flight.setFrom(AirportDAO.getInstance().getById(resultSet.getInt(Column.FLIGHTS_FROM)));
-        flight.setTo(AirportDAO.getInstance().getById(resultSet.getInt(Column.FLIGHTS_TO)));
-        flight.setPlane(PlaneDAO.getInstance().getById(resultSet.getInt(Column.FLIGHTS_PID)));
+        flight.setFrom(AirportDAO.getInstance().getById(resultSet.getLong(Column.FLIGHTS_FROM)));
+        flight.setTo(AirportDAO.getInstance().getById(resultSet.getLong(Column.FLIGHTS_TO)));
+        flight.setPlane(PlaneDAO.getInstance().getById(resultSet.getLong(Column.FLIGHTS_PID)));
         flight.setTeam(TeamDAO.getInstance().getById(fid));
         flight.setStatus(FlightStatus.valueOf(resultSet.getString(Column.FLIGHTS_STATUS)));
         return flight;
     }
 
-    private List<Flight> getLastFiveFlights(int id, String sqlQuery, String failMessage) throws DaoException {
+    private List<Flight> getLastFiveFlights(Long id, String sqlQuery, String failMessage) throws DaoException {
         List<Flight> flights = new ArrayList<>();
         ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Flight flight = new Flight();
