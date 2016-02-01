@@ -17,13 +17,13 @@
 			<tr>
 				<td id="left-content" class="left-content">
 					<div>
-						<%@include file="../elements/_dispmenu.jsp"%>
+						<%@include file="../elements/_adminmenu.jsp"%>
 					</div>
 				</td>
 
 				<td id="right-content" class="right-content">
 					<div>
-						<%@include file="../elements/_plane_report.jsp"%>
+						<%@include file="../elements/_employee_report.jsp"%>
 					</div>
 				</td>
 			</tr>

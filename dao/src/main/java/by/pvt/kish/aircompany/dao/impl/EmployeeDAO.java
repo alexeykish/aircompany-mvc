@@ -6,12 +6,12 @@ package by.pvt.kish.aircompany.dao.impl;
 import by.pvt.kish.aircompany.constants.Column;
 import by.pvt.kish.aircompany.dao.BaseDAO;
 import by.pvt.kish.aircompany.entity.Employee;
+import by.pvt.kish.aircompany.enums.EmployeeStatus;
 import by.pvt.kish.aircompany.enums.Position;
 import by.pvt.kish.aircompany.exceptions.DaoException;
+import by.pvt.kish.aircompany.utils.DaoUtils;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,12 +31,15 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 	private static final String SQL_DELETE_EMPLOYEE = "DELETE FROM employees WHERE eid = ?";
 	private static final String SQL_GET_EMPLOYEE_BY_ID = "SELECT * FROM employees WHERE eid = ?";
 	private static final String SQL_UPDATE_EMPLOYEE = "UPDATE employees SET `first_name` = ?, `last_name` = ?, `position` = ? WHERE eid = ?";
+	private static final String SQL_UPDATE_EMPLOYEE_STATUS = "UPDATE employees SET `status` = ? WHERE eid = ?";
 
 	private static final String ADD_EMPLOYEE_FAIL = "Creating employee failed";
 	private static final String GET_ALL_EMPLOYEES_FAIL = "Get all employees failed";
 	private static final String DELETE_EMPLOYEE_FAIL = "Deleting employee failed";
 	private static final String UPDATE_EMPLOYEE_FAIL = "Updating employee failed";
 	private static final String GET_EMPLOYEE_BY_ID_FAIL = "Getting employee by ID failed";
+	private static final String UPDATE_EMPLOYEE_STATUS_FAIL = "Updating employee status failed";
+
 	private static EmployeeDAO instance;
 
 	private EmployeeDAO() {
@@ -116,7 +119,7 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 	 */
 	@Override
 	public void delete(int id) throws DaoException {
-		deleteEntity(connection, preparedStatement, id, SQL_DELETE_EMPLOYEE, DELETE_EMPLOYEE_FAIL);
+		DaoUtils.deleteEntity(connection, preparedStatement, id, SQL_DELETE_EMPLOYEE, DELETE_EMPLOYEE_FAIL);
 	}
 
 	/**
@@ -167,11 +170,20 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 		return employee;
 	}
 
+	public void setStatus(int id, String status) throws DaoException {
+		DaoUtils.setEntityStatus(connection, preparedStatement, id, status, SQL_UPDATE_EMPLOYEE_STATUS, UPDATE_EMPLOYEE_STATUS_FAIL);
+	}
+
+
+
 	private Employee setEmployeeParametrs(ResultSet resultSet, Employee employee) throws SQLException {
 		employee.setEid(resultSet.getInt(Column.EMPLOYEES_EID));
 		employee.setLastName(resultSet.getString(Column.EMPLOYEES_LASTNAME));
 		employee.setFirstName(resultSet.getString(Column.EMPLOYEES_FIRSTNAME));
 		employee.setPosition(Position.valueOf(resultSet.getString(Column.EMPLOYEES_POSITION)));
+		employee.setStatus(EmployeeStatus.valueOf(resultSet.getString(Column.EMPLOYEES_STATUS)));
 		return employee;
 	}
+
+
 }

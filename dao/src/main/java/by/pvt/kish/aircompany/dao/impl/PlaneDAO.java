@@ -3,10 +3,12 @@ package by.pvt.kish.aircompany.dao.impl;
 import by.pvt.kish.aircompany.constants.Column;
 import by.pvt.kish.aircompany.dao.BaseDAO;
 import by.pvt.kish.aircompany.dao.IPlaneDAO;
+import by.pvt.kish.aircompany.entity.Flight;
 import by.pvt.kish.aircompany.entity.Plane;
 import by.pvt.kish.aircompany.enums.PlaneStatus;
 import by.pvt.kish.aircompany.enums.Position;
 import by.pvt.kish.aircompany.exceptions.DaoException;
+import by.pvt.kish.aircompany.utils.DaoUtils;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +32,6 @@ public class PlaneDAO extends BaseDAO<Plane> implements IPlaneDAO{
     private static final String SQL_DELETE_PLANE = "DELETE FROM planes WHERE pid = ?";
     private static final String SQL_GET_PLANE_BY_ID = "SELECT * FROM  planes WHERE pid = ?";
     private static final String SQL_UPDATE_PLANE = "UPDATE planes SET `model` = ?, `capacity` = ?, `range` = ?, `num_pilots` = ?, `num_nav` = ?, `num_radio` = ?, `num_stew` = ? WHERE pid = ?";
-    private static final String SQL_GET_PLANE_FLIGHTS = "SELECT fid FROM flights WHERE pid = ?";
     private static final String SQL_UPDATE_PLANE_STATUS = "UPDATE planes SET `status` = ? WHERE pid = ?";
 
     private static final String ADD_PLANE_FAIL = "Creating plane failed";
@@ -38,7 +39,6 @@ public class PlaneDAO extends BaseDAO<Plane> implements IPlaneDAO{
     private static final String DELETE_PLANE_FAIL = "Deleting plane failed";
     private static final String UPDATE_PLANE_FAIL = "Updating plane failed";
     private static final String GET_PLANE_BY_ID_FAIL = "Getting plane by ID failed";
-    private static final String GET_PLANE_FLIGHTS_FAIL = "Getting plane flights failed";
     private static final String UPDATE_PLANE_STATUS_FAIL = "Updating plane status failed";
 
 
@@ -175,50 +175,14 @@ public class PlaneDAO extends BaseDAO<Plane> implements IPlaneDAO{
     }
 
     /**
-     * Check if there are any flights associated with plane matching the given ID
-     *
-     * @param id - The ID of the plane
-     * @return - false if there are no flights, true - there are flights associated with this plane
-     * @throws DaoException If something fails at DB level
-     */
-    @Override
-    public boolean checkFlights(int id) throws DaoException {
-        ResultSet resultSet = null;
-        boolean result = true;
-        try {
-            preparedStatement = connection.prepareStatement(SQL_GET_PLANE_FLIGHTS);
-            preparedStatement.setInt(1, id);
-            resultSet = preparedStatement.executeQuery();
-            if (!resultSet.next()) {
-                result = false;
-            }
-        } catch (SQLException e) {
-            throw new DaoException(GET_PLANE_FLIGHTS_FAIL, e);
-        } finally {
-            closeResultSet(resultSet);
-            closePreparedStatement(preparedStatement);
-        }
-        return result;
-    }
-
-    /**
      * Update particular plane status int the DB matching the given ID
      *
      * @param id - The ID of the flight
      * @throws DaoException If something fails at DB level
      */
     @Override
-    public void setStatus(int id, PlaneStatus status) throws DaoException {
-        try {
-            preparedStatement = connection.prepareStatement(SQL_UPDATE_PLANE_STATUS);
-            preparedStatement.setString(1, status.toString());
-            preparedStatement.setInt(2, id);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DaoException(UPDATE_PLANE_STATUS_FAIL, e);
-        } finally {
-            closePreparedStatement(preparedStatement);
-        }
+    public void setStatus(int id, String status) throws DaoException {
+        DaoUtils.setEntityStatus(connection, preparedStatement, id, status, SQL_UPDATE_PLANE_STATUS, UPDATE_PLANE_STATUS_FAIL);
     }
 
     private PreparedStatement setStatementParametrs(PreparedStatement preparedStatement, Plane plane) throws SQLException {

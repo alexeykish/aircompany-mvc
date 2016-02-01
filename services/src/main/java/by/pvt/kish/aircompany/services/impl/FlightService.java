@@ -1,7 +1,9 @@
 package by.pvt.kish.aircompany.services.impl;
 
+import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.dao.impl.FlightDAO;
 import by.pvt.kish.aircompany.entity.Flight;
+import by.pvt.kish.aircompany.exceptions.DaoException;
 import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.exceptions.ServiceValidateException;
 import by.pvt.kish.aircompany.services.BaseService;
@@ -57,5 +59,27 @@ public class FlightService extends BaseService<Flight> {
     @Override
     public Flight getById(int id) throws ServiceException {
         return getByIdEntity(flightDAO, id);
+    }
+
+    public List getPlaneLastFiveFlights(int id) throws ServiceException {
+        if (id < 0) {
+            throw new ServiceException(Message.ERROR_ID_MISSING);
+        }
+        try {
+            return FlightDAO.getInstance().getPlaneLastFiveFlights(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+    public List getEmployeeLastFiveFlights(int id) throws ServiceException {
+        if (id < 0) {
+            throw new ServiceException(Message.ERROR_ID_MISSING);
+        }
+        try {
+            return FlightDAO.getInstance().getEmployeeLastFiveFlights(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
     }
 }

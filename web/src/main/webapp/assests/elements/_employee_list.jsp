@@ -10,6 +10,7 @@
             <th>LASTNAME</th>
             <th>FIRSTNAME</th>
             <th>POSITION</th>
+            <th>STATUS</th>
         </tr>
         <c:forEach items="${requestScope.employees}" var="employee">
             <tr>
@@ -17,17 +18,12 @@
                 <td>${employee.lastName}</td>
                 <td>${employee.firstName}</td>
                 <td>${employee.position}</td>
+                <td>${employee.status}</td>
                 <td style="width: 70px;">
                     <form action="controller" method="post">
-                        <input type="hidden" name="command" value="delete_employee_command"/>
+                        <input type="hidden" name="command" value="employee_report_command"/>
                         <input type="hidden" name="eid" value="${employee.eid}"/>
-                        <input class="table-button" type="submit" name="submit" value="delete"/>
-                    </form>
-                </td>
-                <td style="width: 70px;">
-                    <form action="updateemployee" method="post">
-                        <input type="hidden" name="eid" value="${employee.eid}"/>
-                        <input class="table-button" type="submit" name="submit" value="edit"/>
+                        <input class="table-button" type="submit" name="submit" value="details"/>
                     </form>
                 </td>
             </tr>

@@ -1,5 +1,6 @@
 package by.pvt.kish.aircompany.utils;
 
+import by.pvt.kish.aircompany.enums.EmployeeStatus;
 import by.pvt.kish.aircompany.exceptions.DaoException;
 import org.apache.log4j.Logger;
 
@@ -23,15 +24,39 @@ public class DaoUtils {
      *
      * @param connection        - DB connection
      * @param preparedStatement - processed statement
-     * @param id                - The ID of the entity ti be deleted
-     * @param sqlRequest        - The SQL request to the DB to delete the entity
-     * @param failMessage       - The message tj throw it in exception when SQLException happens
+     * @param id                - The ID of the entity to be deleted
+     * @param sqlQuery          - The SQL request to the DB to delete the entity
+     * @param failMessage       - The message to throw it in exception when SQLException happens
      * @throws DaoException If something fails at DB level
      */
-    public static void deleteEntity(Connection connection, PreparedStatement preparedStatement, int id, String sqlRequest, String failMessage) throws DaoException {
+    public static void deleteEntity(Connection connection, PreparedStatement preparedStatement, int id, String sqlQuery, String failMessage) throws DaoException {
         try {
-            preparedStatement = connection.prepareStatement(sqlRequest);
+            preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(failMessage, e);
+        } finally {
+            closePreparedStatement(preparedStatement);
+        }
+    }
+
+    /**
+     * Set the given entity status by ID from the DB
+     *
+     * @param connection        - DB connection
+     * @param preparedStatement - processed statement
+     * @param id                - The ID of the entity to be setted
+     * @param status            - The status of the entity to be setted
+     * @param sqlQuery          - The SQL request to the DB to delete the entity
+     * @param failMessage       - The message to throw it in exception when SQLException happens
+     * @throws DaoException If something fails at DB level
+     */
+    public static void setEntityStatus(Connection connection, PreparedStatement preparedStatement, int id, String status, String sqlQuery, String failMessage) throws DaoException {
+        try {
+            preparedStatement = connection.prepareStatement(sqlQuery);
+            preparedStatement.setString(1, status);
+            preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(failMessage, e);

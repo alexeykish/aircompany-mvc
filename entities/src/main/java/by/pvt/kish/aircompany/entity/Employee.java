@@ -1,5 +1,6 @@
 package by.pvt.kish.aircompany.entity;
 
+import by.pvt.kish.aircompany.enums.EmployeeStatus;
 import by.pvt.kish.aircompany.enums.Position;
 
 import java.io.Serializable;
@@ -17,6 +18,7 @@ public class Employee implements Serializable {
     private String firstName;
     private String lastName;
     private Position position;
+    private EmployeeStatus status;
 
     public Employee() {
     }
@@ -26,13 +28,15 @@ public class Employee implements Serializable {
      * @param firstName - employee firstname
      * @param lastName  - employee lastname
      * @param position  - employee position in a flight team
+     * @param status    - employee available status
      */
-    public Employee(int eid, String firstName, String lastName, Position position) {
+    public Employee(int eid, String firstName, String lastName, Position position, EmployeeStatus status) {
         super();
         this.eid = eid;
         this.firstName = firstName;
         this.lastName = lastName;
         this.position = position;
+        this.status = status;
     }
 
     @Override
@@ -45,7 +49,8 @@ public class Employee implements Serializable {
         if (eid != employee.eid) return false;
         if (firstName != null ? !firstName.equals(employee.firstName) : employee.firstName != null) return false;
         if (lastName != null ? !lastName.equals(employee.lastName) : employee.lastName != null) return false;
-        return position == employee.position;
+        if (position != employee.position) return false;
+        return status == employee.status;
 
     }
 
@@ -55,6 +60,7 @@ public class Employee implements Serializable {
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (position != null ? position.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
 
@@ -90,4 +96,11 @@ public class Employee implements Serializable {
         this.position = position;
     }
 
+    public EmployeeStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EmployeeStatus status) {
+        this.status = status;
+    }
 }

@@ -62,18 +62,7 @@ public class PlaneService extends BaseService<Plane> {
         return getByIdEntity(planeDAO, id);
     }
 
-    public boolean checkFlights(int id) throws ServiceException {
-        if (id < 0) {
-            throw new ServiceException(Message.ERROR_ID_MISSING);
-        }
-        try {
-            return PlaneDAO.getInstance().checkFlights(id);
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
-        }
-    }
-
-    public void setStatus(int id, PlaneStatus status) throws ServiceException {
+    public void setStatus(int id, String status) throws ServiceException {
         if (id < 0) {
             throw new ServiceException(Message.ERROR_ID_MISSING);
         }

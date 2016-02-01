@@ -3,50 +3,31 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <div style="margin:5px;">
-    <h2>Plane report: #${requestScope.plane.pid}</h2>
+    <h2>Employee report: #${requestScope.employee.eid}</h2>
     <table class="input-label">
         <tr>
-            <td>Model:</td>
-            <td>${requestScope.plane.model}</td>
+            <td>Firstname:</td>
+            <td>${requestScope.employee.firstName}</td>
         </tr>
         <tr>
-            <td>Passenger capacity:</td>
-            <td>${requestScope.plane.capacity}</td>
+            <td>Lastname:</td>
+            <td>${requestScope.employee.lastName}</td>
         </tr>
         <tr>
-            <td>Flight range:</td>
-            <td>${requestScope.plane.range}</td>
-        </tr>
-        <tr>
-            <td>Flight team:</td>
-        </tr>
-        <tr>
-            <td>Number of pilots:</td>
-            <td>${requestScope.team['PILOT']}</td>
-        </tr>
-        <tr>
-            <td>Number of navigators:</td>
-            <td>${requestScope.team['NAVIGATOR']}</td>
-        </tr>
-        <tr>
-            <td>Number of radiooperators:</td>
-            <td>${requestScope.team['RADIOOPERATOR']}</td>
-        </tr>
-        <tr>
-            <td>Number of stewardess:</td>
-            <td>${requestScope.team['STEWARDESS']}</td>
+            <td>Position:</td>
+            <td>${requestScope.employee.position}</td>
         </tr>
     </table>
     <div>
         <form action="controller" method="post">
-            <h4>Plane status is: ${requestScope.plane.status}</h4>
+            <h4>Employee status is: ${requestScope.employee.status}</h4>
             <select class="inputForm" name="status" title="Status">
                 <c:forEach items="${requestScope.statuses}" var="status">
                     <option value="${status}">${status}</option>
                 </c:forEach>
             </select>
-            <input type="hidden" name="command" value="set_plane_status_command"/>
-            <input type="hidden" name="pid" value="${requestScope.plane.pid}"/>
+            <input type="hidden" name="command" value="set_employee_status_command"/>
+            <input type="hidden" name="eid" value="${requestScope.employee.eid}"/>
             <input class="button" type="submit" name="submit" value="set status"/>
         </form>
     </div>
@@ -54,18 +35,18 @@
         <c:choose>
             <c:when test="${requestScope.permissionChangeDeleteStatus =='false'}">
                 <form action="controller" method="post">
-                    <input type="hidden" name="command" value="delete_plane_command"/>
-                    <input type="hidden" name="pid" value="${requestScope.plane.pid}"/>
+                    <input type="hidden" name="command" value="delete_employee_command"/>
+                    <input type="hidden" name="eid" value="${requestScope.employee.eid}"/>
                     <input class="button" type="submit" name="submit" value="delete"/>
                 </form>
-                <form action="updateplane" method="post">
-                    <input type="hidden" name="pid" value="${requestScope.plane.pid}"/>
+                <form action="updateemployee" method="post">
+                    <input type="hidden" name="eid" value="${requestScope.employee.eid}"/>
                     <input class="button" type="submit" name="submit" value="edit"/>
                 </form>
             </c:when>
             <c:otherwise>
-                <h5>It is possible to change or delete plane details if there are no flights associated with this plane</h5>
-                <h4>Last five plane flights</h4>
+                <h5>It is possible to change or delete employee details if there are no flights associated with this employee</h5>
+                <h4>Last five employee flights</h4>
                 <table class="list">
                     <tr>
                         <th>ID</th>

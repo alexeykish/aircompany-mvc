@@ -23,6 +23,8 @@ public enum CommandEnum {
     GET_ALL_EMPLOYEES_COMMAND 	    	{	{this.command = new GetAllEmployeesCommand();   	}	},
     DELETE_EMPLOYEE_COMMAND			 	{	{this.command = new DeleteEmployeeCommand();	    }	},
     UPDATE_EMPLOYEE_COMMAND            	{	{this.command = new UpdateEmployeeCommand();	    }	},
+    EMPLOYEE_REPORT_COMMAND            	{	{this.command = new EmployeeReportCommand();	    }	},
+    SET_EMPLOYEE_STATUS_COMMAND        	{	{this.command = new SetEmployeeStatusCommand();     }	},
 
     REGISTER_USER_COMMAND 			 	{   {this.command = new RegisterUserCommand();	    	}	},
     LOGIN_USER_COMMAND 				 	{   {this.command = new LoginUserCommand();		    	}	},

@@ -2,6 +2,7 @@ package by.pvt.kish.aircompany.dao.impl;
 
 import by.pvt.kish.aircompany.constants.Column;
 import by.pvt.kish.aircompany.dao.BaseDAO;
+import by.pvt.kish.aircompany.dao.IFlightDAO;
 import by.pvt.kish.aircompany.entity.Flight;
 import by.pvt.kish.aircompany.enums.FlightStatus;
 import by.pvt.kish.aircompany.exceptions.DaoException;
@@ -19,19 +20,24 @@ import static by.pvt.kish.aircompany.utils.DaoUtils.deleteEntity;
  *
  * @author Kish Alexey
  */
-public class FlightDAO extends BaseDAO<Flight> {
+public class FlightDAO extends BaseDAO<Flight> implements IFlightDAO{
 
     private static final String SQL_ADD_FLIGHT = "INSERT INTO  flights (`date`,`from`,`to`, `pid`) VALUES (?,?,?,?)";
     private static final String SQL_GET_ALL_FLIGHTS = "SELECT * FROM flights";
     private static final String SQL_DELETE_FLIGHT = "DELETE FROM flights WHERE fid = ?";
     private static final String SQL_GET_FLIGHT_BY_ID = "SELECT * FROM flights WHERE fid = ?";
     private static final String SQL_UPDATE_FLIGHT = "UPDATE flights SET `date` = ?, `from` = ?, `to` = ?, `pid` = ?, `status` = ? WHERE fid = ?";
+    private static final String SQL_GET_PLANES_LAST_FIVE_FLIGHTS = "SELECT * FROM flights WHERE pid = ? ORDER BY `date` DESC LIMIT 5";
+    private static final String SQL_GET_EMPLOYEES_LAST_FIVE_FLIGHTS = "SELECT * FROM teams JOIN flights ON flights.fid=teams.t_fid WHERE t_eid = ? ORDER BY `date` DESC LIMIT 5";
 
     private static final String ADD_FLIGHT_FAIL = "Creating flight failed";
     private static final String GET_ALL_FLIGHTS_FAIL = "Get all flights failed";
     private static final String DELETE_FLIGHT_FAIL = "Deleting flight failed";
     private static final String UPDATE_FLIGHT_FAIL = "Updating flight failed";
     private static final String GET_FLIGHT_BY_ID_FAIL = "Getting flight by ID failed";
+    private static final String GET_PLANE_FLIGHTS_FAIL = "Getting planes flights failed";
+    private static final String GET_EMPLOYEES_FLIGHTS_FAIL = "Getting employees flights failed";
+
 
     private static FlightDAO instance;
 
@@ -166,6 +172,30 @@ public class FlightDAO extends BaseDAO<Flight> {
         return flight;
     }
 
+    /**
+     * Returns a list of five last flights of the concrete plane from the DB
+     *
+     * @param id - The ID of the plane
+     * @return - the list of last five flight of the concrete plane
+     * @throws DaoException If something fails at DB level
+     */
+    @Override
+    public List<Flight> getPlaneLastFiveFlights(int id) throws DaoException {
+        return getLastFiveFlights(id, SQL_GET_PLANES_LAST_FIVE_FLIGHTS, GET_PLANE_FLIGHTS_FAIL);
+    }
+
+    /**
+     * Returns a list of five last flights of the concrete employee from the DB
+     *
+     * @param id - The ID of the plane
+     * @return - the list of last five flight of the concrete employee
+     * @throws DaoException If something fails at DB level
+     */
+    @Override
+    public List<Flight> getEmployeeLastFiveFlights(int id) throws DaoException {
+        return getLastFiveFlights(id, SQL_GET_EMPLOYEES_LAST_FIVE_FLIGHTS, GET_EMPLOYEES_FLIGHTS_FAIL);
+    }
+
     private Flight setFlightParametrs(ResultSet resultSet, Flight flight) throws SQLException, DaoException {
         int fid = resultSet.getInt(Column.FLIGHTS_FID);
         flight.setFid(fid);
@@ -176,5 +206,26 @@ public class FlightDAO extends BaseDAO<Flight> {
         flight.setTeam(TeamDAO.getInstance().getById(fid));
         flight.setStatus(FlightStatus.valueOf(resultSet.getString(Column.FLIGHTS_STATUS)));
         return flight;
+    }
+
+    private List<Flight> getLastFiveFlights(int id, String sqlQuery, String failMessage) throws DaoException {
+        List<Flight> flights = new ArrayList<>();
+        ResultSet resultSet = null;
+        try {
+            preparedStatement = connection.prepareStatement(sqlQuery);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Flight flight = new Flight();
+                flight = setFlightParametrs(resultSet, flight);
+                flights.add(flight);
+            }
+        } catch (SQLException e) {
+            throw new DaoException(failMessage, e);
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+        }
+        return flights;
     }
 }

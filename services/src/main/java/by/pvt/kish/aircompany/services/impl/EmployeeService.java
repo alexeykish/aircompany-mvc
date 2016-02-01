@@ -1,7 +1,11 @@
 package by.pvt.kish.aircompany.services.impl;
 
+import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.dao.impl.EmployeeDAO;
+import by.pvt.kish.aircompany.dao.impl.PlaneDAO;
 import by.pvt.kish.aircompany.entity.Employee;
+import by.pvt.kish.aircompany.enums.EmployeeStatus;
+import by.pvt.kish.aircompany.exceptions.DaoException;
 import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.exceptions.ServiceValidateException;
 import by.pvt.kish.aircompany.services.BaseService;
@@ -57,5 +61,16 @@ public class EmployeeService extends BaseService<Employee> {
     @Override
     public Employee getById(int id) throws ServiceException {
         return getByIdEntity(employeeDAO, id);
+    }
+
+    public void setStatus(int id, String status) throws ServiceException {
+        if (id < 0) {
+            throw new ServiceException(Message.ERROR_ID_MISSING);
+        }
+        try {
+            EmployeeDAO.getInstance().setStatus(id, status);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
     }
 }
