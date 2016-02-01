@@ -63,7 +63,7 @@ public class FlightValidator implements IValidator<Flight> {
     }
 
     /**
-     * The method checks the date of departure, it woild not be the in the past
+     * The method checks the date of departure, it would not be the in the past
      *
      * @param flight - Flight object being checked
      * @return - false, if everything checks out correctly; true - if the data is invalid

@@ -18,6 +18,7 @@ public enum CommandEnum {
     GET_ALL_FLIGHTS_COMMAND 		 	{	{this.command = new GetAllFlightsCommand();		    }	},
     DELETE_FLIGHT_COMMAND 			 	{	{this.command = new DeleteFlightCommand();	    	}	},
     UPDATE_FLIGHT_COMMAND   		    {	{this.command = new UpdateFlightCommand();	    	}	},
+    FLIGHT_REPORT_COMMAND            	{	{this.command = new FlightReportCommand();	        }	},
 
     ADD_EMPLOYEE_COMMAND 			 	{   {this.command = new AddEmployeeCommand();		    }	},
     GET_ALL_EMPLOYEES_COMMAND 	    	{	{this.command = new GetAllEmployeesCommand();   	}	},

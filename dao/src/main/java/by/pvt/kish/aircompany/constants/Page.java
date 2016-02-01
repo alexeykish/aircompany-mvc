@@ -33,5 +33,5 @@ public class Page {
 
     public static final String PLANE_REPORT = "/assests/pages/plane_report.jsp";
     public static final String EMPLOYEE_REPORT = "/assests/pages/employee_report.jsp";
-
+    public static final String FLIGHT_REPORT = "/assests/pages/flight_report.jsp";
 }

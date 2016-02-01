@@ -101,8 +101,8 @@ public class FlightDAO extends BaseDAO<Flight> implements IFlightDAO{
             while (resultSet.next()) {
                 Flight flight = new Flight();
                 flight = setFlightParametrs(resultSet, flight);
-                flights.add(flight);
-            }
+            flights.add(flight);
+        }
         } catch (SQLException e) {
             throw new DaoException(GET_ALL_FLIGHTS_FAIL, e);
         } finally {

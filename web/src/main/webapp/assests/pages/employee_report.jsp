@@ -17,7 +17,7 @@
 			<tr>
 				<td id="left-content" class="left-content">
 					<div>
-						<%@include file="../elements/_adminmenu.jsp"%>
+						<%@include file="../elements/_dispmenu.jsp"%>
 					</div>
 				</td>
 

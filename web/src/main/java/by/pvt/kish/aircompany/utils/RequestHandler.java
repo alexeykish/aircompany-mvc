@@ -182,10 +182,10 @@ public class RequestHandler {
     }
 
     public static List<Long> getTeam(HttpServletRequest request, int count) {
-        List<Long> team = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            team.add(Long.parseLong(request.getParameter(String.valueOf(i))));
-        }
-        return team;
+            List<Long> team = new ArrayList<>();
+            for (int i = 0; i < count; i++) {
+                team.add(Long.parseLong(request.getParameter(String.valueOf(i))));
+            }
+            return team;
     }
 }

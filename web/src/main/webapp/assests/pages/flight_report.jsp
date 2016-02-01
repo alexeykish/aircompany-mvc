@@ -23,7 +23,7 @@
 
 				<td id="right-content" class="right-content">
 					<div>
-						<%@include file="../elements/_plane_report.jsp"%>
+						<%@include file="../elements/_flight_report.jsp"%>
 					</div>
 				</td>
 			</tr>
