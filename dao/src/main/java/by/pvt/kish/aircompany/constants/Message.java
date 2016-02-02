@@ -47,6 +47,6 @@ public class Message {
     public static final String ERROR_USER_STATUS = "Set user status failed";
     public static final String ERROR_FLIGHT_DATE = "Adding or updating of the flight prohibited, when departure date is earlier than the current";
     public static final String ERROR_STATUS = "Empty status in request";
-
+    public static final String ERROR_TEAM_MEMBER_VALID = "Employee is already busy in the other team at this day";
 }
 

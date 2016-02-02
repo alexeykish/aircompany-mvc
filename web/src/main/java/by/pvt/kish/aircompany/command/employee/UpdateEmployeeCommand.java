@@ -28,7 +28,9 @@ public class UpdateEmployeeCommand implements ActionCommand {
 		try {
 			Employee employee = RequestHandler.getEmployee(request);
             EmployeeService.getInstance().update(employee);
+
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_UPDATE_EMPLOYEE);
+
 			return Page.MAIN;
 		} catch (ServiceException e) {
 			return ErrorHandler.returnErrorPage(e.getMessage(), className);

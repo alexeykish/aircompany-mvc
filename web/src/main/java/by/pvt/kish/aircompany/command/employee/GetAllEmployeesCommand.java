@@ -25,6 +25,7 @@ public class GetAllEmployeesCommand implements ActionCommand {
 		String className = GetAllEmployeesCommand.class.getName();
 		try {
 			List<Employee> employees = EmployeeService.getInstance().getAll();
+
 			request.setAttribute(Attribute.EMPLOYEES_ATTRIBUTE, employees);
 		} catch (ServiceException e) {
 			return ErrorHandler.returnErrorPage(e.getMessage(), className);

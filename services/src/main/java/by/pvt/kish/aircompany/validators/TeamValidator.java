@@ -5,12 +5,15 @@ package by.pvt.kish.aircompany.validators;
 
 import by.pvt.kish.aircompany.constants.Message;
 import by.pvt.kish.aircompany.entity.Employee;
+import by.pvt.kish.aircompany.entity.Flight;
 import by.pvt.kish.aircompany.entity.Plane;
 import by.pvt.kish.aircompany.enums.Position;
 import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.services.impl.EmployeeService;
 import by.pvt.kish.aircompany.services.impl.FlightService;
+import by.pvt.kish.aircompany.services.impl.TeamService;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -28,6 +31,7 @@ public class TeamValidator {
      * <li>the presence of empty fields</li>
      * <li>one and the same employee should not be in command at several positions</li>
      * <li>each employee must be located at a position corresponding to its position</li>
+     * <li>each employee must be free from another flights at flights date</li>
      *
      * @param id   - The flight id
      * @param team - The flight team being checked
@@ -43,8 +47,12 @@ public class TeamValidator {
         if (checkPositions(id, team)) {
             return Message.ERROR_TEAM_POSITIONS_VALID;
         }
+        if (checkEmployee(id, team)) {
+            return Message.ERROR_TEAM_MEMBER_VALID;
+        }
         return null;
     }
+
 
     /**
      * The method checks the position of employees to their positions on the team
@@ -109,5 +117,15 @@ public class TeamValidator {
     private static boolean checkEntry(List<Long> team) {
         Set<Long> set = new HashSet<>(team);
         return set.size() != team.size();
+    }
+
+    public static boolean checkEmployee(Long id, List<Long> team) throws ServiceException {
+        Date flightDate = FlightService.getInstance().getById(id).getDate();
+        for (Long eid : team) {
+            if (TeamService.getInstance().checkEmployeeAvailability(eid, flightDate)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -1,23 +1,59 @@
 package by.pvt.kish.aircompany.validators;
 
 import by.pvt.kish.aircompany.entity.Flight;
+import by.pvt.kish.aircompany.enums.FlightStatus;
 import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.services.impl.FlightService;
+import org.apache.log4j.Logger;
 
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Kish Alexey
  */
 public class FlightStatusValidator {
 
+    private static Logger logger = Logger.getLogger(FlightStatusValidator.class.getName());
+    private static final String PAST = "Past";
+    private static final String TODAY = "Today";
+    private static final String FUTURE = "Future";
+    private static final String MATCHED = "Matched";
+    private static final String EMPTY = "Empty";
+
     public static void updateFlightsStatus() throws ServiceException {
         List<Flight> flights = FlightService.getInstance().getAll();
         for (Flight flight : flights) {
-            System.out.println("#" + flight.getFid() + ", Flight date is: " + flight.getDate() + ": " + checkDate(flight) + ", Team: " + checkTeam(flight));
+            if (checkDate(flight).equals(FUTURE) && checkTeam(flight).equals(EMPTY)) {
+                if (flight.getStatus() != (FlightStatus.CREATED)){
+                    FlightService.getInstance().setStatus(flight.getFid(), FlightStatus.CREATED.toString());
+                    logger.info("Flight #" + flight.getFid() + " status changed to " + FlightStatus.CREATED);
+                }
+            } else if (checkDate(flight).equals(FUTURE) && checkTeam(flight).equals(MATCHED)) {
+                if (flight.getStatus() != (FlightStatus.READY)){
+                    FlightService.getInstance().setStatus(flight.getFid(), FlightStatus.READY.toString());
+                    logger.info("Flight #" + flight.getFid() + " status changed to " + FlightStatus.READY);
+                }
+            } else if (checkDate(flight).equals(TODAY) && checkTeam(flight).equals(EMPTY)) {
+                if (flight.getStatus() != (FlightStatus.CANCELED)){
+                    FlightService.getInstance().setStatus(flight.getFid(), FlightStatus.CANCELED.toString());
+                    logger.info("Flight #" + flight.getFid() + " status changed to " + FlightStatus.CANCELED);
+                }
+            } else if (checkDate(flight).equals(TODAY) && checkTeam(flight).equals(MATCHED)) {
+                if (flight.getStatus() != (FlightStatus.DEPARTED)){
+                    FlightService.getInstance().setStatus(flight.getFid(), FlightStatus.DEPARTED.toString());
+                    logger.info("Flight #" + flight.getFid() + " status changed to " + FlightStatus.DEPARTED);
+                }
+            } else if (checkDate(flight).equals(PAST) && checkTeam(flight).equals(EMPTY)) {
+                if (flight.getStatus() != (FlightStatus.CANCELED)){
+                    FlightService.getInstance().setStatus(flight.getFid(), FlightStatus.CANCELED.toString());
+                    logger.info("Flight #" + flight.getFid() + " status changed to " + FlightStatus.CANCELED);
+                }
+            } else if (checkDate(flight).equals(PAST) && checkTeam(flight).equals(MATCHED)) {
+                if (flight.getStatus() != (FlightStatus.ARRIVAL)){
+                    FlightService.getInstance().setStatus(flight.getFid(), FlightStatus.ARRIVAL.toString());
+                    logger.info("Flight #" + flight.getFid() + " status changed to " + FlightStatus.ARRIVAL);
+                }
+            }
         }
     }
 
@@ -26,19 +62,19 @@ public class FlightStatusValidator {
         java.util.Date todayDate = new java.util.Date(System.currentTimeMillis());
         java.util.Date flightDate = flight.getDate();
         if (yesterdayDate.after(flightDate)) {
-            return "Yesterday";
+            return PAST;
         } else if (todayDate.before(flightDate)) {
-            return "Tomorrow";
+            return FUTURE;
         } else {
-            return "Today";
+            return TODAY;
         }
     }
 
     private static String checkTeam(Flight flight) {
         if (flight.getTeam().size() > 0) {
-            return "Matched";
+            return MATCHED;
         } else {
-            return "Empty";
+            return EMPTY;
         }
     }
 }

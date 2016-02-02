@@ -10,6 +10,7 @@
             <th>To</th>
             <%--<th>Team</th>--%>
             <th>Plane</th>
+            <th>Status</th>
         </tr>
         <c:forEach items="${requestScope.flights}" var="flight">
             <tr>

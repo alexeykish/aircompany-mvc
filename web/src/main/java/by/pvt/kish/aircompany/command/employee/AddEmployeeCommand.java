@@ -25,7 +25,9 @@ public class AddEmployeeCommand implements ActionCommand {
         try {
 			Employee employee = RequestHandler.getEmployee(request);
             EmployeeService.getInstance().add(employee);
+
             request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_ADD_EMPLOYEE);
+
 			return Page.MAIN;
 		} catch (ServiceException e) {
 			return ErrorHandler.returnErrorPage(e.getMessage(), className);

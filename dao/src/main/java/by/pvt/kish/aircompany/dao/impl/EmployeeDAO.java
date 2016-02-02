@@ -31,6 +31,12 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 	private static final String SQL_GET_EMPLOYEE_BY_ID = "SELECT * FROM employees WHERE eid = ?";
 	private static final String SQL_UPDATE_EMPLOYEE = "UPDATE employees SET `first_name` = ?, `last_name` = ?, `position` = ? WHERE eid = ?";
 	private static final String SQL_UPDATE_EMPLOYEE_STATUS = "UPDATE employees SET `status` = ? WHERE eid = ?";
+	private static final String SQL_GET_ALL_AVAILABLE_EMPLOYEES = "SELECT * FROM employees " +
+																	"WHERE eid NOT IN (" +
+																	"SELECT t_eid FROM teams " +
+																	"JOIN flights on flights.fid=teams.t_fid " +
+																	"WHERE  flights.date = ?)) " +
+																	"AND (employees.`status` <> 'BLOCKED')";
 
 	private static final String ADD_EMPLOYEE_FAIL = "Creating employee failed";
 	private static final String GET_ALL_EMPLOYEES_FAIL = "Get all employees failed";
@@ -38,6 +44,8 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 	private static final String UPDATE_EMPLOYEE_FAIL = "Updating employee failed";
 	private static final String GET_EMPLOYEE_BY_ID_FAIL = "Getting employee by ID failed";
 	private static final String UPDATE_EMPLOYEE_STATUS_FAIL = "Updating employee status failed";
+	private static final String GET_ALL_AVAILABLE_EMPLOYEES_FAIL = "Getting all available employees failed";;
+
 
 	private static EmployeeDAO instance;
 
@@ -112,6 +120,33 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 	}
 
 	/**
+	 * Returns a list of all available employees at this date from the DB
+	 * @param date - The date of the flight
+	 * @return - a list of all available employees at this date from the DB
+	 * @throws DaoException If something fails at DB level
+	 */
+	public List<Employee> getAllAvailable(Date date) throws DaoException {
+		ResultSet resultSet = null;
+		List<Employee> employees = new ArrayList<>();
+		try {
+			preparedStatement = connection.prepareStatement(SQL_GET_ALL_AVAILABLE_EMPLOYEES);
+			preparedStatement.setDate(1, date);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Employee employee = new Employee();
+				employee = setEmployeeParametrs(resultSet, employee);
+				employees.add(employee);
+			}
+		} catch (SQLException e) {
+			throw new DaoException(GET_ALL_AVAILABLE_EMPLOYEES_FAIL, e);
+		} finally {
+			closeResultSet(resultSet);
+			closePreparedStatement(preparedStatement);
+		}
+		return employees;
+	}
+
+	/**
 	 * Delete the given employee from the DB
 	 * @param id - The ID of the employee to be deleted from the DB
 	 * @throws DaoException If something fails at DB level
@@ -169,11 +204,15 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 		return employee;
 	}
 
+	/**
+	 * Set employees status to the DB
+	 * @param id - The ID of the employee
+	 * @param status - The status to be changed
+	 * @throws DaoException If something fails at DB level
+	 */
 	public void setStatus(Long id, String status) throws DaoException {
 		DaoUtils.setEntityStatus(connection, preparedStatement, id, status, SQL_UPDATE_EMPLOYEE_STATUS, UPDATE_EMPLOYEE_STATUS_FAIL);
 	}
-
-
 
 	private Employee setEmployeeParametrs(ResultSet resultSet, Employee employee) throws SQLException {
 		employee.setEid(resultSet.getLong(Column.EMPLOYEES_EID));
@@ -183,6 +222,4 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 		employee.setStatus(EmployeeStatus.valueOf(resultSet.getString(Column.EMPLOYEES_STATUS)));
 		return employee;
 	}
-
-
 }

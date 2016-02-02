@@ -29,10 +29,12 @@ public class EmployeeReportCommand implements by.pvt.kish.aircompany.command.Act
             List<Flight> flights = FlightService.getInstance().getEmployeeLastFiveFlights(employee.getEid());
             boolean permissionChangeDeleteStatus = flights.size() != 0;
             List<EmployeeStatus> employeeStatuses = Arrays.asList(EmployeeStatus.values());
+
             request.setAttribute(Attribute.EMPLOYEE_ATTRIBUTE, employee);
             request.setAttribute(Attribute.FLIGHTS_ATTRIBUTE, flights);
             request.setAttribute(Attribute.STATUSES_ATTRIBUTE, employeeStatuses);
             request.setAttribute(Attribute.PERMISSION_CHANGE_DELETE_STATUS_ATTRIBUTE, permissionChangeDeleteStatus);
+
             return Page.EMPLOYEE_REPORT;
         } catch (ServiceException e) {
             return ErrorHandler.returnErrorPage(e.getMessage(), className);

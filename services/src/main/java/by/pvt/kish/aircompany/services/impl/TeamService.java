@@ -1,8 +1,10 @@
 package by.pvt.kish.aircompany.services.impl;
 
 import by.pvt.kish.aircompany.constants.Message;
+import by.pvt.kish.aircompany.dao.impl.FlightDAO;
 import by.pvt.kish.aircompany.dao.impl.TeamDAO;
 import by.pvt.kish.aircompany.entity.Employee;
+import by.pvt.kish.aircompany.enums.FlightStatus;
 import by.pvt.kish.aircompany.exceptions.DaoException;
 import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.exceptions.ServiceValidateException;
@@ -12,6 +14,7 @@ import by.pvt.kish.aircompany.utils.ServiceUtils;
 import by.pvt.kish.aircompany.validators.TeamValidator;
 import org.apache.log4j.Logger;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -64,6 +67,7 @@ public class TeamService extends BaseService implements ITeamService {
             connection.setAutoCommit(false);
             teamDAO.delete(id);
             teamDAO.add(id, team);
+            FlightDAO.getInstance().setStatus(id, FlightStatus.READY.toString());
             connection.commit();
         } catch (SQLException e) {
             try {
@@ -115,6 +119,17 @@ public class TeamService extends BaseService implements ITeamService {
             return teamDAO.getById(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
+        }
+    }
+
+    public boolean checkEmployeeAvailability(Long id, Date flightDate) throws ServiceException {
+        if (id < 0) {
+            throw new ServiceException(Message.ERROR_ID_MISSING);
+        }
+        try {
+            return TeamDAO.getInstance().checkEmployeeAvailability(id, flightDate);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
         }
     }
 }

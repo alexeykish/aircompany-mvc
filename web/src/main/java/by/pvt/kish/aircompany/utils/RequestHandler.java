@@ -173,14 +173,6 @@ public class RequestHandler {
         return result;
     }
 
-    public static Long getLong(HttpServletRequest request, String parameter) throws RequestHandlerException {
-        Long result = Long.parseLong(request.getParameter(parameter));
-        if (result < 0) {
-            throw new RequestHandlerException(parameter + " is less than zero");
-        }
-        return result;
-    }
-
     public static List<Long> getTeam(HttpServletRequest request, int count) {
             List<Long> team = new ArrayList<>();
             for (int i = 0; i < count; i++) {

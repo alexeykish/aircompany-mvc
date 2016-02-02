@@ -33,7 +33,7 @@ public class SetTeamCommand implements ActionCommand {
             Long id = RequestHandler.getId(request, "fid");
             List<Employee> team = TeamService.getInstance().getById(id);
             Flight flight = FlightService.getInstance().getById(id);
-            List<Employee> employees = EmployeeService.getInstance().getAll();
+            List<Employee> employees = EmployeeService.getInstance().getAllAvailable(flight.getDate());
             List<String> positions = TeamCreator.getPlanePositions(PlaneService.getInstance().getById(flight.getPlane().getPid()));
             request.setAttribute(Attribute.FLIGHT_ATTRIBUTE, flight);
             request.setAttribute(Attribute.EMPLOYEES_ATTRIBUTE, employees);

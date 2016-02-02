@@ -26,7 +26,9 @@ public class DeleteEmployeeCommand implements ActionCommand {
 		try {
 			Long id = RequestHandler.getId(request, "eid");
 			EmployeeService.getInstance().delete(id);
+
 			request.setAttribute(Attribute.MESSAGE_ATTRIBUTE, Message.SUCCESS_DELETE_EMPLOYEE);
+
 			return Page.MAIN;
 		} catch (ServiceException e) {
 			return ErrorHandler.returnErrorPage(e.getMessage(), className);

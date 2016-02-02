@@ -9,7 +9,10 @@ import by.pvt.kish.aircompany.exceptions.ServiceException;
 import by.pvt.kish.aircompany.exceptions.ServiceValidateException;
 import by.pvt.kish.aircompany.services.BaseService;
 import by.pvt.kish.aircompany.validators.FlightValidator;
+import org.apache.log4j.Logger;
 
+import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 
 import static by.pvt.kish.aircompany.utils.ServiceUtils.*;
@@ -24,6 +27,7 @@ public class FlightService extends BaseService<Flight> {
     private static FlightService instance;
     private FlightDAO flightDAO = FlightDAO.getInstance();
     private FlightValidator flightValidator = new FlightValidator();
+    private static Logger logger = Logger.getLogger(TeamService.class.getName());
 
     /**
      * Returns an synchronized instance of a FlightService, if the instance does not exist yet - create a new
@@ -44,7 +48,20 @@ public class FlightService extends BaseService<Flight> {
 
     @Override
     public void update(Flight flight) throws ServiceException, ServiceValidateException {
-        updateEntity(flightDAO, flight, flightValidator);
+        try {
+            connection.setAutoCommit(false);
+            updateEntity(flightDAO, flight, flightValidator);
+            connection.commit();
+        } catch (SQLException e) {
+            try {
+                logger.debug("Update flight: commit failed");
+                connection.rollback();
+                throw new ServiceException(e);
+            } catch (SQLException e2) {
+                logger.debug("Update flight: rollback failed");
+                throw new ServiceException(e);
+            }
+        }
     }
 
     @Override
@@ -83,4 +100,17 @@ public class FlightService extends BaseService<Flight> {
             throw new ServiceException(e.getMessage());
         }
     }
+
+    public void setStatus(Long id, String status) throws ServiceException {
+        if (id < 0) {
+            throw new ServiceException(Message.ERROR_ID_MISSING);
+        }
+        try {
+            FlightDAO.getInstance().setStatus(id, status);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+
 }

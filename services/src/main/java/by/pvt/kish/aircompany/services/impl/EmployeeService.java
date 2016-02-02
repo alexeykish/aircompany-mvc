@@ -9,6 +9,7 @@ import by.pvt.kish.aircompany.exceptions.ServiceValidateException;
 import by.pvt.kish.aircompany.services.BaseService;
 import by.pvt.kish.aircompany.validators.EmployeeValidator;
 
+import java.sql.Date;
 import java.util.List;
 
 import static by.pvt.kish.aircompany.utils.ServiceUtils.*;
@@ -61,12 +62,32 @@ public class EmployeeService extends BaseService<Employee> {
         return getByIdEntity(employeeDAO, id);
     }
 
+    /**
+     * Set employees status to the DB
+     * @param id - The ID of the employee
+     * @param status - The status to be changed
+     * @throws ServiceException If something fails at DAO level
+     */
     public void setStatus(Long id, String status) throws ServiceException {
         if (id < 0) {
             throw new ServiceException(Message.ERROR_ID_MISSING);
         }
         try {
             EmployeeDAO.getInstance().setStatus(id, status);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+    /**
+     * Returns a list of all available employees at this date from the DB
+     * @param date - The date of the flight
+     * @return - a list of all available employees at this date from the DB
+     * @throws ServiceException If something fails at DAO level
+     */
+    public List<Employee> getAllAvailable(Date date) throws ServiceException {
+        try {
+            return EmployeeDAO.getInstance().getAllAvailable(date);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
         }

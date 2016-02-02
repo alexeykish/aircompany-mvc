@@ -9,6 +9,7 @@ import by.pvt.kish.aircompany.dao.ITeamDAO;
 import by.pvt.kish.aircompany.entity.Employee;
 import by.pvt.kish.aircompany.exceptions.DaoException;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,11 +29,14 @@ public class TeamDAO extends BaseDAO implements ITeamDAO {
     private static final String SQL_ADD_TEAM = "INSERT INTO  teams (`t_eid`,`t_fid`) VALUES (?,?)";
     private static final String SQL_DELETE_TEAM = "DELETE FROM teams WHERE t_fid = ?";
     private static final String SQL_GET_TEAM_BY_ID = "SELECT * FROM teams WHERE t_fid = ?";
+    private static final String SQL_GET_EMPLOYEE_AVAILABILITY = "SELECT * FROM teams JOIN flights on flights.fid=teams.t_fid WHERE  flights.date = ? HAVING t_eid = ?";
 
     private static final String ADD_TEAM_COMMIT_FAIL = "Creating team failed (commit failed)";
     private static final String ADD_TEAM_ROLLBACK_FAIL = "Creating team failed (rollback failed)";
     private static final String DELETE_TEAM_FAIL = "Deleting team failed";
     private static final String GET_TEAM_BY_ID_FAIL = "Getting team by ID failed";
+    private static final String GET_USER_AVAILABILITY_FAIL = "Getting user availability failed";
+
 
     private static TeamDAO instance;
 
@@ -120,6 +124,33 @@ public class TeamDAO extends BaseDAO implements ITeamDAO {
         return team;
     }
 
+    /**
+     * Check if the employee is in another flight teams at that date
+     *
+     * @param id - The ID of hte employee
+     * @param flightDate - The flight date
+     * @return - false if employee isn't in another flights at that date, true - if employee is busy at that date
+     * @throws DaoException If something fails at DB level
+     */
+    public boolean checkEmployeeAvailability(Long id, Date flightDate) throws DaoException {
+        ResultSet resultSet = null;
+        try {
+            preparedStatement = connection.prepareStatement(SQL_GET_EMPLOYEE_AVAILABILITY);
+            preparedStatement.setDate(1, flightDate);
+            preparedStatement.setLong(2, id);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new DaoException(GET_USER_AVAILABILITY_FAIL, e);
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+        }
+        return false;
+    }
+
     @Override
     public Long add(Object o) throws DaoException {
         throw new UnsupportedOperationException();
@@ -134,4 +165,6 @@ public class TeamDAO extends BaseDAO implements ITeamDAO {
     public List getAll() throws DaoException {
         throw new UnsupportedOperationException();
     }
+
+
 }

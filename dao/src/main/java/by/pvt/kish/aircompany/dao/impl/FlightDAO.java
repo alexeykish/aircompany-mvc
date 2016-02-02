@@ -6,6 +6,7 @@ import by.pvt.kish.aircompany.dao.IFlightDAO;
 import by.pvt.kish.aircompany.entity.Flight;
 import by.pvt.kish.aircompany.enums.FlightStatus;
 import by.pvt.kish.aircompany.exceptions.DaoException;
+import by.pvt.kish.aircompany.utils.DaoUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class FlightDAO extends BaseDAO<Flight> implements IFlightDAO{
     private static final String SQL_UPDATE_FLIGHT = "UPDATE flights SET `date` = ?, `from` = ?, `to` = ?, `pid` = ?, `status` = ? WHERE fid = ?";
     private static final String SQL_GET_PLANES_LAST_FIVE_FLIGHTS = "SELECT * FROM flights WHERE pid = ? ORDER BY `date` DESC LIMIT 5";
     private static final String SQL_GET_EMPLOYEES_LAST_FIVE_FLIGHTS = "SELECT * FROM teams JOIN flights ON flights.fid=teams.t_fid WHERE t_eid = ? ORDER BY `date` DESC LIMIT 5";
+    private static final String SQL_UPDATE_FLIGHT_STATUS = "UPDATE flights SET `status` = ? WHERE fid = ?";
 
     private static final String ADD_FLIGHT_FAIL = "Creating flight failed";
     private static final String GET_ALL_FLIGHTS_FAIL = "Get all flights failed";
@@ -37,6 +39,7 @@ public class FlightDAO extends BaseDAO<Flight> implements IFlightDAO{
     private static final String GET_FLIGHT_BY_ID_FAIL = "Getting flight by ID failed";
     private static final String GET_PLANE_FLIGHTS_FAIL = "Getting planes flights failed";
     private static final String GET_EMPLOYEES_FLIGHTS_FAIL = "Getting employees flights failed";
+    private static final String UPDATE_FLIGHT_STATUS_FAIL = "Updating flight status failed";
 
 
     private static FlightDAO instance;
@@ -172,6 +175,7 @@ public class FlightDAO extends BaseDAO<Flight> implements IFlightDAO{
         return flight;
     }
 
+
     /**
      * Returns a list of five last flights of the concrete plane from the DB
      *
@@ -194,6 +198,16 @@ public class FlightDAO extends BaseDAO<Flight> implements IFlightDAO{
     @Override
     public List<Flight> getEmployeeLastFiveFlights(Long id) throws DaoException {
         return getLastFiveFlights(id, SQL_GET_EMPLOYEES_LAST_FIVE_FLIGHTS, GET_EMPLOYEES_FLIGHTS_FAIL);
+    }
+
+    /**
+     * Update particular plane status int the DB matching the given ID
+     *
+     * @param id - The ID of the flight
+     * @throws DaoException If something fails at DB level
+     */
+    public void setStatus(Long id, String status) throws DaoException {
+        DaoUtils.setEntityStatus(connection, preparedStatement, id, status, SQL_UPDATE_FLIGHT_STATUS, UPDATE_FLIGHT_STATUS_FAIL);
     }
 
     private Flight setFlightParametrs(ResultSet resultSet, Flight flight) throws SQLException, DaoException {
@@ -228,4 +242,6 @@ public class FlightDAO extends BaseDAO<Flight> implements IFlightDAO{
         }
         return flights;
     }
+
+
 }
